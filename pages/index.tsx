@@ -1,6 +1,9 @@
 import Head from "next/head";
+import Link from 'next/link'
+
 
 export default function Home() {
+
   return (
     <>
       <Head>
@@ -10,10 +13,10 @@ export default function Home() {
           content="Kodemy to najlepszy zbiór materiałów."
         />
       </Head>
-
-      <div className="flex justify-center h-screen items-center text-4xl">
-        Hello kodemy!
-      </div>
+        <div className="flex justify-center h-screen items-center text-4xl flex-col">
+          Hello kodemy!
+          <Link className="mt-5" href='/components/navigationComp/navigationBar'>Navigation bar</Link>
+        </div>
     </>
   );
 }
