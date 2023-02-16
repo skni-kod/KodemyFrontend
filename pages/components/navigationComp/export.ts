@@ -6,7 +6,7 @@ import Hamburger from './icons/Hamburger.png'
 import moreInfo from './icons/more-information 1.png'
 import nightMode from './icons/night-mode 1.png'
 import retroGame from './icons/retro-game 1.png'
-import sunny1 from './icons/sunny 1.png'
+import lightMode from './icons/sunny 1.png'
 import tick from './icons/tick.png'
 
 let obj = {
@@ -19,7 +19,7 @@ let obj = {
     moreInfo,
     nightMode,
     retroGame,
-    sunny1,
+    lightMode,
 }
 
 export default obj
