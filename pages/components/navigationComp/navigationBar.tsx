@@ -19,7 +19,7 @@ export default function NavigationBar() {
     const [DarkMode,setDarkMode] = useState(false)
 
   return (
-    <div className='h-screen w-screen'>
+    <div className='h-screen absolute z-10 bg-white'>
     <div className={`h-full ${ExpandMenu ? '2sm:w-[14vw] sm:w-[8vw] lg:w-[6vw] xl:w-[5vw] 2xl:w-[4vw]' : '2sm:w-[47vw] sm:w-[23vw] lg:w-[20vw] xl:w-[16vw] 2xl:w-[14vw]'} flex flex-col ring-1 border-r-2`}>
             <div className={`mt-9 ${styles.animationStyle}`}>
                 <Image onClick={()=>setExpandMenu(!ExpandMenu)} className={styles.imgStyle} src={ExpandMenu ? obj.Hamburger : obj.close1} alt='burger'/>

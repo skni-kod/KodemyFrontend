@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from 'next/router'
 import { useState } from "react";
-import HomeBubble from "../components/HomeBubble";
+import HomeBubble from "./components/HomeBubble";
 
 export default function Home() {
   const router = useRouter()
@@ -19,8 +19,8 @@ export default function Home() {
         />
       </Head>
 
-      <div className="px-7 pb-8">
-        <div className="flex justify-center mt-8">
+      <div className="px-7 pb-8 max-w-lg mx-auto">
+        <div className="flex justify-center pt-8">
           <div className="flex items-center gap-4">
             <div className="rounded-full border-sky-500 text-sky-500 shadow-lg border-2 h-10 w-10 flex items-center justify-center font-semibold bg-white">
               1
