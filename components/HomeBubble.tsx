@@ -4,27 +4,29 @@ import Image from "next/image";
 type Props = {
   children: JSX.Element;
   className?: String;
+  setCategory: Function;
+  name: String;
+  category: String;
 };
 
-const HomeBubble = ({ children, className }: Props) => {
-  const [active, setActive] = useState(false);
+const HomeBubble = ({ children, className, category, setCategory, name }: Props) => {
 
   const handleClick = () => {
-    setActive(!active);
+    setCategory(name);
   };
 
   return (
     <div
       className={
-        active
-          ? "cursor-pointer relative p-2 rounded-full min-h-[80px] border-sky-500 border-2 font-semibold aspect-square text-center flex items-center justify-center text-xl text-sky-500 shadow-lg bg-white " +
+        category == name
+          ? "cursor-pointer relative p-2 rounded-full min-h-[80px] border-sky-500 border-2 font-semibold aspect-square text-center flex items-center justify-center text-[1.1rem] text-sky-500 shadow-lg bg-white " +
             className
-          : "cursor-pointer relative p-2 rounded-full min-h-[80px] border-black border-2 font-semibold aspect-square text-center flex items-center justify-center text-xl bg-white " +
+          : "cursor-pointer relative p-2 rounded-full min-h-[80px] border-black border-2 font-semibold aspect-square text-center flex items-center justify-center text-[1.1rem] bg-white " +
             className
       }
       onClick={handleClick}
     >
-      {active ? (
+      {category == name ? (
         <Image
           src="/tick.svg"
           alt="Zaznaczono"
