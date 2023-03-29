@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from 'next/router'
 import { useState } from "react";
-import HomeBubble from "./components/HomeBubble";
+import HomeBubble from "../components/HomeBubble";
 
 export default function Home() {
   const router = useRouter()
