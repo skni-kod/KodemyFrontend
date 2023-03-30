@@ -1,10 +1,10 @@
 import Head from "next/head";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import { useState } from "react";
 import HomeBubble from "../components/HomeBubble";
 
 export default function Home() {
-  const router = useRouter()
+  const router = useRouter();
   const [stage, setStage] = useState(1);
   const [firstCategory, setFirstCategory] = useState("");
   const [secondCategory, setSecondCategory] = useState("");
@@ -158,7 +158,11 @@ export default function Home() {
           className="bg-sky-500 text-white font-semibold mx-auto block py-3 px-6 rounded-2xl mt-16"
           onClick={() => {
             if (stage == 1) setStage(2);
-            else if (stage == 2) router.push(`/${secondCategory}`)
+            else if (stage == 2)
+              router.push({
+                pathname: `/sectionGeneral`,
+                query: { firstCategory, secondCategory },
+              });
           }}
         >
           Następne &gt;
