@@ -15,7 +15,7 @@ const styles = {
 
 
 export default function NavigationBar() {
-    const [ExpandMenu, setExpandMenu] = useState(false)
+    const [ExpandMenu, setExpandMenu] = useState(true)
     const [DarkMode,setDarkMode] = useState(false)
 
   return (
@@ -25,31 +25,31 @@ export default function NavigationBar() {
                 <Image onClick={()=>setExpandMenu(!ExpandMenu)} className={styles.imgStyle} src={ExpandMenu ? obj.Hamburger : obj.close1} alt='burger'/>
             </div>
             <div className={`mt-12 ${styles.animationStyle}`}>
-                <Link href='/components/webAppComp/webAppComp' className={styles.linkStyle}>
+                <Link href='/sectionGeneral?firstCategory=Aplikacje webowe' className={styles.linkStyle}>
                     <Image className={styles.imgStyle} src={obj.internet1} alt='web'/>
                     {ExpandMenu ? '':<p className={styles.textStyle}>Aplikacje webowe</p>}
                 </Link>
             </div>
             <div className={`mt-6 ${styles.animationStyle}`}>
-                <Link href='/components/gameDev/gameDev' className={styles.linkStyle}>
+                <Link href='/sectionGeneral?firstCategory=GameDev' className={styles.linkStyle}>
                     <Image className={styles.imgStyle} src={obj.console1} alt='cmd'/>
                     {ExpandMenu ? '':<p className={styles.textStyle}>GameDev</p>}
                 </Link>
             </div>
             <div className={`mt-6 ${styles.animationStyle}`}>
-                <Link href='/components/retroEle/retroEle' className={styles.linkStyle}>
+                <Link href='/sectionGeneral?firstCategory=Retro gaming' className={styles.linkStyle}>
                     <Image className={styles.imgStyle} src={obj.retroGame} alt='retro gaming'/>
                     {ExpandMenu ? '':<p className={styles.textStyle}>Elektronika/Retro</p>}
                 </Link>
             </div>
             <div className={`mt-6 ${styles.animationStyle}`}>
-                <Link href='/components/programmingLanguages/programmingLanguages' className={styles.linkStyle}>
+                <Link href='/sectionGeneral?firstCategory=Jezyki programowania' className={styles.linkStyle}>
                     <Image className={styles.imgStyle} src={obj.codingLanguage} alt='coding language'/>
                     {ExpandMenu ? '':<p className={styles.textStyle}>Języki programowania</p>}
                 </Link>
             </div>
             <div className={`mt-6 ${styles.animationStyle}`}>
-                <Link href='/components/inne/inne' className={styles.linkStyle}>
+                <Link href='/sectionGeneral?firstCategory=Inne' className={styles.linkStyle}>
                     <Image className={styles.imgStyle} src={obj.moreInfo} alt='more info'/>
                     {ExpandMenu ? '':<p className={styles.textStyle}>Inne</p>}
                 </Link>

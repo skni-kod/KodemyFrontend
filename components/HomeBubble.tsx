@@ -1,14 +1,18 @@
 import Image from "next/image";
 
-type Props = {
+import { clsx } from "clsx";
+
+
+type Props  ={
   children: JSX.Element;
   className?: String;
+  variant?: "HomeBubble" | "ButtonBubble";
   setCategory: Function;
   name: String;
   category: String;
 };
 
-const HomeBubble = ({ children, className, category, setCategory, name }: Props) => {
+const HomeBubble = ({ children, className, category, setCategory, name, variant = "HomeBubble" }: Props) => {
 
   const handleClick = () => {
     setCategory(name);
@@ -16,16 +20,18 @@ const HomeBubble = ({ children, className, category, setCategory, name }: Props)
 
   return (
     <div
-      className={
-        category == name
-          ? "cursor-pointer relative p-2 rounded-full min-h-[80px] border-sky-500 border-2 font-semibold aspect-square text-center flex items-center justify-center text-[1.1rem] text-sky-500 shadow-lg bg-white " +
-            className
-          : "cursor-pointer relative p-2 rounded-full min-h-[80px] border-black border-2 font-semibold aspect-square text-center flex items-center justify-center text-[1.1rem] bg-white " +
-            className
-      }
+      className={clsx("flex cursor-pointer relative border-2 font-semibold text-center items-center justify-center text-[1.1rem] bg-white",
+      variant === "HomeBubble" && "p-2 rounded-full min-h-[80px] aspect-square",
+      variant === "ButtonBubble" && "py-2 px-4 mx-2 rounded-3xl shrink-0",
+      category === name && variant === "HomeBubble" && "border-sky-500 text-sky-500 shadow-lg",
+      category === name && variant === "ButtonBubble" && "border-sky-500 text-sky-500 shadow-lg",
+      category !== name && variant === "HomeBubble" && " border-black",
+      category !== name && variant === "ButtonBubble" && " min-h-[60px] border-gray-400 text-gray-500",
+      className
+      )}
       onClick={handleClick}
     >
-      {category == name ? (
+      {category == name && variant == "HomeBubble" ? (
         <Image
           src="/tick.svg"
           alt="Zaznaczono"
