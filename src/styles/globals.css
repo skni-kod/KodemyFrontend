@@ -1,10 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 * {
-    font-family: 'Poppins';
+    font-family: 'Poppins', "Comic Sans MS", "Times New Roman", sans-serif;
 }
+
 body {
     background: #F5F2F5;
-
 }

@@ -1,9 +1,0 @@
-Linki:
-    https://www.figma.com/file/INELssiP1ER57s7pkFs3JA/kodemy?node-id=129%3A3077&t=SDOGswx3XMtchx1q-0
-    https://flowbite.com/tools/tailwind-cheat-sheet/
-    https://flowbite.com/docs/components/sidebar/    
-    https://flowbite.com/docs/components/dropdowns/
-Co zrobić: 
-    Darkmode
-    Responsywny tryb
-    
