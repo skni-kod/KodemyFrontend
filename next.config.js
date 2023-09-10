@@ -1,3 +1,5 @@
+const proxyConfig = require('./proxy.config');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   i18n: {
@@ -6,6 +8,7 @@ const nextConfig = {
   },
   reactStrictMode: true,
   swcMinify: true,
+  ...proxyConfig,
 }
 
 module.exports = nextConfig

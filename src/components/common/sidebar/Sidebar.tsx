@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import SidebarAssets from "@/components/common/sidebar/SidebarAssets";
 import { Switch } from "@headlessui/react";
+import { getSection, SectionResponse } from "@/services/SectionService";
 
 const styles = {
 	imgStyle: " cursor-pointer w-[17px] h-[17px]",
@@ -14,8 +15,37 @@ const styles = {
 const Sidebar = () => {
 	const [isExpandMenu, setIsExpandMenu] = useState(true);
 	const [isDarkMode, setIsDarkMode] = useState(false);
+	const [sections, setSections] = useState<SectionResponse>([]);
 
 	const handleToggleExpandMenu = () => setIsExpandMenu(isExpandMenu => !isExpandMenu);
+
+	useEffect(() => {
+		async function fetchSections() {
+			try {
+				const response = await getSection();
+				setSections(response);
+			} catch (error) {
+				console.error("Błąd podczas pobierania sekcji:", error);
+			}
+		}
+
+		fetchSections();
+	}, []);
+
+	const handleSectionLogo = (id: number) => {
+		switch (id) {
+			case 1:
+				return SidebarAssets.internet;
+			case 2:
+				return SidebarAssets.console;
+			case 3:
+				return SidebarAssets.retroGame;
+			case 4:
+				return SidebarAssets.codingLanguage;
+			default:
+				return SidebarAssets.moreInfo;
+		}
+	};
 
 	return (
 		<div className="h-full fixed pt-[90px] z-9">
@@ -24,7 +54,7 @@ const Sidebar = () => {
 					? "2sm:w-[47vw] sm:w-[23vw] lg:w-[20vw] xl:w-[16vw] 2xl:w-[14vw]"
 					: "2sm:w-[14vw] sm:w-[8vw] lg:w-[6vw] xl:w-[5vw] 2xl:w-[4vw]"} flex flex-col shadow`}
 			>
-				<div className={`mt-9 mx-2.5 ${styles.animationStyle}`}>
+				<div className={`mt-9 mb-6 mx-2.5 ${styles.animationStyle}`}>
 					<Image
 						onClick={handleToggleExpandMenu}
 						className={styles.imgStyle}
@@ -32,7 +62,21 @@ const Sidebar = () => {
 						alt="burger"
 					/>
 				</div>
-				<Section
+				{
+					sections.map(({id, name, categories}) => (
+						<>
+							<Section
+								key={id}
+								className="mt-6"
+								href={`/materials?category=${id}`}
+								icon={handleSectionLogo(id)}
+								pText={name}
+								isExpandMenu={isExpandMenu}
+							/>
+						</>
+					))
+				}
+				{/*<Section
 					className="mt-12"
 					href="/sectionGeneral?firstCategory=Aplikacje webowe"
 					icon={SidebarAssets.internet}
@@ -66,7 +110,7 @@ const Sidebar = () => {
 					icon={SidebarAssets.moreInfo}
 					pText="Inne"
 					isExpandMenu={isExpandMenu}
-				/>
+				/>*/}
 			</div>
 		</div>
 	);
@@ -75,6 +119,7 @@ const Sidebar = () => {
 export default Sidebar;
 
 interface SectionProps {
+	key?: number
 	className?: string,
 	href: string,
 	icon: StaticImageData,
