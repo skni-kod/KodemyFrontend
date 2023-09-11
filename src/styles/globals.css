@@ -3,23 +3,23 @@
 @tailwind utilities;
 
 * {
-    font-family: 'Poppins', "Comic Sans MS", "Times New Roman", sans-serif;
+  font-family: "Poppins", "Comic Sans MS", "Times New Roman", sans-serif;
 }
 
 html,
 body,
 :root {
-    height: 100%;
+  height: 100%;
 }
 
 @layer base {
-    :root {
-        --body-color: #F5F2F5;
-        --body-2-color: var(--body-color);
-        --base-color: #0EA5E9;
-    }
+  :root {
+    --body-color: #f5f2f5;
+    --body-2-color: var(--body-color);
+    --base-color: #0ea5e9;
+  }
 
-    /*:root[data-theme="dark"] {
+  /*:root[data-theme="dark"] {
         --body-color: #444;
         --body-2-color: #2c2c2c;
         --base-color: white;
@@ -27,5 +27,5 @@ body,
 }
 
 body {
-    background: var(--body-color);
+  background: var(--body-color);
 }
