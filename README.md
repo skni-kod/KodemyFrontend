@@ -2,7 +2,7 @@ Front end of kodemy, using Next.js, Typescript and Tailwind CSS. This project re
 
 ## Installing packages
 ```bash
-npm i
+npm ci
 ```
 
 ## Running the project
