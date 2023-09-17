@@ -89,7 +89,7 @@ export default function Home() {
                 <>Inne</>
               </HomeBubble>
               <HomeBubble
-                className="basis-5/12 relative right-5 top-10 transition duration-500 hover:-translate-y-1 "
+                className="basis-5/12 relative top-10 transition duration-500 hover:-translate-y-1 "
                 name="aplikacje webowe"
                 category={firstCategory}
                 setCategory={setFirstCategory}
