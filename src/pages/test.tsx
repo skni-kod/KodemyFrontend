@@ -13,14 +13,13 @@ function performSignIn() {
   headers.append("Content-Type", "application/json");
   headers.append("Origin", "http://localhost:3000");
 
-  fetch("http://localhost:8181/api/oauth2/authorize/github", {
+  fetch("http://localhost:8080/api/animal", {
     mode: "cors",
-    credentials: "include",
     method: "GET",
     headers: headers,
   })
     .then((response) => {
-      console.log(response);
+      console.log(response.json());
       return response.json();
     })
     .then((json) => {
