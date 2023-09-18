@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "@/components/common/navbar/assets/Logo";
 import SearchBar from "@/components/common/navbar/Search";
 import UserBar from "@/components/common/navbar/UserBar";
+import Container from "@/components/common/Container";
 
 const Navbar = () => {
   return (
@@ -25,10 +26,4 @@ const Navbar = () => {
 
 export default Navbar;
 
-interface ContainerProps {
-  children: React.ReactNode;
-}
 
-const Container: React.FC<ContainerProps> = ({ children }) => {
-  return <div>{children}</div>;
-};

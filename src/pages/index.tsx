@@ -1,9 +1,9 @@
 import Head from "next/head";
-import { metadata } from "@/pages/_document";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Favicon from "@/assets/favicon.ico";
 import HomeBubble from "@/components/home/bubble/HomeBubble";
+import { Metadata } from "@/pages/_app";
 
 export default function Home() {
   const router = useRouter();
@@ -14,8 +14,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>{metadata.title as string}</title>
-        <meta name="description" content={metadata.description as string} />
+        <title>{Metadata.title as string}</title>
+        <meta name="description" content={Metadata.description as string} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href={Favicon.src} />
       </Head>

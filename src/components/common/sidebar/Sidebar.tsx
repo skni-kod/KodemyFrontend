@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import SidebarAssets from "@/components/common/sidebar/SidebarAssets";
-import { Switch } from "@headlessui/react";
 import { getSection, SectionResponse } from "@/services/SectionService";
 
 const styles = {

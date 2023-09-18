@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { metadata } from "@/pages/_document";
 import KodemyImage from "@/assets/kodemy.png";
+import { Metadata } from "@/pages/_app";
 
 const Logo = () => {
 	return (
 		<Image
 			src={KodemyImage.src}
-			alt={metadata.title as string}
+			alt={Metadata.title}
 			className="cursor-pointer"
 			width="155"
 			height="100"
