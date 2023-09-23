@@ -1,8 +1,8 @@
-import Image from "next/image";
-import AvatarImage from "@/assets/avatar.png"
+import Image from 'next/image';
+import AvatarImage from '@/assets/avatar.png';
 
 const Avatar = () => {
-  return (
+	return (
 		<Image
 			src={AvatarImage.src}
 			alt="User's avatar"
@@ -10,7 +10,7 @@ const Avatar = () => {
 			height="30"
 			width="30"
 		/>
-	)
-}
+	);
+};
 
 export default Avatar;

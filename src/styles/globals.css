@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  font-family: "Poppins", "Comic Sans MS", "Times New Roman", sans-serif;
+  font-family: 'Poppins', 'Comic Sans MS', 'Times New Roman', sans-serif;
 }
 
 html,

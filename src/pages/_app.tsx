@@ -1,13 +1,13 @@
-import "../styles/globals.css";
-import Head from "next/head";
-import type { AppProps } from "next/app";
-import Sidebar from "@/components/common/sidebar/Sidebar";
-import Navbar from "@/components/common/navbar/Navbar";
-import Favicon from "@/assets/favicon.ico";
+import '../styles/globals.css';
+import Head from 'next/head';
+import type { AppProps } from 'next/app';
+import Sidebar from '@/components/common/sidebar/Sidebar';
+import Navbar from '@/components/common/navbar/Navbar';
+import Favicon from '@/assets/favicon.ico';
 
 export const Metadata = {
-	title: "Kodemy",
-	description: "Kodemy to najlepszy zbiór materiałów"
+	title: 'Kodemy',
+	description: 'Kodemy to najlepszy zbiór materiałów',
 };
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -21,5 +21,5 @@ export default function App({ Component, pageProps }: AppProps) {
 			<Sidebar />
 			<Component {...pageProps} />
 		</>
-	)
+	);
 }
