@@ -9,16 +9,11 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier-error": [
+    "prettier/prettier": [
       "error",
       {
+        "singleQuote": true,
         "useTabs": true
-      }
-    ],
-    "prettier/prettier-warn": [
-      "warn",
-      {
-        "singleQuote": true
       }
     ]
   },

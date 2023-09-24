@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
-import BellImage from "@/assets/bell.png";
+import React from 'react';
+import Image from 'next/image';
+import BellImage from '@/assets/bell.png';
 
 interface BellProps {
 	isActive: boolean;
