@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import SidebarAssets from "@/components/common/sidebar/SidebarAssets";
-import { Switch } from "@headlessui/react";
 import { getSection, SectionResponse } from "@/services/SectionService";
+import { MaterialsIndexRoute } from '@/pages/materials';
 
 const styles = {
   imgStyle: " cursor-pointer w-[17px] h-[17px]",
@@ -71,7 +71,7 @@ const Sidebar = () => {
             <Section
               key={id}
               className="mt-6"
-              href={`/materials?category=${id}`}
+              href={`${new MaterialsIndexRoute(id).getIndex()}`}
               icon={handleSectionLogo(id)}
               pText={name}
               isExpandMenu={isExpandMenu}

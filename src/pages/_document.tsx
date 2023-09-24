@@ -1,10 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
-export const metadata = {
-	title: "Kodemy",
-	description: "Kodemy to najlepszy zbiór materiałów"
-};
-
 export default function Document() {
 	return (
 		<Html>
