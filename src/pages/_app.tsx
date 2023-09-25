@@ -1,9 +1,9 @@
-import '../styles/globals.css';
+import './main.css';
 import type { AppProps } from 'next/app';
-import Sidebar from '@/components/common/sidebar/Sidebar';
-import Navbar from '@/components/common/navbar/Navbar';
 import Favicon from '@/assets/favicon.ico';
 import Head from 'next/head';
+import Navbar from '@/components/common/navbar/Navbar';
+import Sidebar from '@/components/common/sidebar/Sidebar';
 
 export const Metadata = {
 	title: 'Kodemy',

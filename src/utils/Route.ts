@@ -1,9 +1,9 @@
 export default abstract class Route {
-	url: string;
+	path: string;
 	[key: string]: any;
 
-	protected constructor(url: string) {
-		this.url = url;
+	protected constructor(path: string) {
+		this.path = path;
 	}
 
 	protected getParams(): string {
@@ -15,7 +15,7 @@ export default abstract class Route {
 		return paramPairs.length ? `?${paramPairs.join('&')}` : '';
 	}
 
-	getIndex() {
-		return this.url + this.getParams();
+	protected getIndex() {
+		return this.path + this.getParams();
 	}
 }
