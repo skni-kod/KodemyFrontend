@@ -2,18 +2,11 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import HomeBubble from '@/components/home/bubble/HomeBubble';
 import Item from '@/components/home/bubble/Item';
-import Route from '@/utils/Route';
 import Container from '@/components/common/Container';
 import Page from '@/components/common/Page';
+import { Materials } from '@/pages/Routes';
 
-export class MaterialsIndexRoute extends Route {
-	category: number;
-
-	constructor(category: number) {
-		super('/materials');
-		this.category = category;
-	}
-}
+export const MaterialsIndexRoute = new Materials.IndexRoute('/materials');
 
 export default function MaterialsIndex() {
 	const router = useRouter();

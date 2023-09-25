@@ -5,10 +5,10 @@ const Avatar = () => {
 	return (
 		<Image
 			src={AvatarImage.src}
-			alt="User's avatar"
+			alt="Avatar użytkownika"
 			className="rounded-full cursor-pointer"
-			height="30"
-			width="30"
+			height="35"
+			width="35"
 		/>
 	);
 };
