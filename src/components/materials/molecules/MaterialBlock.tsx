@@ -1,4 +1,4 @@
-import { Material } from '@/services/CategoryService';
+import { Material } from '@/hooks/services/useCategoryService';
 import DocumentsImage from '@/assets/material/documents.png';
 import Image from 'next/image';
 import Status from '@/components/materials/atoms/Status';

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Container from '@/components/common/Container';
 import Page from '@/components/common/Page';
-import { Materials } from '@/pages/Routes';
+import { Materials } from '@/pages/routes';
 import MaterialsContent from '@/components/materials/MaterialsContent';
 
 export const MaterialsIndexRoute = new Materials.IndexRoute('/materials');

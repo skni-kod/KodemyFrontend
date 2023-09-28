@@ -1,12 +1,19 @@
 import SidebarItem from '@/components/common/sidebar/atoms/SidebarItem';
-import Sections from '@/mocks/SectionMock';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
+import useSectionService from '@/hooks/services/useSectionService';
 
 const Sidebar = () => {
-	const sections = Sections;
+	const [sections, setSections] = useState([]);
+	const { getSections } = useSectionService();
 	const [isExpandMenu, setIsExpandMenu] = useState(false);
 	const [expandedItemId, setExpandedItemId] = useState<number | null>(null);
+
+	useEffect(() => {
+		(async () => {
+			setSections(await getSections());
+		})();
+	}, [getSections]);
 
 	const handleExpand = (mouseEntered: boolean) => setIsExpandMenu(mouseEntered);
 
@@ -21,15 +28,16 @@ const Sidebar = () => {
 		>
 			<div className="relative">
 				<ul className="p-0 list-none">
-					{sections.map((section, index) => (
-						<SidebarItem
-							key={index}
-							section={section}
-							isExpandMenu={isExpandMenu}
-							expandedItemId={expandedItemId}
-							setExpandedItemId={setExpandedItemId}
-						/>
-					))}
+					{sections &&
+						sections.map((section, index) => (
+							<SidebarItem
+								key={index}
+								section={section}
+								isExpandMenu={isExpandMenu}
+								expandedItemId={expandedItemId}
+								setExpandedItemId={setExpandedItemId}
+							/>
+						))}
 				</ul>
 			</div>
 		</nav>

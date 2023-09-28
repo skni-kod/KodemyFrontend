@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import SidebarAssets from '@/components/common/sidebar/helpers/SidebarAssets';
-import { Section } from '@/services/SectionService';
+import { Section } from '@/hooks/services/useSectionService';
 import { MaterialsIndexRoute } from '@/pages/materials';
 import clsx from 'clsx';
 
