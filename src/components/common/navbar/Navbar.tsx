@@ -1,7 +1,7 @@
 import { TfiMenu } from 'react-icons/tfi';
 import Logo from '@/components/common/navbar/atoms/Logo';
-import SearchBar from '@/components/common/navbar/molecules/SearchBar';
-import UserBar from '@/components/common/navbar/molecules/UserBar';
+import SearchBar from '@/components/common/navbar/organisms/SearchBar';
+import UserBar from '@/components/common/navbar/organisms/UserBar';
 
 const Navbar = () => {
 	return (

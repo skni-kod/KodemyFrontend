@@ -1,7 +1,7 @@
 import CategoryButton from '@/components/materials/atoms/CategoryButton';
-import { Material } from '@/services/CategoryService';
+import { Material } from '@/hooks/services/useCategoryService';
 import MaterialBlock from '@/components/materials/molecules/MaterialBlock';
-import { CategoryMaterials } from '@/mocks/CategoryMock';
+import { CategoryMaterials } from '@/mocks/categoryMock';
 import { RxTriangleDown } from 'react-icons/rx';
 import FilterButton from '@/components/materials/atoms/FilterButton';
 

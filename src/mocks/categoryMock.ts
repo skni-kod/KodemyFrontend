@@ -1,4 +1,4 @@
-import { CategoryMaterialResponse } from '@/services/CategoryService';
+import { CategoryMaterialResponse } from '@/hooks/services/useCategoryService';
 
 export const CategoryMaterials: CategoryMaterialResponse = {
 	content: [

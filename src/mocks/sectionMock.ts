@@ -1,4 +1,4 @@
-import { SectionResponse } from '@/services/SectionService';
+import { SectionResponse } from '@/hooks/services/useSectionService';
 
 const Sections: SectionResponse = [
 	{

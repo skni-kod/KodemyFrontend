@@ -1,4 +1,4 @@
-import Route from '@/utils/Route';
+import Route from '@/utils/route';
 
 export namespace Materials {
 	export class IndexRoute extends Route {
