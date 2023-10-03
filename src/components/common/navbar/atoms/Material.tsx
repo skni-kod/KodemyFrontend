@@ -1,4 +1,3 @@
-import { Material } from '@/hooks/services/useCategoryService';
 import DocumentsImage from '@/assets/material/documents.png';
 import Image from 'next/image';
 
@@ -11,7 +10,15 @@ type MaterialPageProps = {
 const MaterialPage = ({ status, time, path }: MaterialPageProps) => {
 	return (
 		<div className="flex justify-between items-center py-1 px-1 shadow-md border-2 rounded-2xl shrink-0 bg-white text-gray-500 cursor-pointer">
-			<div className="flex-none h-5 w-5 flex justify-center items-center aspect-square bg-gray-100">
+			<div
+				className={`flex-none h-5 w-5 flex justify-center items-center rounded aspect-square ${
+					status === 'Przyjęty'
+						? 'bg-green-300'
+						: status === 'Odrzucony'
+						? 'bg-red-300'
+						: 'bg-yellow-300'
+				}`}
+			>
 				<Image
 					src={DocumentsImage.src}
 					alt="Materiał Kodemy"
@@ -20,6 +27,7 @@ const MaterialPage = ({ status, time, path }: MaterialPageProps) => {
 					height="16"
 				/>
 			</div>
+
 			<div className="grow flex justify-between items-center px-1">
 				<div>
 					<div className="text-black text-[12px] mt-0.5">{`Twój materiał został: ${status}`}</div>
