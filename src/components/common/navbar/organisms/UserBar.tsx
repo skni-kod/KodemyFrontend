@@ -2,9 +2,9 @@ import { BiGrid, BiSun } from 'react-icons/bi';
 import { HiOutlineMoon } from 'react-icons/hi2';
 import Avatar from '@/components/common/navbar/atoms/Avatar';
 import Bell from '../atoms/Bell';
-import BellDropDownMenu from '../molecules/BellDropDownMenu';
+import BellDropDownMenu from './BellDropDownMenu';
 import { useState } from 'react';
-import AvatarDropDownMenu from '../molecules/AvatarDropDownMenu';
+import AvatarDropDownMenu from './AvatarDropDownMenu';
 
 const UserBar = () => {
 	const IconClassNames = 'cursor-pointer text-gray-400 text-2xl';

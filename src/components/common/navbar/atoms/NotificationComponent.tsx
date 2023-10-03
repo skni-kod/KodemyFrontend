@@ -9,7 +9,9 @@ const NotificationComponent = ({
 }: NotificationComponentProps) => {
 	return (
 		<div className="">
-			<h6 className={`${className} text-[#666] text-[14px]`}>{text}</h6>
+			<h6 className={`${className} text-[#666] text-[14px] cursor-pointer`}>
+				{text}
+			</h6>
 		</div>
 	);
 };
