@@ -32,7 +32,7 @@ const BellDropDownMenu = () => {
 				</button>
 			</div>
 			<div className="h-[auto] w-[323px]">
-				<div className="h-[auto] flex m-2 relative underline border-b">
+				<div className="h-[auto] flex m-2 relative border-b">
 					<button
 						onClick={toggleAllMaterials}
 						className={allMaterials ? 'text-blue-500' : ''}
@@ -41,6 +41,7 @@ const BellDropDownMenu = () => {
 							text={'Wszystkie'}
 							isActive={allMaterials}
 							className={'pl-4'}
+							amount="3"
 						/>
 					</button>
 					<button
@@ -51,6 +52,7 @@ const BellDropDownMenu = () => {
 							text={'Twoje materiały'}
 							isActive={yourMaterials}
 							className={'pl-4'}
+							amount="6"
 						/>
 					</button>
 				</div>
