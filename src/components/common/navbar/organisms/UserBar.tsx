@@ -1,5 +1,6 @@
 import { BiBell, BiGrid, BiSun } from 'react-icons/bi';
 import Avatar from '@/components/common/navbar/atoms/Avatar';
+import Bell from '../atoms/Bell';
 
 const UserBar = () => {
 	const IconClassNames = 'cursor-pointer text-gray-400 text-2xl';
@@ -11,7 +12,7 @@ const UserBar = () => {
 			</button>
 			<div className="flex items-center gap-x-4 font-bold">
 				<BiSun className={IconClassNames} />
-				<BiBell className={IconClassNames} />
+				<Bell className={IconClassNames} />
 				<Avatar />
 			</div>
 		</div>
