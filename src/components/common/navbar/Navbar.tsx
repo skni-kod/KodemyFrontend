@@ -2,7 +2,6 @@ import { TfiMenu } from 'react-icons/tfi';
 import Logo from '@/components/common/navbar/atoms/Logo';
 import SearchBar from '@/components/common/navbar/organisms/SearchBar';
 import UserBar from '@/components/common/navbar/organisms/UserBar';
-import BellDropDownMenu from './molecules/BellDropDownMenu';
 
 const Navbar = () => {
 	return (
@@ -13,7 +12,6 @@ const Navbar = () => {
 			</div>
 			<SearchBar />
 			<UserBar />
-			<BellDropDownMenu />
 		</nav>
 	);
 };
