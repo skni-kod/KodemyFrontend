@@ -18,10 +18,8 @@ const Navbar = () => {
 				<Logo width={155} height={100} />
 			</div>
 
-			{/* BiSearch będzie widoczny tylko na telefonach */}
 			{isMobile && <BiSearch className={`${IconClassNames} mx-3`} />}
 
-			{/* SearchBarDesktop będzie widoczny tylko na komputerach */}
 			{!isMobile && <SearchBarDesktop />}
 
 			<UserBar />
