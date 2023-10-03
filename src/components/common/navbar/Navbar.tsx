@@ -1,34 +1,19 @@
-import React from "react";
-import Logo from "@/components/common/navbar/assets/Logo";
-import SearchBar from "@/components/common/navbar/Search";
-import UserBar from "@/components/common/navbar/UserBar";
+import { TfiMenu } from 'react-icons/tfi';
+import Logo from '@/components/common/navbar/atoms/Logo';
+import SearchBar from '@/components/common/navbar/organisms/SearchBar';
+import UserBar from '@/components/common/navbar/organisms/UserBar';
 
 const Navbar = () => {
-  return (
-    <>
-      <div className="w-full z-20 bg-[var(--body-color)] relative shadow flex items-center">
-        <div className="w-full px-5 py-4">
-          <Container>
-            <div className="flex flex-col sm:flex-row items-center justify-between">
-              <div className="flex flex-col 2sm:flex-row items-center">
-                <Logo />
-                <SearchBar />
-              </div>
-              <UserBar />
-            </div>
-          </Container>
-        </div>
-      </div>
-    </>
-  );
+	return (
+		<nav className="fixed top-0 w-full left-0 bg-white flex items-center justify-between px-7 py-3.5 z-10 shadow-md">
+			<div className="flex items-center gap-x-[10px] text-2xl font-semibold text-blue-500">
+				<TfiMenu className="hidden" />
+				<Logo width={155} height={100} />
+			</div>
+			<SearchBar />
+			<UserBar />
+		</nav>
+	);
 };
 
 export default Navbar;
-
-interface ContainerProps {
-  children: React.ReactNode;
-}
-
-const Container: React.FC<ContainerProps> = ({ children }) => {
-  return <div>{children}</div>;
-};
