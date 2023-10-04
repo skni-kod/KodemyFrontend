@@ -1,5 +1,3 @@
-import { BiGrid, BiSun } from 'react-icons/bi';
-import { HiOutlineMoon } from 'react-icons/hi2';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import Avatar from '@/components/common/navbar/atoms/Avatar';
 import Bell from '../atoms/Bell';
@@ -7,6 +5,7 @@ import BellDropDownMenu from './BellDropDownMenu';
 import { useState } from 'react';
 import AvatarDropDownMenu from './AvatarDropDownMenu';
 import { useMediaQuery } from 'react-responsive';
+import DayNightMode from '../atoms/DayNightMode';
 
 const UserBar = () => {
 	const isSmallScreen = useMediaQuery({ maxWidth: 850 });
@@ -24,10 +23,7 @@ const UserBar = () => {
 		setbellOpen(false);
 		setavatarOpen(!avatarOpen);
 	};
-	const [dayNightSwitch, setdayNightSwitch] = useState(false);
-	const toggleDayNightSwitch = () => {
-		setdayNightSwitch(!dayNightSwitch);
-	};
+
 	return (
 		<div className="flex items-center justify-between gap-x-4">
 			{isSmallScreen ? (
@@ -42,13 +38,7 @@ const UserBar = () => {
 				</button>
 			)}
 			<div className="flex items-center gap-x-4 font-bold">
-				<div onClick={toggleDayNightSwitch}>
-					{dayNightSwitch ? (
-						<BiSun className={IconClassNames} />
-					) : (
-						<HiOutlineMoon className={IconClassNames} />
-					)}
-				</div>
+				<DayNightMode />
 				<button onClick={toggleBell}>
 					<Bell className={IconClassNames} />
 				</button>
