@@ -20,7 +20,7 @@ export default function Home() {
 				<link rel="icon" href={Favicon.src} />
 			</Head>
 			<main>
-				<div className="flex flex-col justify-center items-center px-7 pr-[5rem] pl-[5rem] 2sm:pr-[7rem] 2sm:pl-[7rem] sm:pr-[10rem] sm:pl-[10rem] sm:pb-8 h-screen max-w-[1000px] mx-auto">
+				<div className="flex flex-col justify-center items-center px-7 pr-[5rem] pl-[5rem] 2sm:pr-[7rem] 2sm:pl-[7rem] sm:pr-[10rem] sm:pl-[10rem] sm:pb-8  max-w-[1000px] mx-auto">
 					<div className="flex justify-center pt-8">
 						<div className="flex items-center gap-4">
 							<div className="rounded-full border-sky-500 text-sky-500 shadow-lg border-2 h-10 w-10 flex items-center justify-center font-semibold bg-white">
