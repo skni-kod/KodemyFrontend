@@ -20,11 +20,11 @@ body,
 		--base-color: #0ea5e9;
 	}
 
-	/*:root[data-theme="dark"] {
-        --body-color: #444;
-        --body-2-color: #2c2c2c;
-        --base-color: white;
-    }*/
+	:root[data-theme='dark'] {
+		--body-color: #444;
+		--body-2-color: #2c2c2c;
+		--base-color: white;
+	}
 }
 
 body {
