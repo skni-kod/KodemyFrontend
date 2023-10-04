@@ -9,7 +9,7 @@ const CategoryButton = ({ value, selected = false }: CategoryButtonProps) => {
 	return (
 		<div
 			className={clsx(
-				'p-3 shadow-md border-2 rounded-3xl shrink-0 text-gray-500',
+				'p-3 shadow-md border-2 rounded-3xl shrink-0 text-gray-500 cursor-pointer',
 				!selected
 					? 'border-gray-500 text-gray-500'
 					: 'border-sky-500 text-sky-500',

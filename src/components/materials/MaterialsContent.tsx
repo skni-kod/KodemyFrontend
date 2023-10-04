@@ -1,22 +1,75 @@
 import CategoryButton from '@/components/materials/atoms/CategoryButton';
-import { Material } from '@/hooks/services/useCategoryService';
+import useCategoryService, {
+	CategoryDetailsResponse,
+	CategoryMaterialsResponse,
+} from '@/hooks/services/useCategoryService';
 import MaterialBlock from '@/components/materials/molecules/MaterialBlock';
-import { CategoryMaterials } from '@/mocks/categoryMock';
 import { RxTriangleDown } from 'react-icons/rx';
 import FilterButton from '@/components/materials/atoms/FilterButton';
+import { useEffect, useState } from 'react';
+import useSectionService, { Section } from '@/hooks/services/useSectionService';
+
+const categoryMaterialResponseInitialState = {
+	content: [],
+	size: 20,
+	pageable: {
+		offset: 0,
+		pageNumber: 0,
+		pageSize: 20,
+		paged: true,
+	},
+	totalPages: 1,
+	totalElements: 0,
+};
 
 const MaterialsContent = () => {
-	const materials = CategoryMaterials;
+	const { getCategoryDetails, getCategoryMaterials } = useCategoryService();
+	const [materials, setMaterials] = useState<CategoryMaterialsResponse>(
+		categoryMaterialResponseInitialState,
+	);
+	const [categoryDetails, setCategoryDetails] =
+		useState<CategoryDetailsResponse>();
+	const { getSections } = useSectionService();
+	const [section, setSection] = useState<Section>();
+
+	useEffect(() => {
+		(async () => {
+			setMaterials(await getCategoryMaterials(1, {}));
+		})();
+	}, [setMaterials]);
+
+	useEffect(() => {
+		(async () => {
+			setCategoryDetails(await getCategoryDetails(1));
+		})();
+	}, [setCategoryDetails]);
+
+	useEffect(() => {
+		(async () => {
+			const sections = await getSections();
+			setSection(sections.find((s: Section) => s.id === 1));
+		})();
+	}, [setSection]);
+
+	const mapCategoryDetails = (details: CategoryDetailsResponse) => {
+		return `${details.name}/${details.section.name}`;
+	};
 
 	return (
 		<>
 			<div className="w-full px-3">
 				<div className="w-full mt-4 text-semibold text-[36px]">
-					GameDev/Unity
+					{categoryDetails && <>{mapCategoryDetails(categoryDetails)}</>}
 				</div>
-				<div className="flex items-center w-full gap-4 mt-4 px-4 text-xl text-semibold text-center">
-					<CategoryButton value={'Unreal'} />
-					<CategoryButton value={'Unity'} selected />
+				<div className="flex items-center flex-wrap sw-full gap-4 mt-4 px-4 text-xl text-semibold text-center">
+					{section?.categories &&
+						section.categories.map(({ id, name }) => (
+							<CategoryButton
+								value={name}
+								key={id}
+								selected={id === categoryDetails?.id}
+							/>
+						))}
 				</div>
 				<div className="flex items-center w-full gap-4 mt-4 px-4 text-sm text-semibold text-center">
 					<FilterButton value={'Data utworzenia: DESC'} />

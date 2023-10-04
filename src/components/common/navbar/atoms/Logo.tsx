@@ -7,7 +7,7 @@ const Logo = ({ width, height }: { width: number; height: number }) => {
 		<Image
 			src={KodemyImage.src}
 			alt={Metadata.title}
-			className="w-auto h-auto cursor-pointer"
+			className="cursor-pointer"
 			width={width}
 			height={height}
 			priority={true}
