@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Container from '@/components/common/Container';
 import Page from '@/components/common/Page';
-import { Materials } from '@/pages/routes';
 import MaterialsContent from '@/components/materials/MaterialsContent';
+import Route from '@/utils/route';
 
-export const MaterialsIndexRoute = new Materials.IndexRoute('/materials');
+export const categoryIdRoute = (id: number): Route => {
+	return {
+		pathname: '/category/[id]',
+		query: { id },
+	};
+};
 
-const Index = () => {
+const Id = () => {
 	const router = useRouter();
 
 	return (
@@ -22,4 +26,4 @@ const Index = () => {
 	);
 };
 
-export default Index;
+export default Id;

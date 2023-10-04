@@ -7,7 +7,6 @@ import Sidebar from '@/components/common/sidebar/Sidebar';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
 import { ErrorInterceptorProvider } from '@/contexts/ErrorInterceptorContext';
-import useErrorInterceptor from '@/hooks/useErrorInterceptor';
 import React from 'react';
 
 export const Metadata = {
@@ -15,11 +14,7 @@ export const Metadata = {
 	description: 'Kodemy to najlepszy zbiór materiałów',
 };
 
-type BodyProps = {
-	children: React.ReactNode;
-};
-
-const Body = ({ children }: BodyProps) => {
+const Body = ({ children }: { children: React.ReactNode }) => {
 	return <>{children}</>;
 };
 
