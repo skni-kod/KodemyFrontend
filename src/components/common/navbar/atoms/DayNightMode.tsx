@@ -1,35 +1,41 @@
 import { BiSun } from 'react-icons/bi';
 import { HiOutlineMoon } from 'react-icons/hi2';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const DayNightMode = () => {
 	const IconClassNames =
 		'cursor-pointer text-gray-400 text-2xl h-[25.5px] w-[25.5px]';
 
-	const [dayNightSwitch, setdayNightSwitch] = useState(false);
-	const toggleDayNightSwitch = () => {
-		setdayNightSwitch(!dayNightSwitch);
-	};
-	const setDarkMode = () => {
-		console.log('Ustawiono ciemny motyw');
-		document.querySelector('body').setAttribute('data-theme', 'dark');
+	const [dayNightSwitch, setDayNightSwitch] = useState(false);
+
+	useEffect(() => {
+		const currentTheme = localStorage.getItem('theme');
+		if (currentTheme === 'dark') {
+			document.body.setAttribute('data-theme', 'dark');
+			setDayNightSwitch(true);
+		} else {
+			document.body.setAttribute('data-theme', 'light');
+			setDayNightSwitch(false);
+		}
+	}, []);
+
+	const toggleTheme = () => {
+		if (dayNightSwitch) {
+			document.body.setAttribute('data-theme', 'light');
+			localStorage.setItem('theme', 'light');
+		} else {
+			document.body.setAttribute('data-theme', 'dark');
+			localStorage.setItem('theme', 'dark');
+		}
+		setDayNightSwitch(!dayNightSwitch);
 	};
 
-	const setLightMode = () => {
-		console.log('Ustawiono jasny motyw');
-		document.querySelector('body').setAttribute('data-theme', 'light');
-	};
-
-	const toggleTheme = (e: any) => {
-		if (e.target.checked) setDarkMode();
-		else setLightMode();
-	};
 	return (
-		<div onClick={toggleDayNightSwitch} onChange={toggleTheme}>
+		<div onClick={toggleTheme}>
 			{dayNightSwitch ? (
-				<BiSun className={IconClassNames} />
+				<HiOutlineMoon className={IconClassNames} /> // Zamiana ikon na Moon w dark mode
 			) : (
-				<HiOutlineMoon className={IconClassNames} />
+				<BiSun className={IconClassNames} /> // Zamiana ikon na Sun w light mode
 			)}
 		</div>
 	);

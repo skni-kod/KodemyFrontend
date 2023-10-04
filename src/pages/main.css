@@ -15,15 +15,13 @@ body,
 
 @layer base {
 	:root {
-		--body-color: #f5f2f5;
-		--body-2-color: var(--body-color);
-		--base-color: #0ea5e9;
-	}
+		--body-color-light: #f5f2f5;
+		--body-2-color-light: var(--body-color);
+		--text-color-light: #0ea5e9;
 
-	:root[data-theme='dark'] {
-		--body-color: #444;
-		--body-2-color: #2c2c2c;
-		--base-color: white;
+		--body-color-dark: #444;
+		--body-2-color-dark: #2c2c2c;
+		--text-color-dark: white;
 	}
 }
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import useSectionService from '@/hooks/services/useSectionService';
 
-const Sidebar = () => {
+const Sidebar = ({ dayNightSwitch }) => {
 	const [sections, setSections] = useState([]);
 	const { getSections } = useSectionService();
 	const [isExpandMenu, setIsExpandMenu] = useState(false);
@@ -22,8 +22,9 @@ const Sidebar = () => {
 			onMouseEnter={() => handleExpand(true)}
 			onMouseLeave={() => handleExpand(false)}
 			className={clsx(
-				'z-10 fixed top-0 left-0 h-full pt-20 pb-5 overflow-y-auto bg-white shadow-md transition-all duration-500 ease-linear',
+				'z-10 fixed top-0 left-0 h-full pt-20 pb-5 overflow-y-auto shadow-md transition-all duration-500 ease-linear',
 				isExpandMenu ? 'w-72 px-5' : 'w-14 px-3',
+				dayNightSwitch ? 'dark-theme' : 'light-theme', // Use the theme class here
 			)}
 		>
 			<div className="relative">

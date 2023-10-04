@@ -33,7 +33,7 @@ const UserBar = () => {
 					/>
 				</button>
 			) : (
-				<button className="bg-base hover:bg-blue-700 text-white text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded">
+				<button className="bg-var(--base-color:) hover:bg-blue-700 text-white text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded">
 					Dodaj materiał
 				</button>
 			)}
