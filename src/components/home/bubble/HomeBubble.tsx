@@ -27,7 +27,7 @@ const HomeBubble = ({
 	return (
 		<div
 			className={clsx(
-				'flex cursor-pointer relative border-2 font-semibold text-center items-center justify-center text-[1.1rem] bg-white',
+				'flex cursor-pointer relative border-2 font-semibold text-center items-center justify-center text-[0.5rem] sm:text-[0.7rem] md:text-[1.1rem] bg-white',
 				variant === 'HomeBubble' &&
 					'p-2 rounded-full min-h-[80px] aspect-square',
 				variant === 'ButtonBubble' && 'py-2 px-4 mx-2 rounded-3xl shrink-0',

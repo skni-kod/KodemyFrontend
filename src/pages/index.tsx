@@ -20,7 +20,7 @@ export default function Home() {
 				<link rel="icon" href={Favicon.src} />
 			</Head>
 			<main>
-				<div className="px-7 pr-8 pl-[3.75rem] sm:pb-8 max-w-lg mx-auto">
+				<div className="flex flex-col justify-center items-center px-7 pr-[5rem] pl-[5rem] 2sm:pr-[7rem] 2sm:pl-[7rem] sm:pr-[10rem] sm:pl-[10rem] sm:pb-8 h-screen max-w-[1000px] mx-auto">
 					<div className="flex justify-center pt-8">
 						<div className="flex items-center gap-4">
 							<div className="rounded-full border-sky-500 text-sky-500 shadow-lg border-2 h-10 w-10 flex items-center justify-center font-semibold bg-white">
@@ -50,7 +50,7 @@ export default function Home() {
 					</h1>
 
 					{stage == 1 ? (
-						<div className="flex flex-wrap gap-2 justify-center items-center mx-auto max-w-xl">
+						<div className="grid grid-cols-2 md:grid-cols-[170px_170px_170px] gap-1 justify-center items-center ">
 							<HomeBubble
 								className="basis-[45%]"
 								name="jezyki programowania"
@@ -63,7 +63,7 @@ export default function Home() {
 								</>
 							</HomeBubble>
 							<HomeBubble
-								className="basis-5/12 relative top-16"
+								className="basis-5/12 relative top-16 sm:top-16"
 								name="gamedev"
 								category={firstCategory}
 								setCategory={setFirstCategory}
@@ -81,7 +81,7 @@ export default function Home() {
 								</>
 							</HomeBubble>
 							<HomeBubble
-								className="basis-5/12 relative top-14 left-4"
+								className="basis-5/12 relative top-20 sm:top-16 sm:left-4"
 								name="inne"
 								category={firstCategory}
 								setCategory={setFirstCategory}
@@ -89,7 +89,7 @@ export default function Home() {
 								<>Inne</>
 							</HomeBubble>
 							<HomeBubble
-								className="basis-5/12 relative right-12 top-4"
+								className="basis-5/12 relative top-4 md:left-32 md:top-4  "
 								name="aplikacje webowe"
 								category={firstCategory}
 								setCategory={setFirstCategory}
@@ -100,21 +100,20 @@ export default function Home() {
 							</HomeBubble>{' '}
 						</div>
 					) : (
-						<div className="flex flex-wrap gap-4 justify-center items-center mx-auto max-w-xl">
+						<div className="grid grid-cols-2 md:grid-cols-[170px_170px_170px] gap-1 justify-center items-center ">
 							<HomeBubble
-								className="basis-6/12"
-								name="gamedev ogolny"
+								className=""
+								name="gamedev ogólny"
 								category={secondCategory}
 								setCategory={setSecondCategory}
 							>
 								<>
-									GameDev
-									<br />
-									Ogólny
+									Gamedev <br />
+									ogólny
 								</>
 							</HomeBubble>
 							<HomeBubble
-								className="basis-5/12 relative bottom-4"
+								className="basis-5/12 relative top-32 sm:top-6"
 								name="unity"
 								category={secondCategory}
 								setCategory={setSecondCategory}
@@ -122,7 +121,7 @@ export default function Home() {
 								<>Unity</>
 							</HomeBubble>
 							<HomeBubble
-								className="basis-5/12 relative"
+								className="basis-5/12 top-2"
 								name="unreal"
 								category={secondCategory}
 								setCategory={setSecondCategory}
@@ -130,7 +129,7 @@ export default function Home() {
 								<>Unreal</>
 							</HomeBubble>
 							<HomeBubble
-								className="basis-5/12 relative bottom-6"
+								className="basis-5/12 relative top-32 right-24 sm:top-7 sm:left-0"
 								name="grafika 2d"
 								category={secondCategory}
 								setCategory={setSecondCategory}
@@ -138,7 +137,7 @@ export default function Home() {
 								<>Grafika 2D</>
 							</HomeBubble>
 							<HomeBubble
-								className="basis-5/12 relative"
+								className="basis-5/12 relative bottom-32 left-32  sm:top-7 sm:left-4"
 								name="godot"
 								category={secondCategory}
 								setCategory={setSecondCategory}
@@ -146,13 +145,13 @@ export default function Home() {
 								<>Godot</>
 							</HomeBubble>
 							<HomeBubble
-								className="basis-5/12 relative bottom-2"
+								className="basis-5/12 relative left-16 top-8"
 								name="grafika 3d"
 								category={secondCategory}
 								setCategory={setSecondCategory}
 							>
 								<>Grafika 3D</>
-							</HomeBubble>
+							</HomeBubble>{' '}
 						</div>
 					)}
 					<button
