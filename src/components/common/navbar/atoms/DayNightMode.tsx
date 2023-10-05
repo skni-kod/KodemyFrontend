@@ -9,16 +9,24 @@ const DayNightMode = () => {
 	const [dayNightSwitch, setDayNightSwitch] = useState(false);
 
 	useEffect(() => {
-		toggleTheme();
+		// Sprawdź, czy w pamięci sesji istnieje preferencja trybu
+		const currentTheme = sessionStorage.getItem('data-theme');
+		if (currentTheme) {
+			document.body.setAttribute('data-theme', currentTheme);
+			setDayNightSwitch(currentTheme === 'dark');
+		} else {
+			// Jeśli nie ma preferencji w pamięci sesji, ustaw tryb domyślny
+			toggleTheme();
+		}
 	}, []);
 
 	const toggleTheme = () => {
 		if (dayNightSwitch) {
 			document.body.setAttribute('data-theme', 'light');
-			localStorage.setItem('data-theme', 'light');
+			sessionStorage.setItem('data-theme', 'light');
 		} else {
 			document.body.setAttribute('data-theme', 'dark');
-			localStorage.setItem('data-theme', 'dark');
+			sessionStorage.setItem('data-theme', 'dark');
 		}
 		setDayNightSwitch(!dayNightSwitch);
 	};
