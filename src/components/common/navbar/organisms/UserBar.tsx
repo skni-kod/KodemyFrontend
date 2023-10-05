@@ -10,7 +10,7 @@ import DayNightMode from '../atoms/DayNightMode';
 const UserBar = () => {
 	const isSmallScreen = useMediaQuery({ maxWidth: 850 });
 	const IconClassNames =
-		'cursor-pointer text-texttt text-2xl h-[25.5px] w-[25.5px]';
+		'cursor-pointer text-icon text-2xl h-[25.5px] w-[25.5px]';
 
 	const [bellOpen, setbellOpen] = useState(false);
 	const toggleBell = () => {
@@ -29,11 +29,11 @@ const UserBar = () => {
 			{isSmallScreen ? (
 				<button>
 					<AiFillPlusCircle
-						className={`${IconClassNames} bg-blueeee hover:bg-darkblueeee`}
+						className={`${IconClassNames} hover:bg-darkblueeee`}
 					/>
 				</button>
 			) : (
-				<button className="bg-var(--base-color:) hover:bg-blue-700 text-white text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded">
+				<button className="bg-blueeee  hover:bg-darkblueeee text-texttt text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded">
 					Dodaj materiał
 				</button>
 			)}

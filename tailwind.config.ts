@@ -19,8 +19,10 @@ const config: Config = {
 			colors: {
 				body: 'rgb(var(--color-background) / <alpha-value>)',
 				texttt: 'rgb(var(--color-text) / <alpha-value>)',
+				texttt2: 'rgb(var(--color-text2) / <alpha-value>)',
 				blueeee: 'rgb(var(--color-blue) / <alpha-value>)',
 				darkblueeee: 'rgb(var(--color-dark-blue) / <alpha-value>)',
+				icon: 'rgb(var(--color-icon) / <alpha-value>)',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
