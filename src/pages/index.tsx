@@ -17,10 +17,11 @@ export default function Home() {
 				<title>{Metadata.title as string}</title>
 				<meta name="description" content={Metadata.description as string} />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<meta name="hight" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href={Favicon.src} />
 			</Head>
 			<main>
-				<div className="bg-white2verydarkgrey flex flex-col justify-center items-center px-7 pr-[5rem] pl-[5rem] 2sm:pr-[7rem] 2sm:pl-[7rem] sm:pr-[10rem] sm:pl-[10rem] sm:pb-8  w-100vh mx-auto">
+				<div className="min-h-[91.4vh] w-full bg-white2verydarkgrey flex flex-col justify-center items-center px-7 pr-[5rem] pl-[5rem] 2sm:pr-[7rem] 2sm:pl-[7rem] sm:pr-[10rem] sm:pl-[10rem] sm:pb-8 mx-auto">
 					<div className="flex justify-center pt-8">
 						<div className="flex items-center gap-4">
 							<div className="rounded-full border-sky-500 text-sky-500 shadow-lg border-2 h-10 w-10 flex items-center justify-center font-semibold bg-white2darkgrey">
@@ -157,7 +158,7 @@ export default function Home() {
 						</div>
 					)}
 					<button
-						className="bg-sky-500 text-white font-semibold mx-auto block py-3 px-6 rounded-2xl mt-16"
+						className="bg-sky-500 hover:bg-blue-600 text-white font-semibold mx-auto block py-3 px-6 rounded-2xl mt-16"
 						onClick={() => {
 							if (stage == 1) setStage(2);
 							else if (stage == 2)

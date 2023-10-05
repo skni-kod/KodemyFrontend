@@ -13,8 +13,8 @@ const NotificationComponent = ({
 	className,
 	amount,
 }: NotificationComponentProps) => {
-	const textColorClass = isActive ? 'text-blue' : 'text-black2white';
-	const backgroundColorClass = isActive ? 'bg-blue-500' : 'bg-icon';
+	const textColorClass = isActive ? 'text-sky-500' : 'text-black2white';
+	const backgroundColorClass = isActive ? 'bg-sky-500' : 'bg-grey2white';
 	const boxtextColorClass = isActive ? 'text-white' : 'text-white2darkgrey';
 
 	return (

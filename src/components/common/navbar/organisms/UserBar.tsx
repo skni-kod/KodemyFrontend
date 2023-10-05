@@ -28,12 +28,10 @@ const UserBar = () => {
 		<div className="flex items-center justify-between gap-x-4">
 			{isSmallScreen ? (
 				<button>
-					<AiFillPlusCircle
-						className={`${IconClassNames} hover:bg-darkblueeee`}
-					/>
+					<AiFillPlusCircle className={`${IconClassNames} hover:bg-blue-600`} />
 				</button>
 			) : (
-				<button className="bg-blueeee  hover:bg-darkblueeee text-texttt text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded">
+				<button className="bg-sky-500  hover:bg-blue-600 text-white2white text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded">
 					Dodaj materiał
 				</button>
 			)}

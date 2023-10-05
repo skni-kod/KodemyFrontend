@@ -15,27 +15,19 @@ body,
 
 @layer base {
 	:root [data-theme='light'] {
-		--color-text: 255 255 255;
-		--color-blue: 14 165 233;
-		--color-dark-blue: 56 146 243;
-		--color-icon: 177 177 177;
-
-		--color-white2verydarkgrey: 255 255 255;
-		--color-black2white: 0 0 0;
+		--color-white2white: 255 255 255;
 		--color-white2darkgrey: 255 255 255;
-		--color-black2grey: 0 0 0;
+		--color-white2verydarkgrey: 255 255 255;
 		--color-grey2white: 177 177 177;
+		--color-black2white: 0 0 0;
+		--color-black2grey: 0 0 0;
 	}
 	:root [data-theme='dark'] {
-		--color-text: 255 255 255;
-		--color-blue: 14 165 233;
-		--color-dark-blue: 56 146 243;
-		--color-icon: 255 255 255;
-
-		--color-white2verydarkgrey: 32 33 36;
-		--color-black2white: 255 255 255;
+		--color-white2white: 255 255 255;
 		--color-white2darkgrey: 48 49 52;
-		--color-black2grey: 177 177 177;
+		--color-white2verydarkgrey: 32 33 36;
 		--color-grey2white: 255 255 255;
+		--color-black2white: 255 255 255;
+		--color-black2grey: 177 177 177;
 	}
 }
