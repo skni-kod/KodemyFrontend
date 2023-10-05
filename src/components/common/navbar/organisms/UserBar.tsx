@@ -10,7 +10,7 @@ import DayNightMode from '../atoms/DayNightMode';
 const UserBar = () => {
 	const isSmallScreen = useMediaQuery({ maxWidth: 850 });
 	const IconClassNames =
-		'cursor-pointer text-gray-400 text-2xl h-[25.5px] w-[25.5px]';
+		'cursor-pointer text-texttt text-2xl h-[25.5px] w-[25.5px]';
 
 	const [bellOpen, setbellOpen] = useState(false);
 	const toggleBell = () => {
@@ -29,7 +29,7 @@ const UserBar = () => {
 			{isSmallScreen ? (
 				<button>
 					<AiFillPlusCircle
-						className={`${IconClassNames} text-base hover:text-blue-700`}
+						className={`${IconClassNames} bg-blueeee hover:bg-darkblueeee`}
 					/>
 				</button>
 			) : (

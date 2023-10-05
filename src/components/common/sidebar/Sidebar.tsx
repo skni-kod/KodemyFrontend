@@ -1,9 +1,9 @@
-import SidebarItem from '@/components/common/sidebar/atoms/SidebarItem';
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import useSectionService from '@/hooks/services/useSectionService';
+import SidebarItem from './atoms/SidebarItem';
 
-const Sidebar = ({ dayNightSwitch }) => {
+const Sidebar = () => {
 	const [sections, setSections] = useState([]);
 	const { getSections } = useSectionService();
 	const [isExpandMenu, setIsExpandMenu] = useState(false);
@@ -22,9 +22,10 @@ const Sidebar = ({ dayNightSwitch }) => {
 			onMouseEnter={() => handleExpand(true)}
 			onMouseLeave={() => handleExpand(false)}
 			className={clsx(
-				'z-10 fixed top-0 left-0 h-full pt-20 pb-5 overflow-y-auto shadow-md transition-all duration-500 ease-linear',
-				isExpandMenu ? 'w-72 px-5' : 'w-14 px-3',
-				dayNightSwitch ? 'dark-theme' : 'light-theme', // Use the theme class here
+				'z-10 fixed top-0 left-0 h-full pt-20 pb-5 overflow-y-auto bg-body text-blueeee shadow-md transition-all duration-500 ease-linear',
+				isExpandMenu
+					? 'w-72 px-5 bg-gradient-radial'
+					: 'w-14 px-3 bg-gradient-conic',
 			)}
 		>
 			<div className="relative">

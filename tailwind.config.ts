@@ -16,6 +16,12 @@ const config: Config = {
 			'2xl': '1536px',
 		},
 		extend: {
+			colors: {
+				body: 'rgb(var(--color-background) / <alpha-value>)',
+				texttt: 'rgb(var(--color-text) / <alpha-value>)',
+				blueeee: 'rgb(var(--color-blue) / <alpha-value>)',
+				darkblueeee: 'rgb(var(--color-dark-blue) / <alpha-value>)',
+			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'gradient-conic':
@@ -24,29 +30,5 @@ const config: Config = {
 		},
 	},
 	plugins: [],
-	extend: {
-		'light-theme': {
-			'bg-body-color-light': {
-				backgroundColor: 'var(--body-color-light)',
-			},
-			'bg-body-2-color-light': {
-				color: 'var(--body-2-color-light)',
-			},
-			'bg-text-color-light': {
-				color: 'var(--text-color-light)',
-			},
-		},
-		'dark-theme': {
-			'bg-body-color-dark': {
-				backgroundColor: 'var(--body-color-dark)',
-			},
-			'bg-body-2-color-dark': {
-				color: 'var(--body-2-color-dark)',
-			},
-			'bg-text-color-dark': {
-				color: 'var(--text-color-dark)',
-			},
-		},
-	},
 };
 export default config;

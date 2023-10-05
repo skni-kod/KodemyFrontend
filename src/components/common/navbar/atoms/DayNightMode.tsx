@@ -9,23 +9,16 @@ const DayNightMode = () => {
 	const [dayNightSwitch, setDayNightSwitch] = useState(false);
 
 	useEffect(() => {
-		const currentTheme = localStorage.getItem('theme');
-		if (currentTheme === 'dark') {
-			document.body.setAttribute('data-theme', 'dark');
-			setDayNightSwitch(true);
-		} else {
-			document.body.setAttribute('data-theme', 'light');
-			setDayNightSwitch(false);
-		}
+		toggleTheme();
 	}, []);
 
 	const toggleTheme = () => {
 		if (dayNightSwitch) {
 			document.body.setAttribute('data-theme', 'light');
-			localStorage.setItem('theme', 'light');
+			localStorage.setItem('data-theme', 'light');
 		} else {
 			document.body.setAttribute('data-theme', 'dark');
-			localStorage.setItem('theme', 'dark');
+			localStorage.setItem('data-theme', 'dark');
 		}
 		setDayNightSwitch(!dayNightSwitch);
 	};
@@ -33,9 +26,9 @@ const DayNightMode = () => {
 	return (
 		<div onClick={toggleTheme}>
 			{dayNightSwitch ? (
-				<HiOutlineMoon className={IconClassNames} /> // Zamiana ikon na Moon w dark mode
+				<HiOutlineMoon className={IconClassNames} />
 			) : (
-				<BiSun className={IconClassNames} /> // Zamiana ikon na Sun w light mode
+				<BiSun className={IconClassNames} />
 			)}
 		</div>
 	);
