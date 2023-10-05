@@ -21,13 +21,16 @@ body,
 		--color-blue: 14 165 233;
 		--color-dark-blue: 56 146 243;
 		--color-icon: 177 177 177;
+		--color-black2white: 0 0 0;
+		/* 48,49,52 */
 	}
 	:root [data-theme='dark'] {
-		--color-background: 105 105 105;
+		--color-background: 32 33 36;
 		--color-text: 255 255 255;
 		--color-text2: 177 177 177;
 		--color-blue: 14 165 233;
 		--color-dark-blue: 56 146 243;
 		--color-icon: 255 255 255;
+		--color-black2white: 255 255 255;
 	}
 }
