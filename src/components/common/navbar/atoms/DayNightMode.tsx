@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 const DayNightMode = () => {
 	const IconClassNames =
-		'cursor-pointer text-icon text-2xl h-[25.5px] w-[25.5px]';
+		'cursor-pointer text-grey2white text-2xl h-[25.5px] w-[25.5px]';
 
 	const [dayNightSwitch, setDayNightSwitch] = useState(false);
 

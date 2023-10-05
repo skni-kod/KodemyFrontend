@@ -22,7 +22,7 @@ const BellDropDownMenu = () => {
 	};
 
 	return (
-		<div className="bg-body h-[auto] w-[323px] absolute top-[70px] right-[0px] shadow-md rounded-lg">
+		<div className="bg-white2darkgrey h-[auto] w-[323px] absolute top-[70px] right-[0px] shadow-md rounded-lg">
 			<div className="h-[auto] flex justify-between m-2 relative">
 				<h1 className="w-4/10 text-black2white text-[20px] p-1">
 					Powiadomienia
