@@ -9,13 +9,11 @@ const DayNightMode = () => {
 	const [dayNightSwitch, setDayNightSwitch] = useState(false);
 
 	useEffect(() => {
-		// Sprawdź, czy w pamięci sesji istnieje preferencja trybu
 		const currentTheme = sessionStorage.getItem('data-theme');
 		if (currentTheme) {
 			document.body.setAttribute('data-theme', currentTheme);
 			setDayNightSwitch(currentTheme === 'dark');
 		} else {
-			// Jeśli nie ma preferencji w pamięci sesji, ustaw tryb domyślny
 			toggleTheme();
 		}
 	}, []);
