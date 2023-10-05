@@ -22,7 +22,7 @@ const Sidebar = () => {
 			onMouseEnter={() => handleExpand(true)}
 			onMouseLeave={() => handleExpand(false)}
 			className={clsx(
-				'z-10 fixed top-0 left-0 h-full pt-20 pb-5 overflow-y-auto bg-white shadow-md transition-all duration-500 ease-linear',
+				'hidden md:block z-10 fixed top-0 left-0 h-full pt-20 pb-5 overflow-y-auto bg-white shadow-md transition-all duration-500 ease-linear',
 				isExpandMenu ? 'w-72 px-5' : 'w-14 px-3',
 			)}
 		>
