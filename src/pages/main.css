@@ -14,19 +14,20 @@ body,
 }
 
 @layer base {
-	:root {
-		--body-color: #f5f2f5;
-		--body-2-color: var(--body-color);
-		--base-color: #0ea5e9;
+	:root [data-theme='light'] {
+		--color-white2white: 255 255 255;
+		--color-white2darkgrey: 255 255 255;
+		--color-white2verydarkgrey: 255 255 255;
+		--color-grey2white: 177 177 177;
+		--color-black2white: 0 0 0;
+		--color-black2grey: 0 0 0;
 	}
-
-	/*:root[data-theme="dark"] {
-        --body-color: #444;
-        --body-2-color: #2c2c2c;
-        --base-color: white;
-    }*/
-}
-
-body {
-	background: var(--body-color);
+	:root [data-theme='dark'] {
+		--color-white2white: 255 255 255;
+		--color-white2darkgrey: 48 49 52;
+		--color-white2verydarkgrey: 32 33 36;
+		--color-grey2white: 255 255 255;
+		--color-black2white: 255 255 255;
+		--color-black2grey: 177 177 177;
+	}
 }

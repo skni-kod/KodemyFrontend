@@ -17,11 +17,13 @@ const config: Config = {
 		},
 		extend: {
 			colors: {
-				body: {
-					DEFAULT: 'var(--body-color)',
-					'2': 'var(--body-2-color)',
-				},
-				base: 'var(--base-color)',
+				white2white: 'rgb(var(--color-white2white) / <alpha-value>)',
+				white2darkgrey: 'rgb(var(--color-white2darkgrey) / <alpha-value>)',
+				white2verydarkgrey:
+					'rgb(var(--color-white2verydarkgrey) / <alpha-value>)',
+				grey2white: 'rgb(var(--color-grey2white) / <alpha-value>)',
+				black2white: 'rgb(var(--color-black2white) / <alpha-value>)',
+				black2grey: 'rgb(var(--color-black2grey) / <alpha-value>)',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
