@@ -6,8 +6,10 @@ import Navbar from '@/components/common/navbar/Navbar';
 import Sidebar from '@/components/common/sidebar/Sidebar';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
-import { ErrorInterceptorProvider } from '@/contexts/ErrorInterceptorContext';
-import React from 'react';
+import ErrorInterceptorProvider, {
+	ErrorInterceptorContext,
+} from '@/contexts/ErrorInterceptorContext';
+import React, { useContext } from 'react';
 
 export const Metadata = {
 	title: 'Kodemy',
@@ -15,6 +17,7 @@ export const Metadata = {
 };
 
 const Body = ({ children }: { children: React.ReactNode }) => {
+	const { error, dispatchError } = useContext(ErrorInterceptorContext);
 	return <>{children}</>;
 };
 

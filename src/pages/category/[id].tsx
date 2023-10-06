@@ -6,6 +6,7 @@ import Route from '@/utils/route';
 import Favicon from '@/assets/favicon.ico';
 import { useEffect, useState } from 'react';
 import { page404Route } from '@/pages/404';
+import MaterialsFiltersProvider from '@/contexts/MaterialsFiltersContext';
 
 export const pageCategoryIdRoute = (id: number): Route => {
 	return {
@@ -31,9 +32,11 @@ const Id = () => {
 			title="Lista materiałów"
 			description="Spis wszystkich materiałów danej kategorii."
 		>
+			{/*<MaterialsFiltersProvider>*/}
 			<Container className="mt-28 max-w-7xl mx-auto">
 				{id && <MaterialsContent categoryId={id} />}
 			</Container>
+			{/*</MaterialsFiltersProvider>*/}
 		</Page>
 	);
 };

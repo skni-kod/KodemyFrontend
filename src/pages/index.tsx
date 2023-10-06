@@ -1,8 +1,4 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
 import Favicon from '@/assets/favicon.ico';
-import HomeBubble from '@/components/home/bubble/HomeBubble';
 import { Metadata } from '@/pages/_app';
 import Page from '@/components/common/Page';
 import Container from '@/components/common/Container';
