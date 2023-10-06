@@ -4,11 +4,9 @@ import Bell from '../atoms/Bell';
 import BellDropDownMenu from './BellDropDownMenu';
 import { useState } from 'react';
 import AvatarDropDownMenu from './AvatarDropDownMenu';
-import { useMediaQuery } from 'react-responsive';
 import DayNightMode from '../atoms/DayNightMode';
 
 const UserBar = () => {
-	const isSmallScreen = useMediaQuery({ maxWidth: 850 });
 	const IconClassNames =
 		'cursor-pointer text-grey2white text-2xl h-[25.5px] w-[25.5px]';
 
