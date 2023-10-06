@@ -24,6 +24,8 @@ const config: Config = {
 				grey2white: 'rgb(var(--color-grey2white) / <alpha-value>)',
 				black2white: 'rgb(var(--color-black2white) / <alpha-value>)',
 				black2grey: 'rgb(var(--color-black2grey) / <alpha-value>)',
+				sky2002sky600: 'rgb(var(--color-sky2002sky600) / <alpha-value>)',
+				sky6002sky200: 'rgb(var(--color-sky6002sky200) / <alpha-value>)',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
