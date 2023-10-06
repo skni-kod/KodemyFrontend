@@ -17,13 +17,14 @@ export default function Home() {
 				<title>{Metadata.title as string}</title>
 				<meta name="description" content={Metadata.description as string} />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<meta name="hight" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href={Favicon.src} />
 			</Head>
 			<main>
-				<div className="flex flex-col justify-center items-center px-7 pr-[5rem] pl-[5rem] 2sm:pr-[7rem] 2sm:pl-[7rem] sm:pr-[10rem] sm:pl-[10rem] sm:pb-8  max-w-[1000px] mx-auto">
+				<div className="min-h-[91.4vh] w-full bg-white2verydarkgrey flex flex-col justify-center items-center px-7 pr-[5rem] pl-[5rem] 2sm:pr-[7rem] 2sm:pl-[7rem] sm:pr-[10rem] sm:pl-[10rem] sm:pb-8 mx-auto">
 					<div className="flex justify-center pt-8">
 						<div className="flex items-center gap-4">
-							<div className="rounded-full border-sky-500 text-sky-500 shadow-lg border-2 h-10 w-10 flex items-center justify-center font-semibold bg-white">
+							<div className="rounded-full border-sky-500 text-sky-500 shadow-lg border-2 h-10 w-10 flex items-center justify-center font-semibold bg-white2darkgrey">
 								1
 							</div>
 							<div className="h-[3px] w-6 bg-sky-500"></div>
@@ -31,21 +32,23 @@ export default function Home() {
 						<div className="flex items-center gap-4">
 							<div
 								className={
-									stage != 2 ? 'h-[3px] w-6 bg-black' : 'h-[3px] w-6 bg-sky-500'
+									stage != 2
+										? 'h-[3px] w-6 bg-black2white'
+										: 'h-[3px] w-6 bg-sky-500'
 								}
 							></div>
 							<div
 								className={
 									stage == 2
-										? 'rounded-full border-sky-500 text-sky-500 shadow-lg border-2 h-10 w-10 flex items-center justify-center font-semibold bg-white'
-										: 'rounded-full border-black border-2 h-10 w-10 flex items-center justify-center font-semibold bg-white'
+										? 'rounded-full border-sky-500 text-sky-500 shadow-lg border-2 h-10 w-10 flex items-center justify-center font-semibold bg-white2darkgrey'
+										: 'rounded-full border-black2white text-black2white border-2 h-10 w-10 flex items-center justify-center font-semibold bg-white2darkgrey'
 								}
 							>
 								2
 							</div>
 						</div>
 					</div>
-					<h1 className="text-2xl font-bold text-center mt-4 mb-8">
+					<h1 className="text-2xl font-bold text-center text-black2white mt-4 mb-8">
 						{stage == 1 ? 'Wybierz sekcję' : 'Wybierz kategorię'}
 					</h1>
 
@@ -155,7 +158,7 @@ export default function Home() {
 						</div>
 					)}
 					<button
-						className="bg-sky-500 text-white font-semibold mx-auto block py-3 px-6 rounded-2xl mt-16"
+						className="bg-sky-500 hover:bg-blue-600 text-white font-semibold mx-auto block py-3 px-6 rounded-2xl mt-16"
 						onClick={() => {
 							if (stage == 1) setStage(2);
 							else if (stage == 2)
