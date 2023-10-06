@@ -13,13 +13,17 @@ const Logo = ({ width, height, theme }: LogoProps) => {
 	const imageSrc = theme === 'dark' ? KodemyImageWhite : KodemyImageDark;
 
 	return (
-		<Image
-			src={imageSrc.src}
-			alt={Metadata.title}
-			className="cursor-pointer"
-			width={width}
-			height={height}
-		/>
+		<button>
+			<a href="/">
+				<Image
+					src={imageSrc.src}
+					alt={Metadata.title}
+					className="cursor-pointer"
+					width={width}
+					height={height}
+				/>
+			</a>
+		</button>
 	);
 };
 
