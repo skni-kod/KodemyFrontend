@@ -21,6 +21,8 @@ body,
 		--color-grey2white: 177 177 177;
 		--color-black2white: 0 0 0;
 		--color-black2grey: 0 0 0;
+		--color-sky2002sky600: 186 230 253;
+		--color-sky6002sky200: 2 132 199;
 	}
 	:root [data-theme='dark'] {
 		--color-white2white: 255 255 255;
@@ -29,5 +31,7 @@ body,
 		--color-grey2white: 255 255 255;
 		--color-black2white: 255 255 255;
 		--color-black2grey: 177 177 177;
+		--color-sky2002sky600: 2 132 199;
+		--color-sky6002sky200: 186 230 253;
 	}
 }
