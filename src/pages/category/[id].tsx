@@ -4,8 +4,10 @@ import Page from '@/components/common/Page';
 import MaterialsContent from '@/components/materials/MaterialsContent';
 import Route from '@/utils/route';
 import Favicon from '@/assets/favicon.ico';
+import { useEffect, useState } from 'react';
+import { page404Route } from '@/pages/404';
 
-export const categoryIdRoute = (id: number): Route => {
+export const pageCategoryIdRoute = (id: number): Route => {
 	return {
 		pathname: '/category/[id]',
 		query: { id },
@@ -13,7 +15,16 @@ export const categoryIdRoute = (id: number): Route => {
 };
 
 const Id = () => {
+	const [id, setId] = useState<number | undefined>(undefined);
 	const router = useRouter();
+
+	useEffect(() => {
+		const { id } = router.query;
+		if (typeof id === 'string') {
+			if (/^[0-9]+$/.test(id)) setId(parseInt(id));
+			else router.push(page404Route());
+		}
+	}, [router.query, router.asPath]);
 
 	return (
 		<Page
@@ -21,7 +32,7 @@ const Id = () => {
 			description="Spis wszystkich materiałów danej kategorii."
 		>
 			<Container className="mt-28 max-w-7xl mx-auto">
-				<MaterialsContent />
+				{id && <MaterialsContent categoryId={id} />}
 			</Container>
 		</Page>
 	);

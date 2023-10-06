@@ -22,7 +22,7 @@ const categoryMaterialResponseInitialState = {
 	totalElements: 0,
 };
 
-const MaterialsContent = () => {
+const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 	const { getCategoryDetails, getCategoryMaterials } = useCategoryService();
 	const [materials, setMaterials] = useState<CategoryMaterialsResponse>(
 		categoryMaterialResponseInitialState,
@@ -34,25 +34,25 @@ const MaterialsContent = () => {
 
 	useEffect(() => {
 		(async () => {
-			setMaterials(await getCategoryMaterials(1, {}));
+			setMaterials(await getCategoryMaterials(categoryId, {}));
 		})();
-	}, [setMaterials]);
+	}, [categoryId]);
 
 	useEffect(() => {
 		(async () => {
-			setCategoryDetails(await getCategoryDetails(1));
+			setCategoryDetails(await getCategoryDetails(categoryId));
 		})();
-	}, [setCategoryDetails]);
+	}, [categoryId]);
 
 	useEffect(() => {
 		(async () => {
 			const sections = await getSections();
-			setSection(sections.find((s: Section) => s.id === 1));
+			setSection(sections.find((s: Section) => s.id === categoryId));
 		})();
-	}, [setSection]);
+	}, [categoryId]);
 
 	const mapCategoryDetails = (details: CategoryDetailsResponse) => {
-		return `${details.name}/${details.section.name}`;
+		return `${details.section.name}/${details.name}`;
 	};
 
 	return (

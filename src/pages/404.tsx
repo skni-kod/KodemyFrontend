@@ -1,6 +1,13 @@
 import React from 'react';
 import Container from '@/components/common/Container';
 import Page from '@/components/common/Page';
+import Route from '@/utils/route';
+
+export const page404Route = (): Route => {
+	return {
+		pathname: '/404',
+	};
+};
 
 const ErrorPage = () => (
 	<Page title="404" description="Błąd 404 - strona nie istnieje">

@@ -1,6 +1,6 @@
 type Route = {
 	pathname: string;
-	query: {
+	query?: {
 		[key: string]: any;
 	};
 };

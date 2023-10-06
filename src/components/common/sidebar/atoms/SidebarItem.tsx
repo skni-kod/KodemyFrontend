@@ -4,7 +4,7 @@ import Link from 'next/link';
 import SidebarAssets from '@/components/common/sidebar/helpers/SidebarAssets';
 import { Section } from '@/hooks/services/useSectionService';
 import clsx from 'clsx';
-import { categoryIdRoute } from '@/pages/category/[id]';
+import { pageCategoryIdRoute } from '@/pages/category/[id]';
 
 interface SidebarItemProps {
 	section: Section;
@@ -61,7 +61,7 @@ const SidebarItem = ({
 					{categories.map(({ id, name }) => (
 						<Link
 							key={id}
-							href={categoryIdRoute(id)}
+							href={pageCategoryIdRoute(id)}
 							className="flex items-center w-full px-3.5 py-1 pl-12 mt-1 rounded-lg no-underline overflow-hidden"
 						>
 							{name}
