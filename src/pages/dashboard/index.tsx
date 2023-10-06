@@ -15,8 +15,8 @@ const Index = () => {
 			description="Widok zarządzania dodanymi materiałami i kontem"
 		>
 			<Container className="mt-28 max-w-7xl mx-auto">
-				<UserContent />
-				{/* <AdminContent/> */}
+				{/* <UserContent /> */}
+				<AdminContent />
 			</Container>
 		</Page>
 	);
