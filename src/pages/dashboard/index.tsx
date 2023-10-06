@@ -15,8 +15,8 @@ const Index = () => {
 			description="Widok zarządzania dodanymi materiałami i kontem"
 		>
 			<Container className="pt-28 mx-auto bg-white2verydarkgrey min-h-[91.4vh] min-w-[98vw] px-[10vw]">
-				{/*<AdminContent />*/}
-				<UserContent />
+				<AdminContent />
+				{/* <UserContent /> */}
 			</Container>
 		</Page>
 	);
