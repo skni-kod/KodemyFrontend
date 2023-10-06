@@ -14,7 +14,7 @@ export default function Button({ iconname, companyname }: ButtonProps) {
 	};
 
 	return (
-		<div className="mt-[0.5vh] mb-[0.5vh] max-w-[37vw] h-auto flex bg-white2darkgrey border-2 border-black2white rounded-20 backdrop-blur-20 cursor-pointer">
+		<div className="mt-[0.5vh] mb-[0.5vh] w-[370px] h-auto flex bg-white2darkgrey border-2 border-black2white rounded-20 backdrop-blur-20 cursor-pointer">
 			<div className="w-3/10 bg-none flex items-center mx-auto border-r border-black2white text-black2white">
 				{React.createElement(iconname, { style: iconStyle })}
 			</div>
