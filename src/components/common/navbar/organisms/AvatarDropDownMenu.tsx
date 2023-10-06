@@ -12,6 +12,9 @@ const AvatarDropDownMenu = () => {
 			</div>
 			<div className="text-black2white font-semibold text-[12px] p-1">
 				<button>Wyloguj się</button>
+				<button>
+					<a href="/auth/login/login">Zaloguj się</a>
+				</button>
 			</div>
 		</div>
 	);
