@@ -32,11 +32,13 @@ const Id = () => {
 			title="Lista materiałów"
 			description="Spis wszystkich materiałów danej kategorii."
 		>
-			{/*<MaterialsFiltersProvider>*/}
-			<Container className="mt-28 max-w-7xl mx-auto">
-				{id && <MaterialsContent categoryId={id} />}
-			</Container>
-			{/*</MaterialsFiltersProvider>*/}
+			<div className="min-h-[92.4vh] mt-[7.6vh] bg-white2verydarkgrey">
+				{/*<MaterialsFiltersProvider>*/}
+				<Container className="pt-[5vh] max-w-7xl mx-auto">
+					{id && <MaterialsContent categoryId={id} />}
+				</Container>
+				{/*</MaterialsFiltersProvider>*/}
+			</div>
 		</Page>
 	);
 };

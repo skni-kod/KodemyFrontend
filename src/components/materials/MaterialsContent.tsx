@@ -61,7 +61,7 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 
 	return (
 		<>
-			<div className="w-full px-3">
+			<div className="w-full px-3 text-black2white">
 				<div className="w-full mt-4 text-semibold text-[36px]">
 					{categoryDetails && <>{mapCategoryDetails(categoryDetails)}</>}
 				</div>
