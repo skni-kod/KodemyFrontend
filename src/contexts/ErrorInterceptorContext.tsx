@@ -1,14 +1,21 @@
 import React, { useCallback, useState } from 'react';
 
-const ErrorInterceptorContext = React.createContext({});
-
-export default ErrorInterceptorContext;
-
-type ErrorProviderProps = {
-	children: React.ReactNode;
+type ErrorInterceptorType = {
+	error: string | null;
+	dispatchError: (message: string | null) => void;
 };
 
-export const ErrorInterceptorProvider = ({ children }: ErrorProviderProps) => {
+export const ErrorInterceptorContext =
+	React.createContext<ErrorInterceptorType>({
+		error: null,
+		dispatchError: (message) => {},
+	});
+
+const ErrorInterceptorProvider = ({
+	children,
+}: {
+	children: React.ReactNode;
+}) => {
 	const [error, setError] = useState<string | null>(null);
 	const errorHoldTime = !process.env.ERROR_HOLD_TIME_IN_MS
 		? 5000
@@ -27,3 +34,5 @@ export const ErrorInterceptorProvider = ({ children }: ErrorProviderProps) => {
 		</ErrorInterceptorContext.Provider>
 	);
 };
+
+export default ErrorInterceptorProvider;

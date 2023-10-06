@@ -3,23 +3,19 @@ import { useState } from 'react';
 import AllMaterialBoxComponent from '../molecules/AllMaterialBox';
 import YourMaterialBoxComponent from '../molecules/YourMaterialBox';
 
+enum Menu {
+	ALL,
+	YOUR,
+}
+
 const BellDropDownMenu = () => {
-	const [allMaterials, setAllMaterials] = useState(true);
-	const [yourMaterials, setYourMaterials] = useState(false);
+	const [menuMode, setMenuMode] = useState<Menu>(0);
 
-	const toggleAllMaterials = () => {
-		if (!allMaterials) {
-			setAllMaterials(true);
-			setYourMaterials(false);
-		}
+	const handleMenuMode = (menu: Menu) => {
+		setMenuMode(menu);
 	};
 
-	const toggleYourMaterials = () => {
-		if (!yourMaterials) {
-			setAllMaterials(false);
-			setYourMaterials(true);
-		}
-	};
+	const isMenuOpen = (menu: Menu) => menuMode == menu;
 
 	return (
 		<div className="bg-white2darkgrey h-[auto] w-[323px] absolute top-[70px] right-[0px] shadow-md rounded-lg">
@@ -36,30 +32,30 @@ const BellDropDownMenu = () => {
 			<div className="h-[auto] w-[323px]">
 				<div className="h-[auto] flex m-2 relative border-b">
 					<button
-						onClick={toggleAllMaterials}
-						className={allMaterials ? 'text-blue-500' : ''}
+						onClick={() => handleMenuMode(Menu.ALL)}
+						className={isMenuOpen(Menu.ALL) ? 'text-blue-500' : ''}
 					>
 						<NotificationComponent
 							text={'Wszystkie'}
-							isActive={allMaterials}
+							isActive={isMenuOpen(Menu.ALL)}
 							className={'pl-4'}
 							amount="3"
 						/>
 					</button>
 					<button
-						onClick={toggleYourMaterials}
-						className={yourMaterials ? 'text-blue-500' : ''}
+						onClick={() => handleMenuMode(Menu.YOUR)}
+						className={isMenuOpen(Menu.YOUR) ? 'text-blue-500' : ''}
 					>
 						<NotificationComponent
 							text={'Twoje materiały'}
-							isActive={yourMaterials}
+							isActive={isMenuOpen(Menu.YOUR)}
 							className={'pl-4'}
 							amount="6"
 						/>
 					</button>
 				</div>
-				{allMaterials && <AllMaterialBoxComponent />}
-				{yourMaterials && <YourMaterialBoxComponent />}
+				{isMenuOpen(Menu.ALL) && <AllMaterialBoxComponent />}
+				{isMenuOpen(Menu.YOUR) && <YourMaterialBoxComponent />}
 			</div>
 		</div>
 	);

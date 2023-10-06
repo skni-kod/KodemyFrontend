@@ -1,11 +1,14 @@
 import clsx from 'clsx';
 import { CiCircleRemove } from 'react-icons/ci';
+import { Filter } from '@/contexts/MaterialsFiltersContext';
 
 type FilterButtonProps = {
-	value: string;
+	value: Filter;
 };
 
-const FilterButton = ({ value }: FilterButtonProps) => {
+const FilterButton = ({ value: { key, value } }: FilterButtonProps) => {
+	const btnValue = `${key}: ${value}`;
+
 	return (
 		<div
 			className={clsx(
@@ -14,7 +17,7 @@ const FilterButton = ({ value }: FilterButtonProps) => {
 				'border-sky-500 text-sky-500',
 			)}
 		>
-			{value}
+			{btnValue}
 			<CiCircleRemove className="text-lg ml-0.5 cursor-pointer" />
 		</div>
 	);
