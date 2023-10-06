@@ -14,11 +14,11 @@ export default function Button({ iconname, companyname }: ButtonProps) {
 	};
 
 	return (
-		<div className="mt-[0.5vh] mb-[0.5vh] h-auto flex bg-none border-2 border-black2white rounded-20 backdrop-blur-20 cursor-pointer">
-			<div className="w-1/4 bg-none flex items-center mx-auto">
+		<div className="mt-[0.5vh] mb-[0.5vh] max-w-[37vw] h-auto flex bg-white2darkgrey border-2 border-black2white rounded-20 backdrop-blur-20 cursor-pointer">
+			<div className="w-3/10 bg-none flex items-center mx-auto border-r border-black2white">
 				{React.createElement(iconname, { style: iconStyle })}
 			</div>
-			<div className="w-3/4 bg-none flex justify-center items-center border-l border-black2white text-black2white text-center text-xs sm:text-lg">
+			<div className="w-7/10 ml-[0.5vw] mr-[0.5vw] bg-none flex justify-center items-center text-black2white text-center text-xs sm:text-lg ">
 				<h3>Zaloguj się za pomocą {companyname}</h3>
 			</div>
 		</div>
