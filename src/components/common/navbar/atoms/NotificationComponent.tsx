@@ -13,8 +13,9 @@ const NotificationComponent = ({
 	className,
 	amount,
 }: NotificationComponentProps) => {
-	const textColorClass = isActive ? 'text-blue-500' : 'text-[#666]';
-	const backgroundColorClass = isActive ? 'bg-blue-500' : 'bg-[#ccc]';
+	const textColorClass = isActive ? 'text-sky-500' : 'text-black2white';
+	const backgroundColorClass = isActive ? 'bg-sky-500' : 'bg-grey2white';
+	const boxtextColorClass = isActive ? 'text-white' : 'text-white2darkgrey';
 
 	return (
 		<div className={`flex items-center ${className}`}>
@@ -22,7 +23,7 @@ const NotificationComponent = ({
 				{text}
 			</h6>
 			<div
-				className={`h-3 w-4 text-[#fff] text-[10px] m-1 rounded flex items-center justify-center ${backgroundColorClass}`}
+				className={`h-3 w-4 text-[10px] m-1 rounded flex items-center justify-center ${boxtextColorClass} ${backgroundColorClass}`}
 			>
 				{amount}
 			</div>
