@@ -1,8 +1,13 @@
 import Container from '@/components/common/Container';
 import Page from '@/components/common/Page';
 import AdminContent from '@/components/dashboard/AdminContent';
+import Route from '@/utils/route';
 
-export const DashboardIndexRoute = '/dashboard';
+export const DashboardIndexRoute = (): Route => {
+	return {
+		pathname: '/dashboard',
+	};
+};
 
 const Index = () => {
 	return (

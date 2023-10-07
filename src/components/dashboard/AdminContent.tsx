@@ -1,37 +1,22 @@
 import { CategoryMaterials } from '@/mocks/categoryMock';
-import { GoTriangleDown } from 'react-icons/go';
-import {
-	JSXElementConstructor,
-	ReactElement,
-	ReactFragment,
-	ReactPortal,
-	SetStateAction,
-	SyntheticEvent,
-	useState,
-} from 'react';
-import UserMaterialBlock from './molecules/UserMaterialBlock';
-import clsx from 'clsx';
+import { SetStateAction, useState } from 'react';
 import sectionFilter from './atoms/sectionFilter';
 import AdminMaterialBlock from './molecules/AdminMaterialBlock';
+import Sections from '@/mocks/sectionMock';
+import SectionFilters from '@/mocks/sectionFilterMock';
 
 const AdminContent = () => {
 	const materials = CategoryMaterials;
 	const elementsNumber = 7;
-	const filterOptions = ['Typ materiału', 'Rodzaj materiału', 'Zatwierdzone'];
+	const filterOptions = SectionFilters;
+	const sectionFilters = Sections.map((section) => section.name);
 	var [filter, setFilter] = useState('wybierz filtr');
+	var [section, setSection] = useState('');
 	const handleFilterChange = (e: {
 		target: { value: SetStateAction<string> };
 	}) => {
 		setFilter(e.target.value);
 	};
-	const sectionFilters = [
-		'Języki programowania',
-		'Gamedev',
-		'Elektronika/retro',
-		'Aplikacje webowe',
-		'Inne',
-	];
-	var [section, setSection] = useState('');
 	return (
 		<div className="mx-4 md:mx-20">
 			<h1 className="text-3xl font-semibold text-black2white">

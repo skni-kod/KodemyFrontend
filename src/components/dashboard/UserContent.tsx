@@ -2,11 +2,12 @@ import { CategoryMaterials } from '@/mocks/categoryMock';
 import { GoTriangleDown } from 'react-icons/go';
 import { SetStateAction, SyntheticEvent, useState } from 'react';
 import UserMaterialBlock from './molecules/UserMaterialBlock';
+import SectionFilters from '@/mocks/sectionFilterMock';
 
 const UserContent = () => {
 	const materials = CategoryMaterials;
 	const elementsNumber = 7;
-	const filterOptions = ['Typ materiału', 'Rodzaj materiału', 'Zatwierdzone'];
+	const filterOptions = SectionFilters;
 	var [filter, setFilter] = useState('wybierz filtr');
 	const handleFilterChange = (e: {
 		target: { value: SetStateAction<string> };
