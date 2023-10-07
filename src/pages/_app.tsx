@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
 				<ErrorInterceptorProvider>
 					<Body>
 						<Navbar />
-						<Sidebar locked={isHome()} />
+						<Sidebar/>
 						<Component {...pageProps} />
 					</Body>
 				</ErrorInterceptorProvider>
