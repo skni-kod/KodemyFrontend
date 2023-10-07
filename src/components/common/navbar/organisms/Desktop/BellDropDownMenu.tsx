@@ -1,9 +1,9 @@
-import NotificationComponent from '../atoms/NotificationComponent';
+import NotificationComponent from '../../atoms/NotificationComponent';
 import { useState } from 'react';
-import AllMaterialBoxComponent from '../molecules/AllMaterialBox';
-import YourMaterialBoxComponent from '../molecules/YourMaterialBox';
+import AllMaterialBoxComponent from '../../molecules/AllMaterialBox';
+import YourMaterialBoxComponent from '../../molecules/YourMaterialBox';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
-import NotificationsMenu from '../molecules/NotificationsMenu';
+import NotificationsMenu from '../../molecules/NotificationsMenu';
 
 enum Menu {
 	ALL,
@@ -28,7 +28,7 @@ const BellDropDownMenu = () => {
 
 	return (
 		<div className="bg-white2darkgrey h-[auto] w-[323px] absolute top-[80px] right-[20px] shadow-md rounded-lg">
-			<div className="h-[auto] flex items-center justify-between m-2 relative">
+			<div className="h-[auto] flex items-center justify-between m-2">
 				<h1 className="w-4/10 text-black2white text-[20px] p-1">
 					Powiadomienia
 				</h1>
