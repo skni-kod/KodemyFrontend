@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import useSectionService from '@/hooks/services/useSectionService';
-import SidebarItem from './atoms/SidebarItem';
+import SidebarItem from './molecules/SidebarItem';
 
 const Sidebar = () => {
 	const [sections, setSections] = useState([]);
