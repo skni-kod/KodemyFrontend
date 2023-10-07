@@ -43,7 +43,7 @@ const BellDropDownMenu: React.FC<BellDropDownMenuProps> = ({ topPosition }) => {
 				</button>
 			</div>
 			<div className="h-[auto] w-[323px]">
-				<div className="h-[auto] flex justify-center mb-4">
+				<div className="h-[auto] flex justify-between mb-4 px-8">
 					<button
 						onClick={() => handleMenuMode(Menu.ALL)}
 						className={isMenuOpen(Menu.ALL) ? 'text-blue-500' : ''}
@@ -51,7 +51,6 @@ const BellDropDownMenu: React.FC<BellDropDownMenuProps> = ({ topPosition }) => {
 						<NotificationComponent
 							text={'Wszystkie'}
 							isActive={isMenuOpen(Menu.ALL)}
-							className={'pl-0'}
 							amount="3"
 						/>
 					</button>
@@ -62,7 +61,6 @@ const BellDropDownMenu: React.FC<BellDropDownMenuProps> = ({ topPosition }) => {
 						<NotificationComponent
 							text={'Nieprzeczytane'}
 							isActive={isMenuOpen(Menu.YOUR)}
-							className={'pl-8'}
 							amount="6"
 						/>
 					</button>
