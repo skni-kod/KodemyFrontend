@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import SidebarAssets from '@/components/common/sidebar/helpers/SidebarAssets';
 import { Section } from '@/hooks/services/useSectionService';
 import clsx from 'clsx';
 import { pageCategoryIdRoute } from '@/pages/category/[id]';
+import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai';
 
 interface SidebarItemProps {
 	section: Section;
@@ -34,16 +35,23 @@ const SidebarItem = ({
 		}
 	};
 
+	const [isExpanded, setIsExpanded] = useState(false);
+
 	const isExpandSubmenu = isExpandMenu && expandedItemId === id;
+
+	const toggleExpand = () => {
+		setIsExpanded(!isExpanded);
+		setExpandedItemId(isExpandSubmenu ? null : id);
+	};
 
 	return (
 		<li>
 			<div
 				className={clsx(
-					'flex items-center w-full gap-x-1 py-1.5 mt-3 rounded-md no-underline cursor-pointer transition-all duration-300 ease-linear',
+					'flex items-center justify-between w-full gap-x-1 py-1.5 mt-3 rounded-md no-underline cursor-pointer transition-all duration-300 ease-linear',
 					isExpandMenu ? 'pr-3.5 pl-3' : '',
 				)}
-				onClick={() => setExpandedItemId(isExpandSubmenu ? null : id)}
+				onClick={toggleExpand}
 			>
 				<span className="relative inline-block min-w-12 leading-10 text-center rounded-md">
 					<Image
@@ -52,8 +60,15 @@ const SidebarItem = ({
 						alt={name}
 					/>
 				</span>
+				<div className="flex-grow">
+					{isExpandMenu && (
+						<span className="whitespace-nowrap overflow-hidden">{name}</span>
+					)}
+				</div>
 				{isExpandMenu && (
-					<span className="whitespace-nowrap overflow-hidden">{name}</span>
+					<div className="flex items-center">
+						<div>{isExpanded ? <AiOutlineDown /> : <AiOutlineRight />}</div>
+					</div>
 				)}
 			</div>
 			{isExpandSubmenu && (
