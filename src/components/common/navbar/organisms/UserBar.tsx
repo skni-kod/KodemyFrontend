@@ -23,7 +23,7 @@ const UserBar = () => {
 
 	return (
 		<div className=" items-center justify-between gap-x-4 hidden md:flex">
-			<button className="bg-sky-500  hover:bg-blue-600 text-white2white text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded">
+			<button className="bg-sky-500  hover:bg-blue-600 text-white2white text-[11px] lg:text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded">
 				Dodaj materiał
 			</button>
 			<div className="flex items-center gap-x-4 font-bold">

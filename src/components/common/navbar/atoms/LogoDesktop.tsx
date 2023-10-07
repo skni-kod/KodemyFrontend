@@ -2,16 +2,14 @@ import Image from 'next/image';
 import KodemyImageDark from '@/assets/kodemyDark.png';
 import KodemyImageWhite from '@/assets/kodemyWhite.png';
 import { Metadata } from '@/pages/_app';
-import Link from 'next/link';
-import { pageLoginRoute } from '@/pages';
 
-type LogoProps = {
+type LogoDesktopProps = {
 	width: number;
 	height: number;
 	theme: string;
 };
 
-const Logo = ({ width, height, theme }: LogoProps) => {
+const LogoDesktop = ({ width, height, theme }: LogoDesktopProps) => {
 	const imageSrc = theme === 'dark' ? KodemyImageWhite : KodemyImageDark;
 
 	return (
@@ -19,7 +17,7 @@ const Logo = ({ width, height, theme }: LogoProps) => {
 			<Image
 				src={imageSrc.src}
 				alt={Metadata.title}
-				className="cursor-pointer"
+				className="cursor-pointer hidden md:block"
 				width={width}
 				height={height}
 			/>
@@ -27,4 +25,4 @@ const Logo = ({ width, height, theme }: LogoProps) => {
 	);
 };
 
-export default Logo;
+export default LogoDesktop;
