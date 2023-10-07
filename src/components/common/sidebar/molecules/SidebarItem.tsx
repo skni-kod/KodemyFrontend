@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import SidebarAssets from '@/components/common/sidebar/helpers/SidebarAssets';
-import { Section } from '@/hooks/services/useSectionService';
 import clsx from 'clsx';
 import { pageCategoryIdRoute } from '@/pages/category/[id]';
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai';
+import SidebarItemImage from '../atoms/SidebarItemImage';
+import SidebarItemText from '../atoms/SidebarItemText';
+import { Section } from '@/hooks/services/useSectionService';
 
 interface SidebarItemProps {
 	section: Section;
@@ -15,33 +15,18 @@ interface SidebarItemProps {
 }
 
 const SidebarItem = ({
-	section: { id, name, categories },
+	section,
 	isExpandMenu,
 	expandedItemId,
 	setExpandedItemId,
 }: SidebarItemProps) => {
-	const handleSectionLogo = (id: number) => {
-		switch (id) {
-			case 1:
-				return SidebarAssets.internet;
-			case 2:
-				return SidebarAssets.console;
-			case 3:
-				return SidebarAssets.retroGame;
-			case 4:
-				return SidebarAssets.codingLanguage;
-			default:
-				return SidebarAssets.moreInfo;
-		}
-	};
-
 	const [isExpanded, setIsExpanded] = useState(false);
 
-	const isExpandSubmenu = isExpandMenu && expandedItemId === id;
+	const isExpandSubmenu = isExpandMenu && expandedItemId === section.id;
 
 	const toggleExpand = () => {
 		setIsExpanded(!isExpanded);
-		setExpandedItemId(isExpandSubmenu ? null : id);
+		setExpandedItemId(isExpandSubmenu ? null : section.id);
 	};
 
 	return (
@@ -53,27 +38,17 @@ const SidebarItem = ({
 				)}
 				onClick={toggleExpand}
 			>
-				<span className="relative inline-block min-w-12 leading-10 text-center rounded-md">
-					<Image
-						className="w-6 h-6 cursor-pointer"
-						src={handleSectionLogo(id)}
-						alt={name}
-					/>
-				</span>
-				<div className="flex-grow">
-					{isExpandMenu && (
-						<span className="whitespace-nowrap overflow-hidden">{name}</span>
-					)}
-				</div>
-				{isExpandMenu && (
-					<div className="flex items-center">
-						<div>{isExpanded ? <AiOutlineDown /> : <AiOutlineRight />}</div>
-					</div>
-				)}
+				<SidebarItemImage sectionId={section.id} />
+
+				<SidebarItemText
+					section={section}
+					isExpandMenu={isExpandMenu}
+					isExpanded={isExpanded}
+				/>
 			</div>
 			{isExpandSubmenu && (
 				<ul className="p-0 list-none block">
-					{categories.map(({ id, name }) => (
+					{section.categories.map(({ id, name }) => (
 						<Link
 							key={id}
 							href={pageCategoryIdRoute(id)}
