@@ -36,7 +36,7 @@ const HomeContent = () => {
 
 	return (
 		<div className="w-full h-full">
-			<div className="pt-20 pl-20">
+			<div className="pt-20 px-15 md:pl-20">
 				<LogoDesktop height={150} theme="light" visibility={'block'} />
 				<div className="flex flex-col gap-y-12 pl-9 pt-4">
 					<div>

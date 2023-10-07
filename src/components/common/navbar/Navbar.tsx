@@ -15,8 +15,8 @@ const Navbar = () => {
 	const toggleNotificationsMenu = () => {
 		setIsNotificationsMenuOpen(!isNotificationsMenuOpen);
 	};
-	const [windowWidth, setWindowWidth] = useState<number | null>(
-		typeof window !== 'undefined' ? window.innerWidth : null,
+	const [windowWidth, setWindowWidth] = useState<number>(
+		typeof window !== 'undefined' ? window.innerWidth : 0,
 	);
 
 	useEffect(() => {
