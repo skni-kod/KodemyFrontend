@@ -1,6 +1,9 @@
+import { pageHomeRoute, pageLoginRoute } from '@/pages';
+import Link from 'next/link';
+
 const AvatarDropDownMenu = () => {
 	return (
-		<div className="bg-white2darkgrey h-[auto] w-[160px] absolute top-[70px] right-[0px] shadow-md rounded-lg p-2">
+		<div className="bg-white2darkgrey h-[auto] w-[160px] absolute top-[80px] right-[0px] shadow-md rounded-lg p-2">
 			<div className="text-black2white text-[12px] p-1">
 				<a>
 					<button>Ustawienia konta</button>
@@ -11,9 +14,13 @@ const AvatarDropDownMenu = () => {
 				<button className="pl-3 pt-1">Ulubione</button>
 			</div>
 			<div className="text-black2white font-semibold text-[12px] p-1">
-				<button>Wyloguj się</button>
 				<button>
-					<a href="/login">Zaloguj się</a>
+					<Link href={pageHomeRoute()}>Wyloguj się</Link>
+				</button>
+			</div>
+			<div className="text-black2white font-semibold text-[12px] p-1">
+				<button>
+					<Link href={pageLoginRoute()}>Zaloguj się</Link>
 				</button>
 			</div>
 		</div>

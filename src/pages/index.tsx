@@ -5,9 +5,14 @@ import Container from '@/components/common/Container';
 import HomeContent from '@/components/home/HomeContent';
 import Route from '@/utils/route';
 
-export const pageIndexRoute = (): Route => {
+export const pageHomeRoute = (): Route => {
 	return {
 		pathname: '/',
+	};
+};
+export const pageLoginRoute = (): Route => {
+	return {
+		pathname: '/login',
 	};
 };
 

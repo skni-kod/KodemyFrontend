@@ -7,7 +7,7 @@ const SearchBarDesktop = () => {
 		<div className="h-[50px] w-[auto] flex items-center border border-grey2white rounded-full mx-3 bg-white2darkgrey">
 			<BiSearch className={`${IconClassNames} ml-[5px]`} />
 			<input
-				className="h-[47px] w-[30vw] text-[18px] outline-none bg-white2darkgrey text-black2white px-[5px]"
+				className="h-[47px] w-[20vw] text-[18px] outline-none bg-white2darkgrey text-black2white px-[5px]"
 				type="text"
 				placeholder="Szybkie wyszukiwanie"
 			/>

@@ -2,6 +2,8 @@ import Image from 'next/image';
 import KodemyImageDark from '@/assets/kodemyDark.png';
 import KodemyImageWhite from '@/assets/kodemyWhite.png';
 import { Metadata } from '@/pages/_app';
+import Link from 'next/link';
+import { pageLoginRoute } from '@/pages';
 
 type LogoProps = {
 	width: number;
@@ -14,15 +16,13 @@ const Logo = ({ width, height, theme }: LogoProps) => {
 
 	return (
 		<button>
-			<a href="/">
-				<Image
-					src={imageSrc.src}
-					alt={Metadata.title}
-					className="cursor-pointer"
-					width={width}
-					height={height}
-				/>
-			</a>
+			<Image
+				src={imageSrc.src}
+				alt={Metadata.title}
+				className="cursor-pointer"
+				width={width}
+				height={height}
+			/>
 		</button>
 	);
 };
