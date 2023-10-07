@@ -21,7 +21,9 @@ const BellDropDownMenu = () => {
 
 	const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false);
 	const toggleNotificationsMenu = () => {
-		setIsNotificationsMenuOpen(!isNotificationsMenuOpen);
+		setIsNotificationsMenuOpen(
+			(isNotificationsMenuOpen) => !isNotificationsMenuOpen,
+		);
 	};
 
 	return (
