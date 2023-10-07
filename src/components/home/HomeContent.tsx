@@ -1,166 +1,54 @@
-import HomeBubble from '@/components/home/bubble/HomeBubble';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import LogoDesktop from '@/components/common/navbar/atoms/LogoDesktop';
+import Typewriter from 'typewriter-effect';
+import HomeButton from '@/components/home/atoms/HomeButton';
+
+enum Stage {
+	SECTION,
+	CATEGORY,
+}
+
+type StageData = {
+	section: number | null;
+	category: number | null;
+};
+
+const TypewriterComponent = ({
+	value,
+	delayMs,
+}: {
+	value: string;
+	delayMs: number;
+}) => {
+	return (
+		<Typewriter
+			onInit={(writer) => {
+				writer.pauseFor(delayMs);
+				writer.typeString(value);
+				writer.start();
+			}}
+		/>
+	);
+};
 
 const HomeContent = () => {
 	const router = useRouter();
-	const [stage, setStage] = useState(1);
-	const [firstCategory, setFirstCategory] = useState('');
-	const [secondCategory, setSecondCategory] = useState('');
 
 	return (
-		<>
-			<div className="min-h-[100vh] w-full bg-white2verydarkgrey flex flex-col justify-center items-center px-7 pr-[5rem] pl-[5rem] 2sm:pr-[7rem] 2sm:pl-[7rem] sm:pr-[10rem] sm:pl-[10rem] sm:pb-8 mx-auto">
-				<div className="flex justify-center pt-8">
-					<div className="flex items-center gap-4">
-						<div className="rounded-full border-sky-500 text-sky-500 shadow-lg border-2 h-10 w-10 flex items-center justify-center font-semibold bg-white2darkgrey">
-							1
-						</div>
-						<div className="h-[3px] w-6 bg-sky-500"></div>
-					</div>
-					<div className="flex items-center gap-4">
-						<div
-							className={
-								stage != 2
-									? 'h-[3px] w-6 bg-black2white'
-									: 'h-[3px] w-6 bg-sky-500'
-							}
-						></div>
-						<div
-							className={
-								stage == 2
-									? 'rounded-full border-sky-500 text-sky-500 shadow-lg border-2 h-10 w-10 flex items-center justify-center font-semibold bg-white2darkgrey'
-									: 'rounded-full border-black2white text-black2white border-2 h-10 w-10 flex items-center justify-center font-semibold bg-white2darkgrey'
-							}
-						>
-							2
+		<div className="w-full h-full">
+			<div className="pt-20 px-15 md:pl-20">
+				<LogoDesktop height={150} theme="light" visibility={'block'} />
+				<div className="flex flex-col gap-y-12 pl-9 pt-4">
+					<div>
+						<div className="flex flex-col gap-x-2 text-2xl leading-normal text-black2white font-semibold">
+							<span>Szukasz materiału o konkretnej tematyce?</span>
+							<span>U nas znajdziesz wszystko.</span>
 						</div>
 					</div>
+					<HomeButton />
 				</div>
-				<h1 className="text-2xl font-bold text-center text-black2white mt-4 mb-8">
-					{stage == 1 ? 'Wybierz sekcję' : 'Wybierz kategorię'}
-				</h1>
-
-				{stage == 1 ? (
-					<div className="grid grid-cols-2 md:grid-cols-[170px_170px_170px] gap-1 justify-center items-center ">
-						<HomeBubble
-							className="basis-[45%]"
-							name="jezyki programowania"
-							category={firstCategory}
-							setCategory={setFirstCategory}
-						>
-							<>
-								Języki <br />
-								programowania
-							</>
-						</HomeBubble>
-						<HomeBubble
-							className="basis-5/12 relative top-16 sm:top-16"
-							name="gamedev"
-							category={firstCategory}
-							setCategory={setFirstCategory}
-						>
-							<>GameDev</>
-						</HomeBubble>
-						<HomeBubble
-							className="basis-5/12 top-2"
-							name="ekektroniki retro"
-							category={firstCategory}
-							setCategory={setFirstCategory}
-						>
-							<>
-								Elektroniki <br /> Retro
-							</>
-						</HomeBubble>
-						<HomeBubble
-							className="basis-5/12 relative top-20 sm:top-6 sm:left-4"
-							name="inne"
-							category={firstCategory}
-							setCategory={setFirstCategory}
-						>
-							<>Inne</>
-						</HomeBubble>
-						<HomeBubble
-							className="basis-5/12 relative top-4 md:left-32 md:top-4  "
-							name="aplikacje webowe"
-							category={firstCategory}
-							setCategory={setFirstCategory}
-						>
-							<>
-								Aplikacje <br /> webowe
-							</>
-						</HomeBubble>{' '}
-					</div>
-				) : (
-					<div className="grid grid-cols-2 md:grid-cols-[170px_170px_170px] gap-1 justify-center items-center ">
-						<HomeBubble
-							className=""
-							name="gamedev ogólny"
-							category={secondCategory}
-							setCategory={setSecondCategory}
-						>
-							<>
-								Gamedev <br />
-								ogólny
-							</>
-						</HomeBubble>
-						<HomeBubble
-							className="basis-5/12 relative top-32 sm:top-6"
-							name="unity"
-							category={secondCategory}
-							setCategory={setSecondCategory}
-						>
-							<>Unity</>
-						</HomeBubble>
-						<HomeBubble
-							className="basis-5/12 top-2"
-							name="unreal"
-							category={secondCategory}
-							setCategory={setSecondCategory}
-						>
-							<>Unreal</>
-						</HomeBubble>
-						<HomeBubble
-							className="basis-5/12 relative top-32 right-24 sm:top-7 sm:left-0"
-							name="grafika 2d"
-							category={secondCategory}
-							setCategory={setSecondCategory}
-						>
-							<>Grafika 2D</>
-						</HomeBubble>
-						<HomeBubble
-							className="basis-5/12 relative bottom-32 left-32  sm:top-7 sm:left-4"
-							name="godot"
-							category={secondCategory}
-							setCategory={setSecondCategory}
-						>
-							<>Godot</>
-						</HomeBubble>
-						<HomeBubble
-							className="basis-5/12 relative left-16 sm:left-10 top-6"
-							name="grafika 3d"
-							category={secondCategory}
-							setCategory={setSecondCategory}
-						>
-							<>Grafika 3D</>
-						</HomeBubble>{' '}
-					</div>
-				)}
-				<button
-					className="bg-sky-500 hover:bg-blue-600 text-white font-semibold mx-auto block py-3 px-6 rounded-2xl mt-16"
-					onClick={() => {
-						if (stage == 1 && firstCategory != '') setStage(2);
-						else if (stage == 2 && secondCategory! + '')
-							router.push({
-								pathname: `/sectionGeneral`,
-								query: { firstCategory, secondCategory },
-							});
-					}}
-				>
-					Następne &gt;
-				</button>
 			</div>
-		</>
+		</div>
 	);
 };
 

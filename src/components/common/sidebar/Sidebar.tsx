@@ -4,14 +4,14 @@ import useSectionService from '@/hooks/services/useSectionService';
 import SidebarItem from './molecules/SidebarItem';
 
 const Sidebar = () => {
-	const [sections, setSections] = useState([]);
+	const [sections, setSections] = useState<Section[]>([]);
 	const { getSections } = useSectionService();
 	const [isExpandMenu, setIsExpandMenu] = useState(false);
 	const [expandedItemId, setExpandedItemId] = useState<number | null>(null);
 
 	useEffect(() => {
 		(async () => {
-			setSections(await getSections());
+			setSections(sortSectionCategory(await getSections()));
 		})();
 	}, [getSections]);
 

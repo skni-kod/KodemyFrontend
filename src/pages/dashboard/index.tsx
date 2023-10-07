@@ -3,7 +3,7 @@ import Page from '@/components/common/Page';
 import AdminContent from '@/components/dashboard/AdminContent';
 import Route from '@/utils/route';
 
-export const DashboardIndexRoute = (): Route => {
+export const pageDashboardRoute = (): Route => {
 	return {
 		pathname: '/dashboard',
 	};
@@ -15,7 +15,7 @@ const Index = () => {
 			title="Panel użytkownika"
 			description="Widok zarządzania dodanymi materiałami i kontem"
 		>
-			<Container className="pt-28 mx-auto bg-white2verydarkgrey min-h-[100vh] min-w-[98vw] px-[10vw]">
+			<Container className="mx-auto px-[10vw] bg-white2verydarkgrey">
 				<AdminContent />
 				{/* <UserContent /> */}
 			</Container>

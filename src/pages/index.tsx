@@ -15,7 +15,6 @@ export const pageLoginRoute = (): Route => {
 		pathname: '/login',
 	};
 };
-
 export default function Home() {
 	return (
 		<Page
@@ -29,7 +28,7 @@ export default function Home() {
 				</>
 			}
 		>
-			<Container>
+			<Container className="max-w-7xl h-full mx-auto">
 				<HomeContent />
 			</Container>
 		</Page>
