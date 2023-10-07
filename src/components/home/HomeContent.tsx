@@ -73,7 +73,7 @@ const HomeContent = () => {
 							</>
 						</HomeBubble>
 						<HomeBubble
-							className="basis-5/12 relative top-20 sm:top-16 sm:left-4"
+							className="basis-5/12 relative top-20 sm:top-6 sm:left-4"
 							name="inne"
 							category={firstCategory}
 							setCategory={setFirstCategory}
@@ -137,7 +137,7 @@ const HomeContent = () => {
 							<>Godot</>
 						</HomeBubble>
 						<HomeBubble
-							className="basis-5/12 relative left-16 top-8"
+							className="basis-5/12 relative left-16 sm:left-10 top-6"
 							name="grafika 3d"
 							category={secondCategory}
 							setCategory={setSecondCategory}
@@ -149,8 +149,8 @@ const HomeContent = () => {
 				<button
 					className="bg-sky-500 hover:bg-blue-600 text-white font-semibold mx-auto block py-3 px-6 rounded-2xl mt-16"
 					onClick={() => {
-						if (stage == 1) setStage(2);
-						else if (stage == 2)
+						if (stage == 1 && firstCategory != '') setStage(2);
+						else if (stage == 2 && secondCategory! + '')
 							router.push({
 								pathname: `/sectionGeneral`,
 								query: { firstCategory, secondCategory },
