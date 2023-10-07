@@ -28,7 +28,9 @@ const Page = ({
 				/>
 				{addTags}
 			</Head>
-			{children}
+			<div className="min-h-[100vh] w-full pt-28 bg-white2verydarkgrey">
+				{children}
+			</div>
 		</>
 	);
 };

@@ -4,20 +4,20 @@ import KodemyImageWhite from '@/assets/kodemyWhite.png';
 import { Metadata } from '@/pages/_app';
 
 type LogoDesktopProps = {
-	width: number;
 	height: number;
 	theme: string;
+	visibility: string;
 };
-
-const LogoDesktop = ({ width, height, theme }: LogoDesktopProps) => {
+const LogoDesktop = ({ height, theme, visibility }: LogoDesktopProps) => {
 	const imageSrc = theme === 'dark' ? KodemyImageWhite : KodemyImageDark;
+	const width = (imageSrc.width * height) / imageSrc.height;
 
 	return (
 		<button>
 			<Image
 				src={imageSrc.src}
 				alt={Metadata.title}
-				className="cursor-pointer hidden md:block"
+				className={`${visibility} + cursor-pointer md:block`}
 				width={width}
 				height={height}
 			/>

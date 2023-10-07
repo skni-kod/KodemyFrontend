@@ -10,6 +10,8 @@ import ErrorInterceptorProvider, {
 	ErrorInterceptorContext,
 } from '@/contexts/ErrorInterceptorContext';
 import React, { useContext } from 'react';
+import { useRouter } from 'next/router';
+import { pageHomeRoute } from '@/pages/index';
 
 export const Metadata = {
 	title: 'Kodemy',
@@ -22,6 +24,11 @@ const Body = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default function App({ Component, pageProps }: AppProps) {
+	const router = useRouter();
+	const homePathName = pageHomeRoute().pathname;
+
+	const isHome = () => router.route === homePathName;
+
 	return (
 		<>
 			<Head>
@@ -32,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
 				<ErrorInterceptorProvider>
 					<Body>
 						<Navbar />
-						<Sidebar />
+						<Sidebar/>
 						<Component {...pageProps} />
 					</Body>
 				</ErrorInterceptorProvider>

@@ -4,13 +4,13 @@ import KodemyImageWhite from '@/assets/kodemyPhoneWhite.png';
 import { Metadata } from '@/pages/_app';
 
 type LogoPhoneProps = {
-	width: number;
 	height: number;
 	theme: string;
 };
 
-const LogoPhone = ({ width, height, theme }: LogoPhoneProps) => {
+const LogoPhone = ({ height, theme }: LogoPhoneProps) => {
 	const imageSrc = theme === 'dark' ? KodemyImageWhite : KodemyImageDark;
+	const width = (imageSrc.width * height) / imageSrc.height;
 	return (
 		<button>
 			<Image

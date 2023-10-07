@@ -34,7 +34,6 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 	const { getSections } = useSectionService();
 	const [section, setSection] = useState<Section>();
 	const { filters } = useContext(MaterialsFiltersContext);
-	console.log(filters);
 
 	useEffect(() => {
 		(async () => {

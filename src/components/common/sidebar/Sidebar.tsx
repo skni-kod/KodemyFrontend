@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import useSectionService from '@/hooks/services/useSectionService';
+import useSectionService, { Section } from '@/hooks/services/useSectionService';
 import SidebarItem from './atoms/SidebarItem';
+import { sortSectionCategory } from '@/utils/constant';
 
 const Sidebar = () => {
-	const [sections, setSections] = useState([]);
+	const [sections, setSections] = useState<Section[]>([]);
 	const { getSections } = useSectionService();
 	const [isExpandMenu, setIsExpandMenu] = useState(false);
 	const [expandedItemId, setExpandedItemId] = useState<number | null>(null);
 
 	useEffect(() => {
 		(async () => {
-			setSections(await getSections());
+			setSections(sortSectionCategory(await getSections()));
 		})();
 	}, [getSections]);
 

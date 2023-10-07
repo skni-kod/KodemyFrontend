@@ -15,26 +15,19 @@ const Navbar = () => {
 	const toggleNotificationsMenu = () => {
 		setIsNotificationsMenuOpen(!isNotificationsMenuOpen);
 	};
-
-	// Hook do śledzenia szerokości okna przeglądarki
-	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const [windowWidth, setWindowWidth] = useState<number | null>(
+		typeof window !== 'undefined' ? window.innerWidth : null,
+	);
 
 	useEffect(() => {
-		// Funkcja obsługi zmiany szerokości okna
 		const handleResize = () => {
 			setWindowWidth(window.innerWidth);
 		};
-
-		// Dodajmy słuchacza zdarzeń do śledzenia zmiany szerokości okna
 		window.addEventListener('resize', handleResize);
-
-		// Usuń słuchacza zdarzeń po odmontowaniu komponentu
 		return () => {
 			window.removeEventListener('resize', handleResize);
 		};
 	}, []);
-
-	// Automatycznie zamknij menu po przekroczeniu szerokości 768px
 	useEffect(() => {
 		if (windowWidth > 768) {
 			setIsNotificationsMenuOpen(false);
@@ -45,8 +38,8 @@ const Navbar = () => {
 		<nav className="fixed top-0 w-full left-0 bg-white2darkgrey flex items-center justify-between px-7 py-1.5 md:py-3 z-20 shadow-md">
 			<div className="flex items-center gap-x-[10px] text-2xl font-semibold text-blue-500">
 				<Link href={pageHomeRoute()}>
-					<LogoDesktop width={155} height={100} theme={'light'} />
-					<LogoPhone width={30} height={10} theme={'light'} />
+					<LogoDesktop height={40} theme={'light'} visibility={'hidden'} />
+					<LogoPhone height={40} theme={'light'} />
 				</Link>
 			</div>
 			<SearchBarDesktop />
