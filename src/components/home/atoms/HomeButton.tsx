@@ -29,7 +29,7 @@ const HomeButton = () => {
 			onMouseLeave={() => setIsLoading(false)}
 		>
 			<ProgressBar position="left-0" isLoading={isLoading} />
-			<div className="flex-none tracking-widest text-black2white font-semibold">
+			<div className="flex-none tracking-widest text-gray-800 font-semibold">
 				SPRAWDŹ
 			</div>
 			<ProgressBar position="right-0" isLoading={isLoading} />
