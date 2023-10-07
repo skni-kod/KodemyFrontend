@@ -9,10 +9,10 @@ import { pageHomeRoute } from '@/pages';
 const Navbar = () => {
 	return (
 		<nav className="fixed top-0 w-full left-0 bg-white2darkgrey flex items-center justify-between px-7 py-3.5 z-20 shadow-md">
-			<div className="flex items-center gap-x-[10px] text-2xl font-semibold text-blue-500">
+			<div className="flex items-center gap-x-[10px]">
 				<TfiMenu className="hidden" />
-				<Link href={pageHomeRoute()}>
-					<Logo width={155} height={100} theme={'light'} />
+				<Link href={pageHomeRoute()} className="flex items-center">
+					<Logo height={45} theme="light" />
 				</Link>
 			</div>
 			<SearchBarDesktop />
