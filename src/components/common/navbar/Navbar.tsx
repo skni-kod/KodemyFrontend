@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TfiMenu } from 'react-icons/tfi';
 import LogoDesktop from './atoms/LogoDesktop';
 import LogoPhone from './atoms/LogoPhone';
@@ -13,10 +13,33 @@ const Navbar = () => {
 
 	const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false);
 	const toggleNotificationsMenu = () => {
-		setIsNotificationsMenuOpen(
-			(isNotificationsMenuOpen) => !isNotificationsMenuOpen,
-		);
+		setIsNotificationsMenuOpen(!isNotificationsMenuOpen);
 	};
+
+	// Hook do śledzenia szerokości okna przeglądarki
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+	useEffect(() => {
+		// Funkcja obsługi zmiany szerokości okna
+		const handleResize = () => {
+			setWindowWidth(window.innerWidth);
+		};
+
+		// Dodajmy słuchacza zdarzeń do śledzenia zmiany szerokości okna
+		window.addEventListener('resize', handleResize);
+
+		// Usuń słuchacza zdarzeń po odmontowaniu komponentu
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
+	// Automatycznie zamknij menu po przekroczeniu szerokości 768px
+	useEffect(() => {
+		if (windowWidth > 768) {
+			setIsNotificationsMenuOpen(false);
+		}
+	}, [windowWidth]);
 
 	return (
 		<nav className="fixed top-0 w-full left-0 bg-white2darkgrey flex items-center justify-between px-7 py-1.5 md:py-3 z-20 shadow-md">

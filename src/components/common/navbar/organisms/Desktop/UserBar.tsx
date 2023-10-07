@@ -1,8 +1,8 @@
 import Avatar from '@/components/common/navbar/atoms/Avatar';
 import Bell from '../../atoms/Bell';
-import BellDropDownMenu from './BellDropDownMenu';
+import BellDropDownMenu from '../BellDropDownMenu';
 import { useState } from 'react';
-import AvatarDropDownMenu from './AvatarDropDownMenu';
+import AvatarDropDownMenu from '../AvatarDropDownMenu';
 import DayNightMode from '../../atoms/DayNightMode';
 
 enum UserBarMenu {
@@ -51,8 +51,12 @@ const UserBar = () => {
 					<Avatar />
 				</button>
 			</div>
-			{isOpenMenu(UserBarMenu.BELL) && <BellDropDownMenu />}
-			{isOpenMenu(UserBarMenu.AVATAR) && <AvatarDropDownMenu />}
+			{isOpenMenu(UserBarMenu.BELL) && (
+				<BellDropDownMenu topPosition={'top-[80px]'} />
+			)}
+			{isOpenMenu(UserBarMenu.AVATAR) && (
+				<AvatarDropDownMenu topPosition={'top-[80px]'} />
+			)}
 		</div>
 	);
 };
