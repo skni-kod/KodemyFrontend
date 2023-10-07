@@ -4,13 +4,17 @@ import AllMaterialBoxComponent from '../molecules/AllMaterialBox';
 import YourMaterialBoxComponent from '../molecules/YourMaterialBox';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import NotificationsMenu from '../molecules/NotificationsMenu';
+import React from 'react';
 
 enum Menu {
 	ALL,
 	YOUR,
 }
+type BellDropDownMenuProps = {
+	topPosition: string;
+};
 
-const BellDropDownMenu = () => {
+const BellDropDownMenu: React.FC<BellDropDownMenuProps> = ({ topPosition }) => {
 	const [menuMode, setMenuMode] = useState<Menu>(0);
 
 	const handleMenuMode = (menu: Menu) => {
@@ -27,8 +31,10 @@ const BellDropDownMenu = () => {
 	};
 
 	return (
-		<div className="bg-white2darkgrey h-[auto] w-[323px] absolute top-[80px] right-[20px] shadow-md rounded-lg">
-			<div className="h-[auto] flex items-center justify-between m-2 relative">
+		<div
+			className={`${topPosition} + bg-white2darkgrey h-[auto] w-[323px] absolute  right-[20px] shadow-md rounded-lg`}
+		>
+			<div className="h-[auto] flex items-center justify-between m-2">
 				<h1 className="w-4/10 text-black2white text-[20px] p-1">
 					Powiadomienia
 				</h1>
@@ -37,7 +43,7 @@ const BellDropDownMenu = () => {
 				</button>
 			</div>
 			<div className="h-[auto] w-[323px]">
-				<div className="h-[auto] flex justify-center mb-4">
+				<div className="h-[auto] flex justify-between mb-4 px-8">
 					<button
 						onClick={() => handleMenuMode(Menu.ALL)}
 						className={isMenuOpen(Menu.ALL) ? 'text-blue-500' : ''}
@@ -45,7 +51,6 @@ const BellDropDownMenu = () => {
 						<NotificationComponent
 							text={'Wszystkie'}
 							isActive={isMenuOpen(Menu.ALL)}
-							className={'pl-0'}
 							amount="3"
 						/>
 					</button>
@@ -56,7 +61,6 @@ const BellDropDownMenu = () => {
 						<NotificationComponent
 							text={'Nieprzeczytane'}
 							isActive={isMenuOpen(Menu.YOUR)}
-							className={'pl-8'}
 							amount="6"
 						/>
 					</button>

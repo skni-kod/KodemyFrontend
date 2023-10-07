@@ -2,7 +2,6 @@ import Favicon from '@/assets/favicon.ico';
 import { Metadata } from '@/pages/_app';
 import Page from '@/components/common/Page';
 import Container from '@/components/common/Container';
-import HomeContent2 from '@/components/home/HomeContent2';
 import HomeContent from '@/components/home/HomeContent';
 import Route from '@/utils/route';
 
@@ -11,7 +10,11 @@ export const pageHomeRoute = (): Route => {
 		pathname: '/',
 	};
 };
-
+export const pageLoginRoute = (): Route => {
+	return {
+		pathname: '/login',
+	};
+};
 export default function Home() {
 	return (
 		<Page

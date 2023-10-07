@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import Logo from '@/components/common/navbar/atoms/Logo';
+import LogoDesktop from '@/components/common/navbar/atoms/LogoDesktop';
 import Typewriter from 'typewriter-effect';
 import HomeButton from '@/components/home/atoms/HomeButton';
 
@@ -36,11 +36,11 @@ const HomeContent = () => {
 
 	return (
 		<div className="w-full h-full">
-			<div className="pt-20">
-				<Logo height={150} theme="light" />
+			<div className="pt-20 px-15 md:pl-20">
+				<LogoDesktop height={150} theme="light" visibility={'block'} />
 				<div className="flex flex-col gap-y-12 pl-9 pt-4">
 					<div>
-						<div className="flex flex-col gap-x-2 text-2xl leading-normal text-gray-800 font-semibold">
+						<div className="flex flex-col gap-x-2 text-2xl leading-normal text-black2white font-semibold">
 							<span>Szukasz materiału o konkretnej tematyce?</span>
 							<span>U nas znajdziesz wszystko.</span>
 						</div>

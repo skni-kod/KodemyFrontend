@@ -3,12 +3,12 @@ import KodemyImageDark from '@/assets/kodemyDark.png';
 import KodemyImageWhite from '@/assets/kodemyWhite.png';
 import { Metadata } from '@/pages/_app';
 
-type LogoProps = {
+type LogoDesktopProps = {
 	height: number;
 	theme: string;
+	visibility: string;
 };
-
-const Logo = ({ height, theme }: LogoProps) => {
+const LogoDesktop = ({ height, theme, visibility }: LogoDesktopProps) => {
 	const imageSrc = theme === 'dark' ? KodemyImageWhite : KodemyImageDark;
 	const width = (imageSrc.width * height) / imageSrc.height;
 
@@ -17,7 +17,7 @@ const Logo = ({ height, theme }: LogoProps) => {
 			<Image
 				src={imageSrc.src}
 				alt={Metadata.title}
-				className="cursor-pointer"
+				className={`${visibility} + cursor-pointer md:block`}
 				width={width}
 				height={height}
 			/>
@@ -25,4 +25,4 @@ const Logo = ({ height, theme }: LogoProps) => {
 	);
 };
 
-export default Logo;
+export default LogoDesktop;
