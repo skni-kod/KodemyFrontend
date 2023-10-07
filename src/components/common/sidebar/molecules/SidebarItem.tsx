@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
 import clsx from 'clsx';
-import { pageCategoryIdRoute } from '@/pages/category/[id]';
-import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai';
 import SidebarItemImage from '../atoms/SidebarItemImage';
 import SidebarItemText from '../atoms/SidebarItemText';
 import { Section } from '@/hooks/services/useSectionService';
+import SidebarSubmenu from '../atoms/SidebarSubmenu';
 
 interface SidebarItemProps {
 	section: Section;
@@ -46,19 +44,11 @@ const SidebarItem = ({
 					isExpanded={isExpanded}
 				/>
 			</div>
-			{isExpandSubmenu && (
-				<ul className="p-0 list-none block">
-					{section.categories.map(({ id, name }) => (
-						<Link
-							key={id}
-							href={pageCategoryIdRoute(id)}
-							className="flex items-center w-full px-3.5 py-1 pl-12 mt-1 rounded-lg no-underline overflow-hidden"
-						>
-							{name}
-						</Link>
-					))}
-				</ul>
-			)}
+			<SidebarSubmenu
+				section={section}
+				isExpandMenu={isExpandMenu}
+				expandedItemId={expandedItemId}
+			/>
 		</li>
 	);
 };
