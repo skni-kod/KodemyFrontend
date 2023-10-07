@@ -52,10 +52,10 @@ const UserBarPhone = () => {
 				</button>
 			</div>
 			{isOpenMenu(UserBarMenu.BELL) && (
-				<BellDropDownMenu topPosition={'top-[197px]'} />
+				<BellDropDownMenu topPosition={'top-[198px]'} />
 			)}
 			{isOpenMenu(UserBarMenu.AVATAR) && (
-				<AvatarDropDownMenu topPosition={'top-[197px]'} />
+				<AvatarDropDownMenu topPosition={'top-[198px]'} />
 			)}
 		</div>
 	);
