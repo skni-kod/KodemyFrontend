@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import Container from '@/components/common/Container';
 import Page from '@/components/common/Page';
-import { Materials } from '@/pages/routes';
-import UserContent from '@/components/dashboard/UserContent';
 import AdminContent from '@/components/dashboard/AdminContent';
+import Route from '@/utils/route';
 
-export const DashboardIndexRoute = '/dashboard';
+export const DashboardIndexRoute = (): Route => {
+	return {
+		pathname: '/dashboard',
+	};
+};
 
 const Index = () => {
 	return (
