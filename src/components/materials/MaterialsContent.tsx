@@ -6,7 +6,7 @@ import useCategoryService, {
 } from '@/hooks/services/useCategoryService';
 import MaterialBlock from '@/components/materials/molecules/MaterialBlock';
 import FiltersItem from '@/components/materials/atoms/FilterButton';
-import { useContext, useEffect, useState } from 'react';
+import { SetStateAction, useContext, useEffect, useState } from 'react';
 import { Section } from '@/hooks/services/useSectionService';
 import { MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
 import FilterMenu from '@/components/materials/organisms/FilterMenu';
@@ -14,6 +14,7 @@ import { useSectionsStore } from '@/store/sectionsSlice';
 import useModal from '@/hooks/useModal';
 import Header from '@/components/materials/organisms/Header';
 import MaterialModalContent from '@/components/materials/organisms/MaterialModalContent';
+import SectionFiltersMaterial from '@/mocks/sectionFilterMaterialMock';
 
 const categoryMaterialResponseInitialState = {
 	content: [],
@@ -47,7 +48,12 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 		setCurrentMaterialId(id);
 		if (id) handleOpenModal();
 	};
-
+	/*nowe*/
+	const filterOptions = SectionFiltersMaterial;
+	var [filter, setFilter] = useState('wybierz filtr');
+	const handleFilterChange = (e: { target: { value: SetStateAction<string> } }) => {
+		setFilter(e.target.value);
+	};
 	return (
 		<>
 			<div className="w-full px-3 text-black2white">
@@ -58,6 +64,20 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 						<span className="text-sky-500">{materials ? materials.content.length : 'NaN'}</span>{' '}
 						elementów
 					</div>
+					<h2>
+						Filtrowanie przez:{' '}
+						<span className="font-bold text-black2white">
+							<select
+								onSelect={() => handleFilterChange}
+								className=" bg-white2verydarkgrey border-none text-left text-black2white font-semibold leading-tight focus:outline-none"
+							>
+								<option>{filter}</option>
+								{filterOptions.map((option) => (
+									<option className="p-4" label={option} />
+								))}
+							</select>
+						</span>{' '}
+					</h2>
 					<div className="relative flex items-center text-sky-500 cursor-pointer">
 						<FilterMenu />
 					</div>
