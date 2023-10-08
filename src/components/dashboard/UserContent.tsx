@@ -2,29 +2,22 @@ import { CategoryMaterials } from '@/mocks/categoryMock';
 import { GoTriangleDown } from 'react-icons/go';
 import { SetStateAction, SyntheticEvent, useState } from 'react';
 import UserMaterialBlock from './molecules/UserMaterialBlock';
-import SectionFilters from '@/mocks/sectionFilterMock';
+import SectionFiltersUser from '@/mocks/sectionFilterUserMock';
 
 const UserContent = () => {
 	const materials = CategoryMaterials;
 	const elementsNumber = 7;
-	const filterOptions = SectionFilters;
+	const filterOptions = SectionFiltersUser;
 	var [filter, setFilter] = useState('wybierz filtr');
-	const handleFilterChange = (e: {
-		target: { value: SetStateAction<string> };
-	}) => {
+	const handleFilterChange = (e: { target: { value: SetStateAction<string> } }) => {
 		setFilter(e.target.value);
 	};
 	return (
 		<div className=" mx-4 md:mx-20">
-			<h1 className="text-3xl font-semibold text-black2white">
-				Twoje materiały
-			</h1>
+			<h1 className="text-3xl font-semibold text-black2white">Twoje materiały</h1>
 			<div className="mx-5 flex-col sm:flex-row flex justify-between text-black2white">
 				<h2>
-					Znaleziono{' '}
-					<span className="font-bold text-[var(--base-color)]">
-						{elementsNumber}
-					</span>{' '}
+					Znaleziono <span className="font-bold text-[var(--base-color)]">{elementsNumber}</span>{' '}
 					elementów.
 				</h2>
 				<h2>
