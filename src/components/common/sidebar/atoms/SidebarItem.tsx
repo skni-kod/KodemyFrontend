@@ -52,19 +52,15 @@ const SidebarItem = ({
 		<li>
 			<div
 				className={clsx(
-					'flex items-center justify-between w-full gap-x-2 py-1.5 mt-3 rounded-md no-underline cursor-pointer transition-all duration-300 ease-linear',
+					'flex items-center justify-between w-full py-1.5 mt-3 rounded-md no-underline cursor-pointer transition-all duration-300 ease-linear',
 					isExpandMenu ? 'pr-3.5 pl-3' : '',
 				)}
 				onClick={toggleExpand}
 			>
-				<span className="relative inline-block min-w-12 leading-10 text-center rounded-md">
-					<Image
-						className="w-6 h-6 cursor-pointer"
-						src={handleSectionLogo(id)}
-						alt={name}
-					/>
-				</span>
-				<div className="flex-grow">
+				<div className="relative inline-block min-w-12 text-center rounded-md">
+					<Image className="w-6 h-6 cursor-pointer" src={handleSectionLogo(id)} alt={name} />
+				</div>
+				<div className="pl-2 flex-grow">
 					{isExpandMenu && (
 						<div className="flex items-center justify-between">
 							<span className="whitespace-nowrap overflow-hidden">{name}</span>
