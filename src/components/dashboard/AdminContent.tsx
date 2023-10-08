@@ -3,25 +3,21 @@ import { SetStateAction, useState } from 'react';
 import sectionFilter from './atoms/sectionFilter';
 import AdminMaterialBlock from './molecules/AdminMaterialBlock';
 import Sections from '@/mocks/sectionMock';
-import SectionFilters from '@/mocks/sectionFilterMock';
+import SectionFiltersAdmin from '@/mocks/sectionFilterAdminMock';
 
 const AdminContent = () => {
 	const materials = CategoryMaterials;
 	const elementsNumber = 7;
-	const filterOptions = SectionFilters;
+	const filterOptions = SectionFiltersAdmin;
 	const sectionFilters = Sections.map((section) => section.name);
 	var [filter, setFilter] = useState('wybierz filtr');
 	var [section, setSection] = useState('');
-	const handleFilterChange = (e: {
-		target: { value: SetStateAction<string> };
-	}) => {
+	const handleFilterChange = (e: { target: { value: SetStateAction<string> } }) => {
 		setFilter(e.target.value);
 	};
 	return (
 		<div className="mx-4 md:mx-20">
-			<h1 className="text-3xl font-semibold text-black2white">
-				Niezatwierdzone
-			</h1>
+			<h1 className="text-3xl font-semibold text-black2white">Niezatwierdzone</h1>
 			<div className="lg:flex my-5 gap-5">
 				{sectionFilters.map((filter) => (
 					<>{sectionFilter(filter, section, setSection)}</>
@@ -29,9 +25,7 @@ const AdminContent = () => {
 			</div>
 			<div className="mx-5 flex-col sm:flex-row flex justify-between text-black2white">
 				<h2>
-					Znaleziono{' '}
-					<span className="font-bold text-black2white">{elementsNumber}</span>{' '}
-					elementów.
+					Znaleziono <span className="font-bold text-black2white">{elementsNumber}</span> elementów.
 				</h2>
 				<h2>
 					Filtrowanie przez:{' '}

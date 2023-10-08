@@ -1,12 +1,12 @@
 import { CategoryMaterials } from '@/mocks/categoryMock';
 import { SetStateAction, SyntheticEvent, useState } from 'react';
-import SectionFilters from '@/mocks/sectionFilterMock';
+import SectionFiltersFavourite from '@/mocks/sectionFilterFavouriteMock';
 import FavouriteMaterialBlock from './molecules/FavouriteMaterialBlock';
 
 const FavouriteContent = () => {
 	const materials = CategoryMaterials;
 	const elementsNumber = 7;
-	const filterOptions = SectionFilters;
+	const filterOptions = SectionFiltersFavourite;
 	var [filter, setFilter] = useState('wybierz filtr');
 	const handleFilterChange = (e: { target: { value: SetStateAction<string> } }) => {
 		setFilter(e.target.value);
