@@ -1,6 +1,7 @@
 import Container from '@/components/common/Container';
 import Page from '@/components/common/Page';
 import AdminContent from '@/components/dashboard/AdminContent';
+import UserContent from '@/components/dashboard/UserContent';
 import Route from '@/utils/route';
 
 export const pageDashboardRoute = (): Route => {
@@ -11,13 +12,10 @@ export const pageDashboardRoute = (): Route => {
 
 const Index = () => {
 	return (
-		<Page
-			title="Panel użytkownika"
-			description="Widok zarządzania dodanymi materiałami i kontem"
-		>
+		<Page title="Panel użytkownika" description="Widok zarządzania dodanymi materiałami i kontem">
 			<Container className="mx-auto px-[10vw] bg-white2verydarkgrey">
-				<AdminContent />
-				{/* <UserContent /> */}
+				{/*<AdminContent />*/}
+				<UserContent />
 			</Container>
 		</Page>
 	);
