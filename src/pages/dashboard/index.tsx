@@ -1,6 +1,7 @@
 import Container from '@/components/common/Container';
 import Page from '@/components/common/Page';
 import AdminContent from '@/components/dashboard/AdminContent';
+import FavouriteContent from '@/components/dashboard/FavouriteContent';
 import UserContent from '@/components/dashboard/UserContent';
 import Route from '@/utils/route';
 
@@ -15,7 +16,8 @@ const Index = () => {
 		<Page title="Panel użytkownika" description="Widok zarządzania dodanymi materiałami i kontem">
 			<Container className="mx-auto px-[10vw] bg-white2verydarkgrey">
 				{/*<AdminContent />*/}
-				<UserContent />
+				{/*<UserContent />*/}
+				<FavouriteContent />
 			</Container>
 		</Page>
 	);
