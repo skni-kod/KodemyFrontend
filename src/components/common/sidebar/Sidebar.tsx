@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import useSectionService, { Section } from '@/hooks/services/useSectionService';
-import SidebarItem from './atoms/SidebarItem';
-import { sortSectionCategory } from '@/utils/constant';
+import useSectionService from '@/hooks/services/useSectionService';
+import SidebarItem from './molecules/SidebarItem';
 
 const Sidebar = () => {
 	const [sections, setSections] = useState<Section[]>([]);
