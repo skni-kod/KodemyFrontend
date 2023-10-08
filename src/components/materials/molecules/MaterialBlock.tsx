@@ -3,25 +3,30 @@ import DocumentsImage from '@/assets/material/documents.png';
 import Image from 'next/image';
 import Status from '@/components/materials/atoms/Status';
 import { BiStar } from 'react-icons/bi';
+import { useState } from 'react';
+import clsx from 'clsx';
 
 type MaterialProps = {
 	data: Material;
+	handleOpenModal: (id: number) => void;
 };
 
 const MaterialBlock = ({
-	data: {
-		title,
-		description,
-		link,
-		status,
-		user,
-		createdDate,
-		categoryId,
-		active,
-	},
+	data: { id, title, description, link, status, user, createdDate, categoryId, active },
+	handleOpenModal,
 }: MaterialProps) => {
+	const [isHover, setIsHover] = useState(false);
+
 	return (
-		<div className="flex justify-between items-center py-4 px-9 shadow-md border-2 rounded-3xl shrink-0 bg-white text-gray-500 cursor-pointer">
+		<div
+			className={clsx(
+				'flex justify-between items-center py-4 px-9 shadow-md border-2 rounded-3xl shrink-0 bg-white text-gray-500 cursor-pointer',
+				isHover ? 'border-sky-500' : null,
+			)}
+			onClick={() => handleOpenModal(id)}
+			onMouseEnter={() => setIsHover(true)}
+			onMouseLeave={() => setIsHover(false)}
+		>
 			<div className="flex-none h-20 w-20 flex justify-center items-center aspect-square bg-gray-100">
 				<Image
 					src={DocumentsImage.src}
