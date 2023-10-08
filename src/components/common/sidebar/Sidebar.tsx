@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import useSectionService from '@/hooks/services/useSectionService';
+import useSectionService, { Section } from '@/hooks/services/useSectionService';
 import SidebarItem from './molecules/SidebarItem';
+import { sortSectionCategory } from '@/utils/constant';
 
 const Sidebar = () => {
 	const [sections, setSections] = useState<Section[]>([]);
@@ -36,7 +37,6 @@ const Sidebar = () => {
 								key={index}
 								section={section}
 								isExpandMenu={isExpandMenu}
-								setIsExpandMenu={setIsExpandMenu}
 								expandedItemId={expandedItemId}
 								setExpandedItemId={setExpandedItemId}
 							/>
