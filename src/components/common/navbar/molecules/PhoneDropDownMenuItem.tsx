@@ -31,7 +31,7 @@ const PhoneDropDownMenuItem = ({
 		<li>
 			<div
 				className={clsx(
-					'flex items-center justify-between w-full gap-x-1 py-1.5 mt-3 rounded-md no-underline cursor-pointer transition-all duration-300 ease-linear',
+					'flex items-center justify-between w-full gap-x-1 py-1.5 mt-3 rounded-md no-underline cursor-pointer transition-width duration-300 ease-linear',
 				)}
 				onClick={toggleExpand}
 			>
