@@ -27,7 +27,6 @@ const Sidebar = () => {
 								key={index}
 								section={section}
 								isExpandMenu={isExpandMenu}
-								setIsExpandMenu={setIsExpandMenu}
 								expandedItemId={expandedItemId}
 								setExpandedItemId={setExpandedItemId}
 							/>
