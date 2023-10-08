@@ -30,33 +30,21 @@ const UserBar = () => {
 				<DayNightMode />
 				<button
 					onClick={() =>
-						handleOpenMenu(
-							!isOpenMenu(UserBarMenu.BELL)
-								? UserBarMenu.BELL
-								: UserBarMenu.NONE,
-						)
+						handleOpenMenu(!isOpenMenu(UserBarMenu.BELL) ? UserBarMenu.BELL : UserBarMenu.NONE)
 					}
 				>
 					<Bell className={IconClassNames} />
 				</button>
 				<button
 					onClick={() =>
-						handleOpenMenu(
-							!isOpenMenu(UserBarMenu.AVATAR)
-								? UserBarMenu.AVATAR
-								: UserBarMenu.NONE,
-						)
+						handleOpenMenu(!isOpenMenu(UserBarMenu.AVATAR) ? UserBarMenu.AVATAR : UserBarMenu.NONE)
 					}
 				>
 					<Avatar />
 				</button>
 			</div>
-			{isOpenMenu(UserBarMenu.BELL) && (
-				<BellDropDownMenu topPosition={'top-[80px]'} />
-			)}
-			{isOpenMenu(UserBarMenu.AVATAR) && (
-				<AvatarDropDownMenu topPosition={'top-[80px]'} />
-			)}
+			{isOpenMenu(UserBarMenu.BELL) && <BellDropDownMenu topPosition={'top-[80px]'} />}
+			{isOpenMenu(UserBarMenu.AVATAR) && <AvatarDropDownMenu topPosition={'top-[80px]'} />}
 		</div>
 	);
 };

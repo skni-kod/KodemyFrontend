@@ -10,3 +10,8 @@ export const sortSectionCategory = (section: Section[]) => {
 export const sortCategories = (categories: Category[]) => {
 	return categories.sort((a: Category, b: Category) => a.id - b.id);
 };
+
+export const extractRRRRMMDD = (date: string) => {
+	const dateSplit = date.split('T');
+	return dateSplit.length > 0 ? dateSplit[0] : date;
+};

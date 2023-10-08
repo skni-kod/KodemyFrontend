@@ -19,8 +19,7 @@ const config: Config = {
 			colors: {
 				white2white: 'rgb(var(--color-white2white) / <alpha-value>)',
 				white2darkgrey: 'rgb(var(--color-white2darkgrey) / <alpha-value>)',
-				white2verydarkgrey:
-					'rgb(var(--color-white2verydarkgrey) / <alpha-value>)',
+				white2verydarkgrey: 'rgb(var(--color-white2verydarkgrey) / <alpha-value>)',
 				grey2white: 'rgb(var(--color-grey2white) / <alpha-value>)',
 				black2white: 'rgb(var(--color-black2white) / <alpha-value>)',
 				black2grey: 'rgb(var(--color-black2grey) / <alpha-value>)',
@@ -29,11 +28,18 @@ const config: Config = {
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'gradient-conic':
-					'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
 			},
 			transitionProperty: {
 				width: 'width',
+			},
+			spacing: {
+				'112': '28rem',
+				'128': '32rem',
+			},
+			minHeight: {
+				'96': '24rem',
+				'112': '28rem',
 			},
 		},
 	},

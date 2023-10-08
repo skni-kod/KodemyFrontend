@@ -19,13 +19,13 @@ export type Material = {
 		id: number;
 		name: string;
 	};
-	technologies: string[]; // Jeśli "technologies" ma być tablicą ciągów znaków
+	technologies: number[];
 	averageGrade: number | null;
 	creator: {
 		id: number;
 		username: string;
 	};
-	createdDate: string; // Jeśli "createdDate" jest zawsze w formacie daty jako string
+	createdDate: string;
 };
 
 const useMaterialService = () => {
