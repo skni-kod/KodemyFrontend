@@ -27,13 +27,13 @@ const authSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
-		login(state, action) {
+		setAuth(state, action) {
 			state = {
 				isLogged: true,
 				...action.payload,
 			};
 		},
-		logout(state, action) {
+		dispatchAuth(state, action) {
 			state = {
 				isLogged: false,
 				user: undefined,
@@ -44,5 +44,3 @@ const authSlice = createSlice({
 });
 
 export default authSlice;
-
-export const { login, logout } = authSlice.actions;

@@ -12,6 +12,7 @@
     "prettier/prettier": [
       "error",
       {
+        "printWidth": 100,
         "singleQuote": true,
         "useTabs": true,
         "tabWidth": 2
