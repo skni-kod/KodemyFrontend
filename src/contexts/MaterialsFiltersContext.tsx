@@ -1,43 +1,79 @@
 import React, { useState } from 'react';
 
-export type Filter = {
-	key: string;
-	value: string | number;
+export enum SortDirection {
+	DESC,
+	ASC,
+}
+
+export type Filters = {
+	size?: number;
+	page?: number;
+	sort?: string;
+	sort_direction?: SortDirection;
 };
 
-export const MaterialsFiltersContext = React.createContext({
-	filters: new Array<Filter>(),
-	addFilter: (filter: Filter) => {},
-	removeFilter: (key: string) => {},
+export const defaultFilters: Filters = {
+	size: 15,
+	page: 0,
+	sort: 'createdDate',
+	sort_direction: SortDirection.DESC,
+};
+
+export const defaultPages = [10, 20, 40];
+
+type MaterialsFiltersContextType = {
+	filters: Filters;
+	updateSizeFilter: (size: number | undefined) => void;
+	updatePageFilter: (page: number | undefined) => void;
+	updateSortFilter: (sort: string | undefined, sortDirection: SortDirection | undefined) => void;
+	clearFilters: () => void;
+};
+
+export const MaterialsFiltersContext = React.createContext<MaterialsFiltersContextType>({
+	filters: {},
+	updateSizeFilter: () => {},
+	updatePageFilter: () => {},
+	updateSortFilter: () => {},
 	clearFilters: () => {},
 });
 
-const MaterialsFiltersProvider = ({
-	children,
-}: {
-	children: React.ReactNode;
-}) => {
-	const [filters, setFilters] = useState<Filter[]>([]);
+const MaterialsFiltersProvider = ({ children }: { children: React.ReactNode }) => {
+	const [filters, setFilters] = useState<Filters>({});
 
-	const handleAddFilter = (filter: Filter) => {
-		setFilters([filter, ...filters]);
+	const updateSizeFilter = (size: number | undefined) => {
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			size: size,
+		}));
 	};
 
-	const handleRemoveFilter = (key: string) => {
-		setFilters(filters.filter((f) => f.key !== key));
+	const updatePageFilter = (page: number | undefined) => {
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			page: page,
+		}));
 	};
 
-	const handleClearFilters = () => {
-		setFilters([]);
+	const updateSortFilter = (sort: string | undefined, sortDirection: SortDirection | undefined) => {
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			sort: sort,
+			sort_direction: sortDirection,
+		}));
+	};
+
+	const clearFilters = () => {
+		setFilters({});
 	};
 
 	return (
 		<MaterialsFiltersContext.Provider
 			value={{
 				filters,
-				addFilter: handleAddFilter,
-				removeFilter: handleRemoveFilter,
-				clearFilters: handleClearFilters,
+				updateSizeFilter,
+				updatePageFilter,
+				updateSortFilter,
+				clearFilters,
 			}}
 		>
 			{children}

@@ -1,13 +1,9 @@
 import clsx from 'clsx';
 import { CiCircleRemove } from 'react-icons/ci';
-import { Filter } from '@/contexts/MaterialsFiltersContext';
 
-type FilterButtonProps = {
-	value: Filter;
-};
-
-const FilterButton = ({ value: { key, value } }: FilterButtonProps) => {
-	const btnValue = `${key}: ${value}`;
+const FilterButton = () => {
+	// const btnValue = `${key}: ${value}`;
+	const btnValue = ``;
 
 	return (
 		<div

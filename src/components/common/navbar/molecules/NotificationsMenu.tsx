@@ -10,7 +10,7 @@ const NotificationsMenu = () => {
 	const text2 = 'Ustawienia powiadomień';
 
 	return (
-		<div className="h-[auto] w-[310px] bg-white2darkgrey absolute top-[50px] right-[40px] rounded pt-[10px] pl-[10px] shadow-md space-y-2 pb-2">
+		<div className="h-auto w-[310px] bg-white2darkgrey absolute top-[50px] right-[40px] rounded pt-[10px] pl-[10px] shadow-md space-y-2 pb-2">
 			<button>
 				<NotificationsOption iconname={iconName1} text={text1} />
 			</button>

@@ -1,15 +1,12 @@
 import { pageHomeRoute, pageLoginRoute } from '@/pages';
 import Link from 'next/link';
 
-type AvatarDropDownMenuProps = {
-	topPosition: string;
-};
-const AvatarDropDownMenu: React.FC<AvatarDropDownMenuProps> = ({ topPosition }) => {
+const AvatarDropDownMenu = ({ className }: { className?: string }) => {
 	return (
 		<div
-			className={`${topPosition} + bg-white2darkgrey h-[auto] w-[160px] absolute top-[80px] right-[0px] shadow-md rounded-lg p-2`}
+			className={`absolute right-5 h-auto w-40 p-2 ${className} bg-white2darkgrey shadow-md rounded-lg`}
 		>
-			<div className="text-black2white text-[12px] p-1">
+			<div className="text-black2white text-xs p-1">
 				<a>
 					<button>Ustawienia konta</button>
 				</a>

@@ -12,8 +12,7 @@ enum UserBarMenu {
 }
 
 const UserBarPhone = () => {
-	const IconClassNames =
-		'cursor-pointer text-grey2white text-2xl h-[25.5px] w-[25.5px]';
+	const IconClassNames = 'cursor-pointer text-grey2white text-2xl h-[25.5px] w-[25.5px]';
 
 	const [userBarMenu, setUserBarMenu] = useState<UserBarMenu>(0);
 
@@ -30,33 +29,21 @@ const UserBarPhone = () => {
 				<DayNightMode />
 				<button
 					onClick={() =>
-						handleOpenMenu(
-							!isOpenMenu(UserBarMenu.BELL)
-								? UserBarMenu.BELL
-								: UserBarMenu.NONE,
-						)
+						handleOpenMenu(!isOpenMenu(UserBarMenu.BELL) ? UserBarMenu.BELL : UserBarMenu.NONE)
 					}
 				>
 					<Bell className={IconClassNames} />
 				</button>
 				<button
 					onClick={() =>
-						handleOpenMenu(
-							!isOpenMenu(UserBarMenu.AVATAR)
-								? UserBarMenu.AVATAR
-								: UserBarMenu.NONE,
-						)
+						handleOpenMenu(!isOpenMenu(UserBarMenu.AVATAR) ? UserBarMenu.AVATAR : UserBarMenu.NONE)
 					}
 				>
 					<Avatar />
 				</button>
 			</div>
-			{isOpenMenu(UserBarMenu.BELL) && (
-				<BellDropDownMenu topPosition={'top-[198px]'} />
-			)}
-			{isOpenMenu(UserBarMenu.AVATAR) && (
-				<AvatarDropDownMenu topPosition={'top-[198px]'} />
-			)}
+			{isOpenMenu(UserBarMenu.BELL) && <BellDropDownMenu topPosition={'top-[198px]'} />}
+			{isOpenMenu(UserBarMenu.AVATAR) && <AvatarDropDownMenu topPosition={'top-[198px]'} />}
 		</div>
 	);
 };
