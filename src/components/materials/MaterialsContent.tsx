@@ -1,13 +1,13 @@
 import useCategoryService, { CategoryMaterialsResponse } from '@/hooks/services/useCategoryService';
 import MaterialBlock from '@/components/materials/molecules/MaterialBlock';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import FiltersMenu from '@/components/materials/organisms/FiltersMenu';
 import useModal from '@/hooks/useModal';
 import Header from '@/components/materials/organisms/Header';
 import MaterialModalContent from '@/components/materials/organisms/MaterialModalContent';
 import FilterMenuButton from '@/components/materials/atoms/FilterMenuButton';
 import SortMenuButton from '@/components/materials/organisms/SortMenuButton';
-import { Filter, MaterialsFiltersContext, SortDirection } from '@/contexts/MaterialsFiltersContext';
+import { MaterialsFiltersContext, SortDirection } from '@/contexts/MaterialsFiltersContext';
 
 const categoryMaterialResponseInitialState = {
 	content: [],
@@ -35,13 +35,7 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 
 	const { filters } = useContext(MaterialsFiltersContext);
 
-	useEffect(() => {
-		(async () => {
-			setMaterials(await getCategoryMaterials(categoryId, mapFilters()));
-		})();
-	}, [categoryId, getCategoryMaterials, filters]);
-
-	const mapFilters = () => {
+	const mapFilters = useCallback(() => {
 		const size = filters['size']?.value;
 		const page = filters['page']?.value;
 		const sort = filters['sort']?.value;
@@ -52,7 +46,13 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 			sort,
 			sortDirection,
 		};
-	};
+	}, [filters]);
+
+	useEffect(() => {
+		(async () => {
+			setMaterials(await getCategoryMaterials(categoryId, mapFilters()));
+		})();
+	}, [categoryId, getCategoryMaterials, filters, mapFilters]);
 
 	const handleOpenMaterialModal = (id: number) => {
 		setCurrentMaterialId(id);

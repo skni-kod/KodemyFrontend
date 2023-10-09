@@ -1,5 +1,5 @@
 import { CategoryMaterials } from '@/mocks/categoryMock';
-import { SetStateAction, SyntheticEvent, useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import SectionFiltersFavourite from '@/mocks/sectionFilterFavouriteMock';
 import FavouriteMaterialBlock from './molecules/FavouriteMaterialBlock';
 
@@ -27,8 +27,8 @@ const FavouriteContent = () => {
 							className=" bg-white2verydarkgrey border-none text-left text-black2white font-semibold leading-tight focus:outline-none"
 						>
 							<option>{filter}</option>
-							{filterOptions.map((option) => (
-								<option className="p-4" label={option} />
+							{filterOptions.map((option, index) => (
+								<option key={index} className="p-4" label={option} />
 							))}
 						</select>
 					</span>{' '}

@@ -1,10 +1,9 @@
 import NotificationComponent from '../atoms/NotificationComponent';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import AllMaterialBoxComponent from '../molecules/AllMaterialBox';
 import YourMaterialBoxComponent from '../molecules/YourMaterialBox';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import NotificationsMenu from '../molecules/NotificationsMenu';
-import React from 'react';
 
 enum Menu {
 	ALL,

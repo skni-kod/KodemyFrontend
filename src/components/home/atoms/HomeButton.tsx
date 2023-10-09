@@ -1,13 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import clsx from 'clsx';
 
-const ProgressBar = ({
-	position,
-	isLoading,
-}: {
-	position: string;
-	isLoading: boolean;
-}) => (
+const ProgressBar = ({ position, isLoading }: { position: string; isLoading: boolean }) => (
 	<div className="relative flex-1 h-1 bg-gray-400">
 		<div
 			className={clsx(
@@ -29,9 +23,7 @@ const HomeButton = () => {
 			onMouseLeave={() => setIsLoading(false)}
 		>
 			<ProgressBar position="left-0" isLoading={isLoading} />
-			<div className="flex-none tracking-widest text-sky6002sky200 font-semibold">
-				SPRAWDŹ
-			</div>
+			<div className="flex-none tracking-widest text-sky6002sky200 font-semibold">SPRAWDŹ</div>
 			<ProgressBar position="right-0" isLoading={isLoading} />
 		</div>
 	);

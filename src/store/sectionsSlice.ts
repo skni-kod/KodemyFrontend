@@ -31,7 +31,7 @@ export const useSectionsStore = () => {
 	const dispatch = useDispatch<StoreDispatch>();
 
 	useEffect(() => {
-		if (sections.length === 0)
+		if (sections?.length === 0)
 			(async () => {
 				dispatch(sectionsSlice.actions.setSections(sortSectionCategory(await getSections())));
 			})();

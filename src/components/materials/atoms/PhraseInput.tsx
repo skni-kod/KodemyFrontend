@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { KeyObject } from 'crypto';
 
 type PhraseInputProps = {
 	className?: string;

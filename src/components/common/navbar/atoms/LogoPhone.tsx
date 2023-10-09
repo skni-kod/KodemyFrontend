@@ -1,15 +1,12 @@
 import Image from 'next/image';
-import KodemyImageDark from '@/assets/kodemyPhoneDark.png';
-import KodemyImageWhite from '@/assets/kodemyPhoneWhite.png';
+import KodemyImageDark from '@/assets/logo/kodemyPhoneDark.png';
+import KodemyImageWhite from '@/assets/logo/kodemyPhoneWhite.png';
 import { Metadata } from '@/pages/_app';
+import { useThemeStore } from '@/store/themeSlice';
 
-type LogoPhoneProps = {
-	height: number;
-	theme: string;
-};
-
-const LogoPhone = ({ height, theme }: LogoPhoneProps) => {
-	const imageSrc = theme === 'dark' ? KodemyImageWhite : KodemyImageDark;
+const LogoPhone = ({ height }: { height: number }) => {
+	const { themeMode } = useThemeStore();
+	const imageSrc = [KodemyImageDark, KodemyImageWhite][themeMode];
 	const width = (imageSrc.width * height) / imageSrc.height;
 	return (
 		<button>

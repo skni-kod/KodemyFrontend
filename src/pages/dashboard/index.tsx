@@ -1,8 +1,6 @@
 import Container from '@/components/common/Container';
 import Page from '@/components/common/Page';
-import AdminContent from '@/components/dashboard/AdminContent';
 import FavouriteContent from '@/components/dashboard/FavouriteContent';
-import UserContent from '@/components/dashboard/UserContent';
 import Route from '@/utils/route';
 
 export const pageDashboardRoute = (): Route => {

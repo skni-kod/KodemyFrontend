@@ -1,6 +1,5 @@
-import { Material } from '@/hooks/services/useMaterialService';
+import useMaterialService, { Material } from '@/hooks/services/useMaterialService';
 import { useEffect, useState } from 'react';
-import useMaterialService from '@/hooks/services/useMaterialService';
 import { AiOutlineClose } from 'react-icons/ai';
 import BlankTargetLink from '@/components/materials/atoms/BlankTargetLink';
 import { extractRRRRMMDD } from '@/utils/constant';

@@ -1,6 +1,5 @@
 import { CategoryMaterials } from '@/mocks/categoryMock';
-import { GoTriangleDown } from 'react-icons/go';
-import { SetStateAction, SyntheticEvent, useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import UserMaterialBlock from './molecules/UserMaterialBlock';
 import SectionFiltersUser from '@/mocks/sectionFilterUserMock';
 
@@ -28,8 +27,8 @@ const UserContent = () => {
 							className=" bg-white2verydarkgrey border-none text-left text-black2white font-semibold leading-tight focus:outline-none"
 						>
 							<option>{filter}</option>
-							{filterOptions.map((option) => (
-								<option className="p-4" label={option} />
+							{filterOptions.map((option, index) => (
+								<option key={index} className="p-4" label={option} />
 							))}
 						</select>
 					</span>{' '}

@@ -1,43 +1,11 @@
-import { useRouter } from 'next/router';
 import LogoDesktop from '@/components/common/navbar/atoms/LogoDesktop';
-import Typewriter from 'typewriter-effect';
 import HomeButton from '@/components/home/atoms/HomeButton';
 
-enum Stage {
-	SECTION,
-	CATEGORY,
-}
-
-type StageData = {
-	section: number | null;
-	category: number | null;
-};
-
-const TypewriterComponent = ({
-	value,
-	delayMs,
-}: {
-	value: string;
-	delayMs: number;
-}) => {
-	return (
-		<Typewriter
-			onInit={(writer) => {
-				writer.pauseFor(delayMs);
-				writer.typeString(value);
-				writer.start();
-			}}
-		/>
-	);
-};
-
 const HomeContent = () => {
-	const router = useRouter();
-
 	return (
 		<div className="w-full h-full">
-			<div className="pt-20 px-15 md:pl-20">
-				<LogoDesktop height={150} theme="light" visibility={'block'} />
+			<div className="flex flex-col justify-center w-1/2 pt-24 px-15">
+				<LogoDesktop height={150} visibility={'block'} />
 				<div className="flex flex-col gap-y-12 pl-9 pt-4">
 					<div>
 						<div className="flex flex-col gap-x-2 text-2xl leading-normal text-black2white font-semibold">
@@ -48,6 +16,7 @@ const HomeContent = () => {
 					<HomeButton />
 				</div>
 			</div>
+			<div className="w-1/2"></div>
 		</div>
 	);
 };
