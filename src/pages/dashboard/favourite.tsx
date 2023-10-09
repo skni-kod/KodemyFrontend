@@ -2,12 +2,21 @@ import React from 'react';
 import Container from '@/components/common/Container';
 import Page from '@/components/common/Page';
 import FavouriteContent from '@/components/dashboard/FavouriteContent';
+import { useCheckLoginStatus } from '@/components/login/CheckLoginStatus';
+import RedirectionButton from '@/components/login/atoms/RedirectionButton';
 
 const Index = () => {
+	const isLoggedIn = useCheckLoginStatus();
 	return (
 		<Page title="Panel użytkownika" description="Widok zarządzania dodanymi materiałami i kontem">
 			<Container className="mx-auto px-[10vw] bg-white2verydarkgrey">
-				<FavouriteContent />
+				{isLoggedIn === true ? (
+					<FavouriteContent />
+				) : isLoggedIn === false ? (
+					<RedirectionButton />
+				) : (
+					<RedirectionButton />
+				)}
 			</Container>
 		</Page>
 	);

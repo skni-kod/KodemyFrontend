@@ -35,6 +35,7 @@ export const pageDashboardFavouriteRoute = (): Route => {
 		pathname: '/dashboard/favourite',
 	};
 };
+
 export default function Home() {
 	return (
 		<Page
