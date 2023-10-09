@@ -15,6 +15,11 @@ export const pageLoginRoute = (): Route => {
 		pathname: '/login',
 	};
 };
+export const pageDashboardRoute = (): Route => {
+	return {
+		pathname: '/dashboard',
+	};
+};
 export const pageDashboardUserRoute = (): Route => {
 	return {
 		pathname: '/dashboard/user',

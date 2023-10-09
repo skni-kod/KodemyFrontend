@@ -25,9 +25,7 @@ const BellDropDownMenu: React.FC<BellDropDownMenuProps> = ({ topPosition }) => {
 
 	const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false);
 	const toggleNotificationsMenu = () => {
-		setIsNotificationsMenuOpen(
-			(isNotificationsMenuOpen) => !isNotificationsMenuOpen,
-		);
+		setIsNotificationsMenuOpen((isNotificationsMenuOpen) => !isNotificationsMenuOpen);
 	};
 
 	return (
@@ -35,9 +33,7 @@ const BellDropDownMenu: React.FC<BellDropDownMenuProps> = ({ topPosition }) => {
 			className={`${topPosition} + bg-white2darkgrey h-[auto] w-[323px] absolute  right-[20px] shadow-md rounded-lg`}
 		>
 			<div className="h-[auto] flex items-center justify-between m-2">
-				<h1 className="w-4/10 text-black2white text-[20px] p-1">
-					Powiadomienia
-				</h1>
+				<h1 className="w-4/10 text-black2white text-[20px] p-1">Powiadomienia</h1>
 				<button className="pr-[1vw] relative" onClick={toggleNotificationsMenu}>
 					<BiDotsHorizontalRounded className="cursor-pointer text-grey2white text-2xl h-[25.5px] w-[25.5px]" />
 				</button>
@@ -48,11 +44,7 @@ const BellDropDownMenu: React.FC<BellDropDownMenuProps> = ({ topPosition }) => {
 						onClick={() => handleMenuMode(Menu.ALL)}
 						className={isMenuOpen(Menu.ALL) ? 'text-blue-500' : ''}
 					>
-						<NotificationComponent
-							text={'Wszystkie'}
-							isActive={isMenuOpen(Menu.ALL)}
-							amount="3"
-						/>
+						<NotificationComponent text={'Wszystkie'} isActive={isMenuOpen(Menu.ALL)} amount="3" />
 					</button>
 					<button
 						onClick={() => handleMenuMode(Menu.YOUR)}
