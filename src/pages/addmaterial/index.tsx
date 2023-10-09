@@ -10,7 +10,7 @@ const Index = () => {
 		<Page title="Panel użytkownika" description="Widok zarządzania dodanymi materiałami i kontem">
 			<Container className="mx-auto px-[10vw] bg-white2verydarkgrey">
 				{isLoggedIn === true ? (
-					<h1 className="text-black2white">Strona z ustawieniami</h1>
+					<h1 className="text-black2white">Strona z dodawaniem materiałów</h1>
 				) : isLoggedIn === false ? (
 					<RedirectionButton />
 				) : (

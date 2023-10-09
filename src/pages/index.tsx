@@ -35,7 +35,11 @@ export const pageDashboardFavouriteRoute = (): Route => {
 		pathname: '/dashboard/favourite',
 	};
 };
-
+export const pageAddMaterialRoute = (): Route => {
+	return {
+		pathname: '/addmaterial',
+	};
+};
 export default function Home() {
 	return (
 		<Page

@@ -4,6 +4,8 @@ import BellDropDownMenu from '../BellDropDownMenu';
 import { useState } from 'react';
 import AvatarDropDownMenu from '../AvatarDropDownMenu';
 import DayNightMode from '../../atoms/DayNightMode';
+import Link from 'next/link';
+import { pageAddMaterialRoute } from '@/pages';
 
 enum UserBarMenu {
 	NONE,
@@ -12,8 +14,7 @@ enum UserBarMenu {
 }
 
 const UserBar = () => {
-	const IconClassNames =
-		'cursor-pointer text-grey2white text-2xl h-[25.5px] w-[25.5px]';
+	const IconClassNames = 'cursor-pointer text-grey2white text-2xl h-[25.5px] w-[25.5px]';
 
 	const [userBarMenu, setUserBarMenu] = useState<UserBarMenu>(0);
 
@@ -24,7 +25,7 @@ const UserBar = () => {
 	return (
 		<div className=" items-center justify-between gap-x-4 hidden md:flex">
 			<button className="bg-sky-500  hover:bg-blue-600 text-white2white text-[11px] lg:text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded">
-				Dodaj materiał
+				<Link href={pageAddMaterialRoute()}>Dodaj materiał</Link>
 			</button>
 			<div className="flex items-center gap-x-4 font-bold">
 				<DayNightMode />
