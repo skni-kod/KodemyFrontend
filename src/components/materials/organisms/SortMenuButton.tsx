@@ -1,33 +1,54 @@
-import { useState } from 'react';
-import { SortDirection } from '@/contexts/MaterialsFiltersContext';
+import { useContext, useState } from 'react';
+import { MaterialsFiltersContext, SortDirection } from '@/contexts/MaterialsFiltersContext';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
+import { capitalizeString } from '@/utils/constant';
 
-type SortFilter = {
+export type SortFilter = {
 	name: string;
-	sort: string;
-	sort_direction: SortDirection;
+	map: {
+		sort: string;
+		sortDirection: SortDirection;
+	};
 };
 
 export const sortMenuValues: SortFilter[] = [
 	{
-		name: 'Data dodania: DESC',
-		sort: 'createdDate',
-		sort_direction: SortDirection.DESC,
+		name: 'Data dodania',
+		map: { sort: 'createdDate', sortDirection: SortDirection.DESC },
 	},
 	{
-		name: 'Data dodania: ASC',
-		sort: 'createdDate',
-		sort_direction: SortDirection.ASC,
+		name: 'Data dodania',
+		map: { sort: 'createdDate', sortDirection: SortDirection.ASC },
 	},
 ];
 
 const SortMenuButton = () => {
+	const { addFilters } = useContext(MaterialsFiltersContext);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const handleToggleMenu = () => {
-		setIsMenuOpen((isMenuOpen) => !isMenuOpen);
+	const handleToggleMenu = () => setIsMenuOpen((isMenuOpen) => !isMenuOpen);
+
+	const handleSort = (filter: SortFilter) => {
+		const sortFilter = {
+			field: 'sort',
+			value: filter.map.sort,
+			lang: {
+				key: 'Sortowanie',
+				value: filter.name,
+			},
+		};
+		const sortDirectionFilter = {
+			field: 'sort_direction',
+			value: filter.map.sortDirection,
+			lang: {
+				key: '',
+				value: SortDirection[filter.map.sortDirection],
+			},
+		};
+		addFilters(sortFilter, sortDirectionFilter);
 	};
 
-	const handleSort = (filter: SortFilter) => {};
+	const handleLiValue = (filter: SortFilter) =>
+		`${filter.name}: ${capitalizeString(SortDirection[filter.map.sortDirection])}`;
 
 	return (
 		<div className="relative cursor-pointer" onClick={handleToggleMenu}>
@@ -43,7 +64,7 @@ const SortMenuButton = () => {
 								className="m-0 p-2.5 pl-4 hover:bg-gray-500 hover:text-white2white"
 								onClick={() => handleSort(filter)}
 							>
-								{filter.name}
+								{handleLiValue(filter)}
 							</li>
 						))}
 					</ul>

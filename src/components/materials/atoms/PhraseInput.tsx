@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { KeyObject } from 'crypto';
 
 type PhraseInputProps = {
 	className?: string;
@@ -10,7 +11,7 @@ const PhraseInput = ({ className, placeholder, setCurrentValue }: PhraseInputPro
 	const [phrase, setPhrase] = useState<string | undefined>();
 
 	const handleButtonClick = () => {
-		setCurrentValue(phrase);
+		if (phrase) setCurrentValue(phrase);
 	};
 
 	return (
@@ -18,15 +19,15 @@ const PhraseInput = ({ className, placeholder, setCurrentValue }: PhraseInputPro
 			<input
 				className="w-full h-12 px-4 border-none active:border-inherit focus-visible:border-inherit rounded-sm bg-white2verydarkgrey"
 				type="text"
-				value={phrase}
 				placeholder={placeholder}
 				onChange={(e) => setPhrase(e.target.value)}
+				onKeyDown={(event) => event.key === 'Enter' && handleButtonClick()}
 			/>
 			<button
 				className="bg-sky-500 hover:bg-blue-600 text-white2white text-sm w-20 h-12"
 				onClick={handleButtonClick}
 			>
-				Szukaj
+				Pokaż
 			</button>
 		</div>
 	);

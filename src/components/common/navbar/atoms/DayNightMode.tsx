@@ -3,20 +3,9 @@ import { HiOutlineMoon } from 'react-icons/hi2';
 import { useState, useEffect } from 'react';
 
 const DayNightMode = () => {
-	const IconClassNames =
-		'cursor-pointer text-grey2white text-2xl h-[25.5px] w-[25.5px]';
+	const IconClassNames = 'cursor-pointer text-grey2white text-2xl h-[25.5px] w-[25.5px]';
 
 	const [dayNightSwitch, setDayNightSwitch] = useState(false);
-
-	useEffect(() => {
-		const currentTheme = sessionStorage.getItem('data-theme');
-		if (currentTheme) {
-			document.body.setAttribute('data-theme', currentTheme);
-			setDayNightSwitch(currentTheme === 'dark');
-		} else {
-			toggleTheme();
-		}
-	}, []);
 
 	const toggleTheme = () => {
 		if (dayNightSwitch) {
@@ -28,6 +17,16 @@ const DayNightMode = () => {
 		}
 		setDayNightSwitch(!dayNightSwitch);
 	};
+
+	useEffect(() => {
+		const currentTheme = sessionStorage.getItem('data-theme');
+		if (currentTheme) {
+			document.body.setAttribute('data-theme', currentTheme);
+			setDayNightSwitch(currentTheme === 'dark');
+		} else {
+			toggleTheme();
+		}
+	}, []);
 
 	return (
 		<div onClick={toggleTheme}>

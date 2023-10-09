@@ -21,7 +21,7 @@ const MaterialBlock = ({
 		<div
 			className={clsx(
 				'flex justify-between items-center py-4 px-9 shadow-md border-2 rounded-3xl shrink-0 bg-white2black text-grey2white cursor-pointer',
-				isHover ? 'border-sky-500' : null,
+				isHover ? 'border-sky-500' : 'border-gray2white',
 			)}
 			onClick={() => handleOpenModal(id)}
 			onMouseEnter={() => setIsHover(true)}

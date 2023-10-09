@@ -1,65 +1,68 @@
 import React, { useState } from 'react';
 
+export type Filter<T> = {
+	field: string;
+	value: T;
+	lang?: FilterLang;
+};
+
+type FilterLang = {
+	key: string;
+	value: string | number | undefined;
+};
+
 export enum SortDirection {
 	DESC,
 	ASC,
 }
 
-export type Filters = {
-	size?: number;
-	page?: number;
-	sort?: string;
-	sort_direction?: SortDirection;
-};
+export const defaultPageSizes = [10, 20, 40];
 
-export const defaultFilters: Filters = {
-	size: 15,
+export const defaultFilterParams = {
+	size: 10,
 	page: 0,
 	sort: 'createdDate',
-	sort_direction: SortDirection.DESC,
+	sortDirection: SortDirection.DESC,
 };
 
-export const defaultPages = [10, 20, 40];
-
 type MaterialsFiltersContextType = {
-	filters: Filters;
-	updateSizeFilter: (size: number | undefined) => void;
-	updatePageFilter: (page: number | undefined) => void;
-	updateSortFilter: (sort: string | undefined, sortDirection: SortDirection | undefined) => void;
+	filters: Record<string, Filter<any>>;
+	addFilters: (...filter: Filter<any>[]) => void;
+	removeFilters: (...filterKey: string[]) => void;
 	clearFilters: () => void;
 };
 
 export const MaterialsFiltersContext = React.createContext<MaterialsFiltersContextType>({
 	filters: {},
-	updateSizeFilter: () => {},
-	updatePageFilter: () => {},
-	updateSortFilter: () => {},
+	addFilters: () => {},
+	removeFilters: () => {},
 	clearFilters: () => {},
 });
 
 const MaterialsFiltersProvider = ({ children }: { children: React.ReactNode }) => {
-	const [filters, setFilters] = useState<Filters>({});
+	const [filters, setFilters] = useState<Record<string, Filter<any>>>({});
 
-	const updateSizeFilter = (size: number | undefined) => {
-		setFilters((prevFilters) => ({
-			...prevFilters,
-			size: size,
-		}));
+	const fastRemoveFilters = (...keys: string[]) => {
+		const newFilters = { ...filters };
+		keys.forEach((key) => {
+			delete newFilters[key];
+		});
+		return newFilters;
 	};
 
-	const updatePageFilter = (page: number | undefined) => {
-		setFilters((prevFilters) => ({
-			...prevFilters,
-			page: page,
-		}));
+	const addFilters = (...filters: Filter<any>[]) => {
+		const keysToRemove = filters.map((filter) => filter.field);
+		setFilters(() => {
+			const updatedFilters = { ...fastRemoveFilters(...keysToRemove) };
+			filters.forEach((filter) => {
+				updatedFilters[filter.field] = filter;
+			});
+			return updatedFilters;
+		});
 	};
 
-	const updateSortFilter = (sort: string | undefined, sortDirection: SortDirection | undefined) => {
-		setFilters((prevFilters) => ({
-			...prevFilters,
-			sort: sort,
-			sort_direction: sortDirection,
-		}));
+	const removeFilters = (...filterKey: string[]) => {
+		setFilters(fastRemoveFilters(...filterKey));
 	};
 
 	const clearFilters = () => {
@@ -70,9 +73,8 @@ const MaterialsFiltersProvider = ({ children }: { children: React.ReactNode }) =
 		<MaterialsFiltersContext.Provider
 			value={{
 				filters,
-				updateSizeFilter,
-				updatePageFilter,
-				updateSortFilter,
+				addFilters,
+				removeFilters,
 				clearFilters,
 			}}
 		>

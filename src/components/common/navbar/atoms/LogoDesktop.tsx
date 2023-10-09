@@ -9,7 +9,7 @@ type LogoDesktopProps = {
 	visibility: string;
 };
 const LogoDesktop = ({ height, theme, visibility }: LogoDesktopProps) => {
-	const imageSrc = theme === 'dark' ? KodemyImageWhite : KodemyImageDark;
+	const imageSrc = theme !== 'dark' ? KodemyImageWhite : KodemyImageDark;
 	const width = (imageSrc.width * height) / imageSrc.height;
 
 	return (
@@ -17,9 +17,10 @@ const LogoDesktop = ({ height, theme, visibility }: LogoDesktopProps) => {
 			<Image
 				src={imageSrc.src}
 				alt={Metadata.title}
-				className={`${visibility} + cursor-pointer md:block`}
+				className={`${visibility} + cursor-pointer md:block h-none w-none`}
 				width={width}
 				height={height}
+				priority={true}
 			/>
 		</button>
 	);

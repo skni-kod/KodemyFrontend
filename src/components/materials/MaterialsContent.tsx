@@ -1,12 +1,13 @@
 import useCategoryService, { CategoryMaterialsResponse } from '@/hooks/services/useCategoryService';
 import MaterialBlock from '@/components/materials/molecules/MaterialBlock';
-import { useEffect, useState } from 'react';
-import FilterMenu from '@/components/materials/organisms/FilterMenu';
+import { useContext, useEffect, useState } from 'react';
+import FiltersMenu from '@/components/materials/organisms/FiltersMenu';
 import useModal from '@/hooks/useModal';
 import Header from '@/components/materials/organisms/Header';
 import MaterialModalContent from '@/components/materials/organisms/MaterialModalContent';
 import FilterMenuButton from '@/components/materials/atoms/FilterMenuButton';
 import SortMenuButton from '@/components/materials/organisms/SortMenuButton';
+import { Filter, MaterialsFiltersContext, SortDirection } from '@/contexts/MaterialsFiltersContext';
 
 const categoryMaterialResponseInitialState = {
 	content: [],
@@ -32,11 +33,26 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 
 	const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);
 
+	const { filters } = useContext(MaterialsFiltersContext);
+
 	useEffect(() => {
 		(async () => {
-			setMaterials(await getCategoryMaterials(categoryId, {}));
+			setMaterials(await getCategoryMaterials(categoryId, mapFilters()));
 		})();
-	}, [categoryId, getCategoryMaterials]);
+	}, [categoryId, getCategoryMaterials, filters]);
+
+	const mapFilters = () => {
+		const size = filters['size']?.value;
+		const page = filters['page']?.value;
+		const sort = filters['sort']?.value;
+		const sortDirection = SortDirection[filters['sort_direction']?.value];
+		return {
+			size,
+			page,
+			sort,
+			sortDirection,
+		};
+	};
 
 	const handleOpenMaterialModal = (id: number) => {
 		setCurrentMaterialId(id);
@@ -47,7 +63,7 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 		<>
 			<div className="w-full px-3 text-black2white">
 				<Header categoryId={categoryId} />
-				<div className="flex justify-between items-center w-full mt-4 px-8">
+				<div className="flex justify-between items-center w-full pt-4 px-8">
 					<div>
 						Znaleziono{' '}
 						<span className="text-sky-500">{materials ? materials.content.length : 'NaN'}</span>{' '}
@@ -59,7 +75,7 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 					</div>
 				</div>
 			</div>
-			<div className="w-full px-3 text-black2white">{isFilterMenuOpen && <FilterMenu />}</div>
+			<div className="w-full px-3 text-black2white">{isFilterMenuOpen && <FiltersMenu />}</div>
 			<div className="flex flex-col w-full gap-4 pt-6 pb-4">
 				{materials &&
 					materials.content.map((material) => (
