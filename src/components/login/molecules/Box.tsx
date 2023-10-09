@@ -3,6 +3,11 @@ import Button from '../atoms/Button';
 import { AiFillGithub, AiFillGoogleCircle } from 'react-icons/ai';
 
 export default function Box() {
+	const handleLoginClick = () => {
+		document.cookie = 'redirectUrl=http://localhost:3000/';
+		window.location.href = 'http://localhost:8181/api/oauth2/authorize/github?redirect_uri=';
+	};
+
 	const iconName1 = AiFillGithub;
 	const companyName1 = 'Github';
 
@@ -13,7 +18,10 @@ export default function Box() {
 			<div className="flex flex-col items-center gap-9 mt-[30px] h-auto text-black2white text-3xl font-bold mb-[2vh]">
 				Logowanie
 			</div>
-			<a>
+			<a
+				onClick={handleLoginClick}
+				href="http://localhost:8181/api/oauth2/authorize/github?redirect_uri="
+			>
 				<Button iconname={iconName1} companyname={companyName1} />
 			</a>
 			<a>
