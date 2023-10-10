@@ -13,7 +13,7 @@ export default function Box() {
 			<div className="flex flex-col items-center gap-9 mt-[30px] h-auto text-black2white text-3xl font-bold mb-[2vh]">
 				Logowanie
 			</div>
-			<a>
+			<a href="http://localhost:8181/api/oauth2/authorize/github">
 				<Button iconname={iconName1} companyname={companyName1} />
 			</a>
 			<a>

@@ -4,6 +4,8 @@ import { useState } from 'react';
 import AvatarDropDownMenu from '../AvatarDropDownMenu';
 import DayNightMode from '../../atoms/DayNightMode';
 import BellDropDownMenu from '../BellDropDownMenu';
+import { pageAddMaterialRoute } from '@/pages';
+import Link from 'next/link';
 
 enum UserBarMenu {
 	NONE,
@@ -23,7 +25,7 @@ const UserBarPhone = () => {
 	return (
 		<div className=" items-center justify-between gap-x-4 flex pt-[1vh] pb-[2vh]">
 			<button className="bg-sky-500  hover:bg-blue-600 text-white2white text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded">
-				Dodaj materiał
+				<Link href={pageAddMaterialRoute()}>Dodaj materiał</Link>
 			</button>
 			<div className="flex items-center gap-x-4 font-bold">
 				<DayNightMode />
@@ -42,8 +44,8 @@ const UserBarPhone = () => {
 					<Avatar />
 				</button>
 			</div>
-			{isOpenMenu(UserBarMenu.BELL) && <BellDropDownMenu topPosition={'top-[198px]'} />}
-			{isOpenMenu(UserBarMenu.AVATAR) && <AvatarDropDownMenu topPosition={'top-[198px]'} />}
+			{isOpenMenu(UserBarMenu.BELL) && <BellDropDownMenu className="top-full mt-1.5" />}
+			{isOpenMenu(UserBarMenu.AVATAR) && <AvatarDropDownMenu className="top-full mt-1.5" />}
 		</div>
 	);
 };

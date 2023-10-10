@@ -15,6 +15,31 @@ export const pageLoginRoute = (): Route => {
 		pathname: '/login',
 	};
 };
+export const pageDashboardRoute = (): Route => {
+	return {
+		pathname: '/dashboard',
+	};
+};
+export const pageDashboardUserRoute = (): Route => {
+	return {
+		pathname: '/dashboard/user',
+	};
+};
+export const pageDashboardAdminRoute = (): Route => {
+	return {
+		pathname: '/dashboard/admin',
+	};
+};
+export const pageDashboardFavouriteRoute = (): Route => {
+	return {
+		pathname: '/dashboard/favourite',
+	};
+};
+export const pageAddMaterialRoute = (): Route => {
+	return {
+		pathname: '/addmaterial',
+	};
+};
 export default function Home() {
 	return (
 		<Page

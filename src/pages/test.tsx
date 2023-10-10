@@ -10,10 +10,8 @@ function getUserInfo() {
 
 export default function Home() {
 	return (
-		<div className="flex items-center justify-center">
-			<a href="http://localhost:8181/api/oauth2/authorize/github">
-				Zaloguj się
-			</a>
+		<div className="flex pl-10 pt-[20vh] items-center bg-white2darkgrey text-black2white justify-center">
+			<a href="http://localhost:8181/api/oauth2/authorize/github">Zaloguj się</a>
 			<a href="http://localhost:8181/api/oauth2/logout">Wyloguj się</a>
 			<button formMethod="get" onClick={getUserInfo}>
 				Pobierz info
