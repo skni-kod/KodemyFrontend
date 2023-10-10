@@ -6,13 +6,16 @@ export const useCheckLoginStatus = () => {
 	useEffect(() => {
 		const checkLoginStatus = async () => {
 			try {
-				const response = await fetch('http://localhost:8181/api/users/me');
-				console.log('response ' + response.status);
+				const response = await fetch('http://localhost:8181/api/users/me', {
+					credentials: 'include',
+				});
+
 				if (response.status === 200) {
 					setIsLoggedIn(true);
 				} else if (response.status === 401) {
 					setIsLoggedIn(false);
 				} else {
+					// Obsługa innych błędów (np. 500, 404) tutaj
 					console.error('Błąd podczas sprawdzania statusu logowania:', response.status);
 				}
 			} catch (error) {
@@ -21,8 +24,6 @@ export const useCheckLoginStatus = () => {
 		};
 		checkLoginStatus();
 	}, []);
-
-	console.log('isLoggedIn ' + isLoggedIn);
 
 	return isLoggedIn;
 };

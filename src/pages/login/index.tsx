@@ -4,12 +4,6 @@ import LoginPage from '@/components/login/login';
 import Route from '@/utils/route';
 import { useCheckLoginStatus } from '@/components/login/CheckLoginStatus';
 
-export const pageLoginRoute = (): Route => {
-	return {
-		pathname: '/login',
-	};
-};
-
 const Index = () => {
 	const isLoggedIn = useCheckLoginStatus();
 	return (

@@ -21,11 +21,10 @@ const AvatarDropDownMenu: React.FC<AvatarDropDownMenuProps> = ({ topPosition }) 
 		>
 			{isLoggedIn === true ? (
 				<div className="text-black2white text-[12px] p-1">
-					<a>
-						<button>
-							<Link href={pageDashboardRoute()}>Ustawienia konta</Link>
-						</button>
-					</a>
+					<button>
+						<Link href={pageDashboardRoute()}>Ustawienia konta</Link>
+					</button>
+
 					<div className="pt-1">
 						<button>
 							<Link href={pageDashboardUserRoute()}>Twoje materiały:</Link>
@@ -57,7 +56,7 @@ const AvatarDropDownMenu: React.FC<AvatarDropDownMenuProps> = ({ topPosition }) 
 			<div className="text-black2white font-semibold text-[12px] p-1">
 				{isLoggedIn === true ? (
 					<button>
-						<Link href={pageHomeRoute()}>Wyloguj się</Link>
+						<Link href="http://localhost:8181/api/oauth2/logout">Wyloguj się</Link>
 					</button>
 				) : isLoggedIn === false ? (
 					<button>
