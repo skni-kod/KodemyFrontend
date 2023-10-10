@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreDispatch, StoreState } from '@/store/store';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 export enum ThemeMode {
 	light,
@@ -9,6 +9,14 @@ export enum ThemeMode {
 }
 
 const dataThemeAttributeKey = 'data-theme';
+
+const updateDataThemeAttribute = (mode: ThemeMode) => {
+	document.body.setAttribute(dataThemeAttributeKey, ThemeMode[mode]);
+};
+
+const saveToLocalStorage = (mode: ThemeMode) => {
+	localStorage.setItem(dataThemeAttributeKey, ThemeMode[mode]);
+};
 
 const themeSlice = createSlice({
 	name: 'theme',
@@ -18,10 +26,13 @@ const themeSlice = createSlice({
 	reducers: {
 		toggleTheme: (state) => {
 			state.mode = (state.mode + 1) % 2;
+			updateDataThemeAttribute(state.mode);
+			saveToLocalStorage(state.mode);
 		},
 		initializeTheme: (state) => {
 			const storedMode = localStorage.getItem(dataThemeAttributeKey);
 			if (storedMode) state.mode = ThemeMode[storedMode as keyof typeof ThemeMode];
+			updateDataThemeAttribute(state.mode);
 		},
 	},
 });
@@ -39,19 +50,6 @@ export function useThemeStore() {
 	const toggleTheme = () => {
 		dispatch(themeSlice.actions.toggleTheme());
 	};
-
-	const updateDataThemeAttribute = useCallback(() => {
-		document.body.setAttribute(dataThemeAttributeKey, ThemeMode[themeMode]);
-	}, [themeMode]);
-
-	const saveToLocalStorage = useCallback(() => {
-		localStorage.setItem(dataThemeAttributeKey, ThemeMode[themeMode]);
-	}, [themeMode]);
-
-	useEffect(() => {
-		updateDataThemeAttribute();
-		saveToLocalStorage();
-	}, [saveToLocalStorage, updateDataThemeAttribute]);
 
 	return {
 		themeMode,
