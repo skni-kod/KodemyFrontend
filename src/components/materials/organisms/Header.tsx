@@ -1,18 +1,23 @@
-import CategoryLinkButton from '@/components/materials/atoms/CategoryButton';
+import HeaderButton from '@/components/common/page/atoms/HeaderButton';
 import { useContext, useEffect, useState } from 'react';
 import { Section } from '@/hooks/services/useSectionService';
 import { useSectionsStore } from '@/store/sectionsSlice';
 import useCategoryService, { CategoryDetailsResponse } from '@/hooks/services/useCategoryService';
-import { MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
-import FilterButton from '@/components/materials/atoms/FilterButton';
+import { MaterialsFiltersContext, useFiltersContext } from '@/contexts/MaterialsFiltersContext';
+import FilterButton from '@/components/common/page/atoms/FilterButton';
 import { capitalizeString } from '@/utils/constant';
+import { pageCategoryIdRoute } from '@/pages/category/[id]';
+import { useRouter } from 'next/router';
+import FilterButtonsList from '@/components/common/page/molecules/FilterButtonsList';
 
 const Header = ({ categoryId }: { categoryId: number }) => {
+	const router = useRouter();
 	const { sections } = useSectionsStore();
 	const [section, setSection] = useState<Section>();
 
 	const { getCategoryDetails } = useCategoryService();
 	const [categoryDetails, setCategoryDetails] = useState<CategoryDetailsResponse>();
+	const { filters, removeFilters } = useFiltersContext();
 
 	useEffect(() => {
 		setSection(sections.find((s: Section) => s.id === categoryDetails?.section.id));
@@ -24,54 +29,23 @@ const Header = ({ categoryId }: { categoryId: number }) => {
 		})();
 	}, [categoryId, getCategoryDetails]);
 
-	const { filters } = useContext(MaterialsFiltersContext);
-	const [filtersTable, setFiltersTable] = useState<{ key: string; value: string }[]>([]);
-
-	useEffect(() => {
-		const localFiltersTable = new Array<{ key: string; value: string }>();
-		Object.entries(filters).forEach(([key, filter]) => {
-			switch (key) {
-				case 'sort_direction':
-					return;
-				case 'sort':
-					const order = capitalizeString(`${filters['sort_direction'].lang?.value}`);
-					localFiltersTable.push({
-						key,
-						value: `${filter.lang?.key}: ${filter.lang?.value} (${order})`,
-					});
-					break;
-				default:
-					localFiltersTable.push({
-						key,
-						value: `${filter.lang?.key}: ${filter.lang?.value}`,
-					});
-			}
-		});
-		setFiltersTable(localFiltersTable.sort((a, b) => a.key.localeCompare(b.key)));
-	}, [filters]);
-
 	return (
 		<>
 			<h2 className="w-full mt-4 text-semibold text-[36px]">
 				{categoryDetails && <>{categoryDetails.section.name}</>}
 			</h2>
-			<div className="flex items-center flex-wrap sw-full gap-4 mt-4 px-4 text-xl text-semibold text-center">
+			<div className="flex items-center flex-wrap sw-full gap-4 pt-4 px-4 text-xl text-semibold text-center">
 				{section?.categories &&
 					section.categories.map(({ id, name }) => (
-						<CategoryLinkButton
-							value={{ id, name }}
+						<HeaderButton
+							name={name}
 							key={id}
 							selected={id === categoryDetails?.id}
+							onClick={() => router.push(pageCategoryIdRoute(id))}
 						/>
 					))}
 			</div>
-			{filtersTable.length > 0 && (
-				<div className="flex items-center w-full gap-4 mt-4 px-4 text-sm text-semibold text-center">
-					{filtersTable.map((value, index) => (
-						<FilterButton key={index} value={value} />
-					))}
-				</div>
-			)}
+			<FilterButtonsList />
 		</>
 	);
 };

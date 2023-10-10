@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { SortDirection } from '@/utils/model';
+import FilterButton from '@/components/common/page/atoms/FilterButton';
+import { capitalizeString } from '@/utils/constant';
 
 export type Filter<T> = {
 	field: string;
@@ -77,6 +79,36 @@ const MaterialsFiltersProvider = ({ children }: { children: React.ReactNode }) =
 			{children}
 		</MaterialsFiltersContext.Provider>
 	);
+};
+
+export const useFiltersContext = () => {
+	const { filters, removeFilters } = useContext(MaterialsFiltersContext);
+	const [filtersTable, setFiltersTable] = useState<{ key: string; value: string }[]>([]);
+
+	useEffect(() => {
+		const localFiltersTable = new Array<{ key: string; value: string }>();
+		Object.entries(filters).forEach(([key, filter]) => {
+			switch (key) {
+				case 'sort_direction':
+					return;
+				case 'sort':
+					const order = capitalizeString(`${filters['sort_direction'].lang?.value}`);
+					localFiltersTable.push({
+						key,
+						value: `${filter.lang?.key}: ${filter.lang?.value} (${order})`,
+					});
+					break;
+				default:
+					localFiltersTable.push({
+						key,
+						value: `${filter.lang?.key}: ${filter.lang?.value}`,
+					});
+			}
+		});
+		setFiltersTable(localFiltersTable.sort((a, b) => a.key.localeCompare(b.key)));
+	}, [filters]);
+
+	return { filters: filtersTable, removeFilters, filterRecords: filters };
 };
 
 export default MaterialsFiltersProvider;
