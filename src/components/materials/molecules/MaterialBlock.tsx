@@ -12,7 +12,7 @@ type MaterialProps = {
 };
 
 const MaterialBlock = ({
-	data: { id, title, description, link, status, user, createdDate, categoryId, active },
+	data: { id, title, description, status, user, createdDate },
 	handleOpenModal,
 }: MaterialProps) => {
 	const [isHover, setIsHover] = useState(false);
@@ -20,8 +20,8 @@ const MaterialBlock = ({
 	return (
 		<div
 			className={clsx(
-				'flex justify-between items-center py-4 px-9 shadow-md border-2 rounded-3xl shrink-0 bg-white text-gray-500 cursor-pointer',
-				isHover ? 'border-sky-500' : null,
+				'flex justify-between items-center py-4 px-9 shadow-md border-2 rounded-3xl shrink-0 bg-white2black text-grey2white cursor-pointer',
+				isHover ? 'border-sky-500' : 'border-gray2white',
 			)}
 			onClick={() => handleOpenModal(id)}
 			onMouseEnter={() => setIsHover(true)}
@@ -41,14 +41,14 @@ const MaterialBlock = ({
 					<div className="flex items-center">
 						<BiStar /> <BiStar /> <BiStar /> <BiStar /> <BiStar />
 					</div>
-					<div className="text-xl text-black text-bold mt-0.5">{title}</div>
+					<div className="text-xl text-black2white text-bold mt-0.5">{title}</div>
 					<div className="text-sm text-bold">{description}</div>
 				</div>
 				<Status status={status} />
 			</div>
 			<div className="flex-none pl-5 py-2 border-l-2 text-xs">
 				<div>Dodane przez: {user}</div>
-				<div>Data Dodania: {createdDate.split('T')[0]}</div>
+				<div>Data dodania: {createdDate.split('T')[0]}</div>
 			</div>
 		</div>
 	);

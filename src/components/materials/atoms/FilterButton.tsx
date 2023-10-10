@@ -1,13 +1,10 @@
 import clsx from 'clsx';
 import { CiCircleRemove } from 'react-icons/ci';
-import { Filter } from '@/contexts/MaterialsFiltersContext';
+import { useContext } from 'react';
+import { MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
 
-type FilterButtonProps = {
-	value: Filter;
-};
-
-const FilterButton = ({ value: { key, value } }: FilterButtonProps) => {
-	const btnValue = `${key}: ${value}`;
+const FilterButton = ({ value }: { value: { key: string; value: string } }) => {
+	const { removeFilters } = useContext(MaterialsFiltersContext);
 
 	return (
 		<div
@@ -17,8 +14,11 @@ const FilterButton = ({ value: { key, value } }: FilterButtonProps) => {
 				'border-sky-500 text-sky-500',
 			)}
 		>
-			{btnValue}
-			<CiCircleRemove className="text-lg ml-0.5 cursor-pointer" />
+			{value.value}
+			<CiCircleRemove
+				className="text-lg ml-0.5 cursor-pointer"
+				onClick={() => removeFilters(value.key)}
+			/>
 		</div>
 	);
 };

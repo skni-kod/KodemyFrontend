@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import SidebarItemImage from '../../sidebar/atoms/SidebarItemImage';
-import SidebarItemText from '../../sidebar/atoms/SidebarItemText';
 import { Section } from '@/hooks/services/useSectionService';
-import SidebarSubmenu from '../../sidebar/atoms/SidebarSubmenu';
 import PhoneDropDownMenuItemText from '../atoms/PhoneDropDownMenuItemText';
 import PhoneDropDownMenuItemSubmenu from '../atoms/PhoneDropDownMenuItemSubmenu';
 
@@ -39,10 +37,7 @@ const PhoneDropDownMenuItem = ({
 
 				<PhoneDropDownMenuItemText section={section} isExpanded={isExpanded} />
 			</div>
-			<PhoneDropDownMenuItemSubmenu
-				section={section}
-				expandedItemId={expandedItemId}
-			/>
+			<PhoneDropDownMenuItemSubmenu section={section} expandedItemId={expandedItemId} />
 		</li>
 	);
 };

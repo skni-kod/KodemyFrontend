@@ -1,7 +1,6 @@
 import { Material } from '@/hooks/services/useCategoryService';
 import DocumentsImage from '@/assets/material/documents.png';
 import Image from 'next/image';
-import Status from '@/components/materials/atoms/Status';
 import { BiStar } from 'react-icons/bi';
 import { AiFillStar } from 'react-icons/ai';
 
@@ -10,7 +9,7 @@ type FavouriteMaterialBlockProps = {
 };
 
 const FavouriteMaterialBlock = ({
-	data: { title, description, link, status, user, createdDate, categoryId, active },
+	data: { description, user, createdDate },
 }: FavouriteMaterialBlockProps) => {
 	return (
 		<div className="flex justify-between items-center py-4 px-9 shadow-md border-2 rounded-3xl shrink-0 bg-white2darkgrey text-black2white cursor-pointer">

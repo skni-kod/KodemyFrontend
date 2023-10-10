@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TfiMenu } from 'react-icons/tfi';
 import LogoDesktop from './atoms/LogoDesktop';
 import LogoPhone from './atoms/LogoPhone';
@@ -38,8 +38,8 @@ const Navbar = () => {
 		<nav className="fixed top-0 w-full left-0 bg-white2darkgrey flex items-center justify-between px-7 py-1.5 md:py-3 z-20 shadow-md">
 			<div className="flex items-center gap-x-[10px] text-2xl font-semibold text-blue-500">
 				<Link href={pageHomeRoute()} className="flex items-center">
-					<LogoDesktop height={44} theme={'light'} visibility={'hidden'} />
-					<LogoPhone height={44} theme={'light'} />
+					<LogoDesktop height={44} visibility={'hidden'} />
+					<LogoPhone height={44} />
 				</Link>
 			</div>
 			<SearchBarDesktop />

@@ -1,6 +1,5 @@
-import { Material } from '@/hooks/services/useMaterialService';
+import useMaterialService, { Material } from '@/hooks/services/useMaterialService';
 import { useEffect, useState } from 'react';
-import useMaterialService from '@/hooks/services/useMaterialService';
 import { AiOutlineClose } from 'react-icons/ai';
 import BlankTargetLink from '@/components/materials/atoms/BlankTargetLink';
 import { extractRRRRMMDD } from '@/utils/constant';
@@ -20,14 +19,14 @@ const MaterialModalContent = ({
 			(async () => {
 				setMaterial(await getMaterialById(materialId));
 			})();
-	}, [materialId]);
+	}, [materialId, getMaterialById]);
 
 	if (!material) {
 		return null;
 	}
 
 	return (
-		<div className="relative w-128 min-h-112 p-3 bg-white2white rounded-2xl">
+		<div className="relative w-128 min-h-112 p-3 bg-white2verydarkgrey rounded-2xl">
 			<div className="flex justify-end">
 				<button className="font-semibold hover:text-sky-500" onClick={() => handleClose()}>
 					<AiOutlineClose height={24} width={24} />
@@ -35,7 +34,9 @@ const MaterialModalContent = ({
 			</div>
 			<div className="px-8 py-1">
 				<div>
-					<h2 className="text-4xl text-center font-semibold">Szczegóły wybranego materiału</h2>
+					<h2 className="text-4xl text-center font-semibold text-black2white">
+						Szczegóły wybranego materiału
+					</h2>
 					<div className="text-gray-500 mt-2 text-center">
 						Materiał został dodany:{' '}
 						<span className="font-semibold">{extractRRRRMMDD(material.createdDate)}</span> przez:{' '}
@@ -44,21 +45,21 @@ const MaterialModalContent = ({
 				</div>
 				<div className="flex flex-col gap-y-2 mt-6 text-sky-500 font-semibold">
 					<div>
-						Tytuł: <span className="text-black">{material.title}</span>
+						Tytuł: <span className="text-black2white">{material.title}</span>
 					</div>
 					<div>
-						Typ materiału: <span className="text-black">{material.type.name}</span>
+						Typ materiału: <span className="text-black2white">{material.type.name}</span>
 					</div>
 					<div className="flex flex-col">
 						Link:{' '}
 						<BlankTargetLink
 							href={material.link}
-							className="text-black px-1 line-clamp-1 hover:underline"
+							className="text-black2white px-1 line-clamp-1 text-ellipsis hover:underline"
 						/>
 					</div>
 					<div className="flex flex-col">
 						<span>Opis:</span>
-						<span className="text-black px-1">{material.description}</span>
+						<span className="text-black2white px-1">{material.description}</span>
 					</div>
 				</div>
 				<div className="relative bottom-0 left-0 flex justify-center w-full pb-3 pt-11">

@@ -1,11 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import SidebarAssets from '@/components/common/sidebar/helpers/SidebarAssets';
+import getSectionIco from '@/components/common/sidebar/helpers/SidebarAssets';
 import { Section } from '@/hooks/services/useSectionService';
 import clsx from 'clsx';
 import { pageCategoryIdRoute } from '@/pages/category/[id]';
-import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai';
+import { AiOutlineDown, AiOutlineRight } from 'react-icons/ai';
+import { useThemeStore } from '@/store/themeSlice';
 
 interface SidebarItemProps {
 	section: Section;
@@ -22,20 +23,7 @@ const SidebarItem = ({
 	expandedItemId,
 	setExpandedItemId,
 }: SidebarItemProps) => {
-	const handleSectionLogo = (id: number) => {
-		switch (id) {
-			case 1:
-				return SidebarAssets.internet;
-			case 2:
-				return SidebarAssets.console;
-			case 3:
-				return SidebarAssets.retroGame;
-			case 4:
-				return SidebarAssets.codingLanguage;
-			default:
-				return SidebarAssets.moreInfo;
-		}
-	};
+	const { themeMode } = useThemeStore();
 
 	const isExpandSubmenu = isExpandMenu && expandedItemId === id;
 
@@ -58,7 +46,7 @@ const SidebarItem = ({
 				onClick={toggleExpand}
 			>
 				<div className="relative inline-block min-w-12 text-center rounded-md">
-					<Image className="w-6 h-6 cursor-pointer" src={handleSectionLogo(id)} alt={name} />
+					<Image className="w-6 h-6 cursor-pointer" src={getSectionIco(id)[themeMode]} alt={name} />
 				</div>
 				<div className="pl-2 flex-grow">
 					{isExpandMenu && (

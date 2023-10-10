@@ -6,18 +6,14 @@ type NotificationComponentProps = {
 	amount: string;
 };
 
-const NotificationComponent = ({
-	text,
-	isActive,
-	amount,
-}: NotificationComponentProps) => {
+const NotificationComponent = ({ text, isActive }: NotificationComponentProps) => {
 	const textColorClass = isActive
-		? 'bg-sky-500 text-white mx-auto rounded-3xl px-2 py-1'
-		: 'text-black2white px-2 py-1';
+		? 'bg-sky-500 text-white mx-auto rounded-t-xl'
+		: 'text-black2white';
 
 	return (
 		<div className={`flex items-center`}>
-			<h6 className={`${textColorClass} text-[14px] cursor-pointer`}>{text}</h6>
+			<h6 className={`${textColorClass} px-3 py-2 text-[14px] cursor-pointer`}>{text}</h6>
 		</div>
 	);
 };

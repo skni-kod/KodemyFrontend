@@ -1,25 +1,23 @@
 import Image from 'next/image';
-import KodemyImageDark from '@/assets/kodemyDark.png';
-import KodemyImageWhite from '@/assets/kodemyWhite.png';
+import KodemyImageDark from '@/assets/logo/kodemyDark.png';
+import KodemyImageWhite from '@/assets/logo/kodemyWhite.png';
 import { Metadata } from '@/pages/_app';
+import { useThemeStore } from '@/store/themeSlice';
 
-type LogoDesktopProps = {
-	height: number;
-	theme: string;
-	visibility: string;
-};
-const LogoDesktop = ({ height, theme, visibility }: LogoDesktopProps) => {
-	const imageSrc = theme === 'dark' ? KodemyImageWhite : KodemyImageDark;
-	const width = (imageSrc.width * height) / imageSrc.height;
+const LogoDesktop = ({ height, visibility }: { height: number; visibility: string }) => {
+	const { themeMode } = useThemeStore();
+	const image = [KodemyImageDark, KodemyImageWhite][themeMode];
+	const width = (image.width * height) / image.height;
 
 	return (
 		<button>
 			<Image
-				src={imageSrc.src}
+				src={image.src}
 				alt={Metadata.title}
-				className={`${visibility} + cursor-pointer md:block`}
+				className={`${visibility} + cursor-pointer md:block h-none w-none`}
 				width={width}
 				height={height}
+				priority={true}
 			/>
 		</button>
 	);

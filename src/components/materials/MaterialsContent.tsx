@@ -1,20 +1,15 @@
-import CategoryLinkButton from '@/components/materials/atoms/CategoryButton';
-import useCategoryService, {
-	CategoryDetailsResponse,
-	CategoryMaterialsResponse,
-	Material,
-} from '@/hooks/services/useCategoryService';
+import useCategoryService, { CategoryMaterialsResponse } from '@/hooks/services/useCategoryService';
 import MaterialBlock from '@/components/materials/molecules/MaterialBlock';
-import FiltersItem from '@/components/materials/atoms/FilterButton';
-import { SetStateAction, useContext, useEffect, useState } from 'react';
-import { Section } from '@/hooks/services/useSectionService';
-import { MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
-import FilterMenu from '@/components/materials/organisms/FilterMenu';
-import { useSectionsStore } from '@/store/sectionsSlice';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import FiltersMenu from '@/components/materials/organisms/FiltersMenu';
 import useModal from '@/hooks/useModal';
 import Header from '@/components/materials/organisms/Header';
 import MaterialModalContent from '@/components/materials/organisms/MaterialModalContent';
-import SectionFiltersMaterial from '@/mocks/sectionFilterMaterialMock';
+import FilterMenuButton from '@/components/materials/atoms/FilterMenuButton';
+import SortMenuButton from '@/components/materials/organisms/SortMenuButton';
+import { MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
+import { SortDirection } from '@/utils/model';
+import useMaterialService from '@/hooks/services/useMaterialService';
 
 const categoryMaterialResponseInitialState = {
 	content: [],
@@ -30,7 +25,7 @@ const categoryMaterialResponseInitialState = {
 };
 
 const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
-	const { getCategoryMaterials } = useCategoryService();
+	const { getMaterials } = useMaterialService();
 	const [materials, setMaterials] = useState<CategoryMaterialsResponse>(
 		categoryMaterialResponseInitialState,
 	);
@@ -38,52 +33,58 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 	const { Modal, isOpen, handleOpenModal, handleCloseModal } = useModal(false);
 	const [currentMaterialId, setCurrentMaterialId] = useState<number>();
 
+	const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);
+
+	const { filters } = useContext(MaterialsFiltersContext);
+
+	const mapFilters = useCallback(() => {
+		const size = filters['size']?.value;
+		const page = filters['page']?.value;
+		const sort = filters['sort']?.value;
+		const sortDirection = SortDirection[filters['sort_direction']?.value];
+		const searchFields = {
+			categoryId,
+			status: filters['status']?.value,
+			phrase: filters['phrase']?.value,
+		};
+		return {
+			size,
+			page,
+			sort,
+			sortDirection,
+			searchFields,
+		};
+	}, [filters, categoryId]);
+
 	useEffect(() => {
 		(async () => {
-			setMaterials(await getCategoryMaterials(categoryId, {}));
+			setMaterials(await getMaterials(mapFilters()));
 		})();
-	}, [categoryId]);
+	}, [categoryId, getMaterials, filters, mapFilters]);
 
 	const handleOpenMaterialModal = (id: number) => {
 		setCurrentMaterialId(id);
 		if (id) handleOpenModal();
 	};
-	/*nowe*/
-	const filterOptions = SectionFiltersMaterial;
-	var [filter, setFilter] = useState('wybierz filtr');
-	const handleFilterChange = (e: { target: { value: SetStateAction<string> } }) => {
-		setFilter(e.target.value);
-	};
+
 	return (
 		<>
 			<div className="w-full px-3 text-black2white">
 				<Header categoryId={categoryId} />
-				<div className="flex justify-between items-center w-full mt-4 px-8">
+				<div className="flex justify-between items-center w-full pt-4 px-8">
 					<div>
 						Znaleziono{' '}
 						<span className="text-sky-500">{materials ? materials.content.length : 'NaN'}</span>{' '}
 						elementów
 					</div>
-					<h2>
-						Filtrowanie przez:{' '}
-						<span className="font-bold text-black2white">
-							<select
-								onSelect={() => handleFilterChange}
-								className=" bg-white2verydarkgrey border-none text-left text-black2white font-semibold leading-tight focus:outline-none"
-							>
-								<option>{filter}</option>
-								{filterOptions.map((option) => (
-									<option className="p-4" label={option} />
-								))}
-							</select>
-						</span>{' '}
-					</h2>
-					<div className="relative flex items-center text-sky-500 cursor-pointer">
-						<FilterMenu />
+					<div className="relative flex gap-x-8 text-black2white cursor-pointer">
+						{!isFilterMenuOpen && <SortMenuButton />}
+						<FilterMenuButton isMenuOpen={isFilterMenuOpen} setIsMenuOpen={setIsFilterMenuOpen} />
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-col w-full gap-4 py-4">
+			<div className="w-full px-3 text-black2white">{isFilterMenuOpen && <FiltersMenu />}</div>
+			<div className="flex flex-col w-full gap-4 pt-6 pb-4">
 				{materials &&
 					materials.content.map((material) => (
 						<MaterialBlock

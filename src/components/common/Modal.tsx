@@ -12,11 +12,11 @@ const Modal = ({ className, children }: ModalProps) => {
 		return () => {
 			mRoot?.removeChild(mNode);
 		};
-	}, [mNode]);
+	}, [mNode, mRoot]);
 
 	return ReactDOM.createPortal(
 		<div
-			className={`fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center w-full h-full z-30 ${className}`}
+			className={`fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center w-full h-full z-40 ${className}`}
 		>
 			{children}
 		</div>,

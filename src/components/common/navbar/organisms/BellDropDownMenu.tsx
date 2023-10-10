@@ -1,10 +1,9 @@
 import NotificationComponent from '../atoms/NotificationComponent';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import AllMaterialBoxComponent from '../molecules/AllMaterialBox';
 import YourMaterialBoxComponent from '../molecules/YourMaterialBox';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import NotificationsMenu from '../molecules/NotificationsMenu';
-import React from 'react';
 import { useCheckLoginStatus } from '@/components/login/CheckLoginStatus';
 import RedirectionButton from '@/components/login/atoms/RedirectionButton';
 
@@ -12,11 +11,8 @@ enum Menu {
 	ALL,
 	YOUR,
 }
-type BellDropDownMenuProps = {
-	topPosition: string;
-};
 
-const BellDropDownMenu: React.FC<BellDropDownMenuProps> = ({ topPosition }) => {
+const BellDropDownMenu = ({ className }: { className?: string }) => {
 	const [menuMode, setMenuMode] = useState<Menu>(0);
 
 	const handleMenuMode = (menu: Menu) => {
@@ -32,18 +28,18 @@ const BellDropDownMenu: React.FC<BellDropDownMenuProps> = ({ topPosition }) => {
 	const isLoggedIn = useCheckLoginStatus();
 	return (
 		<div
-			className={`${topPosition} + bg-white2darkgrey h-[auto] w-[323px] absolute  right-[20px] shadow-md rounded-lg`}
+			className={`absolute right-5 h-auto w-88 px-3 py-2 ${className} bg-white2darkgrey shadow-md rounded-lg`}
 		>
 			{isLoggedIn === true ? (
 				<>
-					<div className="h-[auto] flex items-center justify-between m-2">
+					<div className="h-auto flex items-center justify-between m-2">
 						<h1 className="w-4/10 text-black2white text-[20px] p-1">Powiadomienia</h1>
-						<button className="pr-[1vw] relative" onClick={toggleNotificationsMenu}>
-							<BiDotsHorizontalRounded className="cursor-pointer text-grey2white text-2xl h-[25.5px] w-[25.5px]" />
+						<button className="relative" onClick={toggleNotificationsMenu}>
+							<BiDotsHorizontalRounded className="cursor-pointer text-grey2white text-2xl h-6 w-6" />
 						</button>
 					</div>
-					<div className="h-[auto] w-[323px]">
-						<div className="h-[auto] flex justify-between mb-4 px-8">
+					<div className="h-auto w-full">
+						<div className="h-auto flex justify-between mb-2.5 px-8">
 							<button
 								onClick={() => handleMenuMode(Menu.ALL)}
 								className={isMenuOpen(Menu.ALL) ? 'text-blue-500' : ''}

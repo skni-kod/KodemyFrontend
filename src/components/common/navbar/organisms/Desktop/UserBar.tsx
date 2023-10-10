@@ -14,7 +14,7 @@ enum UserBarMenu {
 }
 
 const UserBar = () => {
-	const IconClassNames = 'cursor-pointer text-grey2white text-2xl h-[25.5px] w-[25.5px]';
+	const IconClassNames = 'cursor-pointer text-grey2white text-2xl h-6 w-6';
 
 	const [userBarMenu, setUserBarMenu] = useState<UserBarMenu>(0);
 
@@ -44,8 +44,8 @@ const UserBar = () => {
 					<Avatar />
 				</button>
 			</div>
-			{isOpenMenu(UserBarMenu.BELL) && <BellDropDownMenu topPosition={'top-[80px]'} />}
-			{isOpenMenu(UserBarMenu.AVATAR) && <AvatarDropDownMenu topPosition={'top-[80px]'} />}
+			{isOpenMenu(UserBarMenu.BELL) && <BellDropDownMenu className="top-full mt-1.5" />}
+			{isOpenMenu(UserBarMenu.AVATAR) && <AvatarDropDownMenu className="top-full mt-1.5" />}
 		</div>
 	);
 };

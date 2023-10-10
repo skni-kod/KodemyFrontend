@@ -7,9 +7,9 @@ type MaterialPageProps = {
 	path: string;
 };
 
-const MaterialPage = ({ status, time, path }: MaterialPageProps) => {
+const Notification = ({ status, time, path }: MaterialPageProps) => {
 	return (
-		<div className="flex justify-between items-center py-1 px-1 shadow-md border-2 rounded-2xl shrink-0 bg-white2darkgrey text-grey2white cursor-pointer">
+		<div className="flex justify-between items-center w-full px-2 py-1.5 gap-3 shadow-md border rounded-lg shrink-0 bg-white2darkgrey text-grey2white cursor-pointer">
 			<div
 				className={`flex-none h-5 w-5 flex justify-center items-center rounded aspect-square ${
 					status === 'Przyjęty'
@@ -23,19 +23,18 @@ const MaterialPage = ({ status, time, path }: MaterialPageProps) => {
 					src={DocumentsImage.src}
 					alt="Materiał Kodemy"
 					className="aspect-square"
-					width="16"
-					height="16"
+					width="20"
+					height="20"
 				/>
 			</div>
 
-			<div className="grow flex justify-between items-center px-1">
-				<div>
-					<div className="text-black2white text-[12px] mt-0.5">{`Twój materiał został: ${status}`}</div>
-					<div className="text-black2white text-[10px]">{`${time} temu | ${path}`}</div>
-				</div>
+			<div className="grow flex flex-col">
+				<div className="text-black2white text-sm">{`Twój materiał został: ${status}`}</div>
+				<div className="text-black2white text-xs">{path}</div>
+				<div className="text-black2white text-xs">{`${time} temu`}</div>
 			</div>
 		</div>
 	);
 };
 
-export default MaterialPage;
+export default Notification;

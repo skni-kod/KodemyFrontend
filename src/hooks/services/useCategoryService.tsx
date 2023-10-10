@@ -1,5 +1,7 @@
 import { useCallback } from 'react';
 import kodemyAPI from '@/utils/kodemyAPI';
+import { defaultFilterParams } from '@/contexts/MaterialsFiltersContext';
+import { SortDirection } from '@/utils/model';
 
 export type Material = {
 	id: number;
@@ -26,13 +28,6 @@ type OpenSearchResponse = {
 	totalPages: number;
 };
 
-type OpenSearchParams = {
-	size?: number;
-	page?: number;
-	sort?: string;
-	sort_direction?: string;
-};
-
 export type CategoryMaterialsResponse = OpenSearchResponse & {
 	content: Array<Material>;
 };
@@ -47,52 +42,16 @@ export type CategoryDetailsResponse = {
 };
 
 const useCategoryService = () => {
-	const getCategoryDetails = useCallback(
-		async (
-			categoryId: number,
-		): Promise<CategoryDetailsResponse | undefined> => {
-			try {
-				const response = await kodemyAPI.get(`/api/categories/${categoryId}`);
-				return response.data;
-			} catch (e) {
-				console.log(e);
-			}
-		},
-		[],
-	);
+	const getCategoryDetails = useCallback(async (categoryId: number) => {
+		try {
+			const response = await kodemyAPI.get(`/api/categories/${categoryId}`);
+			return response.data;
+		} catch (e) {
+			console.log(e);
+		}
+	}, []);
 
-	const getCategoryMaterials = useCallback(
-		async (
-			categoryId: number,
-			{
-				size = 20,
-				page = 0,
-				sort = 'createdDate',
-				sort_direction = 'DESC',
-			}: OpenSearchParams,
-		) => {
-			try {
-				const searchParams = new URLSearchParams({
-					size: size.toString(),
-					page: page.toString(),
-					sort,
-					sort_direction,
-				});
-				const response = await kodemyAPI.get(
-					`/api/categories/${categoryId}/materials?${searchParams.toString()}`,
-				);
-				return response.data;
-			} catch (e) {
-				console.log(e);
-			}
-		},
-		[],
-	);
-
-	return {
-		getCategoryDetails,
-		getCategoryMaterials,
-	};
+	return { getCategoryDetails };
 };
 
 export default useCategoryService;

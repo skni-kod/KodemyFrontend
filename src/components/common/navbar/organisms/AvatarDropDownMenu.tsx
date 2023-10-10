@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { CheckPermission } from '@/components/login/CheckPermission';
 import { useEffect, useState } from 'react';
 
+
 type AvatarDropDownMenuProps = {
 	topPosition: string;
 };
@@ -28,8 +29,9 @@ const AvatarDropDownMenu: React.FC<AvatarDropDownMenuProps> = ({ topPosition }) 
 
 	return (
 		<div
-			className={`${topPosition} + bg-white2darkgrey h-[auto] w-[160px] absolute top-[80px] right-[0px] shadow-md rounded-lg p-2`}
+			className={`absolute right-5 h-auto w-40 p-2 ${className} bg-white2darkgrey shadow-md rounded-lg`}
 		>
+
 			{isLoggedIn === true ? (
 				<div className="text-black2white text-[12px] p-1">
 					<button>
