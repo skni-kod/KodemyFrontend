@@ -1,15 +1,16 @@
-import useCategoryService, { CategoryMaterialsResponse } from '@/hooks/services/useCategoryService';
+import { CategoryMaterialsResponse } from '@/hooks/services/useCategoryService';
 import MaterialBlock from '@/components/materials/molecules/MaterialBlock';
 import { useCallback, useContext, useEffect, useState } from 'react';
-import FiltersMenu from '@/components/materials/organisms/FiltersMenu';
+import FiltersMenu from '@/components/common/page/organisms/FiltersMenu';
 import useModal from '@/hooks/useModal';
 import Header from '@/components/materials/organisms/Header';
 import MaterialModalContent from '@/components/materials/organisms/MaterialModalContent';
-import FilterMenuButton from '@/components/materials/atoms/FilterMenuButton';
+import FilterMenuButton from '@/components/common/page/atoms/FilterMenuButton';
 import SortMenuButton from '@/components/materials/organisms/SortMenuButton';
 import { MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
 import { SortDirection } from '@/utils/model';
 import useMaterialService from '@/hooks/services/useMaterialService';
+import ResultCount from '@/components/common/page/atoms/ResultCount';
 
 const categoryMaterialResponseInitialState = {
 	content: [],
@@ -72,11 +73,7 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 			<div className="w-full px-3 text-black2white">
 				<Header categoryId={categoryId} />
 				<div className="flex justify-between items-center w-full pt-4 px-8">
-					<div>
-						Znaleziono{' '}
-						<span className="text-sky-500">{materials ? materials.content.length : 'NaN'}</span>{' '}
-						elementów
-					</div>
+					<ResultCount value={materials.content.length} />
 					<div className="relative flex gap-x-8 text-black2white cursor-pointer">
 						{!isFilterMenuOpen && <SortMenuButton />}
 						<FilterMenuButton isMenuOpen={isFilterMenuOpen} setIsMenuOpen={setIsFilterMenuOpen} />

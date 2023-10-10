@@ -8,20 +8,20 @@ import {
 	pageLoginRoute,
 } from '@/pages';
 import Link from 'next/link';
-import { CheckPermission } from '@/components/login/CheckPermission';
+import checkPermission from '@/components/login/checkPermission';
 import { useEffect, useState } from 'react';
 
 type AvatarDropDownMenuProps = {
 	className: string;
 };
 
-const AvatarDropDownMenu: React.FC<AvatarDropDownMenuProps> = ({ className }) => {
+const AvatarDropDownMenu = ({ className }: AvatarDropDownMenuProps) => {
 	const isLoggedIn = useCheckLoginStatus();
 
 	const [userHasPermission, setUserPermission] = useState(false);
 
 	useEffect(() => {
-		CheckPermission().then((hasPermission) => {
+		checkPermission().then((hasPermission) => {
 			setUserPermission(hasPermission);
 		});
 	}, []);

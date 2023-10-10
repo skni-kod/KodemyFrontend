@@ -1,4 +1,4 @@
-export const CheckPermission = async () => {
+const checkPermission = async () => {
 	try {
 		const response = await fetch('http://localhost:8181/api/users/me', {
 			credentials: 'include',
@@ -20,3 +20,5 @@ export const CheckPermission = async () => {
 		return false;
 	}
 };
+
+export default checkPermission;
