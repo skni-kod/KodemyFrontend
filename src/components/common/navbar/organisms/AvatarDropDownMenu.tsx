@@ -8,6 +8,8 @@ import {
 	pageLoginRoute,
 } from '@/pages';
 import Link from 'next/link';
+import { CheckPermission } from '@/components/login/CheckPermission';
+import { useEffect, useState } from 'react';
 
 type AvatarDropDownMenuProps = {
 	topPosition: string;
@@ -15,6 +17,15 @@ type AvatarDropDownMenuProps = {
 
 const AvatarDropDownMenu: React.FC<AvatarDropDownMenuProps> = ({ topPosition }) => {
 	const isLoggedIn = useCheckLoginStatus();
+
+	const [userHasPermission, setUserPermission] = useState(false);
+
+	useEffect(() => {
+		CheckPermission().then((hasPermission) => {
+			setUserPermission(hasPermission);
+		});
+	}, []);
+
 	return (
 		<div
 			className={`${topPosition} + bg-white2darkgrey h-[auto] w-[160px] absolute top-[80px] right-[0px] shadow-md rounded-lg p-2`}
@@ -39,17 +50,19 @@ const AvatarDropDownMenu: React.FC<AvatarDropDownMenuProps> = ({ topPosition }) 
 							<Link href={pageDashboardFavouriteRoute()}>Ulubione</Link>
 						</button>
 					</div>
-					<div className="pt-1">
-						<button>
-							<Link href={pageDashboardAdminRoute()}>Strona Admina:</Link>
-						</button>
-						<button className="pl-3">
-							<Link href={pageDashboardAdminRoute()}>Do Zatwierdzenia</Link>
-						</button>
-						<button className="pl-3">
-							<Link href={pageDashboardAdminRoute()}>Zatwierdzone</Link>
-						</button>
-					</div>
+					{userHasPermission ? (
+						<div className="pt-1">
+							<button>
+								<Link href={pageDashboardAdminRoute()}>Strona Admina:</Link>
+							</button>
+							<button className="pl-3">
+								<Link href={pageDashboardAdminRoute()}>Do Zatwierdzenia</Link>
+							</button>
+							<button className="pl-3">
+								<Link href={pageDashboardAdminRoute()}>Zatwierdzone</Link>
+							</button>
+						</div>
+					) : null}
 				</div>
 			) : isLoggedIn === false ? null : null}
 

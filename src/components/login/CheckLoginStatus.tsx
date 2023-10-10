@@ -15,7 +15,6 @@ export const useCheckLoginStatus = () => {
 				} else if (response.status === 401) {
 					setIsLoggedIn(false);
 				} else {
-					// Obsługa innych błędów (np. 500, 404) tutaj
 					console.error('Błąd podczas sprawdzania statusu logowania:', response.status);
 				}
 			} catch (error) {
