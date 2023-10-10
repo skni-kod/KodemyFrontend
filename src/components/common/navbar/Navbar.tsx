@@ -7,27 +7,17 @@ import UserBar from '@/components/common/navbar/organisms/Desktop/UserBar';
 import Link from 'next/link';
 import { pageHomeRoute } from '@/pages';
 import PhoneDropDownMenu from './organisms/Phone/PhoneDropDownMenu';
+import useWindowWidth from '@/hooks/useWindowWidth';
 
 const Navbar = () => {
 	const IconClassNames = 'text-grey2white text-2xl h-[25.5px] w-[25.5px]';
-
 	const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false);
+	const windowWidth = useWindowWidth();
+
 	const toggleNotificationsMenu = () => {
 		setIsNotificationsMenuOpen(!isNotificationsMenuOpen);
 	};
-	const [windowWidth, setWindowWidth] = useState<number>(
-		typeof window !== 'undefined' ? window.innerWidth : 0,
-	);
 
-	useEffect(() => {
-		const handleResize = () => {
-			setWindowWidth(window.innerWidth);
-		};
-		window.addEventListener('resize', handleResize);
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-	}, []);
 	useEffect(() => {
 		if (windowWidth > 768) {
 			setIsNotificationsMenuOpen(false);

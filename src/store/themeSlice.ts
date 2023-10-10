@@ -8,59 +8,53 @@ export enum ThemeMode {
 	dark,
 }
 
-const dataThemeAttribute = 'data-theme';
-
-const initialState: { mode: ThemeMode } = {
-	mode: ThemeMode.light,
-};
+const dataThemeAttributeKey = 'data-theme';
 
 const themeSlice = createSlice({
 	name: 'theme',
-	initialState,
+	initialState: {
+		mode: ThemeMode.light,
+	},
 	reducers: {
 		toggleTheme: (state) => {
-			state.mode = state.mode === ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+			state.mode = (state.mode + 1) % 2;
+		},
+		initializeTheme: (state) => {
+			const storedMode = localStorage.getItem(dataThemeAttributeKey);
+			if (storedMode) state.mode = ThemeMode[storedMode as keyof typeof ThemeMode];
 		},
 	},
 });
 
 export default themeSlice;
 
-export const useThemeStore = () => {
+export function useThemeStore() {
 	const themeMode = useSelector<StoreState, ThemeMode>((state) => state.theme.mode);
 	const dispatch = useDispatch<StoreDispatch>();
 
-	const isThemeStored = () => localStorage.getItem(dataThemeAttribute) !== null;
-
-	const updateBodyAttribute = useCallback(() => {
-		document.body.setAttribute(dataThemeAttribute, ThemeMode[themeMode]);
-	}, [themeMode]);
+	useEffect(() => {
+		dispatch(themeSlice.actions.initializeTheme());
+	}, [dispatch]);
 
 	const toggleTheme = () => {
 		dispatch(themeSlice.actions.toggleTheme());
 	};
 
-	const saveToLocalStorage = useCallback(() => {
-		localStorage.setItem(dataThemeAttribute, `${ThemeMode[themeMode]}`);
+	const updateDataThemeAttribute = useCallback(() => {
+		document.body.setAttribute(dataThemeAttributeKey, ThemeMode[themeMode]);
 	}, [themeMode]);
 
-	const initTheme = useCallback(() => {
-		if (!isThemeStored()) {
-			saveToLocalStorage();
-			updateBodyAttribute();
-		} else {
-			if (localStorage.getItem(dataThemeAttribute) === ThemeMode[ThemeMode.dark]) {
-				dispatch(themeSlice.actions.toggleTheme());
-			}
-		}
-	}, [dispatch, saveToLocalStorage, updateBodyAttribute]);
-
-	useEffect(() => initTheme(), [initTheme]);
+	const saveToLocalStorage = useCallback(() => {
+		localStorage.setItem(dataThemeAttributeKey, ThemeMode[themeMode]);
+	}, [themeMode]);
 
 	useEffect(() => {
+		updateDataThemeAttribute();
 		saveToLocalStorage();
-		updateBodyAttribute();
-	}, [themeMode, saveToLocalStorage, updateBodyAttribute]);
+	}, [saveToLocalStorage, updateDataThemeAttribute]);
 
-	return { themeMode, toggleTheme };
-};
+	return {
+		themeMode,
+		toggleTheme,
+	};
+}
