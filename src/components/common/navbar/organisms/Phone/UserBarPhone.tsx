@@ -44,8 +44,8 @@ const UserBarPhone = () => {
 					<Avatar />
 				</button>
 			</div>
-			{isOpenMenu(UserBarMenu.BELL) && <BellDropDownMenu topPosition={'top-[198px]'} />}
-			{isOpenMenu(UserBarMenu.AVATAR) && <AvatarDropDownMenu topPosition={'top-[198px]'} />}
+			{isOpenMenu(UserBarMenu.BELL) && <BellDropDownMenu className="top-full mt-1.5" />}
+			{isOpenMenu(UserBarMenu.AVATAR) && <AvatarDropDownMenu className="top-full mt-1.5" />}
 		</div>
 	);
 };

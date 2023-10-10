@@ -11,12 +11,11 @@ import Link from 'next/link';
 import { CheckPermission } from '@/components/login/CheckPermission';
 import { useEffect, useState } from 'react';
 
-
 type AvatarDropDownMenuProps = {
-	topPosition: string;
+	className: string;
 };
 
-const AvatarDropDownMenu: React.FC<AvatarDropDownMenuProps> = ({ topPosition }) => {
+const AvatarDropDownMenu: React.FC<AvatarDropDownMenuProps> = ({ className }) => {
 	const isLoggedIn = useCheckLoginStatus();
 
 	const [userHasPermission, setUserPermission] = useState(false);
@@ -31,7 +30,6 @@ const AvatarDropDownMenu: React.FC<AvatarDropDownMenuProps> = ({ topPosition }) 
 		<div
 			className={`absolute right-5 h-auto w-40 p-2 ${className} bg-white2darkgrey shadow-md rounded-lg`}
 		>
-
 			{isLoggedIn === true ? (
 				<div className="text-black2white text-[12px] p-1">
 					<button>
