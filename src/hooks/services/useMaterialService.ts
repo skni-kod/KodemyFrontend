@@ -1,5 +1,8 @@
 import { useCallback } from 'react';
 import kodemyAPI from '@/utils/kodemyAPI';
+import { SearchFields, SortDirection } from '@/utils/model';
+import { defaultFilterParams } from '@/contexts/MaterialsFiltersContext';
+import { mapSearchFieldsParam } from '@/utils/constant';
 
 export enum MaterialStatus {
 	PENDING,
@@ -28,7 +31,38 @@ export type Material = {
 	createdDate: string;
 };
 
+type OpenSearchParams = {
+	size?: number;
+	page?: number;
+	sort?: string;
+	sortDirection?: string;
+	searchFields?: SearchFields;
+};
+
 const useMaterialService = () => {
+	const defaultParamsValue = defaultFilterParams;
+
+	const getMaterials = useCallback(
+		async ({
+			size = defaultParamsValue.size,
+			page = defaultParamsValue.page,
+			sort = defaultParamsValue.sort,
+			sortDirection = SortDirection[defaultParamsValue.sortDirection],
+			searchFields = undefined,
+		}: OpenSearchParams) => {
+			try {
+				const basicParams = `size=${size}&page=${page}&sort=${sort}&sort_direction=${sortDirection}`;
+				const response = await kodemyAPI.get(
+					`/api/materials?${basicParams}${mapSearchFieldsParam(searchFields)}`,
+				);
+				return response.data;
+			} catch (e) {
+				console.log(e);
+			}
+		},
+		[defaultParamsValue],
+	);
+
 	const getMaterialById = useCallback(async (id: number) => {
 		try {
 			const response = await kodemyAPI.get(`/api/materials/${id}`);
@@ -39,6 +73,7 @@ const useMaterialService = () => {
 	}, []);
 
 	return {
+		getMaterials,
 		getMaterialById,
 	};
 };

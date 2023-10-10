@@ -1,7 +1,8 @@
 import { useContext, useState } from 'react';
-import { MaterialsFiltersContext, SortDirection } from '@/contexts/MaterialsFiltersContext';
+import { MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
 import { capitalizeString } from '@/utils/constant';
+import { SortDirection } from '@/utils/model';
 
 export type SortFilter = {
 	name: string;

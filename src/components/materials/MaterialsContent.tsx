@@ -7,7 +7,9 @@ import Header from '@/components/materials/organisms/Header';
 import MaterialModalContent from '@/components/materials/organisms/MaterialModalContent';
 import FilterMenuButton from '@/components/materials/atoms/FilterMenuButton';
 import SortMenuButton from '@/components/materials/organisms/SortMenuButton';
-import { MaterialsFiltersContext, SortDirection } from '@/contexts/MaterialsFiltersContext';
+import { MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
+import { SortDirection } from '@/utils/model';
+import useMaterialService from '@/hooks/services/useMaterialService';
 
 const categoryMaterialResponseInitialState = {
 	content: [],
@@ -23,7 +25,7 @@ const categoryMaterialResponseInitialState = {
 };
 
 const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
-	const { getCategoryMaterials } = useCategoryService();
+	const { getMaterials } = useMaterialService();
 	const [materials, setMaterials] = useState<CategoryMaterialsResponse>(
 		categoryMaterialResponseInitialState,
 	);
@@ -40,19 +42,25 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 		const page = filters['page']?.value;
 		const sort = filters['sort']?.value;
 		const sortDirection = SortDirection[filters['sort_direction']?.value];
+		const searchFields = {
+			categoryId,
+			status: filters['status']?.value,
+			phrase: filters['phrase']?.value,
+		};
 		return {
 			size,
 			page,
 			sort,
 			sortDirection,
+			searchFields,
 		};
-	}, [filters]);
+	}, [filters, categoryId]);
 
 	useEffect(() => {
 		(async () => {
-			setMaterials(await getCategoryMaterials(categoryId, mapFilters()));
+			setMaterials(await getMaterials(mapFilters()));
 		})();
-	}, [categoryId, getCategoryMaterials, filters, mapFilters]);
+	}, [categoryId, getMaterials, filters, mapFilters]);
 
 	const handleOpenMaterialModal = (id: number) => {
 		setCurrentMaterialId(id);

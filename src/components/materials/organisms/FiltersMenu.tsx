@@ -1,15 +1,12 @@
 import { materialStatusPolishVerbs, statusDict } from '@/components/materials/atoms/Status';
-import {
-	defaultPageSizes,
-	MaterialsFiltersContext,
-	SortDirection,
-} from '@/contexts/MaterialsFiltersContext';
+import { defaultPageSizes, MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
 import Select from '@/components/materials/atoms/Select';
 import PhraseInput from '@/components/materials/atoms/PhraseInput';
 import { sortMenuValues } from '@/components/materials/organisms/SortMenuButton';
 import { MaterialStatus } from '@/hooks/services/useMaterialService';
 import { useContext } from 'react';
 import { capitalizeString } from '@/utils/constant';
+import { SortDirection } from '@/utils/model';
 
 const sortValues = sortMenuValues.map(
 	(sort) => `${sort.name}: ${capitalizeString(SortDirection[sort.map.sortDirection])}`,

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { SortDirection } from '@/utils/model';
 
 export type Filter<T> = {
 	field: string;
@@ -10,11 +11,6 @@ type FilterLang = {
 	key: string;
 	value: string | number | undefined;
 };
-
-export enum SortDirection {
-	DESC,
-	ASC,
-}
 
 export const defaultPageSizes = [10, 20, 40];
 
