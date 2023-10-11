@@ -7,6 +7,11 @@ import SortMenuButton from '@/components/materials/organisms/SortMenuButton';
 import FilterMenuButton from '@/components/common/page/atoms/FilterMenuButton';
 import FiltersMenu from '@/components/common/page/organisms/FiltersMenu';
 
+export enum AdminView {
+	MATERIALS_PENDING,
+	MATERIALS_APPROVED,
+}
+
 const AdminContent = () => {
 	const materials = CategoryMaterials;
 	const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);

@@ -44,8 +44,18 @@ const UserBar = () => {
 					<Avatar />
 				</button>
 			</div>
-			{isOpenMenu(UserBarMenu.BELL) && <BellDropDownMenu className="top-full mt-1.5" />}
-			{isOpenMenu(UserBarMenu.AVATAR) && <AvatarDropDownMenu className="top-full mt-1.5" />}
+			{isOpenMenu(UserBarMenu.BELL) && (
+				<BellDropDownMenu
+					className="top-full mt-1.5"
+					handleClose={() => setUserBarMenu(UserBarMenu.NONE)}
+				/>
+			)}
+			{isOpenMenu(UserBarMenu.AVATAR) && (
+				<AvatarDropDownMenu
+					className="top-full mt-1.5"
+					handleClose={() => setUserBarMenu(UserBarMenu.NONE)}
+				/>
+			)}
 		</div>
 	);
 };
