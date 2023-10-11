@@ -6,6 +6,7 @@ import AvatarDropDownMenu from '../AvatarDropDownMenu';
 import DayNightMode from '../../atoms/DayNightMode';
 import Link from 'next/link';
 import { pageAddMaterialRoute } from '@/pages';
+import { BiSearch } from 'react-icons/bi';
 
 enum UserBarMenu {
 	NONE,
@@ -23,12 +24,15 @@ const UserBar = () => {
 	const isOpenMenu = (menu: UserBarMenu) => userBarMenu == menu;
 
 	return (
-		<div className=" items-center justify-between gap-x-4 hidden md:flex">
-			<button className="bg-sky-500  hover:bg-blue-600 text-white2white text-[11px] lg:text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded">
+		<div className="flex items-center justify-between gap-x-4">
+			<button className="bg-sky-500  hover:bg-blue-600 text-white2white text-[11px] lg:text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded hidden md:flex">
 				<Link href={pageAddMaterialRoute()}>Dodaj materiał</Link>
 			</button>
-			<div className="flex items-center gap-x-4 font-bold">
-				<DayNightMode />
+			<div className="flex items-center gap-x-3 lg:gap-x-4 font-bold">
+				<BiSearch
+					className={`sm:h-[25.5px] sm:w-[25.5px] text-grey2white text-2xl flex sm:hidden`}
+				/>
+				<DayNightMode className="hidden md:flex" />
 				<button
 					onClick={() =>
 						handleOpenMenu(!isOpenMenu(UserBarMenu.BELL) ? UserBarMenu.BELL : UserBarMenu.NONE)

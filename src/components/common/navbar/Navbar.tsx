@@ -25,8 +25,12 @@ const Navbar = () => {
 	}, [windowWidth]);
 
 	return (
-		<nav className="fixed top-0 w-full left-0 bg-white2darkgrey flex items-center justify-between px-7 py-1.5 md:py-3 z-20 shadow-md">
+		<nav className="fixed top-0 w-full left-0 bg-white2darkgrey flex items-center justify-between px-3 py-1.5 md:py-3 z-20 shadow-md">
 			<div className="flex items-center gap-x-[10px] text-2xl font-semibold text-blue-500">
+				<TfiMenu
+					onClick={toggleNotificationsMenu}
+					className={`${IconClassNames} block md:hidden cursor-pointer relative mr-2`}
+				/>
 				<Link href={pageHomeRoute()} className="flex items-center">
 					<LogoDesktop height={44} visibility={'hidden'} />
 					<LogoPhone height={44} />
@@ -34,10 +38,7 @@ const Navbar = () => {
 			</div>
 			<SearchBarDesktop />
 			<UserBar />
-			<TfiMenu
-				onClick={toggleNotificationsMenu}
-				className={`${IconClassNames} block md:hidden cursor-pointer relative`}
-			/>
+
 			{isNotificationsMenuOpen && <PhoneDropDownMenu />}
 		</nav>
 	);
