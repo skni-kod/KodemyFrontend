@@ -2,20 +2,23 @@ import { useCheckLoginStatus } from '@/components/login/CheckLoginStatus';
 import {
 	pageDashboardAdminRoute,
 	pageDashboardFavouriteRoute,
-	pageDashboardRoute,
 	pageDashboardUserRoute,
 	pageHomeRoute,
 	pageLoginRoute,
 } from '@/pages';
-import Link from 'next/link';
 import checkPermission from '@/components/login/checkPermission';
 import { useEffect, useState } from 'react';
+import AvatarMenuSeparator from '@/components/common/navbar/atoms/AvatarMenuSeparator';
+import AvatarMenuButton from '@/components/common/navbar/atoms/AvatarMenuButton';
+import { AdminView } from '@/components/dashboard/AdminContent';
 
-type AvatarDropDownMenuProps = {
+const AvatarDropDownMenu = ({
+	className,
+	handleClose = () => {},
+}: {
 	className: string;
-};
-
-const AvatarDropDownMenu = ({ className }: AvatarDropDownMenuProps) => {
+	handleClose?: () => void;
+}) => {
 	const isLoggedIn = useCheckLoginStatus();
 
 	const [userHasPermission, setUserPermission] = useState(false);
@@ -28,54 +31,53 @@ const AvatarDropDownMenu = ({ className }: AvatarDropDownMenuProps) => {
 
 	return (
 		<div
-			className={`absolute right-5 h-auto w-40 p-2 ${className} bg-white2darkgrey shadow-md rounded-lg`}
+			className={`absolute right-4 top-full h-auto w-48 p-2 ${className} bg-white2darkgrey shadow-md rounded-lg`}
 		>
-			{isLoggedIn === true ? (
-				<div className="text-black2white text-[12px] p-1">
-					<button>
-						<Link href={pageDashboardRoute()}>Ustawienia konta</Link>
-					</button>
-
-					<div className="pt-1">
-						<button>
-							<Link href={pageDashboardUserRoute()}>Twoje materiały:</Link>
-						</button>
-						<button className="pl-3">
-							<Link href={pageDashboardUserRoute()}>Zatwierdzone</Link>
-						</button>
-						<button className="pl-3">
-							<Link href={pageDashboardUserRoute()}>Nie zatwierdzone</Link>
-						</button>
-						<button className="pl-3">
-							<Link href={pageDashboardFavouriteRoute()}>Ulubione</Link>
-						</button>
+			<div className="text-black2white text-xs p-1">
+				{isLoggedIn && (
+					<div>
+						<AvatarMenuSeparator value="Twoje materiały" className="pb-3 px-2">
+							<AvatarMenuButton
+								value="Zatwierdzone"
+								href={pageDashboardUserRoute()}
+								onClick={handleClose}
+							/>
+							<AvatarMenuButton value="Nie zatwierdzone" href={pageDashboardUserRoute()} />
+							<AvatarMenuButton value="Ulubione" href={pageDashboardFavouriteRoute()} />
+						</AvatarMenuSeparator>
 					</div>
-					{userHasPermission ? (
-						<div className="pt-1">
-							<button>
-								<Link href={pageDashboardAdminRoute()}>Strona Admina:</Link>
-							</button>
-							<button className="pl-3">
-								<Link href={pageDashboardAdminRoute()}>Do Zatwierdzenia</Link>
-							</button>
-							<button className="pl-3">
-								<Link href={pageDashboardAdminRoute()}>Zatwierdzone</Link>
-							</button>
-						</div>
-					) : null}
+				)}
+				{isLoggedIn && userHasPermission && (
+					<div>
+						<AvatarMenuSeparator value={'Zarządzanie'} className="pb-3 px-2">
+							<AvatarMenuButton
+								value="Oczekujące"
+								href={pageDashboardAdminRoute(AdminView.MATERIALS_PENDING)}
+							/>
+							<AvatarMenuButton
+								value="Zatwierdzone"
+								href={pageDashboardAdminRoute(AdminView.MATERIALS_APPROVED)}
+							/>
+						</AvatarMenuSeparator>
+					</div>
+				)}
+				<div>
+					<AvatarMenuSeparator value={'Konto'} className="px-2">
+						{!isLoggedIn ? (
+							<AvatarMenuButton value="Zaloguj się" href={pageLoginRoute()} />
+						) : (
+							<AvatarMenuButton
+								value="Wyloguj się"
+								href={{
+									pathname: 'http://localhost:8181/api/oauth2/logout',
+									query: {
+										redirect_uri: pageHomeRoute().pathname,
+									},
+								}}
+							/>
+						)}
+					</AvatarMenuSeparator>
 				</div>
-			) : isLoggedIn === false ? null : null}
-
-			<div className="text-black2white font-semibold text-[12px] p-1">
-				{isLoggedIn === true ? (
-					<button>
-						<Link href="http://localhost:8181/api/oauth2/logout">Wyloguj się</Link>
-					</button>
-				) : isLoggedIn === false ? (
-					<button>
-						<Link href={pageLoginRoute()}>Zaloguj się</Link>
-					</button>
-				) : null}
 			</div>
 		</div>
 	);

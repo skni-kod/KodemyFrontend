@@ -4,6 +4,7 @@ import Page from '@/components/common/Page';
 import Container from '@/components/common/Container';
 import HomeContent from '@/components/home/HomeContent';
 import Route from '@/utils/route';
+import { AdminView } from '@/components/dashboard/AdminContent';
 
 export const pageHomeRoute = (): Route => {
 	return {
@@ -25,11 +26,16 @@ export const pageDashboardUserRoute = (): Route => {
 		pathname: '/dashboard/user',
 	};
 };
-export const pageDashboardAdminRoute = (): Route => {
+
+export const pageDashboardAdminRoute = (view: AdminView): Route => {
 	return {
 		pathname: '/dashboard/admin',
+		query: {
+			view: view,
+		},
 	};
 };
+
 export const pageDashboardFavouriteRoute = (): Route => {
 	return {
 		pathname: '/dashboard/favourite',

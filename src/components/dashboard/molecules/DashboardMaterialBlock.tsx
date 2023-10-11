@@ -39,7 +39,7 @@ const DashboardMaterialBlock = ({
 				</div>
 				<Status status={status} />
 			</div>
-			<div className="flex flex-col justify-center w-52 pl-5 py-2 gap-1 border-l-2 text-xs">
+			<div className="flex flex-col justify-center items-center w-52 pl-5 py-2 gap-1 border-l-2 text-xs">
 				{children}
 			</div>
 		</MaterialWrapper>

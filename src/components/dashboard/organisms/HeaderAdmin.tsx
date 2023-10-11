@@ -1,9 +1,6 @@
 import HeaderButton from '@/components/common/page/atoms/HeaderButton';
-import { pageCategoryIdRoute } from '@/pages/category/[id]';
 import { useSectionsStore } from '@/store/sectionsSlice';
 import { useState } from 'react';
-import FilterButton from '@/components/common/page/atoms/FilterButton';
-import { useFiltersContext } from '@/contexts/MaterialsFiltersContext';
 import FilterButtonsList from '@/components/common/page/molecules/FilterButtonsList';
 
 const currentIdsInit = {
@@ -17,7 +14,6 @@ const HeaderAdmin = () => {
 		section: number | undefined;
 		category: number | undefined;
 	}>(currentIdsInit);
-	const { filters, removeFilters } = useFiltersContext();
 
 	const handleCategories = (id: number) =>
 		sections.find((section) => section.id === id)?.categories;
@@ -36,7 +32,7 @@ const HeaderAdmin = () => {
 					/>
 				)}
 				{sections &&
-					sections?.map(({ id, name, categories }) => (
+					sections?.map(({ id, name }) => (
 						<HeaderButton
 							name={name}
 							key={id}

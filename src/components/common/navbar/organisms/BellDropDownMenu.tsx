@@ -12,7 +12,7 @@ enum Menu {
 	YOUR,
 }
 
-const BellDropDownMenu = ({ className }: { className?: string }) => {
+const BellDropDownMenu = ({ className }: { className?: string; handleClose?: () => void }) => {
 	const [menuMode, setMenuMode] = useState<Menu>(0);
 
 	const handleMenuMode = (menu: Menu) => {
