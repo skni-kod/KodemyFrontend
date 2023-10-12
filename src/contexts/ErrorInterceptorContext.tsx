@@ -5,21 +5,16 @@ type ErrorInterceptorType = {
 	dispatchError: (message: string | null) => void;
 };
 
-export const ErrorInterceptorContext =
-	React.createContext<ErrorInterceptorType>({
-		error: null,
-		dispatchError: (message) => {},
-	});
+export const ErrorInterceptorContext = React.createContext<ErrorInterceptorType>({
+	error: null,
+	dispatchError: (message) => {},
+});
 
-const ErrorInterceptorProvider = ({
-	children,
-}: {
-	children: React.ReactNode;
-}) => {
+const ErrorInterceptorProvider = ({ children }: { children: React.ReactNode }) => {
 	const [error, setError] = useState<string | null>(null);
-	const errorHoldTime = !process.env.ERROR_HOLD_TIME_IN_MS
+	const errorHoldTime = !process.env.NEXT_PUBLIC_ERROR_HOLD_TIME_IN_MS
 		? 5000
-		: parseInt(process.env.ERROR_HOLD_TIME_IN_MS);
+		: parseInt(process.env.NEXT_PUBLIC_ERROR_HOLD_TIME_IN_MS);
 
 	const dispatchError = useCallback((message: string | null) => {
 		setError(message);

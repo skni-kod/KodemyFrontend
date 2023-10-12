@@ -19,9 +19,7 @@ const useSectionService = () => {
 		try {
 			const response = await kodemyAPI.get(`/api/sections`);
 			return response.data;
-		} catch (e) {
-			console.log(e);
-		}
+		} catch (e) {}
 	}, []);
 
 	return {

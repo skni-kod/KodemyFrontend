@@ -1,11 +1,9 @@
 import HeaderButton from '@/components/common/page/atoms/HeaderButton';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Section } from '@/hooks/services/useSectionService';
 import { useSectionsStore } from '@/store/sectionsSlice';
 import useCategoryService, { CategoryDetailsResponse } from '@/hooks/services/useCategoryService';
-import { MaterialsFiltersContext, useFiltersContext } from '@/contexts/MaterialsFiltersContext';
-import FilterButton from '@/components/common/page/atoms/FilterButton';
-import { capitalizeString } from '@/utils/constant';
+import { useFiltersContext } from '@/contexts/MaterialsFiltersContext';
 import { pageCategoryIdRoute } from '@/pages/category/[id]';
 import { useRouter } from 'next/router';
 import FilterButtonsList from '@/components/common/page/molecules/FilterButtonsList';

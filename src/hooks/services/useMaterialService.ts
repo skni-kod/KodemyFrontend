@@ -56,9 +56,7 @@ const useMaterialService = () => {
 					`/api/materials?${basicParams}${mapSearchFieldsParam(searchFields)}`,
 				);
 				return response.data;
-			} catch (e) {
-				console.log(e);
-			}
+			} catch (e) {}
 		},
 		[defaultParamsValue],
 	);
@@ -67,9 +65,7 @@ const useMaterialService = () => {
 		try {
 			const response = await kodemyAPI.get(`/api/materials/${id}`);
 			return response.data;
-		} catch (e) {
-			console.log(e);
-		}
+		} catch (e) {}
 	}, []);
 
 	return {

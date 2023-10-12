@@ -5,11 +5,11 @@ import Head from 'next/head';
 import Sidebar from '@/components/common/sidebar/Sidebar';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
-import ErrorInterceptorProvider, {
-	ErrorInterceptorContext,
-} from '@/contexts/ErrorInterceptorContext';
-import React, { useContext } from 'react';
+import ErrorInterceptorProvider, { ErrorInterceptorContext } from '@/contexts/ErrorInterceptorContext';
+import React, { useContext, useEffect } from 'react';
 import Navbar from '@/components/common/navbar/Navbar';
+import { useAuthStore } from '@/store/authSlice';
+import useAuthService from '@/hooks/services/useAuthService';
 
 export const Metadata = {
 	title: 'Kodemy',
@@ -18,6 +18,15 @@ export const Metadata = {
 
 const Body = ({ children }: { children: React.ReactNode }) => {
 	const { error, dispatchError } = useContext(ErrorInterceptorContext);
+	const { isAuth, setAuth } = useAuthStore();
+	const { getMe } = useAuthService();
+
+	useEffect(() => {
+		(async () => {
+			setAuth(await getMe());
+		})();
+	}, [isAuth, getMe, setAuth]);
+
 	return <>{children}</>;
 };
 

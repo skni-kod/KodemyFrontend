@@ -1,5 +1,4 @@
 import { Category, Section } from '@/hooks/services/useSectionService';
-import { useState } from 'react';
 import { SearchFields } from '@/utils/model';
 
 export const sortSectionCategory = (section: Section[]) => {

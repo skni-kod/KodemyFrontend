@@ -1,7 +1,5 @@
 import { useCallback } from 'react';
 import kodemyAPI from '@/utils/kodemyAPI';
-import { defaultFilterParams } from '@/contexts/MaterialsFiltersContext';
-import { SortDirection } from '@/utils/model';
 
 export type Material = {
 	id: number;
@@ -46,9 +44,7 @@ const useCategoryService = () => {
 		try {
 			const response = await kodemyAPI.get(`/api/categories/${categoryId}`);
 			return response.data;
-		} catch (e) {
-			console.log(e);
-		}
+		} catch (e) {}
 	}, []);
 
 	return { getCategoryDetails };

@@ -3,8 +3,6 @@ import DocumentsImage from '@/assets/material/documents.png';
 import Image from 'next/image';
 import Status from '@/components/materials/atoms/Status';
 import { BiStar } from 'react-icons/bi';
-import { useState } from 'react';
-import clsx from 'clsx';
 import MaterialWrapper from '@/components/common/page/atoms/MaterialWrapper';
 
 type MaterialProps = {

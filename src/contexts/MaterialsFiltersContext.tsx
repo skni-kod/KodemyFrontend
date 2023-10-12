@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { SortDirection } from '@/utils/model';
-import FilterButton from '@/components/common/page/atoms/FilterButton';
 import { capitalizeString } from '@/utils/constant';
 
 export type Filter<T> = {

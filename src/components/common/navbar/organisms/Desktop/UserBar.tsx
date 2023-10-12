@@ -5,8 +5,10 @@ import { useState } from 'react';
 import AvatarDropDownMenu from '../AvatarDropDownMenu';
 import DayNightMode from '../../atoms/DayNightMode';
 import Link from 'next/link';
-import { pageAddMaterialRoute } from '@/pages';
+import { pageAddMaterialRoute, pageLoginRoute } from '@/pages';
 import { BiSearch } from 'react-icons/bi';
+import { useAuthStore } from '@/store/authSlice';
+import { useRouter } from 'next/router';
 
 enum UserBarMenu {
 	NONE,
@@ -18,6 +20,8 @@ const UserBar = () => {
 	const IconClassNames = 'cursor-pointer text-grey2white text-2xl h-6 w-6';
 
 	const [userBarMenu, setUserBarMenu] = useState<UserBarMenu>(0);
+	const { isAuth } = useAuthStore();
+	const router = useRouter();
 
 	const handleOpenMenu = (menu: UserBarMenu) => setUserBarMenu(menu);
 
@@ -35,26 +39,32 @@ const UserBar = () => {
 				<DayNightMode className="hidden md:flex" />
 				<button
 					onClick={() =>
-						handleOpenMenu(!isOpenMenu(UserBarMenu.BELL) ? UserBarMenu.BELL : UserBarMenu.NONE)
+						isAuth()
+							? handleOpenMenu(!isOpenMenu(UserBarMenu.BELL) ? UserBarMenu.BELL : UserBarMenu.NONE)
+							: router.push(pageLoginRoute())
 					}
 				>
 					<Bell className={IconClassNames} />
 				</button>
 				<button
 					onClick={() =>
-						handleOpenMenu(!isOpenMenu(UserBarMenu.AVATAR) ? UserBarMenu.AVATAR : UserBarMenu.NONE)
+						isAuth()
+							? handleOpenMenu(
+									!isOpenMenu(UserBarMenu.AVATAR) ? UserBarMenu.AVATAR : UserBarMenu.NONE,
+							  )
+							: router.push(pageLoginRoute())
 					}
 				>
 					<Avatar />
 				</button>
 			</div>
-			{isOpenMenu(UserBarMenu.BELL) && (
+			{isAuth() && isOpenMenu(UserBarMenu.BELL) && (
 				<BellDropDownMenu
 					className="top-full mt-1.5"
 					handleClose={() => setUserBarMenu(UserBarMenu.NONE)}
 				/>
 			)}
-			{isOpenMenu(UserBarMenu.AVATAR) && (
+			{isAuth() && isOpenMenu(UserBarMenu.AVATAR) && (
 				<AvatarDropDownMenu
 					className="top-full mt-1.5"
 					handleClose={() => setUserBarMenu(UserBarMenu.NONE)}

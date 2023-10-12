@@ -1,7 +1,4 @@
 import clsx from 'clsx';
-import Link from 'next/link';
-import { Category } from '@/hooks/services/useSectionService';
-import { pageCategoryIdRoute } from '@/pages/category/[id]';
 
 type HeaderButtonProps = {
 	name: string;

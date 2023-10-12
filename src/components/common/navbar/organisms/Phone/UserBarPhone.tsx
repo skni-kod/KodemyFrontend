@@ -1,9 +1,4 @@
-import Avatar from '@/components/common/navbar/atoms/Avatar';
-import Bell from '../../atoms/Bell';
-import { useState } from 'react';
-import AvatarDropDownMenu from '../AvatarDropDownMenu';
 import DayNightMode from '../../atoms/DayNightMode';
-import BellDropDownMenu from '../BellDropDownMenu';
 import { pageAddMaterialRoute } from '@/pages';
 import Link from 'next/link';
 
