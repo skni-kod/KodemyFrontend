@@ -3,7 +3,11 @@ import { HiOutlineMoon } from 'react-icons/hi2';
 import { useEffect, useState } from 'react';
 import { ThemeMode, useThemeStore } from '@/store/themeSlice';
 
-const DayNightMode = () => {
+type DayNightModeProps = {
+	className: string;
+};
+
+const DayNightMode = ({ className }: DayNightModeProps) => {
 	const { themeMode, toggleTheme } = useThemeStore();
 	const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 	const IconClassNames = 'cursor-pointer text-grey2white text-2xl h-[25.5px] w-[25.5px]';
@@ -13,7 +17,7 @@ const DayNightMode = () => {
 	}, [themeMode]);
 
 	return (
-		<div onClick={toggleTheme}>
+		<div onClick={toggleTheme} className={className}>
 			{isDarkTheme ? (
 				<HiOutlineMoon className={IconClassNames} />
 			) : (
