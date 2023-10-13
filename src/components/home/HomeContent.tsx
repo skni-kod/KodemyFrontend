@@ -4,7 +4,7 @@ import HomeButton from '@/components/home/atoms/HomeButton';
 const HomeContent = () => {
 	return (
 		<div className="w-full h-full">
-			<div className="flex flex-col justify-center w-1/2 pt-24 px-15">
+			<div className="flex flex-col justify-center w-1/2 pt-32 px-15">
 				<LogoDesktop height={150} visibility={'block'} />
 				<div className="flex flex-col gap-y-12 pl-9 pt-4">
 					<div>

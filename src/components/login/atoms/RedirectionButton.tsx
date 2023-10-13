@@ -1,4 +1,4 @@
-import { pageLoginRoute } from '@/pages';
+import { pageLoginRoute } from '@/pages/route';
 import Link from 'next/link';
 
 const RedirectionButton = () => {

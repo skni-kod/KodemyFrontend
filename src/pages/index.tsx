@@ -3,8 +3,6 @@ import { Metadata } from '@/pages/_app';
 import Page from '@/components/common/Page';
 import Container from '@/components/common/Container';
 import HomeContent from '@/components/home/HomeContent';
-import Route from '@/utils/route';
-import { AdminView } from '@/components/dashboard/AdminContent';
 
 export default function Home() {
 	return (
@@ -19,60 +17,9 @@ export default function Home() {
 				</>
 			}
 		>
-			<Container className="max-w-7xl h-full mx-auto">
+			<Container className="max-w-7xl h-full mx-auto relative">
 				<HomeContent />
 			</Container>
 		</Page>
 	);
 }
-
-export const pageHomeRoute = (): Route => {
-	return {
-		pathname: '/',
-	};
-};
-
-export const pageLoginRoute = (): Route => {
-	return {
-		pathname: '/login',
-	};
-};
-
-export const pageLogoutRoute = (): Route => {
-	return {
-		pathname: '/logout',
-	};
-};
-
-export const pageDashboardRoute = (): Route => {
-	return {
-		pathname: '/dashboard',
-	};
-};
-
-export const pageDashboardUserRoute = (): Route => {
-	return {
-		pathname: '/dashboard/user',
-	};
-};
-
-export const pageDashboardAdminRoute = (view: AdminView): Route => {
-	return {
-		pathname: '/dashboard/admin',
-		query: {
-			view: view,
-		},
-	};
-};
-
-export const pageDashboardFavouriteRoute = (): Route => {
-	return {
-		pathname: '/dashboard/favourite',
-	};
-};
-
-export const pageAddMaterialRoute = (): Route => {
-	return {
-		pathname: '/addmaterial',
-	};
-};

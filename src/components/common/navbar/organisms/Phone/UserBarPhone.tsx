@@ -1,5 +1,5 @@
 import DayNightMode from '../../atoms/DayNightMode';
-import { pageAddMaterialRoute } from '@/pages';
+import { pageAddMaterialRoute } from '@/pages/route';
 import Link from 'next/link';
 
 enum UserBarMenu {
