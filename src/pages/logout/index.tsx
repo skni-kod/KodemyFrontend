@@ -15,20 +15,8 @@ const logoutApiAuth = (originLocation: Location): Route => {
 
 const Index = () => {
 	const router = useRouter();
-
-	useEffect(() => {
-		router.push(logoutApiAuth(window.location))
-	}, [router]);
-
-	return (
-		<Page
-			title=""
-			description={Metadata.description}
-			addTags={<meta name="robots" content="noindex" />}
-		>
-			{null}
-		</Page>
-	);
+	router.push(logoutApiAuth(window.location));
+	return null;
 };
 
 export default Index;

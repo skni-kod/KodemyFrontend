@@ -11,7 +11,10 @@ const FilterButton = ({ value, handleRemove }: { value: string; handleRemove: ()
 			)}
 		>
 			{value}
-			<CiCircleRemove className="text-lg ml-0.5 cursor-pointer" onClick={handleRemove} />
+			<CiCircleRemove
+				className="text-red-800 hover:text-gray-500 text-xl font-semibold ml-0.5 cursor-pointer"
+				onClick={handleRemove}
+			/>
 		</div>
 	);
 };

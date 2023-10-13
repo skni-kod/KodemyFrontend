@@ -6,7 +6,7 @@ import Status from '@/components/materials/atoms/Status';
 import { Material } from '@/hooks/services/useCategoryService';
 import React from 'react';
 
-const DashboardMaterialBlock = ({
+const ManagementMaterialBlock = ({
 	data: { id, title, description, link, status, user, createdDate, categoryId, active },
 	children,
 }: {
@@ -46,4 +46,4 @@ const DashboardMaterialBlock = ({
 	);
 };
 
-export default DashboardMaterialBlock;
+export default ManagementMaterialBlock;

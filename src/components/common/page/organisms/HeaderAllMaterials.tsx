@@ -8,7 +8,7 @@ const currentIdsInit = {
 	category: undefined,
 };
 
-const HeaderAdmin = () => {
+const HeaderAllMaterials = ({ headName }: { headName: string }) => {
 	const { sections } = useSectionsStore();
 	const [currentIds, setCurrentIds] = useState<{
 		section: number | undefined;
@@ -20,7 +20,7 @@ const HeaderAdmin = () => {
 
 	return (
 		<>
-			<h2 className="w-full mt-4 text-semibold text-[36px]">Do zatwierdzenia</h2>
+			<h2 className="w-full mt-4 text-semibold text-[36px]">{headName}</h2>
 			<div className="flex items-center flex-wrap sw-full gap-4 pt-4 px-4 text-xl text-semibold text-center">
 				{sections && (
 					<HeaderButton
@@ -79,4 +79,4 @@ const HeaderAdmin = () => {
 	);
 };
 
-export default HeaderAdmin;
+export default HeaderAllMaterials;

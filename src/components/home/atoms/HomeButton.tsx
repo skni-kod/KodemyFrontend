@@ -2,7 +2,7 @@ import { useState } from 'react';
 import clsx from 'clsx';
 
 const ProgressBar = ({ position, isLoading }: { position: string; isLoading: boolean }) => (
-	<div className="relative flex-1 h-1 bg-gray-400">
+	<div className="relative flex-1 h-1 bg-gray-500">
 		<div
 			className={clsx(
 				'absolute top-0 h-full bg-gray-500 transition-[width] duration-1000',

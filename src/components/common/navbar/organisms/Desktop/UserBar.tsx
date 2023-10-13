@@ -5,7 +5,7 @@ import { useState } from 'react';
 import AvatarDropDownMenu from '../AvatarDropDownMenu';
 import DayNightMode from '../../atoms/DayNightMode';
 import Link from 'next/link';
-import { pageAddMaterialRoute, pageLoginRoute } from '@/pages';
+import { pageAddMaterialRoute, pageLoginRoute } from '@/pages/route';
 import { BiSearch } from 'react-icons/bi';
 import { useAuthStore } from '@/store/authSlice';
 import { useRouter } from 'next/router';
@@ -23,7 +23,10 @@ const UserBar = () => {
 	const { isAuth } = useAuthStore();
 	const router = useRouter();
 
-	const handleOpenMenu = (menu: UserBarMenu) => setUserBarMenu(menu);
+	const handleOpenMenu = (menu: UserBarMenu) => {
+		if (!isAuth) router.push(pageLoginRoute());
+		else setUserBarMenu(menu);
+	};
 
 	const isOpenMenu = (menu: UserBarMenu) => userBarMenu == menu;
 
@@ -39,32 +42,26 @@ const UserBar = () => {
 				<DayNightMode className="hidden md:flex" />
 				<button
 					onClick={() =>
-						isAuth()
-							? handleOpenMenu(!isOpenMenu(UserBarMenu.BELL) ? UserBarMenu.BELL : UserBarMenu.NONE)
-							: router.push(pageLoginRoute())
+						handleOpenMenu(!isOpenMenu(UserBarMenu.BELL) ? UserBarMenu.BELL : UserBarMenu.NONE)
 					}
 				>
 					<Bell className={IconClassNames} />
 				</button>
 				<button
 					onClick={() =>
-						isAuth()
-							? handleOpenMenu(
-									!isOpenMenu(UserBarMenu.AVATAR) ? UserBarMenu.AVATAR : UserBarMenu.NONE,
-							  )
-							: router.push(pageLoginRoute())
+						handleOpenMenu(!isOpenMenu(UserBarMenu.AVATAR) ? UserBarMenu.AVATAR : UserBarMenu.NONE)
 					}
 				>
 					<Avatar />
 				</button>
 			</div>
-			{isAuth() && isOpenMenu(UserBarMenu.BELL) && (
+			{isAuth && isOpenMenu(UserBarMenu.BELL) && (
 				<BellDropDownMenu
 					className="top-full mt-1.5"
 					handleClose={() => setUserBarMenu(UserBarMenu.NONE)}
 				/>
 			)}
-			{isAuth() && isOpenMenu(UserBarMenu.AVATAR) && (
+			{isAuth && isOpenMenu(UserBarMenu.AVATAR) && (
 				<AvatarDropDownMenu
 					className="top-full mt-1.5"
 					handleClose={() => setUserBarMenu(UserBarMenu.NONE)}

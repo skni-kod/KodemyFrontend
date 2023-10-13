@@ -5,7 +5,7 @@ import LogoPhone from './atoms/LogoPhone';
 import SearchBarDesktop from '@/components/common/navbar/organisms/SearchBarDesktop';
 import UserBar from '@/components/common/navbar/organisms/Desktop/UserBar';
 import Link from 'next/link';
-import { pageHomeRoute } from '@/pages';
+import { pageHomeRoute } from '@/pages/route';
 import PhoneDropDownMenu from './organisms/Phone/PhoneDropDownMenu';
 import useWindowWidth from '@/hooks/useWindowWidth';
 

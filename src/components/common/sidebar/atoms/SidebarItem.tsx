@@ -65,7 +65,7 @@ const SidebarItem = ({
 						<Link
 							key={id}
 							href={pageCategoryIdRoute(id)}
-							className="flex items-center w-full px-3.5 py-1 pl-12 mt-1 rounded-lg no-underline overflow-hidden"
+							className="flex items-center w-full px-3.5 py-1 pl-12 mt-1 rounded-lg no-underline overflow-hidden hover:text-sky-500"
 							onClick={() => handleCloseSidebar()}
 						>
 							{name}

@@ -1,29 +1,30 @@
 import React, { useEffect } from 'react';
 import Page from '@/components/common/Page';
-import AdminContent from '@/components/dashboard/AdminContent';
+import AdminMaterialsContent from '@/components/admin/AdminMaterialsContent';
 import { page404Route } from '../404';
 import checkPermission from '@/components/login/checkPermission';
 import { useRouter } from 'next/router';
 import Container from '@/components/common/Container';
 import MaterialsFiltersProvider from '@/contexts/MaterialsFiltersContext';
+import { useAuthStore } from '@/store/authSlice';
+import { pageLoginRoute } from '@/pages/route';
 
 const Index = () => {
 	const router = useRouter();
+	const { user } = useAuthStore();
 
-	useEffect(() => {
-		checkPermission().then((hasPermission) => {
-			if (!hasPermission) {
-				router.push(page404Route());
-				return;
-			}
-		});
-	}, [router]);
+	if (!user) {
+		router.push(pageLoginRoute());
+	}
 
 	return (
-		<Page title="Panel użytkownika" description="Widok zarządzania dodanymi materiałami i kontem">
+		<Page
+			title="Twoje materiały - Konto użytkownika"
+			description="Widok zarządzania dodanymi materiałami"
+		>
 			<MaterialsFiltersProvider>
 				<Container className="max-w-7xl mx-auto">
-					<AdminContent />
+					<AdminMaterialsContent />
 				</Container>
 			</MaterialsFiltersProvider>
 		</Page>

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Status from '@/components/materials/atoms/Status';
 import { BiStar } from 'react-icons/bi';
 import MaterialWrapper from '@/components/common/page/atoms/MaterialWrapper';
+import { Rating } from 'react-simple-star-rating';
 
 type MaterialProps = {
 	data: Material;
@@ -27,8 +28,14 @@ const MaterialBlock = ({
 			</div>
 			<div className="grow flex justify-between items-center px-5">
 				<div>
-					<div className="flex items-center">
-						<BiStar /> <BiStar /> <BiStar /> <BiStar /> <BiStar />
+					<div>
+						<Rating
+							initialValue={Math.round((Math.random() * 9.5) / 0.5) * 0.5}
+							SVGstyle={{ display: 'inline' }}
+							size={16}
+							allowFraction
+							readonly
+						/>
 					</div>
 					<div className="text-xl text-black2white text-bold mt-0.5">{title}</div>
 					<div className="text-sm text-bold">{description}</div>
