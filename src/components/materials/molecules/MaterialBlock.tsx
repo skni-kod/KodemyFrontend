@@ -2,7 +2,6 @@ import { Material } from '@/hooks/services/useCategoryService';
 import DocumentsImage from '@/assets/material/documents.png';
 import Image from 'next/image';
 import Status from '@/components/materials/atoms/Status';
-import { BiStar } from 'react-icons/bi';
 import MaterialWrapper from '@/components/common/page/atoms/MaterialWrapper';
 import { Rating } from 'react-simple-star-rating';
 
@@ -37,12 +36,12 @@ const MaterialBlock = ({
 							readonly
 						/>
 					</div>
-					<div className="text-xl text-black2white text-bold mt-0.5">{title}</div>
+					<div className="text-xl text-black2white text-bold mt-0.5 text-ellipsis">{title}</div>
 					<div className="text-sm text-bold">{description}</div>
 				</div>
 				<Status status={status} />
 			</div>
-			<div className="flex flex-col justify-center w-52 pl-5 py-2 gap-1 border-l-2 text-xs">
+			<div className="flex flex-col justify-center w-52 min-w-52 pl-5 py-2 gap-1 border-l-2 text-xs">
 				<div>Dodane przez: {user}</div>
 				<div>Data dodania: {createdDate.split('T')[0]}</div>
 			</div>

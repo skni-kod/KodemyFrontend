@@ -14,11 +14,9 @@ const NotificationsOption = ({ iconname, text }: ButtonProps) => {
 	};
 
 	return (
-		<div className="min-w-[290px] max-w-[300px] flex items-center py-1 px-1 shadow-md border-2 rounded-2xl bg-white2darkgrey text-grey2white cursor-pointer">
-			<div className="mr-2 text-black2white">
-				{React.createElement(iconname, { style: iconStyle })}
-			</div>
-			<div className="text-black2white text-[13px]">
+		<div className="flex items-center gap-2 min-w-[290px] max-w-[300px] py-1 px-1 text-xs shadow-md border-2 rounded-2xl bg-white2darkgrey text-black2white cursor-pointer hover:bg-gray-500 hover:text-white2white text-xs">
+			<div>{React.createElement(iconname, { style: iconStyle })}</div>
+			<div>
 				<h5>{text}</h5>
 			</div>
 		</div>

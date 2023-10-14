@@ -4,41 +4,6 @@ import { SearchFields, SortDirection } from '@/utils/model';
 import { defaultFilterParams } from '@/contexts/MaterialsFiltersContext';
 import { mapSearchFieldsParam } from '@/utils/constant';
 
-export enum MaterialStatus {
-	PENDING,
-	APPROVED,
-	EDITED,
-	REJECTED,
-	BANNED,
-}
-
-export type Material = {
-	id: number;
-	title: string;
-	description: string;
-	link: string;
-	status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'BANNED' | 'EDITED';
-	type: {
-		id: number;
-		name: string;
-	};
-	technologies: number[];
-	averageGrade: number | null;
-	creator: {
-		id: number;
-		username: string;
-	};
-	createdDate: string;
-};
-
-type OpenSearchParams = {
-	size?: number;
-	page?: number;
-	sort?: string;
-	sortDirection?: string;
-	searchFields?: SearchFields;
-};
-
 const useMaterialService = () => {
 	const defaultParamsValue = defaultFilterParams;
 
@@ -75,3 +40,50 @@ const useMaterialService = () => {
 };
 
 export default useMaterialService;
+
+type OpenSearchParams = {
+	size?: number;
+	page?: number;
+	sort?: string;
+	sortDirection?: string;
+	searchFields?: SearchFields;
+};
+
+export type OpenSearchBase = {
+	content: Array<any>;
+	pageable: {
+		offset: number;
+		pageNumber: number;
+		pageSize: number;
+		paged: boolean;
+	};
+	size: number;
+	totalElements: number;
+	totalPages: number;
+};
+
+export enum MaterialStatus {
+	PENDING,
+	APPROVED,
+	EDITED,
+	REJECTED,
+	BANNED,
+}
+
+export type Material = {
+	id: number;
+	title: string;
+	description: string;
+	link: string;
+	status: string;
+	user: string;
+	createdDate: string;
+	sectionId: number;
+	categoryId: number;
+	technologyIds: number[];
+	active: boolean;
+};
+
+export type MaterialOpenSearch = OpenSearchBase & {
+	content: Array<Material>;
+};

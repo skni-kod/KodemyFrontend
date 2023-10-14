@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreDispatch, StoreState } from '@/store/store';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 
 export enum AuthUserRoleType {
 	ROLE_USER,
@@ -12,7 +12,7 @@ export enum AuthUserRoleType {
 
 type AuthUserRole = {
 	id: number;
-	name: AuthUserRoleType;
+	name: string;
 };
 
 type AuthUser = {

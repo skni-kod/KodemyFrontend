@@ -11,8 +11,18 @@ const useAuthService = () => {
 		} catch (e) {}
 	}, []);
 
+	const checkAuth = useCallback(async () => {
+		try {
+			const response = await kodemyAPI.get('/api/oauth2', {
+				withCredentials: true,
+			});
+			return response.data;
+		} catch (e) {}
+	}, []);
+
 	return {
 		getMe,
+		checkAuth,
 	};
 };
 

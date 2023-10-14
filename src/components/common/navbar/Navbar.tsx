@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { TfiClose, TfiMenu } from 'react-icons/tfi';
 import LogoDesktop from './atoms/LogoDesktop';
 import SearchBarDesktop from '@/components/common/navbar/organisms/SearchBarDesktop';

@@ -4,7 +4,6 @@ import AllMaterialBoxComponent from '../molecules/AllMaterialBox';
 import YourMaterialBoxComponent from '../molecules/YourMaterialBox';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import NotificationsMenu from '../molecules/NotificationsMenu';
-import { useAuthStore } from '@/store/authSlice';
 
 enum Menu {
 	ALL,

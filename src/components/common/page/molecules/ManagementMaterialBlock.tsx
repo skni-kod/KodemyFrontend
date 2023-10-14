@@ -3,11 +3,11 @@ import Image from 'next/image';
 import DocumentsImage from '@/assets/material/documents.png';
 import { BiStar } from 'react-icons/bi';
 import Status from '@/components/materials/atoms/Status';
-import { Material } from '@/hooks/services/useCategoryService';
 import React from 'react';
+import { Material } from '@/hooks/services/useMaterialService';
 
 const ManagementMaterialBlock = ({
-	data: { id, title, description, link, status, user, createdDate, categoryId, active },
+	data: { title, description, status, user, createdDate },
 	children,
 }: {
 	data: Material;

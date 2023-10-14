@@ -14,7 +14,7 @@ const LogoDesktop = ({ height }: { height: number }) => {
 			<Image
 				src={image.src}
 				alt={Metadata.title}
-				className={`cursor-pointer md:block h-none w-none`}
+				className="cursor-pointer md:block"
 				width={width}
 				height={height}
 				priority={true}

@@ -1,45 +1,60 @@
-import MaterialBlock from '@/components/materials/molecules/MaterialBlock';
 import { useEffect, useState } from 'react';
-import useModal from '@/hooks/useModal';
-import Header from '@/components/materials/organisms/Header';
-import MaterialModalContent from '@/components/materials/organisms/MaterialModalContent';
-import FilterMenuButton from '@/components/common/page/atoms/FilterMenuButton';
-import SortMenuButton from '@/components/materials/organisms/SortMenuButton';
-import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialService';
+import HeaderAllMaterials from '@/components/common/page/organisms/HeaderAllMaterials';
 import ResultCount from '@/components/common/page/atoms/ResultCount';
+import SortMenuButton from '@/components/materials/organisms/SortMenuButton';
+import FilterMenuButton from '@/components/common/page/atoms/FilterMenuButton';
+import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialService';
 import useFiltersMenu from '@/hooks/useFiltersMenu';
+import useModal from '@/hooks/useModal';
 import { openSearchBaseInitialState } from '@/utils/constant';
+import MaterialBlock from '@/components/materials/molecules/MaterialBlock';
+import MaterialModalContent from '@/components/materials/organisms/MaterialModalContent';
 
-const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
+type CurrentIds = {
+	material: number | undefined;
+	section: number | undefined;
+	category: number | undefined;
+};
+
+const currentIdsInitState: CurrentIds = {
+	material: undefined,
+	section: undefined,
+	category: undefined,
+};
+
+const UserMaterialsContent = () => {
 	const { getMaterials } = useMaterialService();
 	const [materials, setMaterials] = useState<MaterialOpenSearch>(openSearchBaseInitialState);
+	const { FiltersMenu, filters, isFilterMenuOpen, setIsFilterMenuOpen } = useFiltersMenu();
 
 	const { Modal, isOpen, handleOpenModal, handleCloseModal } = useModal(false);
-	const [currentMaterialId, setCurrentMaterialId] = useState<number>();
-
-	const { FiltersMenu, isFilterMenuOpen, setIsFilterMenuOpen, filters } = useFiltersMenu();
+	const [currentIds, setCurrentIds] = useState<CurrentIds>(currentIdsInitState);
 
 	useEffect(() => {
 		(async () => {
 			setMaterials(
 				await getMaterials(
 					filters({
-						categoryId,
+						sectionId: currentIds.section,
+						categoryId: currentIds.category,
 					}),
 				),
 			);
 		})();
-	}, [categoryId, getMaterials, filters]);
+	}, [currentIds.category, currentIds.section, filters, getMaterials]);
 
 	const handleOpenMaterialModal = (id: number) => {
-		setCurrentMaterialId(id);
+		setCurrentIds({
+			...currentIds,
+			material: id,
+		});
 		if (id) handleOpenModal();
 	};
 
 	return (
 		<>
 			<div className="w-full px-3 text-black2white">
-				<Header categoryId={categoryId} />
+				<HeaderAllMaterials headName="Twoje materiałów" />
 				<div className="flex justify-between items-center w-full pt-4 px-8">
 					<ResultCount value={materials.content.length} />
 					<div className="relative flex gap-x-8 text-black2white cursor-pointer">
@@ -61,11 +76,10 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 			</div>
 			{isOpen && (
 				<Modal>
-					<MaterialModalContent materialId={currentMaterialId} handleClose={handleCloseModal} />
+					<MaterialModalContent materialId={currentIds.material} handleClose={handleCloseModal} />
 				</Modal>
 			)}
 		</>
 	);
 };
-
-export default MaterialsContent;
+export default UserMaterialsContent;

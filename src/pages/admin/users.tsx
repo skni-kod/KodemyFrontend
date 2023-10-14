@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from '@/components/common/Container';
 import Page from '@/components/common/Page';
 import { useRouter } from 'next/router';
@@ -9,9 +9,11 @@ const Index = () => {
 	const router = useRouter();
 	const { user } = useAuthStore();
 
-	if (!user || (user && user.role.name === AuthUserRoleType.ROLE_USER)) {
-		router.push(page404Route());
-	}
+	useEffect(() => {
+		if (!user || (user && user.role.name === AuthUserRoleType.ROLE_USER)) {
+			router.push(page404Route());
+		}
+	}, [router, user]);
 
 	return (
 		<Page title="Użytkownicy - Panel administracyjny" description="Widok zarządzania użytkownikami">

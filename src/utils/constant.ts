@@ -1,5 +1,6 @@
 import { Category, Section } from '@/hooks/services/useSectionService';
 import { SearchFields } from '@/utils/model';
+import { OpenSearchBase } from '@/hooks/services/useMaterialService';
 
 export const sortSectionCategory = (section: Section[]) => {
 	section?.forEach((section: Section) => {
@@ -37,4 +38,17 @@ export const mapSearchFieldsParam = (searchFields: SearchFields | undefined) => 
 		return encodedQueryString ? `&search_fields=%7B${encodedQueryString}%7D` : '';
 	}
 	return '';
+};
+
+export const openSearchBaseInitialState: OpenSearchBase = {
+	content: [],
+	size: 20,
+	pageable: {
+		offset: 0,
+		pageNumber: 0,
+		pageSize: 20,
+		paged: true,
+	},
+	totalPages: 1,
+	totalElements: 0,
 };
