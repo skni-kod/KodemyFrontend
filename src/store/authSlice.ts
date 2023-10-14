@@ -48,13 +48,8 @@ export default authSlice;
 export const useAuthStore = () => {
 	const { authUser } = useSelector<StoreState, AuthState>((state) => state.auth);
 	const dispatch = useDispatch<StoreDispatch>();
-	const [isAuth, setIsAuth] = useState<boolean>(false);
 
-	useEffect(() => {
-		setIsAuth(authUser !== undefined);
-	}, [authUser]);
-
-	const setAuth = useCallback(
+	const setUser = useCallback(
 		(user: AuthUser) => {
 			dispatch(authSlice.actions.setAuth(user));
 		},
@@ -66,8 +61,7 @@ export const useAuthStore = () => {
 	}, [dispatch]);
 
 	return {
-		isAuth,
-		setAuth,
+		setUser,
 		user: authUser,
 		logout,
 	};

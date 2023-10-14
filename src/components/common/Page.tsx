@@ -27,7 +27,7 @@ const Page = ({
 				<meta name="description" content={description ? description : Metadata.description} />
 				{addTags}
 			</Head>
-			<div className={`min-h-[100vh] w-full pt-28 bg-white2verydarkgrey ${afterClassName}`}>
+			<div className={`min-h-[100vh] w-full pt-28 bg-white2verydarkgrey ${afterClassName ? afterClassName : ''}`}>
 				{children}
 			</div>
 		</>

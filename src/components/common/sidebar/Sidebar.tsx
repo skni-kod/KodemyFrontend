@@ -2,21 +2,26 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import SidebarItem from './atoms/SidebarItem';
 import { useSectionsStore } from '@/store/sectionsSlice';
+import { useSidebarContext } from '@/contexts/SidebarStateContext';
+import useWindowWidth from '@/hooks/useWindowWidth';
 
 const Sidebar = () => {
 	const { sections } = useSectionsStore();
-	const [isExpandMenu, setIsExpandMenu] = useState(false);
+	const { isOpen, setIsOpen } = useSidebarContext();
 	const [expandedItemId, setExpandedItemId] = useState<number | null>(null);
+	const windowWidth = useWindowWidth();
 
-	const handleExpand = (mouseEntered: boolean) => setIsExpandMenu(mouseEntered);
+	const handleExpand = (mouseEntered: boolean) => windowWidth > 768 && setIsOpen(mouseEntered);
 
 	return (
 		<nav
 			onMouseEnter={() => handleExpand(true)}
 			onMouseLeave={() => handleExpand(false)}
 			className={clsx(
-				'hidden md:block z-10 fixed top-0 left-0 h-full pt-20 pb-5 overflow-y-auto bg-white2darkgrey text-black2white shadow-md transition-width duration-500 ease-linear',
-				isExpandMenu ? 'w-72 px-5 bg-gradient-radial' : 'w-18 pl-5 pr-4 bg-gradient-conic',
+				'z-10 fixed top-0 left-0 h-full pt-20 pb-5 overflow-y-auto bg-white2darkgrey text-black2white shadow-md',
+				isOpen ? 'w-72 px-5 bg-gradient-radial' : 'bg-gradient-conic',
+				!isOpen && (windowWidth > 768 ? 'w-18 pl-5 pr-4' : 'w-0 x-0'),
+				windowWidth > 786 && 'transition-width duration-500 ease-linear',
 			)}
 		>
 			<div className="relative pt-2">
@@ -26,8 +31,8 @@ const Sidebar = () => {
 							<SidebarItem
 								key={index}
 								section={section}
-								setIsExpandMenu={setIsExpandMenu}
-								isExpandMenu={isExpandMenu}
+								setIsExpandMenu={setIsOpen}
+								isExpandMenu={isOpen}
 								expandedItemId={expandedItemId}
 								setExpandedItemId={setExpandedItemId}
 							/>

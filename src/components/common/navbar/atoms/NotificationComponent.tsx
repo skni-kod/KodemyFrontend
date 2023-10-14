@@ -13,7 +13,7 @@ const NotificationComponent = ({ text, isActive }: NotificationComponentProps) =
 
 	return (
 		<div className={`flex items-center`}>
-			<h6 className={`${textColorClass} px-3 py-2 text-[14px] cursor-pointer`}>{text}</h6>
+			<h6 className={`${textColorClass} px-3 py-2 text-sm cursor-pointer`}>{text}</h6>
 		</div>
 	);
 };
