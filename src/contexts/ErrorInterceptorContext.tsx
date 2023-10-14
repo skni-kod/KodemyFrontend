@@ -7,7 +7,7 @@ type ErrorInterceptorType = {
 
 export const ErrorInterceptorContext = React.createContext<ErrorInterceptorType>({
 	error: null,
-	dispatchError: (message) => {},
+	dispatchError: () => {},
 });
 
 const ErrorInterceptorProvider = ({ children }: { children: React.ReactNode }) => {

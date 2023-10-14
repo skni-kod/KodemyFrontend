@@ -1,10 +1,7 @@
-import Page from '@/components/common/Page';
-import { Metadata } from '@/pages/_app';
 import Route from '@/utils/route';
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-const logoutApiAuth = (originLocation: Location): Route => {
+const logoutApiAuth = (originPathName: string): Route => {
 	return {
 		pathname: process.env.NEXT_PUBLIC_API_BASE_URL + '/api/oauth2/logout',
 		query: {
@@ -15,7 +12,7 @@ const logoutApiAuth = (originLocation: Location): Route => {
 
 const Index = () => {
 	const router = useRouter();
-	router.push(logoutApiAuth(window.location));
+	router.push(logoutApiAuth(router.asPath));
 	return null;
 };
 

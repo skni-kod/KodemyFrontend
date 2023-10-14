@@ -7,16 +7,16 @@ import { pageHomeRoute } from '@/pages/route';
 import { useRouter } from 'next/router';
 
 const Index = () => {
-	const { isAuth } = useAuthStore();
+	const { user } = useAuthStore();
 	const router = useRouter();
 
 	useEffect(() => {
-		if (isAuth) router.push(pageHomeRoute());
-	}, [isAuth, router]);
+		if (user) router.push(pageHomeRoute());
+	}, [user, router]);
 
 	return (
 		<Page title="Panel logowania" description="Panel logowania">
-			<Container className="max-w-7xl mx-auto">{!isAuth && <LoginContent />}</Container>
+			<Container className="max-w-7xl mx-auto">{!user && <LoginContent />}</Container>
 		</Page>
 	);
 };

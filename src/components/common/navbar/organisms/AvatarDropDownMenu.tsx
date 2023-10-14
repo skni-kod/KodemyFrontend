@@ -12,7 +12,7 @@ import { useAuthStore } from '@/store/authSlice';
 import usePermissions from '@/hooks/usePermissions';
 
 const AvatarDropDownMenu = ({ className }: { className: string; handleClose?: () => void }) => {
-	const { isAuth } = useAuthStore();
+	const { user } = useAuthStore();
 	const { isModerator } = usePermissions();
 
 	return (
@@ -20,7 +20,7 @@ const AvatarDropDownMenu = ({ className }: { className: string; handleClose?: ()
 			className={`absolute right-4 top-full h-auto w-48 p-2 ${className} bg-white2darkgrey shadow-md rounded-lg`}
 		>
 			<div className="text-black2white text-sm p-1">
-				{isAuth && (
+				{user && (
 					<>
 						<div>
 							<AvatarMenuSeparator value="Materiały" className="pb-3 px-2">

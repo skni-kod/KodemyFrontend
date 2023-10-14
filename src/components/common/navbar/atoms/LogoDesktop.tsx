@@ -4,7 +4,7 @@ import KodemyImageWhite from '@/assets/logo/kodemyWhite.png';
 import { Metadata } from '@/pages/_app';
 import { useThemeStore } from '@/store/themeSlice';
 
-const LogoDesktop = ({ height, visibility }: { height: number; visibility: string }) => {
+const LogoDesktop = ({ height }: { height: number }) => {
 	const { themeMode } = useThemeStore();
 	const image = [KodemyImageDark, KodemyImageWhite][themeMode];
 	const width = (image.width * height) / image.height;
@@ -14,7 +14,7 @@ const LogoDesktop = ({ height, visibility }: { height: number; visibility: strin
 			<Image
 				src={image.src}
 				alt={Metadata.title}
-				className={`${visibility} + cursor-pointer md:block h-none w-none`}
+				className={`cursor-pointer md:block h-none w-none`}
 				width={width}
 				height={height}
 				priority={true}

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { pageLoginRoute } from '@/pages/route';
 import Route from '@/utils/route';
 import { IconType } from 'react-icons';
+import { useRouter } from 'next/router';
 
 type AuthProvider = {
 	name: string;
@@ -20,7 +21,7 @@ type AuthProviders = {
 	google: AuthProvider;
 };
 
-const authorizeApiAuth = (originLocation: Location): AuthProviders => {
+const authorizeApiAuth = (originPathName: string): AuthProviders => {
 	return {
 		github: {
 			name: 'Github',
@@ -31,7 +32,7 @@ const authorizeApiAuth = (originLocation: Location): AuthProviders => {
 			route: {
 				pathname: process.env.NEXT_PUBLIC_API_BASE_URL + '/api/oauth2/authorize/github',
 				query: {
-					redirect_uri: '', //originLocation.origin + pageHomeRoute().pathname,
+					redirect_uri: '', //originPathName.origin + pageHomeRoute().pathname,
 				},
 			},
 		},
@@ -49,8 +50,9 @@ const authorizeApiAuth = (originLocation: Location): AuthProviders => {
 	};
 };
 
-export default function LoginBox() {
-	const providers = Object.values(authorizeApiAuth(window.location));
+const LoginBox = () => {
+	const router = useRouter();
+	const providers = Object.values(authorizeApiAuth(router.asPath));
 
 	return (
 		<div className="flex flex-col items-center justify-center text-center mb-[3vh]">
@@ -67,4 +69,6 @@ export default function LoginBox() {
 			</div>
 		</div>
 	);
-}
+};
+
+export default LoginBox;

@@ -13,7 +13,6 @@ enum Menu {
 
 const BellDropDownMenu = ({ className }: { className?: string; handleClose?: () => void }) => {
 	const [menuMode, setMenuMode] = useState<Menu>(0);
-	const { isAuth } = useAuthStore();
 
 	const handleMenuMode = (menu: Menu) => {
 		setMenuMode(menu);
