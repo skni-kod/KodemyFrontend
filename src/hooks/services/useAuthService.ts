@@ -16,7 +16,7 @@ const useAuthService = () => {
 			const response = await kodemyAPI.get('/api/oauth2', {
 				withCredentials: true,
 			});
-			return response.data;
+			return response.data.auth;
 		} catch (e) {}
 	}, []);
 
