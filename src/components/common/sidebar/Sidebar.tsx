@@ -10,18 +10,18 @@ const Sidebar = () => {
 	const { isOpen, setIsOpen } = useSidebarContext();
 	const [expandedItemId, setExpandedItemId] = useState<number | null>(null);
 	const windowWidth = useWindowWidth();
-	const navClassNameRef = useRef<string>('');
+	const sidebarRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		navClassNameRef.current = clsx(
-			'z-10 fixed top-0 left-0 h-full pt-20 pb-5 overflow-y-auto bg-white2darkgrey text-black2white shadow-md',
-			isOpen ? 'w-72 px-5 bg-gradient-radial' : 'bg-gradient-conic',
-			!isOpen && (windowWidth > 768 ? 'w-18 pl-5 pr-4' : 'w-0 x-0'),
-			windowWidth > 768 && 'transition-width duration-500 ease-linear',
-		);
+		if (sidebarRef.current) {
+			sidebarRef.current.className = clsx(
+				'z-10 fixed top-0 left-0 h-full pt-20 pb-5 overflow-y-auto bg-white2darkgrey text-black2white shadow-md',
+				windowWidth > 768 && 'transition-width duration-500 ease-linear',
+				isOpen ? 'bg-gradient-radial' : 'bg-gradient-conic',
+				isOpen ? 'w-72 px-5' : windowWidth > 768 ? 'w-18 pl-5 pr-4' : 'w-0 px-0',
+			);
+		}
 	}, [isOpen, windowWidth]);
-
-	useEffect(() => {}, []);
 
 	const handleExpand = (mouseEntered: boolean) => windowWidth > 768 && setIsOpen(mouseEntered);
 
@@ -29,7 +29,7 @@ const Sidebar = () => {
 		<nav
 			onMouseEnter={() => handleExpand(true)}
 			onMouseLeave={() => handleExpand(false)}
-			className={navClassNameRef.current}
+			ref={sidebarRef}
 		>
 			<div className="relative pt-2">
 				<ul className="p-0 list-none">

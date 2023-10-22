@@ -1,8 +1,6 @@
 import React from 'react';
 import Container from '@/components/common/Container';
 import Page from '@/components/common/Page';
-import { useCheckLoginStatus } from '@/components/login/CheckLoginStatus';
-import RedirectionButton from '@/components/login/atoms/RedirectionButton';
 
 const Index = () => {
 	return (

@@ -1,15 +1,57 @@
-import { CategoryMaterials } from '@/mocks/categoryMock';
-import { useState } from 'react';
-import MaterialManagementButtons from './molecules/MaterialManagementButtons';
+import { useEffect, useState } from 'react';
 import HeaderAllMaterials from '@/components/common/page/organisms/HeaderAllMaterials';
 import ResultCount from '@/components/common/page/atoms/ResultCount';
 import SortMenuButton from '@/components/materials/organisms/SortMenuButton';
 import FilterMenuButton from '@/components/common/page/atoms/FilterMenuButton';
 import FiltersMenu from '@/components/common/page/organisms/FiltersMenu';
+import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialService';
+import { openSearchBaseInitialState } from '@/utils/constant';
+import useFiltersMenu from '@/hooks/useFiltersMenu';
+import useModal from '@/hooks/useModal';
+import MaterialModalContent from '@/components/materials/organisms/MaterialModalContent';
+import ManagementMaterialBlock from '@/components/common/page/molecules/ManagementMaterialBlock';
+import AdminMaterialBlockButtons from '@/components/admin/molecules/AdminMaterialBlockButtons';
+
+type CurrentIds = {
+	material: number | undefined;
+	section: number | undefined;
+	category: number | undefined;
+};
+
+const currentIdsInitState: CurrentIds = {
+	material: undefined,
+	section: undefined,
+	category: undefined,
+};
 
 const AdminMaterialsContent = () => {
-	const materials = CategoryMaterials;
-	const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);
+	const { getMaterials } = useMaterialService();
+	const [materials, setMaterials] = useState<MaterialOpenSearch>(openSearchBaseInitialState);
+	const { FiltersMenu, filters, isFilterMenuOpen, setIsFilterMenuOpen } = useFiltersMenu();
+
+	const { Modal, isOpen, handleOpenModal, handleCloseModal } = useModal(false);
+	const [currentIds, setCurrentIds] = useState<CurrentIds>(currentIdsInitState);
+
+	useEffect(() => {
+		(async () => {
+			setMaterials(
+				await getMaterials(
+					filters({
+						sectionId: currentIds.section,
+						categoryId: currentIds.category,
+					}),
+				),
+			);
+		})();
+	}, [currentIds.category, currentIds.section, filters, getMaterials]);
+
+	const handleOpenMaterialModal = (id: number) => {
+		setCurrentIds({
+			...currentIds,
+			material: id,
+		});
+		if (id) handleOpenModal();
+	};
 
 	return (
 		<>
@@ -27,9 +69,16 @@ const AdminMaterialsContent = () => {
 			<div className="flex flex-col w-full gap-4 pt-6 pb-4">
 				{materials &&
 					materials.content.map((material) => (
-						<MaterialManagementButtons key={material.id} data={material} />
+						<ManagementMaterialBlock key={material.id} data={material}>
+							<AdminMaterialBlockButtons />
+						</ManagementMaterialBlock>
 					))}
 			</div>
+			{isOpen && (
+				<Modal>
+					<MaterialModalContent materialId={currentIds.material} handleClose={handleCloseModal} />
+				</Modal>
+			)}
 		</>
 	);
 };

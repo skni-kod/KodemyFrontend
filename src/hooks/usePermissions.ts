@@ -23,7 +23,10 @@ const usePermissions = () => {
 	};
 
 	useEffect(() => {
-		if (user) setPermissions(determinePermissions(user.role.name));
+		if (user)
+			setPermissions(
+				determinePermissions(AuthUserRoleType[user.role.name as keyof typeof AuthUserRoleType]),
+			);
 	}, [user]);
 
 	return permissions;

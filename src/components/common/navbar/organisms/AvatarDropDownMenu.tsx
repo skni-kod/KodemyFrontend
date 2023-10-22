@@ -1,10 +1,10 @@
 import {
-	pageAdminMaterialsRoute,
-	pageLogoutRoute,
-	pageAdminUsersRoute,
-	pageAccountSettingsRoute,
 	pageAccountMaterialsRoute,
 	pageAccountRoute,
+	pageAccountSettingsRoute,
+	pageAdminMaterialsRoute,
+	pageAdminUsersRoute,
+	pageLogoutRoute
 } from '@/pages/route';
 import AvatarMenuSeparator from '@/components/common/navbar/atoms/AvatarMenuSeparator';
 import AvatarMenuButton from '@/components/common/navbar/atoms/AvatarMenuButton';

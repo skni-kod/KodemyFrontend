@@ -3,17 +3,19 @@ import { useSectionsStore } from '@/store/sectionsSlice';
 import { useState } from 'react';
 import FilterButtonsList from '@/components/common/page/molecules/FilterButtonsList';
 
-const currentIdsInit = {
+type CurrentIds = {
+	section: number | undefined;
+	category: number | undefined;
+};
+
+const currentIdsInitState: CurrentIds = {
 	section: undefined,
 	category: undefined,
 };
 
 const HeaderAllMaterials = ({ headName }: { headName: string }) => {
 	const { sections } = useSectionsStore();
-	const [currentIds, setCurrentIds] = useState<{
-		section: number | undefined;
-		category: number | undefined;
-	}>(currentIdsInit);
+	const [currentIds, setCurrentIds] = useState<CurrentIds>(currentIdsInitState);
 
 	const handleCategories = (id: number) =>
 		sections.find((section) => section.id === id)?.categories;
@@ -27,7 +29,7 @@ const HeaderAllMaterials = ({ headName }: { headName: string }) => {
 						name="Wszystkie"
 						selected={!currentIds.section}
 						onClick={() => {
-							setCurrentIds(currentIdsInit);
+							setCurrentIds(currentIdsInitState);
 						}}
 					/>
 				)}

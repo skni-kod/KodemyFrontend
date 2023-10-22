@@ -1,5 +1,6 @@
 import Route from '@/utils/route';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const logoutApiAuth = (originPathName: string): Route => {
 	return {
@@ -12,7 +13,10 @@ const logoutApiAuth = (originPathName: string): Route => {
 
 const Index = () => {
 	const router = useRouter();
-	router.push(logoutApiAuth(router.asPath));
+
+	useEffect(() => {
+		router.push(logoutApiAuth(router.asPath));
+	}, [router]);
 	return null;
 };
 

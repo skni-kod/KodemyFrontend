@@ -1,5 +1,4 @@
 import { BiSearch } from 'react-icons/bi';
-import { PiMicrophoneThin } from 'react-icons/pi';
 
 const SearchBarDesktop = () => {
 	return (
@@ -7,7 +6,7 @@ const SearchBarDesktop = () => {
 			<div className="flex items-center px-1 gap-1 overflow-hidden rounded-full">
 				<BiSearch className="text-grey2white text-2xl h-[5vw] w-[5vw] sm:h-[25.5px] sm:w-[25.5px] mt-0.5" />
 				<input
-					className="h-auto py-[1vh] w-[33vw] sm:h-[37px] sm:w-[20vw] text-[2.8vw] sm:text-[18px] sm:min-w-[205px] outline-none bg-white2darkgrey text-black2white"
+					className="h-auto py-[1vh] w-[33vw] sm:h-[37px] sm:w-[20vw] sm:min-w-[205px] text-lg outline-none bg-white2darkgrey text-grey2white"
 					placeholder="Szybkie wyszukiwanie"
 				/>
 			</div>
