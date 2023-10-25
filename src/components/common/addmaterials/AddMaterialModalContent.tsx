@@ -3,13 +3,12 @@ import BottomButtons from './atoms/BottomButtons';
 import ChooseSection from './organisms/ChooseSection';
 import ChooseCategory from './organisms/ChooseCategory';
 import DescribeMaterial from './organisms/DescribeMaterial';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ConfirmMsg from './organisms/ConfirmMsg';
 
 const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) => {
 	const [currentSection, setCurrentSection] = useState('section1');
 	const [nextButtonText, setNextButtonText] = useState('Następne');
-
 	const [sectionID, setSectionID] = useState('0');
 	const handleSectionChange = (newSectionID: string) => {
 		setSectionID(newSectionID);
@@ -20,9 +19,43 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 		setCategoryID(newCategoryID);
 	};
 
+	const [titlematerial, setTitlematerial] = useState('');
+	const [linkmaterial, setLinkmaterial] = useState('');
+	const [descriptionmaterial, setDescriptionmaterial] = useState('');
+	const handleMaterialChange = (
+		newTitlematerial: string,
+		newLinkmaterial: string,
+		newDescriptionmaterial: string,
+	) => {
+		setTitlematerial(newTitlematerial);
+		setLinkmaterial(newLinkmaterial);
+		setDescriptionmaterial(newDescriptionmaterial);
+	};
+
+	const [userId, setUserId] = useState('');
+
+	useEffect(() => {
+		const fetchUserId = async () => {
+			try {
+				const response = await fetch('http://localhost:8181/api/users/me', {
+					credentials: 'include',
+				});
+
+				if (response.status === 200) {
+					const userData = await response.json();
+					console.log('userData ', userData);
+					setUserId(userData.id);
+				} else {
+					console.error('Błąd podczas sprawdzania statusu logowania:', response.status);
+				}
+			} catch (error) {
+				console.error('Błąd podczas sprawdzania statusu logowania:', error);
+			}
+		};
+		fetchUserId();
+	}, []);
+
 	const handleNext = () => {
-		console.log('Wybrana sekcja:', sectionID);
-		console.log('Wybrana kategoria:', categoryID);
 		if (currentSection === 'section1') {
 			setCurrentSection('section2');
 		}
@@ -71,10 +104,26 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 					/>
 				)}
 				{currentSection === 'section3' && (
-					<DescribeMaterial titletext="Opisz materiał" descriptiontext="Tutaj opisujesz materiał" />
+					<DescribeMaterial
+						titletext="Opisz materiał"
+						descriptiontext="Tutaj opisujesz materiał"
+						titlematerial={titlematerial}
+						linkmaterial={linkmaterial}
+						descriptionmaterial={descriptionmaterial}
+						handleMaterialChange={handleMaterialChange}
+					/>
 				)}
 				{currentSection === 'section4' && (
-					<ConfirmMsg titletext="Udało się" descriptiontext="Dodano materiał" />
+					<ConfirmMsg
+						titletext="Udało się"
+						descriptiontext="Dodano materiał"
+						userId={userId} // Przekazywanie id użytkownika do komponentu ConfirmMsg
+						sectionID={sectionID}
+						categoryID={categoryID}
+						titlematerial={titlematerial}
+						linkmaterial={linkmaterial}
+						descriptionmaterial={descriptionmaterial}
+					/>
 				)}
 
 				<div className="relative bottom-0 left-0 column w-full pb-3 pt-4">
@@ -84,7 +133,7 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 							<BottomButtons handleState={handleNext} buttonText={nextButtonText} />
 						</div>
 					)}
-					{currentSection == 'section4' && (
+					{currentSection === 'section4' && (
 						<div className="relative bottom-0 left-0 flex justify-center w-full gap-6">
 							<BottomButtons handleState={handleClose} buttonText="Zakończ" />
 						</div>
