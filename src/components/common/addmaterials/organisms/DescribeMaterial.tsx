@@ -10,6 +10,8 @@ const DescribeMaterial = ({
 	return (
 		<div>
 			<Title titletext={titletext} descriptiontext={descriptiontext} />
+			<h2>Tytuł</h2>
+
 			<div className="border border-black2white rounded-lg mx-6">
 				<div className="px-5 py-5 text-black2white text-center">
 					<h2 className="text-lg font-semibold ">Języki programowania</h2>

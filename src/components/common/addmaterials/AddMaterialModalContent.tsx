@@ -1,6 +1,5 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import BottomButtons from './atoms/BottomButtons';
-import useModal from '@/hooks/useModal';
 import ChooseSection from './organisms/ChooseSection';
 import ChooseCategory from './organisms/ChooseCategory';
 import DescribeMaterial from './organisms/DescribeMaterial';
@@ -8,11 +7,20 @@ import { useState } from 'react';
 import ConfirmMsg from './organisms/ConfirmMsg';
 
 const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) => {
-	const { Modal, isOpen, handleOpenModal, handleCloseModal } = useModal(false);
 	const [currentSection, setCurrentSection] = useState('section1');
 	const [nextButtonText, setNextButtonText] = useState('Następne');
 
+	const [sectionID, setSectionID] = useState('0');
+	const handleSectionChange = (newSectionID: string) => {
+		setSectionID(newSectionID);
+	};
+	const [categoryID, setCategoryID] = useState('0');
+	const handleCategoryChange = (newCategoryID: string) => {
+		setCategoryID(newCategoryID);
+	};
+
 	const handleNext = () => {
+		console.log('Wybrana sekcja:', sectionID);
 		if (currentSection === 'section1') {
 			setCurrentSection('section2');
 		}
@@ -32,10 +40,6 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 		}
 	};
 
-	const handleOpenMaterialModal = () => {
-		handleOpenModal();
-	};
-
 	return (
 		<div className="relative w-128 min-h-112 p-3 bg-white2verydarkgrey rounded-2xl">
 			<div className="flex justify-end">
@@ -48,12 +52,18 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 			</div>
 			<div className="px-8 py-1">
 				{currentSection === 'section1' && (
-					<ChooseSection titletext="Wybierz sekcje" descriptiontext="Tutaj wybierasz sekcję" />
+					<ChooseSection
+						titletext="Wybierz sekcje"
+						descriptiontext="Tutaj wybierasz sekcję"
+						sectionID={sectionID}
+						handleSectionChange={handleSectionChange}
+					/>
 				)}
 				{currentSection === 'section2' && (
 					<ChooseCategory
 						titletext="Wybierz kategorię"
 						descriptiontext="Tutaj wybierasz kategorię"
+						section={sectionID}
 					/>
 				)}
 				{currentSection === 'section3' && (

@@ -1,5 +1,4 @@
 import { useSectionsStore } from '@/store/sectionsSlice';
-
 import Title from '../atoms/Title';
 import SectionItem from '../molecules/SectionItem';
 import { useState } from 'react';
@@ -8,12 +7,22 @@ import { Section } from '@/hooks/services/useSectionService';
 const ChooseSection = ({
 	titletext,
 	descriptiontext,
+	sectionID,
+	handleSectionChange,
 }: {
 	titletext: string;
 	descriptiontext: string;
+	sectionID: string;
+	handleSectionChange: (newSectionID: string) => void;
 }) => {
 	const { sections } = useSectionsStore();
-	const [selectedSection, setSelectedSection] = useState<Section | null>(null); // Zmieniamy typ selectedSection
+	const [selectedSection, setSelectedSection] = useState<Section | null>(null);
+
+	const handleSectionSelect = (section: Section) => {
+		setSelectedSection(section);
+		const newSectionID = section.id.toString();
+		handleSectionChange(newSectionID);
+	};
 
 	return (
 		<>
@@ -23,7 +32,7 @@ const ChooseSection = ({
 					<SectionItem
 						key={index}
 						section={section}
-						setSelectedSection={setSelectedSection}
+						setSelectedSection={handleSectionSelect}
 						isSelected={selectedSection === section}
 					/>
 				))}

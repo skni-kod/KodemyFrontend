@@ -1,22 +1,42 @@
 import Title from '../atoms/Title';
+import { useState } from 'react';
+import CategoryItem from '../molecules/CategoryItem';
+import { useSectionsStore } from '@/store/sectionsSlice';
+import { Category } from '@/hooks/services/useSectionService';
 
 const ChooseCategory = ({
 	titletext,
 	descriptiontext,
+	section,
 }: {
 	titletext: string;
 	descriptiontext: string;
+	section: string;
 }) => {
+	const { sections } = useSectionsStore();
+	const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+
+	const handleCategorySelect = (category: Category) => {
+		setSelectedCategory(category);
+		// const newCategoryID = category.id.toString();
+		// handleCategoryChange(newCategoryID);
+	};
+
+	const selectedSection = sections.find((s) => s.name === section);
+
 	return (
-		<div>
+		<>
 			<Title titletext={titletext} descriptiontext={descriptiontext} />
-			<div className="border border-black2white rounded-lg mx-6">
-				<div className="px-5 py-5 text-black2white text-center">
-					<h2 className="text-lg font-semibold ">Języki programowania</h2>
-					<span className="pt-6 text-sm">Lorem ipsum itd...</span>
-				</div>
-			</div>
-		</div>
+			{selectedSection &&
+				selectedSection.categories.map((category) => (
+					<CategoryItem
+						key={category.id}
+						category={category}
+						setSelectedCategory={handleCategorySelect}
+						isSelected={selectedCategory === category}
+					/>
+				))}
+		</>
 	);
 };
 
