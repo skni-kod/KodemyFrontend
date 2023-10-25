@@ -63,7 +63,7 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 					<ConfirmMsg titletext="Udało się" descriptiontext="Dodano materiał" />
 				)}
 
-				<div className="relative bottom-0 left-0 column w-full pb-3 pt-11">
+				<div className="relative bottom-0 left-0 column w-full pb-3 pt-4">
 					{currentSection !== 'section4' && (
 						<div className="relative bottom-0 left-0 flex justify-center w-full gap-6">
 							<BottomButtons handleState={handlePrevious} buttonText="Wróć" />

@@ -1,4 +1,9 @@
+import { useSectionsStore } from '@/store/sectionsSlice';
+
 import Title from '../atoms/Title';
+import SectionItem from '../molecules/SectionItem';
+import { useState } from 'react';
+import { Section } from '@/hooks/services/useSectionService';
 
 const ChooseSection = ({
 	titletext,
@@ -7,16 +12,22 @@ const ChooseSection = ({
 	titletext: string;
 	descriptiontext: string;
 }) => {
+	const { sections } = useSectionsStore();
+	const [selectedSection, setSelectedSection] = useState<Section | null>(null); // Zmieniamy typ selectedSection
+
 	return (
-		<div>
+		<>
 			<Title titletext={titletext} descriptiontext={descriptiontext} />
-			<div className="border border-black2white rounded-lg mx-6">
-				<div className="px-5 py-5 text-black2white text-center">
-					<h2 className="text-lg font-semibold ">Języki programowania</h2>
-					<span className="pt-6 text-sm">Lorem ipsum itd...</span>
-				</div>
-			</div>
-		</div>
+			{sections &&
+				sections.map((section, index) => (
+					<SectionItem
+						key={index}
+						section={section}
+						setSelectedSection={setSelectedSection}
+						isSelected={selectedSection === section}
+					/>
+				))}
+		</>
 	);
 };
 
