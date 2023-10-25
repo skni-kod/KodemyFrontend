@@ -5,26 +5,30 @@ import ChooseSection from './organisms/ChooseSection';
 import ChooseCategory from './organisms/ChooseCategory';
 import DescribeMaterial from './organisms/DescribeMaterial';
 import { useState } from 'react';
-import { BsDot } from 'react-icons/bs';
+import ConfirmMsg from './organisms/ConfirmMsg';
 
 const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) => {
 	const { Modal, isOpen, handleOpenModal, handleCloseModal } = useModal(false);
 	const [currentSection, setCurrentSection] = useState('section1');
+	const [nextButtonText, setNextButtonText] = useState('Następne');
 
 	const handleNext = () => {
 		if (currentSection === 'section1') {
 			setCurrentSection('section2');
 		}
-		if (currentSection === 'section2') {
+		if (currentSection === 'section3') {
+			setCurrentSection('section4');
+		} else if (currentSection === 'section2') {
 			setCurrentSection('section3');
+			setNextButtonText('Zakończ');
 		}
 	};
 	const handlePrevious = () => {
 		if (currentSection === 'section2') {
 			setCurrentSection('section1');
-		}
-		if (currentSection === 'section3') {
+		} else if (currentSection === 'section3') {
 			setCurrentSection('section2');
+			setNextButtonText('Następne');
 		}
 	};
 
@@ -55,28 +59,42 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 				{currentSection === 'section3' && (
 					<DescribeMaterial titletext="Opisz materiał" descriptiontext="Tutaj opisujesz materiał" />
 				)}
+				{currentSection === 'section4' && (
+					<ConfirmMsg titletext="Udało się" descriptiontext="Dodano materiał" />
+				)}
+
 				<div className="relative bottom-0 left-0 column w-full pb-3 pt-11">
-					<div className="relative bottom-0 left-0 flex justify-center w-full gap-6">
-						<BottomButtons handleState={handlePrevious} buttonText="Wróć" />
-						<BottomButtons handleState={handleNext} buttonText="Następne" />
-					</div>
-					<div className="flex justify-center gap-4 pt-5">
-						<div
-							className={`rounded-full w-4 h-4 ${
-								currentSection === 'section1' ? 'bg-sky-500' : 'bg-black2white'
-							}`}
-						></div>
-						<div
-							className={`rounded-full w-4 h-4 ${
-								currentSection === 'section2' ? 'bg-sky-500' : 'bg-black2white'
-							}`}
-						></div>
-						<div
-							className={`rounded-full w-4 h-4 ${
-								currentSection === 'section3' ? 'bg-sky-500' : 'bg-black2white'
-							}`}
-						></div>
-					</div>
+					{currentSection !== 'section4' && (
+						<div className="relative bottom-0 left-0 flex justify-center w-full gap-6">
+							<BottomButtons handleState={handlePrevious} buttonText="Wróć" />
+							<BottomButtons handleState={handleNext} buttonText={nextButtonText} />
+						</div>
+					)}
+					{currentSection == 'section4' && (
+						<div className="relative bottom-0 left-0 flex justify-center w-full gap-6">
+							<BottomButtons handleState={handleClose} buttonText="Zakończ" />
+						</div>
+					)}
+
+					{currentSection !== 'section4' && (
+						<div className="flex justify-center gap-4 pt-5">
+							<div
+								className={`rounded-full w-4 h-4 ${
+									currentSection === 'section1' ? 'bg-sky-500' : 'bg-black2white'
+								}`}
+							></div>
+							<div
+								className={`rounded-full w-4 h-4 ${
+									currentSection === 'section2' ? 'bg-sky-500' : 'bg-black2white'
+								}`}
+							></div>
+							<div
+								className={`rounded-full w-4 h-4 ${
+									currentSection === 'section3' ? 'bg-sky-500' : 'bg-black2white'
+								}`}
+							></div>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>
