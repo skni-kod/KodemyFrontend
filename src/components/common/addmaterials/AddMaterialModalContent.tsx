@@ -14,6 +14,7 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 	const handleSectionChange = (newSectionID: string) => {
 		setSectionID(newSectionID);
 	};
+
 	const [categoryID, setCategoryID] = useState('0');
 	const handleCategoryChange = (newCategoryID: string) => {
 		setCategoryID(newCategoryID);
@@ -21,6 +22,7 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 
 	const handleNext = () => {
 		console.log('Wybrana sekcja:', sectionID);
+		console.log('Wybrana kategoria:', categoryID);
 		if (currentSection === 'section1') {
 			setCurrentSection('section2');
 		}
@@ -63,7 +65,9 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 					<ChooseCategory
 						titletext="Wybierz kategorię"
 						descriptiontext="Tutaj wybierasz kategorię"
-						section={sectionID}
+						sectionID={sectionID}
+						categoryID={categoryID}
+						handleCategoryChange={handleCategoryChange}
 					/>
 				)}
 				{currentSection === 'section3' && (
