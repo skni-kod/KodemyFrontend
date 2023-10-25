@@ -1,6 +1,37 @@
 import { AiOutlineClose } from 'react-icons/ai';
+import BottomButtons from './atoms/BottomButtons';
+import useModal from '@/hooks/useModal';
+import ChooseSection from './organisms/ChooseSection';
+import ChooseCategory from './organisms/ChooseCategory';
+import DescribeMaterial from './organisms/DescribeMaterial';
+import { useState } from 'react';
+import { BsDot } from 'react-icons/bs';
 
 const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) => {
+	const { Modal, isOpen, handleOpenModal, handleCloseModal } = useModal(false);
+	const [currentSection, setCurrentSection] = useState('section1');
+
+	const handleNext = () => {
+		if (currentSection === 'section1') {
+			setCurrentSection('section2');
+		}
+		if (currentSection === 'section2') {
+			setCurrentSection('section3');
+		}
+	};
+	const handlePrevious = () => {
+		if (currentSection === 'section2') {
+			setCurrentSection('section1');
+		}
+		if (currentSection === 'section3') {
+			setCurrentSection('section2');
+		}
+	};
+
+	const handleOpenMaterialModal = () => {
+		handleOpenModal();
+	};
+
 	return (
 		<div className="relative w-128 min-h-112 p-3 bg-white2verydarkgrey rounded-2xl">
 			<div className="flex justify-end">
@@ -12,13 +43,40 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 				</button>
 			</div>
 			<div className="px-8 py-1">
-				<div className="relative bottom-0 left-0 flex justify-center w-full pb-3 pt-11">
-					<button
-						className="bg-sky-500 hover:bg-blue-600 text-white2white text-xs lg:text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded"
-						onClick={() => handleClose()}
-					>
-						Zamknij
-					</button>
+				{currentSection === 'section1' && (
+					<ChooseSection titletext="Wybierz sekcje" descriptiontext="Tutaj wybierasz sekcję" />
+				)}
+				{currentSection === 'section2' && (
+					<ChooseCategory
+						titletext="Wybierz kategorię"
+						descriptiontext="Tutaj wybierasz kategorię"
+					/>
+				)}
+				{currentSection === 'section3' && (
+					<DescribeMaterial titletext="Opisz materiał" descriptiontext="Tutaj opisujesz materiał" />
+				)}
+				<div className="relative bottom-0 left-0 column w-full pb-3 pt-11">
+					<div className="relative bottom-0 left-0 flex justify-center w-full gap-6">
+						<BottomButtons handleState={handlePrevious} buttonText="Wróć" />
+						<BottomButtons handleState={handleNext} buttonText="Następne" />
+					</div>
+					<div className="flex justify-center gap-4 pt-5">
+						<div
+							className={`rounded-full w-4 h-4 ${
+								currentSection === 'section1' ? 'bg-sky-500' : 'bg-black2white'
+							}`}
+						></div>
+						<div
+							className={`rounded-full w-4 h-4 ${
+								currentSection === 'section2' ? 'bg-sky-500' : 'bg-black2white'
+							}`}
+						></div>
+						<div
+							className={`rounded-full w-4 h-4 ${
+								currentSection === 'section3' ? 'bg-sky-500' : 'bg-black2white'
+							}`}
+						></div>
+					</div>
 				</div>
 			</div>
 		</div>
