@@ -15,6 +15,8 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 	const [titlematerial, setTitlematerial] = useState('');
 	const [linkmaterial, setLinkmaterial] = useState('');
 	const [descriptionmaterial, setDescriptionmaterial] = useState('');
+	const [responsemsgtitle, setResponseMsgTitle] = useState('');
+	const [responsemsgtext, setResponseMsgText] = useState('');
 
 	const handleSectionChange = (newSectionID: string) => {
 		setSectionID(newSectionID);
@@ -34,34 +36,37 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 		setDescriptionmaterial(newDescriptionmaterial);
 	};
 
-	const addDataToDatabase = async () => {
-		try {
-			const response = await axios.post('http://localhost:8181/api/materials', {
-				title: titlematerial,
-				description: descriptionmaterial,
-				link: linkmaterial,
-				typeId: sectionID,
-				categoryId: categoryID,
-				technologiesIds: [2],
-			});
-			if (response.status === 200) {
-				console.log('Dane zostały pomyślnie dodane do bazy danych.');
-			} else {
-				console.log('Wystąpił błąd podczas dodawania danych do bazy danych.');
-			}
-		} catch (error) {
-			console.error('Wystąpił błąd podczas wykonywania zapytania HTTP:', error);
-		}
-	};
-
-	const handleNext = () => {
+	const handleNext = async () => {
 		if (currentSection === 'section1') {
 			setCurrentSection('section2');
 		} else if (currentSection === 'section2') {
 			setCurrentSection('section3');
 			setNextButtonText('Zakończ');
 		} else if (currentSection === 'section3') {
-			addDataToDatabase();
+			try {
+				const typeId = +sectionID;
+				const categoryId = +categoryID;
+
+				const response = await axios.post('http://localhost:8181/api/materials', {
+					title: titlematerial,
+					description: descriptionmaterial,
+					link: linkmaterial,
+					typeId: typeId,
+					categoryId: categoryId,
+					technologiesIds: [2],
+				});
+				if (response.status === 200) {
+					setResponseMsgTitle('Udało się');
+					setResponseMsgText('Materiał został dodany');
+				} else {
+					setResponseMsgTitle('Błąd');
+					setResponseMsgText('Materiał nie został dodany');
+				}
+			} catch (error) {
+				setResponseMsgTitle('Błąd');
+				setResponseMsgText('Wystąpił błąd podczas wykonywania zapytania HTTP: ' + error);
+				console.error(responsemsgtext);
+			}
 			setCurrentSection('section4');
 		}
 	};
@@ -112,8 +117,8 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 				)}
 				{currentSection === 'section4' && (
 					<ConfirmMsg
-						titletext="Udało się"
-						descriptiontext="Dodano materiał"
+						titletext={responsemsgtitle}
+						descriptiontext={responsemsgtext}
 						sectionID={sectionID}
 						categoryID={categoryID}
 						titlematerial={titlematerial}
