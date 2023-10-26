@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Status from '@/components/materials/atoms/Status';
 import MaterialWrapper from '@/components/common/page/atoms/MaterialWrapper';
 import { Rating } from 'react-simple-star-rating';
+import Favourite from '../atoms/Favourite';
 
 type MaterialProps = {
 	data: Material;
@@ -39,9 +40,14 @@ const MaterialBlock = ({
 					<div className="text-xl text-black2white text-bold mt-0.5 text-ellipsis">{title}</div>
 					<div className="text-sm text-bold">{description}</div>
 				</div>
+			</div>
+			<div className="flex flex-col justify-center w-auto py-5 px-2">
 				<Status status={status} />
 			</div>
-			<div className="flex flex-col justify-center w-52 min-w-52 pl-5 py-2 gap-1 border-l-2 text-xs">
+			<div className="flex flex-col justify-center w-auto min-w-52 min-h-5 h-16 py-5 px-2 border-l-2 ">
+				<Favourite />
+			</div>
+			<div className="flex flex-col justify-center w-52 min-w-52 min-h-5 h-16 pl-5 py-2 gap-1 border-l-2 text-xs">
 				<div>Dodane przez: {user}</div>
 				<div>Data dodania: {createdDate.split('T')[0]}</div>
 			</div>

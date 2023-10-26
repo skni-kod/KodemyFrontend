@@ -5,6 +5,7 @@ import { BiStar } from 'react-icons/bi';
 import Status from '@/components/materials/atoms/Status';
 import React from 'react';
 import { Material } from '@/hooks/services/useMaterialService';
+import Favourite from '@/components/materials/atoms/Favourite';
 
 const ManagementMaterialBlock = ({
 	data: { title, description, status, user, createdDate },
@@ -31,6 +32,7 @@ const ManagementMaterialBlock = ({
 					</div>
 					<div className="text-xl text-black2white text-bold mt-0.5">{title}</div>
 					<div className="text-sm text-bold">{description}</div>
+
 					<div className="flex-none text-xs text-bold pt-1">
 						<div>
 							Dodane {createdDate.split('T')[0]} przez: {user}
