@@ -5,45 +5,28 @@ import ChooseCategory from './organisms/ChooseCategory';
 import DescribeMaterial from './organisms/DescribeMaterial';
 import { useEffect, useState } from 'react';
 import ConfirmMsg from './organisms/ConfirmMsg';
+import axios from 'axios';
 
 const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) => {
 	const [currentSection, setCurrentSection] = useState('section1');
 	const [nextButtonText, setNextButtonText] = useState('Następne');
 	const [sectionID, setSectionID] = useState('0');
-	const handleSectionChange = (newSectionID: string) => {
-		setSectionID(newSectionID);
-	};
-
 	const [categoryID, setCategoryID] = useState('0');
-	const handleCategoryChange = (newCategoryID: string) => {
-		setCategoryID(newCategoryID);
-	};
-
 	const [titlematerial, setTitlematerial] = useState('');
 	const [linkmaterial, setLinkmaterial] = useState('');
 	const [descriptionmaterial, setDescriptionmaterial] = useState('');
-	const handleMaterialChange = (
-		newTitlematerial: string,
-		newLinkmaterial: string,
-		newDescriptionmaterial: string,
-	) => {
-		setTitlematerial(newTitlematerial);
-		setLinkmaterial(newLinkmaterial);
-		setDescriptionmaterial(newDescriptionmaterial);
-	};
-
 	const [userId, setUserId] = useState('');
 
 	useEffect(() => {
 		const fetchUserId = async () => {
 			try {
-				const response = await fetch('http://localhost:8181/api/users/me', {
-					credentials: 'include',
+				const response = await axios.get('http://localhost:8181/api/users/me', {
+					withCredentials: true,
 				});
 
 				if (response.status === 200) {
-					const userData = await response.json();
-					console.log('userData ', userData);
+					const userData = response.data;
+					console.log('userData', userData);
 					setUserId(userData.id);
 				} else {
 					console.error('Błąd podczas sprawdzania statusu logowania:', response.status);
@@ -55,17 +38,57 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 		fetchUserId();
 	}, []);
 
+	const handleSectionChange = (newSectionID: string) => {
+		setSectionID(newSectionID);
+	};
+
+	const handleCategoryChange = (newCategoryID: string) => {
+		setCategoryID(newCategoryID);
+	};
+
+	const handleMaterialChange = (
+		newTitlematerial: string,
+		newLinkmaterial: string,
+		newDescriptionmaterial: string,
+	) => {
+		setTitlematerial(newTitlematerial);
+		setLinkmaterial(newLinkmaterial);
+		setDescriptionmaterial(newDescriptionmaterial);
+	};
+
+	const addDataToDatabase = async () => {
+		try {
+			const response = await axios.post('http://localhost:8181/api/materials', {
+				title: titlematerial,
+				description: descriptionmaterial,
+				link: linkmaterial,
+				categoryId: categoryID,
+				typeId: sectionID,
+				technologiesIds: [2],
+			});
+
+			if (response.status === 200) {
+				console.log('Dane zostały pomyślnie dodane do bazy danych.');
+			} else {
+				console.log('Wystąpił błąd podczas dodawania danych do bazy danych.');
+			}
+		} catch (error) {
+			console.error('Wystąpił błąd podczas wykonywania zapytania HTTP:', error);
+		}
+	};
+
 	const handleNext = () => {
 		if (currentSection === 'section1') {
 			setCurrentSection('section2');
-		}
-		if (currentSection === 'section3') {
-			setCurrentSection('section4');
 		} else if (currentSection === 'section2') {
 			setCurrentSection('section3');
 			setNextButtonText('Zakończ');
+		} else if (currentSection === 'section3') {
+			addDataToDatabase();
+			setCurrentSection('section4');
 		}
 	};
+
 	const handlePrevious = () => {
 		if (currentSection === 'section2') {
 			setCurrentSection('section1');
@@ -78,10 +101,7 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 	return (
 		<div className="relative w-128 min-h-112 p-3 bg-white2verydarkgrey rounded-2xl">
 			<div className="flex justify-end">
-				<button
-					className="font-semibold text-black2white hover:text-sky-500"
-					onClick={() => handleClose()}
-				>
+				<button className="font-semibold text-black2white hover:text-sky-500" onClick={handleClose}>
 					<AiOutlineClose height={24} width={24} />
 				</button>
 			</div>
@@ -117,7 +137,7 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 					<ConfirmMsg
 						titletext="Udało się"
 						descriptiontext="Dodano materiał"
-						userId={userId} // Przekazywanie id użytkownika do komponentu ConfirmMsg
+						userId={userId}
 						sectionID={sectionID}
 						categoryID={categoryID}
 						titlematerial={titlematerial}
@@ -141,21 +161,14 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 
 					{currentSection !== 'section4' && (
 						<div className="flex justify-center gap-4 pt-5">
-							<div
-								className={`rounded-full w-4 h-4 ${
-									currentSection === 'section1' ? 'bg-sky-500' : 'bg-black2white'
-								}`}
-							></div>
-							<div
-								className={`rounded-full w-4 h-4 ${
-									currentSection === 'section2' ? 'bg-sky-500' : 'bg-black2white'
-								}`}
-							></div>
-							<div
-								className={`rounded-full w-4 h-4 ${
-									currentSection === 'section3' ? 'bg-sky-500' : 'bg-black2white'
-								}`}
-							></div>
+							{['section1', 'section2', 'section3'].map((section, index) => (
+								<div
+									key={index}
+									className={`rounded-full w-4 h-4 ${
+										currentSection === section ? 'bg-sky-500' : 'bg-black2white'
+									}`}
+								></div>
+							))}
 						</div>
 					)}
 				</div>
