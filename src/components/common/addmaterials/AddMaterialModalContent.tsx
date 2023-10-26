@@ -15,28 +15,6 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 	const [titlematerial, setTitlematerial] = useState('');
 	const [linkmaterial, setLinkmaterial] = useState('');
 	const [descriptionmaterial, setDescriptionmaterial] = useState('');
-	const [userId, setUserId] = useState('');
-
-	useEffect(() => {
-		const fetchUserId = async () => {
-			try {
-				const response = await axios.get('http://localhost:8181/api/users/me', {
-					withCredentials: true,
-				});
-
-				if (response.status === 200) {
-					const userData = response.data;
-					console.log('userData', userData);
-					setUserId(userData.id);
-				} else {
-					console.error('Błąd podczas sprawdzania statusu logowania:', response.status);
-				}
-			} catch (error) {
-				console.error('Błąd podczas sprawdzania statusu logowania:', error);
-			}
-		};
-		fetchUserId();
-	}, []);
 
 	const handleSectionChange = (newSectionID: string) => {
 		setSectionID(newSectionID);
@@ -62,11 +40,10 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 				title: titlematerial,
 				description: descriptionmaterial,
 				link: linkmaterial,
-				categoryId: categoryID,
 				typeId: sectionID,
+				categoryId: categoryID,
 				technologiesIds: [2],
 			});
-
 			if (response.status === 200) {
 				console.log('Dane zostały pomyślnie dodane do bazy danych.');
 			} else {
@@ -137,7 +114,6 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 					<ConfirmMsg
 						titletext="Udało się"
 						descriptiontext="Dodano materiał"
-						userId={userId}
 						sectionID={sectionID}
 						categoryID={categoryID}
 						titlematerial={titlematerial}

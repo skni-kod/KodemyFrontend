@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
-
 import Title from '../atoms/Title';
 
 const ConfirmMsg = ({
 	titletext,
 	descriptiontext,
-	userId,
 	sectionID,
 	categoryID,
 	titlematerial,
@@ -15,7 +11,6 @@ const ConfirmMsg = ({
 }: {
 	titletext: string;
 	descriptiontext: string;
-	userId: string;
 	sectionID: string;
 	categoryID: string;
 	titlematerial: string;
@@ -26,7 +21,6 @@ const ConfirmMsg = ({
 		<>
 			<Title titletext={titletext} descriptiontext={descriptiontext} />
 			<div className="flex flex-col">
-				<h2 className="text-black2white">userId: {userId}</h2>
 				<h2 className="text-black2white">sectionID: {sectionID}</h2>
 				<h2 className="text-black2white">categoryID: {categoryID}</h2>
 				<h2 className="text-black2white">titlematerial: {titlematerial}</h2>
