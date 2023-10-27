@@ -19,6 +19,8 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 
 	const { FiltersMenu, isFilterMenuOpen, setIsFilterMenuOpen, filters } = useFiltersMenu();
 
+	const [isFavouriteClicked, setIsFavouriteClicked] = useState(false);
+
 	useEffect(() => {
 		(async () => {
 			setMaterials(
@@ -32,8 +34,17 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 	}, [categoryId, getMaterials, filters]);
 
 	const handleOpenMaterialModal = (id: number) => {
+		setIsFavouriteClicked(false);
+		if (isFavouriteClicked == false) handleOpenModal();
 		setCurrentMaterialId(id);
 		if (id) handleOpenModal();
+	};
+
+	const [isFilled, setIsFilled] = useState(false);
+
+	const handleFavouriteClick = () => {
+		setIsFilled(!isFilled);
+		setIsFavouriteClicked(true);
 	};
 
 	return (
@@ -56,10 +67,12 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 							key={material.id}
 							data={material}
 							handleOpenModal={handleOpenMaterialModal}
+							isFavouriteFilled={isFilled}
+							handleFavouriteClick={handleFavouriteClick}
 						/>
 					))}
 			</div>
-			{isOpen && (
+			{isOpen && !isFavouriteClicked && (
 				<Modal>
 					<MaterialModalContent materialId={currentMaterialId} handleClose={handleCloseModal} />
 				</Modal>

@@ -1,16 +1,14 @@
-import { useState } from 'react';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 
-const Favourite = () => {
-	const [isFilled, setIsFilled] = useState(false);
+type FavouriteProps = {
+	isFavouriteFilled: boolean;
+	handleFavouriteClick: () => void;
+};
 
-	const handleClick = () => {
-		setIsFilled(!isFilled);
-	};
-
+const Favourite = ({ isFavouriteFilled, handleFavouriteClick }: FavouriteProps) => {
 	return (
-		<div onClick={handleClick}>
-			{isFilled ? (
+		<div onClick={handleFavouriteClick}>
+			{isFavouriteFilled ? (
 				<AiFillStar size={50} className="text-yellow-500" title="Usuń z ulubionych" />
 			) : (
 				<AiOutlineStar size={50} className="text-yellow-500" title="Dodaj do ulubionych" />
