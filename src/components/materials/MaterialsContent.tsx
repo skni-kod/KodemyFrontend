@@ -18,9 +18,7 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 	const [currentMaterialId, setCurrentMaterialId] = useState<number>();
 
 	const { FiltersMenu, isFilterMenuOpen, setIsFilterMenuOpen, filters } = useFiltersMenu();
-
-	const [isFavouriteClicked, setIsFavouriteClicked] = useState(false);
-
+	const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
 	useEffect(() => {
 		(async () => {
 			setMaterials(
@@ -34,17 +32,21 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 	}, [categoryId, getMaterials, filters]);
 
 	const handleOpenMaterialModal = (id: number) => {
-		setIsFavouriteClicked(false);
-		if (isFavouriteClicked == false) handleOpenModal();
 		setCurrentMaterialId(id);
-		if (id) handleOpenModal();
+		if (id) {
+			if (!isRatingModalOpen) {
+				handleOpenModal();
+			}
+			if (isRatingModalOpen) {
+				handleCloseModal();
+			}
+		}
 	};
 
 	const [isFilled, setIsFilled] = useState(false);
 
 	const handleFavouriteClick = () => {
 		setIsFilled(!isFilled);
-		setIsFavouriteClicked(true);
 	};
 
 	return (
@@ -69,14 +71,16 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 							handleOpenModal={handleOpenMaterialModal}
 							isFavouriteFilled={isFilled}
 							handleFavouriteClick={handleFavouriteClick}
+							isRatingModalOpen={isRatingModalOpen}
+							setIsRatingModalOpen={setIsRatingModalOpen}
 						/>
 					))}
 			</div>
-			{/* {isOpen && !isFavouriteClicked && (
+			{isOpen && !isRatingModalOpen && (
 				<Modal>
 					<MaterialModalContent materialId={currentMaterialId} handleClose={handleCloseModal} />
 				</Modal>
-			)} */}
+			)}
 		</>
 	);
 };

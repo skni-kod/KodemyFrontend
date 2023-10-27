@@ -14,6 +14,8 @@ type MaterialProps = {
 	handleOpenModal: (id: number) => void;
 	isFavouriteFilled: boolean;
 	handleFavouriteClick: () => void;
+	isRatingModalOpen: boolean;
+	setIsRatingModalOpen: (value: boolean) => void;
 };
 
 const MaterialBlock = ({
@@ -21,9 +23,9 @@ const MaterialBlock = ({
 	handleOpenModal,
 	isFavouriteFilled,
 	handleFavouriteClick,
+	isRatingModalOpen,
+	setIsRatingModalOpen,
 }: MaterialProps) => {
-	const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
-
 	const openRatingModal = () => {
 		setIsRatingModalOpen(true);
 	};
