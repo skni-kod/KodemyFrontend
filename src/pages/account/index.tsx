@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useAuthStore } from '@/store/authSlice';
 import { pageLoginRoute } from '@/pages/route';
 import { useEffect } from 'react';
+import UserProfileContent from '@/components/user/UserProfileContent';
 
 const Index = () => {
 	const router = useRouter();
@@ -18,7 +19,7 @@ const Index = () => {
 	return (
 		<Page title="Konto - Panel użytkownika" description="Widok konta użytkownika">
 			<Container className="max-w-7xl mx-auto">
-				<></>
+				<UserProfileContent />
 			</Container>
 		</Page>
 	);
