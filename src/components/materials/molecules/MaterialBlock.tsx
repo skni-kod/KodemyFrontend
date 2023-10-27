@@ -8,12 +8,13 @@ import { Rating } from 'react-simple-star-rating';
 import Favourite from '../atoms/Favourite';
 import Modal from '@/components/common/Modal/Modal';
 import MaterialModalRating from '../organisms/MaterialModalRating';
+import MaterialModalAdd from '../organisms/MaterialModalAdd';
 
 type MaterialProps = {
 	data: Material;
 	handleOpenModal: (id: number) => void;
-	isFavouriteFilled: boolean;
-	handleFavouriteClick: () => void;
+	isAddedModalOpen: boolean;
+	setIsAddedModalOpen: (value: boolean) => void;
 	isRatingModalOpen: boolean;
 	setIsRatingModalOpen: (value: boolean) => void;
 };
@@ -21,11 +22,19 @@ type MaterialProps = {
 const MaterialBlock = ({
 	data: { id, title, description, status, user, createdDate },
 	handleOpenModal,
-	isFavouriteFilled,
-	handleFavouriteClick,
+	isAddedModalOpen,
+	setIsAddedModalOpen,
 	isRatingModalOpen,
 	setIsRatingModalOpen,
 }: MaterialProps) => {
+	const openAddedModal = () => {
+		setIsAddedModalOpen(true);
+	};
+
+	const handleCloseAddedModal = () => {
+		setIsAddedModalOpen(false);
+	};
+
 	const openRatingModal = () => {
 		setIsRatingModalOpen(true);
 	};
@@ -72,11 +81,11 @@ const MaterialBlock = ({
 			<div className="flex flex-col justify-center w-auto py-5 px-2">
 				<Status status={status} />
 			</div>
-			<div className="flex flex-col justify-center w-auto min-w-52 min-h-5 h-16 py-5 px-2 border-l-2">
-				<Favourite
-					isFavouriteFilled={isFavouriteFilled}
-					handleFavouriteClick={handleFavouriteClick}
-				/>
+			<div
+				className="flex flex-col justify-center w-auto min-w-52 min-h-5 h-16 py-5 px-2 border-l-2"
+				onClick={openAddedModal}
+			>
+				<Favourite />
 			</div>
 			<div className="flex flex-col justify-center w-52 min-w-52 min-h-5 h-16 pl-5 py-2 gap-1 border-l-2 text-xs">
 				<div>Dodane przez: {user}</div>
@@ -93,6 +102,11 @@ const MaterialBlock = ({
 						ratingOne={ratingOne}
 						allRatings={allRatings}
 					/>
+				</Modal>
+			)}
+			{isAddedModalOpen && (
+				<Modal>
+					<MaterialModalAdd handleCloseAddedModal={handleCloseAddedModal} />
 				</Modal>
 			)}
 		</MaterialWrapper>

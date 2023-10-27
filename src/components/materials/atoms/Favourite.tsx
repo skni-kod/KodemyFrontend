@@ -1,17 +1,18 @@
-import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
+import { useState } from 'react';
+import { BsFillBookmarkPlusFill } from 'react-icons/bs';
 
-type FavouriteProps = {
-	isFavouriteFilled: boolean;
-	handleFavouriteClick: () => void;
-};
+const Favourite = () => {
+	const [isAdded, setIsAdded] = useState(false);
+	const handleAddedeClick = () => {
+		setIsAdded(!isAdded);
+	};
 
-const Favourite = ({ isFavouriteFilled, handleFavouriteClick }: FavouriteProps) => {
 	return (
-		<div onClick={handleFavouriteClick}>
-			{isFavouriteFilled ? (
-				<AiFillStar size={50} className="text-yellow-500" title="Usuń z ulubionych" />
+		<div onClick={handleAddedeClick}>
+			{isAdded ? (
+				<BsFillBookmarkPlusFill size={30} className="text-white2black" title="Usuń z ulubionych" />
 			) : (
-				<AiOutlineStar size={50} className="text-yellow-500" title="Dodaj do ulubionych" />
+				<BsFillBookmarkPlusFill size={30} className="text-sky-500" title="Dodaj do ulubionych" />
 			)}
 		</div>
 	);
