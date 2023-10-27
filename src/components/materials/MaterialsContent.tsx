@@ -20,6 +20,7 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 	const { FiltersMenu, isFilterMenuOpen, setIsFilterMenuOpen, filters } = useFiltersMenu();
 	const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
 	const [isAddedModalOpen, setIsAddedModalOpen] = useState(false);
+	const [isMarkModalOpen, setIsMarkModalOpen] = useState(false);
 
 	useEffect(() => {
 		(async () => {
@@ -36,13 +37,9 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 	const handleOpenMaterialModal = (id: number) => {
 		setCurrentMaterialId(id);
 		if (id) {
-			if (!isRatingModalOpen && isAddedModalOpen) {
+			if (!isRatingModalOpen && !isAddedModalOpen && !isMarkModalOpen) {
 				handleOpenModal();
-			}
-			if (isRatingModalOpen && !isAddedModalOpen) {
-				handleOpenModal();
-			}
-			if (isRatingModalOpen || isAddedModalOpen) {
+			} else if (isRatingModalOpen || isAddedModalOpen || isMarkModalOpen) {
 				handleCloseModal();
 			}
 		}
@@ -72,10 +69,12 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 							setIsAddedModalOpen={setIsAddedModalOpen}
 							isRatingModalOpen={isRatingModalOpen}
 							setIsRatingModalOpen={setIsRatingModalOpen}
+							isMarkModalOpen={isMarkModalOpen}
+							setIsMarkModalOpen={setIsMarkModalOpen}
 						/>
 					))}
 			</div>
-			{isOpen && (!isRatingModalOpen || !isAddedModalOpen) && (
+			{isOpen && !isRatingModalOpen && !isAddedModalOpen && !isMarkModalOpen && (
 				<Modal>
 					<MaterialModalContent materialId={currentMaterialId} handleClose={handleCloseModal} />
 				</Modal>

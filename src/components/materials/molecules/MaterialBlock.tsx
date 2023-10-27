@@ -9,6 +9,7 @@ import Favourite from '../atoms/Favourite';
 import Modal from '@/components/common/Modal/Modal';
 import MaterialModalRating from '../organisms/MaterialModalRating';
 import MaterialModalAdd from '../organisms/MaterialModalAdd';
+import MaterialModalMark from '../organisms/MaterialModalMark';
 
 type MaterialProps = {
 	data: Material;
@@ -17,6 +18,8 @@ type MaterialProps = {
 	setIsAddedModalOpen: (value: boolean) => void;
 	isRatingModalOpen: boolean;
 	setIsRatingModalOpen: (value: boolean) => void;
+	isMarkModalOpen: boolean;
+	setIsMarkModalOpen: (value: boolean) => void;
 };
 
 const MaterialBlock = ({
@@ -26,6 +29,8 @@ const MaterialBlock = ({
 	setIsAddedModalOpen,
 	isRatingModalOpen,
 	setIsRatingModalOpen,
+	isMarkModalOpen,
+	setIsMarkModalOpen,
 }: MaterialProps) => {
 	const openAddedModal = () => {
 		setIsAddedModalOpen(true);
@@ -41,6 +46,14 @@ const MaterialBlock = ({
 
 	const handleCloseRatingModal = () => {
 		setIsRatingModalOpen(false);
+	};
+
+	const openMarkModal = () => {
+		setIsMarkModalOpen(true);
+	};
+
+	const handleCloseMarkModal = () => {
+		setIsMarkModalOpen(false);
 	};
 
 	const ratingFive = 0;
@@ -78,8 +91,19 @@ const MaterialBlock = ({
 					<div className="text-sm text-bold">{description}</div>
 				</div>
 			</div>
+			{/* To będzie do wyrzucania jak będzie wyświetlało materiały tylko z statusem „APPROVED”  */}
+			{/* ten div u dołu  */}
 			<div className="flex flex-col justify-center w-auto py-5 px-2">
 				<Status status={status} />
+			</div>
+			{/* ten div u góry */}
+			<div className="flex flex-col justify-center w-auto py-5 px-2" onClick={openMarkModal}>
+				<button
+					className="text-black bg-yellow-400 rounded-lg px-3 py-0.5"
+					title="Usuń z ulubionych"
+				>
+					Oceń
+				</button>
 			</div>
 			<div
 				className="flex flex-col justify-center w-auto min-w-52 min-h-5 h-16 py-5 px-2 border-l-2"
@@ -107,6 +131,11 @@ const MaterialBlock = ({
 			{isAddedModalOpen && (
 				<Modal>
 					<MaterialModalAdd handleCloseAddedModal={handleCloseAddedModal} />
+				</Modal>
+			)}
+			{isMarkModalOpen && (
+				<Modal>
+					<MaterialModalMark handleCloseMarkModal={handleCloseMarkModal} />
 				</Modal>
 			)}
 		</MaterialWrapper>
