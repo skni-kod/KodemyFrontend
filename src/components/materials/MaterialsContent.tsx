@@ -72,11 +72,11 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 						/>
 					))}
 			</div>
-			{isOpen && !isFavouriteClicked && (
+			{/* {isOpen && !isFavouriteClicked && (
 				<Modal>
 					<MaterialModalContent materialId={currentMaterialId} handleClose={handleCloseModal} />
 				</Modal>
-			)}
+			)} */}
 		</>
 	);
 };

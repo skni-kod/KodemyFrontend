@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Material } from '@/hooks/services/useMaterialService';
 import DocumentsImage from '@/assets/material/documents.png';
 import Image from 'next/image';
@@ -5,7 +6,8 @@ import Status from '@/components/materials/atoms/Status';
 import MaterialWrapper from '@/components/common/page/atoms/MaterialWrapper';
 import { Rating } from 'react-simple-star-rating';
 import Favourite from '../atoms/Favourite';
-import { useState } from 'react';
+import Modal from '@/components/common/Modal/Modal';
+import MaterialModalRating from '../organisms/MaterialModalRating';
 
 type MaterialProps = {
 	data: Material;
@@ -20,6 +22,25 @@ const MaterialBlock = ({
 	isFavouriteFilled,
 	handleFavouriteClick,
 }: MaterialProps) => {
+	const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
+
+	const openRatingModal = () => {
+		setIsRatingModalOpen(true);
+	};
+
+	const handleCloseRatingModal = () => {
+		setIsRatingModalOpen(false);
+	};
+
+	const ratingFive = 0;
+	const ratingFour = 40;
+	const ratingThree = 100;
+	const ratingTwo = 20;
+	const ratingOne = 50;
+	const allRatings = ratingOne + ratingTwo + ratingThree + ratingFour + ratingFive;
+	const averageRating =
+		(5 * ratingFive + 4 * ratingFour + 3 * ratingThree + 2 * ratingTwo + ratingOne) / allRatings;
+
 	return (
 		<MaterialWrapper onClick={() => handleOpenModal(id)}>
 			<div className="flex-none h-20 w-20 flex justify-center items-center aspect-square bg-gray-100">
@@ -33,9 +54,9 @@ const MaterialBlock = ({
 			</div>
 			<div className="grow flex justify-between items-center px-5">
 				<div>
-					<div>
+					<div onClick={openRatingModal}>
 						<Rating
-							initialValue={Math.round((Math.random() * 9.5) / 0.5) * 0.5}
+							initialValue={averageRating}
 							SVGstyle={{ display: 'inline' }}
 							size={16}
 							allowFraction
@@ -49,7 +70,7 @@ const MaterialBlock = ({
 			<div className="flex flex-col justify-center w-auto py-5 px-2">
 				<Status status={status} />
 			</div>
-			<div className="flex flex-col justify-center w-auto min-w-52 min-h-5 h-16 py-5 px-2 border-l-2 ">
+			<div className="flex flex-col justify-center w-auto min-w-52 min-h-5 h-16 py-5 px-2 border-l-2">
 				<Favourite
 					isFavouriteFilled={isFavouriteFilled}
 					handleFavouriteClick={handleFavouriteClick}
@@ -59,6 +80,19 @@ const MaterialBlock = ({
 				<div>Dodane przez: {user}</div>
 				<div>Data dodania: {createdDate.split('T')[0]}</div>
 			</div>
+			{isRatingModalOpen && (
+				<Modal>
+					<MaterialModalRating
+						handleCloseRatingModal={handleCloseRatingModal}
+						ratingFive={ratingFive}
+						ratingFour={ratingFour}
+						ratingThree={ratingThree}
+						ratingTwo={ratingTwo}
+						ratingOne={ratingOne}
+						allRatings={allRatings}
+					/>
+				</Modal>
+			)}
 		</MaterialWrapper>
 	);
 };

@@ -1,4 +1,4 @@
-import Title from '../atoms/Title';
+import Title from '../../Modal/Title';
 
 const ConfirmMsg = ({
 	titletext,
