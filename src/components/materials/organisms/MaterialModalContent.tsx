@@ -28,7 +28,10 @@ const MaterialModalContent = ({
 	return (
 		<div className="relative w-128 min-h-112 p-3 bg-white2verydarkgrey rounded-2xl">
 			<div className="flex justify-end">
-				<button className="font-semibold hover:text-sky-500" onClick={() => handleClose()}>
+				<button
+					className="font-semibold text-black2white hover:text-sky-500"
+					onClick={() => handleClose()}
+				>
 					<AiOutlineClose height={24} width={24} />
 				</button>
 			</div>
