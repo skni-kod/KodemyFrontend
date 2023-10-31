@@ -47,7 +47,7 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 			try {
 				const typeId = +sectionID;
 				const categoryId = +categoryID;
-
+				// 8080 - trzeba tokana, 8082 - 401
 				const response = await axios.post('http://localhost:8080/api/materials', {
 					title: titlematerial,
 					description: descriptionmaterial,
