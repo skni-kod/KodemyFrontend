@@ -1,6 +1,5 @@
 import useMaterialService, { Material } from '@/hooks/services/useMaterialService';
 import { useEffect, useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
 import BlankTargetLink from '@/components/materials/atoms/BlankTargetLink';
 import { extractRRRRMMDD } from '@/utils/constant';
 import CloseCross from '@/components/common/Modal/CloseCross';

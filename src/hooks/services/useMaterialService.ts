@@ -76,12 +76,23 @@ export type Material = {
 	description: string;
 	link: string;
 	status: string;
-	user: string;
+	// creator jest podczas kożystania z Material
+	creator: {
+		id: number;
+		username: string;
+	};
 	createdDate: string;
 	sectionId: number;
 	categoryId: number;
 	technologyIds: number[];
 	active: boolean;
+	type: {
+		id: number;
+		name: string;
+	};
+	// author jest podczas kożystania z MaterialOpenSearch
+	author: string;
+	avgGrade: number;
 };
 
 export type MaterialOpenSearch = OpenSearchBase & {

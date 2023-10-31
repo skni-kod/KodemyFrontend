@@ -23,7 +23,7 @@ type MaterialProps = {
 };
 
 const MaterialBlock = ({
-	data: { id, title, description, status, user, createdDate },
+	data: { id, title, description, status, author, createdDate },
 	handleOpenModal,
 	isAddedModalOpen,
 	setIsAddedModalOpen,
@@ -112,7 +112,7 @@ const MaterialBlock = ({
 				<Favourite />
 			</div>
 			<div className="flex flex-col justify-center w-52 min-w-52 min-h-5 h-16 pl-5 py-2 gap-1 border-l-2 text-xs">
-				<div>Dodane przez: {user}</div>
+				<div>Dodane przez: {author}</div>
 				<div>Data dodania: {createdDate.split('T')[0]}</div>
 			</div>
 			{isRatingModalOpen && (
