@@ -4,7 +4,7 @@ import Page from '@/components/common/Page';
 
 const Index = () => {
 	return (
-		<Page title="Ustawienia - Panel użytkownika" description="Widok ustawień konta">
+		<Page title="Zakładki - Konto użytkownika" description="Widok twoich zakładek">
 			<Container className="max-w-7xl mx-auto">
 				<></>
 			</Container>
