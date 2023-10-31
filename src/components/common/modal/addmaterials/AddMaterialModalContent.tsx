@@ -6,6 +6,7 @@ import DescribeMaterial from './organisms/DescribeMaterial';
 import { useState } from 'react';
 import ConfirmMsg from './organisms/ConfirmMsg';
 import axios from 'axios';
+import CloseCross from '../common/CloseCross';
 
 const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) => {
 	const [currentSection, setCurrentSection] = useState('section1');
@@ -82,11 +83,7 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 
 	return (
 		<div className="relative w-128 min-h-112 p-3 bg-white2verydarkgrey rounded-2xl">
-			<div className="flex justify-end">
-				<button className="font-semibold text-black2white hover:text-sky-500" onClick={handleClose}>
-					<AiOutlineClose height={24} width={24} />
-				</button>
-			</div>
+			<CloseCross handleCloseCross={handleClose} />
 			<div className="px-8 py-1">
 				{currentSection === 'section1' && (
 					<ChooseSection

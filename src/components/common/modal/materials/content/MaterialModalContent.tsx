@@ -1,9 +1,9 @@
 import useMaterialService, { Material } from '@/hooks/services/useMaterialIdService';
 import { useEffect, useState } from 'react';
-import BlankTargetLink from '@/components/common/modal/atoms/BlankTargetLink';
+import BlankTargetLink from '@/components/common/modal/materials/content/atoms/BlankTargetLink';
 import { extractRRRRMMDD } from '@/utils/constant';
-import CloseCross from '@/components/common/modal/atoms/CloseCross';
-import CloseButton from '@/components/common/modal/atoms/CloseButton';
+import CloseCross from '@/components/common/modal/common/CloseCross';
+import CloseButton from '@/components/common/modal/common/CloseButton';
 
 const MaterialModalContent = ({
 	materialId,

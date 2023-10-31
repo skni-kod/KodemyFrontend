@@ -8,7 +8,7 @@ import { BiSearch } from 'react-icons/bi';
 import { useAuthStore } from '@/store/authSlice';
 import { useRouter } from 'next/router';
 import useModal from '@/hooks/useModal';
-import AddMaterialModalContent from '@/components/common/addmaterials/AddMaterialModalContent';
+import AddMaterialModalContent from '@/components/common/modal/addmaterials/AddMaterialModalContent';
 import Route from '@/utils/route';
 
 enum UserBarMenu {

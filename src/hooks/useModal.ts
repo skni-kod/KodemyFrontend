@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Modal from '@/components/common/modal/atoms/Modal';
+import Modal from '@/components/common/modal/common/Modal';
 
 const useModal = (initialState = false) => {
 	const [isOpen, setIsOpen] = useState(initialState);

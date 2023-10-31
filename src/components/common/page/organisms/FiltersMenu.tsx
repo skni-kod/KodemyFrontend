@@ -1,4 +1,4 @@
-import { materialStatusPolishVerbs, statusDict } from '@/components/common/modal/atoms/Status';
+import { materialStatusPolishVerbs, statusDict } from '@/components/common/modal/common/Status';
 import { defaultPageSizes, MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
 import Select from '@/components/common/page/atoms/Select';
 import PhraseInput from '@/components/common/page/atoms/PhraseInput';

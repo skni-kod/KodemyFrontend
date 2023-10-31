@@ -1,6 +1,5 @@
 import React from 'react';
 import { Section } from '@/hooks/services/useSectionService';
-import { AiOutlineDown, AiOutlineRight } from 'react-icons/ai';
 
 interface SidebarItemTextProps {
 	section: Section;

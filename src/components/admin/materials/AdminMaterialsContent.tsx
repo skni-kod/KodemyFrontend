@@ -7,9 +7,9 @@ import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMate
 import { openSearchBaseInitialState } from '@/utils/constant';
 import useFiltersMenu from '@/hooks/useFiltersMenu';
 import useModal from '@/hooks/useModal';
-import MaterialModalContent from '@/components/common/modal/organisms/MaterialModalContent';
+import MaterialModalContent from '@/components/common/modal/materials/content/MaterialModalContent';
 import ManagementMaterialBlock from '@/components/common/page/molecules/ManagementMaterialBlock';
-import AdminMaterialBlockButtons from '@/components/common/modal/molecules/AdminMaterialBlockButtons';
+import AdminMaterialBlockButtons from '@/components/admin/materials/molecules/AdminMaterialBlockButtons';
 
 type CurrentIds = {
 	material: number | undefined;

@@ -1,5 +1,5 @@
-import Title from '@/components/common/modal/atoms/Title';
-import CloseCross from '@/components/common/modal/atoms/CloseCross';
+import Title from '@/components/common/modal/common/Title';
+import CloseCross from '@/components/common/modal/common/CloseCross';
 import { Rating } from 'react-simple-star-rating';
 import { useState } from 'react';
 

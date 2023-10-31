@@ -1,7 +1,7 @@
-import Title from '@/components/common/modal/atoms/Title';
-import CloseCross from '@/components/common/modal/atoms/CloseCross';
-import CloseButton from '@/components/common/modal/atoms/CloseButton';
-import List from '../atoms/List';
+import Title from '@/components/common/modal/common/Title';
+import CloseCross from '@/components/common/modal/common/CloseCross';
+import CloseButton from '@/components/common/modal/common/CloseButton';
+import List from './atoms/List';
 
 const MaterialModalAdd = ({ handleCloseAddedModal }: { handleCloseAddedModal: () => void }) => {
 	return (

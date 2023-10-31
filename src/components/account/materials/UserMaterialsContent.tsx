@@ -7,8 +7,8 @@ import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMate
 import useFiltersMenu from '@/hooks/useFiltersMenu';
 import useModal from '@/hooks/useModal';
 import { openSearchBaseInitialState } from '@/utils/constant';
-import MaterialBlock from '@/components/common/modal/molecules/MaterialBlock';
-import MaterialModalContent from '@/components/common/modal/organisms/MaterialModalContent';
+import MaterialBlock from '@/components/common/modal/materials/materialblock/MaterialBlock';
+import MaterialModalContent from '@/components/common/modal/materials/content/MaterialModalContent';
 
 type CurrentIds = {
 	material: number | undefined;

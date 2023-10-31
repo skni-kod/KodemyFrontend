@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Page from '@/components/common/Page';
-import AdminMaterialsContent from '@/components/admin/AdminMaterialsContent';
+import AdminMaterialsContent from '@/components/admin/materials/AdminMaterialsContent';
 import { page404Route } from '../404';
 import { useRouter } from 'next/router';
 import Container from '@/components/common/Container';

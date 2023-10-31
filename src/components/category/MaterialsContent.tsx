@@ -1,8 +1,8 @@
-import MaterialBlock from '@/components/common/modal/molecules/MaterialBlock';
+import MaterialBlock from '@/components/common/modal/materials/materialblock/MaterialBlock';
 import { useEffect, useState } from 'react';
 import useModal from '@/hooks/useModal';
-import Header from '@/components/materials/organisms/Header';
-import MaterialModalContent from '@/components/common/modal/organisms/MaterialModalContent';
+import Header from '@/components/category/organisms/Header';
+import MaterialModalContent from '@/components/common/modal/materials/content/MaterialModalContent';
 import FilterMenuButton from '@/components/common/page/atoms/FilterMenuButton';
 import SortMenuButton from '@/components/common/SortMenuButton';
 import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialIdService';

@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Material } from '@/hooks/services/useMaterialIdService';
 import DocumentsImage from '@/assets/material/documents.png';
 import Image from 'next/image';
-import Status from '@/components/common/modal/atoms/Status';
+import Status from '@/components/common/modal/common/Status';
 import MaterialWrapper from '@/components/common/page/atoms/MaterialWrapper';
 import { Rating } from 'react-simple-star-rating';
-import Favourite from '../atoms/Favourite';
-import Modal from '@/components/common/modal/atoms/Modal';
-import MaterialModalRating from '../organisms/MaterialModalRating';
-import MaterialModalAdd from '../organisms/MaterialModalAdd';
-import MaterialModalMark from '../organisms/MaterialModalMark';
+import Favourite from './atoms/Favourite';
+import Modal from '@/components/common/modal/common/Modal';
+import MaterialModalRating from './molecules/rating/MaterialModalRating';
+import MaterialModalAdd from './molecules/add/MaterialModalAdd';
+import MaterialModalMark from './molecules/mark/MaterialModalMark';
 
 type MaterialProps = {
 	data: Material;

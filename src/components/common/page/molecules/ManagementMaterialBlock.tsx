@@ -2,7 +2,7 @@ import MaterialWrapper from '@/components/common/page/atoms/MaterialWrapper';
 import Image from 'next/image';
 import DocumentsImage from '@/assets/material/documents.png';
 import { BiStar } from 'react-icons/bi';
-import Status from '@/components/common/modal/atoms/Status';
+import Status from '@/components/common/modal/common/Status';
 import React from 'react';
 import { Material } from '@/hooks/services/useMaterialIdService';
 

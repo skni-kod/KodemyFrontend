@@ -1,5 +1,5 @@
 import { useSectionsStore } from '@/store/sectionsSlice';
-import Title from '../../modal/atoms/Title';
+import Title from '../../common/Title';
 import SectionItem from '../molecules/SectionItem';
 import { useState } from 'react';
 import { Section } from '@/hooks/services/useSectionService';
