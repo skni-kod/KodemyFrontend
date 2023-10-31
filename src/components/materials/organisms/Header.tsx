@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Section } from '@/hooks/services/useSectionService';
 import { useSectionsStore } from '@/store/sectionsSlice';
 import useCategoryService, { CategoryDetailsResponse } from '@/hooks/services/useCategoryService';
-import { useFiltersContext } from '@/contexts/MaterialsFiltersContext';
 import { pageCategoryIdRoute } from '@/pages/category/[id]';
 import { useRouter } from 'next/router';
 import FilterButtonsList from '@/components/common/page/molecules/FilterButtonsList';
@@ -15,7 +14,6 @@ const Header = ({ categoryId }: { categoryId: number }) => {
 
 	const { getCategoryDetails } = useCategoryService();
 	const [categoryDetails, setCategoryDetails] = useState<CategoryDetailsResponse>();
-	const { filters, removeFilters } = useFiltersContext();
 
 	useEffect(() => {
 		setSection(sections.find((s: Section) => s.id === categoryDetails?.section.id));

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Avatar from '../common/navbar/atoms/Avatar';
+import Avatar from '../../common/navbar/atoms/Avatar';
 
 interface UserData {
 	username: string;
@@ -16,7 +16,7 @@ const UserProfileContent = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await fetch('http://localhost:8181/api/users/me', {
+				const response = await fetch('http://localhost:8080/api/users/me', {
 					credentials: 'include',
 				});
 				if (response.status === 200) {
@@ -34,7 +34,7 @@ const UserProfileContent = () => {
 	}, []);
 
 	if (!userData) {
-		return <div>Loading...</div>;
+		return <div className="text-black2white">Loading...</div>;
 	}
 
 	return (

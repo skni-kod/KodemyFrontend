@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react';
 import HeaderAllMaterials from '@/components/common/page/organisms/HeaderAllMaterials';
 import ResultCount from '@/components/common/page/atoms/ResultCount';
-import SortMenuButton from '@/components/materials/organisms/SortMenuButton';
+import SortMenuButton from '@/components/common/SortMenuButton';
 import FilterMenuButton from '@/components/common/page/atoms/FilterMenuButton';
-import FiltersMenu from '@/components/common/page/organisms/FiltersMenu';
 import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialIdService';
-import { openSearchBaseInitialState } from '@/utils/constant';
 import useFiltersMenu from '@/hooks/useFiltersMenu';
 import useModal from '@/hooks/useModal';
-import MaterialModalContent from '@/components/materials/organisms/MaterialModalContent';
-import ManagementMaterialBlock from '@/components/common/page/molecules/ManagementMaterialBlock';
-import AdminMaterialBlockButtons from '@/components/admin/molecules/AdminMaterialBlockButtons';
+import { openSearchBaseInitialState } from '@/utils/constant';
+import MaterialBlock from '@/components/common/modal/molecules/MaterialBlock';
+import MaterialModalContent from '@/components/common/modal/organisms/MaterialModalContent';
 
 type CurrentIds = {
 	material: number | undefined;
@@ -24,13 +22,17 @@ const currentIdsInitState: CurrentIds = {
 	category: undefined,
 };
 
-const AdminMaterialsContent = () => {
+const UserMaterialsContent = () => {
 	const { getMaterials } = useMaterialService();
 	const [materials, setMaterials] = useState<MaterialOpenSearch>(openSearchBaseInitialState);
-	const { FiltersMenu, filters, isFilterMenuOpen, setIsFilterMenuOpen } = useFiltersMenu();
 
 	const { Modal, isOpen, handleOpenModal, handleCloseModal } = useModal(false);
 	const [currentIds, setCurrentIds] = useState<CurrentIds>(currentIdsInitState);
+
+	const { FiltersMenu, filters, isFilterMenuOpen, setIsFilterMenuOpen } = useFiltersMenu();
+	const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
+	const [isAddedModalOpen, setIsAddedModalOpen] = useState(false);
+	const [isMarkModalOpen, setIsMarkModalOpen] = useState(false);
 
 	useEffect(() => {
 		(async () => {
@@ -56,7 +58,7 @@ const AdminMaterialsContent = () => {
 	return (
 		<>
 			<div className="w-full px-3 text-black2white">
-				<HeaderAllMaterials headName="Statusy materiałów" />
+				<HeaderAllMaterials headName="Twoje materiałów" />
 				<div className="flex justify-between items-center w-full pt-4 px-8">
 					<ResultCount value={materials.content.length} />
 					<div className="relative flex gap-x-8 text-black2white cursor-pointer">
@@ -69,9 +71,17 @@ const AdminMaterialsContent = () => {
 			<div className="flex flex-col w-full gap-4 pt-6 pb-4">
 				{materials &&
 					materials.content.map((material) => (
-						<ManagementMaterialBlock key={material.id} data={material}>
-							<AdminMaterialBlockButtons />
-						</ManagementMaterialBlock>
+						<MaterialBlock
+							key={material.id}
+							data={material}
+							handleOpenModal={handleOpenMaterialModal}
+							isAddedModalOpen={isAddedModalOpen}
+							setIsAddedModalOpen={setIsAddedModalOpen}
+							isRatingModalOpen={isRatingModalOpen}
+							setIsRatingModalOpen={setIsRatingModalOpen}
+							isMarkModalOpen={isMarkModalOpen}
+							setIsMarkModalOpen={setIsMarkModalOpen}
+						/>
 					))}
 			</div>
 			{isOpen && (
@@ -82,4 +92,4 @@ const AdminMaterialsContent = () => {
 		</>
 	);
 };
-export default AdminMaterialsContent;
+export default UserMaterialsContent;

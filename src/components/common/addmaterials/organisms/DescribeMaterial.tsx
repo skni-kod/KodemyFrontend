@@ -1,4 +1,4 @@
-import Title from '../../Modal/Title';
+import Title from '../../modal/atoms/Title';
 
 const DescribeMaterial = ({
 	titletext,

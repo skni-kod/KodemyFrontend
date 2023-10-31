@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Container from '@/components/common/Container';
 import MaterialsFiltersProvider from '@/contexts/MaterialsFiltersContext';
 import { useAuthStore } from '@/store/authSlice';
-import UserMaterialsContent from '@/components/account/UserMaterialsContent';
+import UserMaterialsContent from '@/components/account/materials/UserMaterialsContent';
 import Route from '@/utils/route';
 
 const Index = () => {

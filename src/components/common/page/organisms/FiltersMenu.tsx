@@ -1,8 +1,8 @@
-import { materialStatusPolishVerbs, statusDict } from '@/components/materials/atoms/Status';
+import { materialStatusPolishVerbs, statusDict } from '@/components/common/modal/atoms/Status';
 import { defaultPageSizes, MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
-import Select from '@/components/materials/atoms/Select';
-import PhraseInput from '@/components/materials/atoms/PhraseInput';
-import { sortMenuValues } from '@/components/materials/organisms/SortMenuButton';
+import Select from '@/components/common/page/atoms/Select';
+import PhraseInput from '@/components/common/page/atoms/PhraseInput';
+import { sortMenuValues } from '@/components/common/SortMenuButton';
 import { MaterialStatus } from '@/hooks/services/useMaterialIdService';
 import { useContext } from 'react';
 import { capitalizeString } from '@/utils/constant';

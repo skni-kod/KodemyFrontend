@@ -3,7 +3,7 @@ import Container from '@/components/common/Container';
 import { useRouter } from 'next/router';
 import { useAuthStore } from '@/store/authSlice';
 import { useEffect } from 'react';
-import UserProfileContent from '@/components/account/UserProfileContent';
+import UserProfileContent from '@/components/account/index/UserProfileContent';
 import Route from '@/utils/route';
 
 const Index = () => {

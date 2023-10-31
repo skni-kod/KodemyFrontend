@@ -1,4 +1,4 @@
-import Title from '../../Modal/Title';
+import Title from '../../modal/atoms/Title';
 import { useState } from 'react';
 import CategoryItem from '../molecules/CategoryItem';
 import { useSectionsStore } from '@/store/sectionsSlice';

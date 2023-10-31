@@ -3,7 +3,7 @@ import BottomButtons from './atoms/BottomButtons';
 import ChooseSection from './organisms/ChooseSection';
 import ChooseCategory from './organisms/ChooseCategory';
 import DescribeMaterial from './organisms/DescribeMaterial';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ConfirmMsg from './organisms/ConfirmMsg';
 import axios from 'axios';
 

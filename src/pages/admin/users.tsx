@@ -10,7 +10,7 @@ const Index = () => {
 	const { user } = useAuthStore();
 
 	useEffect(() => {
-		if (!user || (user && user.role.name === AuthUserRoleType.ROLE_USER)) {
+		if (!user || (user && user.role.name === AuthUserRoleType[AuthUserRoleType.ROLE_USER])) {
 			router.push(page404Route());
 		}
 	}, [router, user]);

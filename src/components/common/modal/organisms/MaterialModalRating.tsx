@@ -1,9 +1,9 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import { Rating } from 'react-simple-star-rating';
 import RatingChart from '../molecules/RatingChart';
-import Title from '@/components/common/Modal/Title';
-import CloseCross from '@/components/common/Modal/CloseCross';
-import CloseButton from '@/components/common/Modal/CloseButton';
+import Title from '@/components/common/modal/atoms/Title';
+import CloseCross from '@/components/common/modal/atoms/CloseCross';
+import CloseButton from '@/components/common/modal/atoms/CloseButton';
 
 const MaterialModalContent = ({
 	handleCloseRatingModal,
