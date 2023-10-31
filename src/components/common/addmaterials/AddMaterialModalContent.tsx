@@ -47,7 +47,7 @@ const AddMaterialModalContent = ({ handleClose }: { handleClose: () => void }) =
 				const typeId = +sectionID;
 				const categoryId = +categoryID;
 
-				const response = await axios.post('http://localhost:8181/api/materials', {
+				const response = await axios.post('http://localhost:8080/api/materials', {
 					title: titlematerial,
 					description: descriptionmaterial,
 					link: linkmaterial,

@@ -1,4 +1,4 @@
-import useMaterialService, { Material } from '@/hooks/services/useMaterialService';
+import useMaterialService, { Material } from '@/hooks/services/useMaterialIdService';
 import { useEffect, useState } from 'react';
 import BlankTargetLink from '@/components/materials/atoms/BlankTargetLink';
 import { extractRRRRMMDD } from '@/utils/constant';

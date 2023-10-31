@@ -3,7 +3,7 @@ import HeaderAllMaterials from '@/components/common/page/organisms/HeaderAllMate
 import ResultCount from '@/components/common/page/atoms/ResultCount';
 import SortMenuButton from '@/components/materials/organisms/SortMenuButton';
 import FilterMenuButton from '@/components/common/page/atoms/FilterMenuButton';
-import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialService';
+import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialIdService';
 import useFiltersMenu from '@/hooks/useFiltersMenu';
 import useModal from '@/hooks/useModal';
 import { openSearchBaseInitialState } from '@/utils/constant';
@@ -25,10 +25,14 @@ const currentIdsInitState: CurrentIds = {
 const UserMaterialsContent = () => {
 	const { getMaterials } = useMaterialService();
 	const [materials, setMaterials] = useState<MaterialOpenSearch>(openSearchBaseInitialState);
-	const { FiltersMenu, filters, isFilterMenuOpen, setIsFilterMenuOpen } = useFiltersMenu();
 
 	const { Modal, isOpen, handleOpenModal, handleCloseModal } = useModal(false);
 	const [currentIds, setCurrentIds] = useState<CurrentIds>(currentIdsInitState);
+
+	const { FiltersMenu, filters, isFilterMenuOpen, setIsFilterMenuOpen } = useFiltersMenu();
+	const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
+	const [isAddedModalOpen, setIsAddedModalOpen] = useState(false);
+	const [isMarkModalOpen, setIsMarkModalOpen] = useState(false);
 
 	useEffect(() => {
 		(async () => {
@@ -71,6 +75,12 @@ const UserMaterialsContent = () => {
 							key={material.id}
 							data={material}
 							handleOpenModal={handleOpenMaterialModal}
+							isAddedModalOpen={isAddedModalOpen}
+							setIsAddedModalOpen={setIsAddedModalOpen}
+							isRatingModalOpen={isRatingModalOpen}
+							setIsRatingModalOpen={setIsRatingModalOpen}
+							isMarkModalOpen={isMarkModalOpen}
+							setIsMarkModalOpen={setIsMarkModalOpen}
 						/>
 					))}
 			</div>

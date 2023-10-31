@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Avatar from '../common/navbar/atoms/Avatar';
 
-// Define an interface for the user data
 interface UserData {
 	username: string;
 	email: string | null;

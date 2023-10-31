@@ -4,7 +4,7 @@ import DocumentsImage from '@/assets/material/documents.png';
 import { BiStar } from 'react-icons/bi';
 import Status from '@/components/materials/atoms/Status';
 import React from 'react';
-import { Material } from '@/hooks/services/useMaterialService';
+import { Material } from '@/hooks/services/useMaterialIdService';
 import Favourite from '@/components/materials/atoms/Favourite';
 
 const ManagementMaterialBlock = ({

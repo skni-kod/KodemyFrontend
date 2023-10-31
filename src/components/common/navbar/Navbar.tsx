@@ -1,13 +1,19 @@
 import React from 'react';
+import Route from '@/utils/route';
 import { TfiClose, TfiMenu } from 'react-icons/tfi';
 import LogoDesktop from './atoms/LogoDesktop';
 import SearchBarDesktop from '@/components/common/navbar/organisms/SearchBarDesktop';
 import UserBar from '@/components/common/navbar/organisms/Desktop/UserBar';
 import Link from 'next/link';
-import { pageHomeRoute } from '@/pages/route';
 import { useSidebarContext } from '@/contexts/SidebarStateContext';
 
 const Navbar = () => {
+	const pageHomeRoute = (): Route => {
+		return {
+			pathname: '/',
+		};
+	};
+
 	const hamburgerClassName =
 		'relative block md:hidden h-6 w-6 mr-2 text-grey2white text-2xl cursor-pointer';
 	const { isOpen, setIsOpen } = useSidebarContext();

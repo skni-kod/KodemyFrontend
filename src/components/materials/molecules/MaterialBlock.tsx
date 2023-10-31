@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Material } from '@/hooks/services/useMaterialService';
+import { Material } from '@/hooks/services/useMaterialIdService';
 import DocumentsImage from '@/assets/material/documents.png';
 import Image from 'next/image';
 import Status from '@/components/materials/atoms/Status';

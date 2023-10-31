@@ -2,7 +2,6 @@ import React from 'react';
 import ProviderButton from '@/components/login/atoms/ProviderButton';
 import { AiFillGithub, AiFillGoogleCircle } from 'react-icons/ai';
 import Link from 'next/link';
-import { pageLoginRoute } from '@/pages/route';
 import Route from '@/utils/route';
 import { IconType } from 'react-icons';
 import { useRouter } from 'next/router';
@@ -22,6 +21,12 @@ type AuthProviders = {
 };
 
 const authorizeApiAuth = (originPathName: string): AuthProviders => {
+	const pageLoginRoute = (): Route => {
+		return {
+			pathname: '/login',
+		};
+	};
+
 	return {
 		github: {
 			name: 'Github',

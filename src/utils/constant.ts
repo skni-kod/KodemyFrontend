@@ -1,6 +1,6 @@
 import { Category, Section } from '@/hooks/services/useSectionService';
 import { SearchFields } from '@/utils/model';
-import { OpenSearchBase } from '@/hooks/services/useMaterialService';
+import { OpenSearchBase } from '@/hooks/services/useMaterialIdService';
 
 export const sortSectionCategory = (section: Section[]) => {
 	section?.forEach((section: Section) => {

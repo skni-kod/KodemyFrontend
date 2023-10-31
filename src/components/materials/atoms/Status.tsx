@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { MaterialStatus } from '@/hooks/services/useMaterialService';
+import { MaterialStatus } from '@/hooks/services/useMaterialIdService';
 
 export const statusDict: Record<MaterialStatus, { polishVerb: string; className: string }> = {
 	[MaterialStatus.PENDING]: { polishVerb: 'Oczekujące', className: 'bg-green-300' },

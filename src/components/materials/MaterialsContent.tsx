@@ -5,7 +5,7 @@ import Header from '@/components/materials/organisms/Header';
 import MaterialModalContent from '@/components/materials/organisms/MaterialModalContent';
 import FilterMenuButton from '@/components/common/page/atoms/FilterMenuButton';
 import SortMenuButton from '@/components/materials/organisms/SortMenuButton';
-import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialService';
+import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialIdService';
 import ResultCount from '@/components/common/page/atoms/ResultCount';
 import useFiltersMenu from '@/hooks/useFiltersMenu';
 import { openSearchBaseInitialState } from '@/utils/constant';

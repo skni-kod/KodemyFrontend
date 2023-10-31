@@ -4,7 +4,7 @@ import ResultCount from '@/components/common/page/atoms/ResultCount';
 import SortMenuButton from '@/components/materials/organisms/SortMenuButton';
 import FilterMenuButton from '@/components/common/page/atoms/FilterMenuButton';
 import FiltersMenu from '@/components/common/page/organisms/FiltersMenu';
-import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialService';
+import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialIdService';
 import { openSearchBaseInitialState } from '@/utils/constant';
 import useFiltersMenu from '@/hooks/useFiltersMenu';
 import useModal from '@/hooks/useModal';

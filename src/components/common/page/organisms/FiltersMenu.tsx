@@ -3,7 +3,7 @@ import { defaultPageSizes, MaterialsFiltersContext } from '@/contexts/MaterialsF
 import Select from '@/components/materials/atoms/Select';
 import PhraseInput from '@/components/materials/atoms/PhraseInput';
 import { sortMenuValues } from '@/components/materials/organisms/SortMenuButton';
-import { MaterialStatus } from '@/hooks/services/useMaterialService';
+import { MaterialStatus } from '@/hooks/services/useMaterialIdService';
 import { useContext } from 'react';
 import { capitalizeString } from '@/utils/constant';
 import { SortDirection } from '@/utils/model';

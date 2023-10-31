@@ -2,11 +2,17 @@ import Page from '@/components/common/Page';
 import Container from '@/components/common/Container';
 import { useRouter } from 'next/router';
 import { useAuthStore } from '@/store/authSlice';
-import { pageLoginRoute } from '@/pages/route';
 import { useEffect } from 'react';
-import UserProfileContent from '@/components/user/UserProfileContent';
+import UserProfileContent from '@/components/account/UserProfileContent';
+import Route from '@/utils/route';
 
 const Index = () => {
+	const pageLoginRoute = (): Route => {
+		return {
+			pathname: '/login',
+		};
+	};
+
 	const router = useRouter();
 	const { user } = useAuthStore();
 
