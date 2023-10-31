@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import BlankTargetLink from '@/components/materials/atoms/BlankTargetLink';
 import { extractRRRRMMDD } from '@/utils/constant';
+import CloseCross from '@/components/common/Modal/CloseCross';
+import CloseButton from '@/components/common/Modal/CloseButton';
 
 const MaterialModalContent = ({
 	materialId,
@@ -27,14 +29,7 @@ const MaterialModalContent = ({
 
 	return (
 		<div className="relative w-128 min-h-112 p-3 bg-white2verydarkgrey rounded-2xl">
-			<div className="flex justify-end">
-				<button
-					className="font-semibold text-black2white hover:text-sky-500"
-					onClick={() => handleClose()}
-				>
-					<AiOutlineClose height={24} width={24} />
-				</button>
-			</div>
+			<CloseCross handleCloseCross={handleClose} />
 			<div className="px-8 py-1">
 				<div>
 					<h2 className="text-4xl text-center font-semibold text-black2white">
@@ -65,14 +60,7 @@ const MaterialModalContent = ({
 						<span className="text-black2white px-1">{material.description}</span>
 					</div>
 				</div>
-				<div className="relative bottom-0 left-0 flex justify-center w-full pb-3 pt-11">
-					<button
-						className="bg-sky-500 hover:bg-blue-600 text-white2white text-xs lg:text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded"
-						onClick={() => handleClose()}
-					>
-						Zamknij
-					</button>
-				</div>
+				<CloseButton handleCloseButton={handleClose} />
 			</div>
 		</div>
 	);

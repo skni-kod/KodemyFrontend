@@ -30,6 +30,9 @@ const config: Config = {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
 			},
+			backgroundColor: {
+				'blue-green': 'linear-gradient(90deg, blue, blue 50%, green 50%)',
+			},
 			transitionProperty: {
 				width: 'width',
 			},
