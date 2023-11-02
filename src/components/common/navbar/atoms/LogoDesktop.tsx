@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import KodemyImageDark from '@/assets/logo/kodemyDark.png';
-import KodemyImageWhite from '@/assets/logo/kodemyWhite.png';
+import KodemyImageDark from '@/assets/logo/dark/kodemyBig.png';
+import KodemyImageWhite from '@/assets/logo/white/kodemyBig.png';
 import { Metadata } from '@/pages/_app';
 import { useThemeStore } from '@/store/themeSlice';
 

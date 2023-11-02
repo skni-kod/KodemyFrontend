@@ -4,10 +4,16 @@ import { useRouter } from 'next/router';
 import Container from '@/components/common/Container';
 import MaterialsFiltersProvider from '@/contexts/MaterialsFiltersContext';
 import { useAuthStore } from '@/store/authSlice';
-import { pageLoginRoute } from '@/pages/route';
-import UserMaterialsContent from '@/components/user/UserMaterialsContent';
+import UserMaterialsContent from '@/components/account/materials/UserMaterialsContent';
+import Route from '@/utils/route';
 
 const Index = () => {
+	const pageLoginRoute = (): Route => {
+		return {
+			pathname: '/login',
+		};
+	};
+
 	const router = useRouter();
 	const { user } = useAuthStore();
 

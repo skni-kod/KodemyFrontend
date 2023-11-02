@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Container from '@/components/common/Container';
 import Page from '@/components/common/Page';
-import MaterialsContent from '@/components/materials/MaterialsContent';
+import MaterialsContent from '@/components/category/MaterialsContent';
 import Route from '@/utils/route';
 import { useEffect, useState } from 'react';
 import { page404Route } from '@/pages/404';

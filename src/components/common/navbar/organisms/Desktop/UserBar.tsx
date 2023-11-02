@@ -4,13 +4,12 @@ import BellDropDownMenu from '../BellDropDownMenu';
 import { useState } from 'react';
 import AvatarDropDownMenu from '../AvatarDropDownMenu';
 import DayNightMode from '../../atoms/DayNightMode';
-import Link from 'next/link';
-import { pageAddMaterialRoute, pageLoginRoute } from '@/pages/route';
 import { BiSearch } from 'react-icons/bi';
 import { useAuthStore } from '@/store/authSlice';
 import { useRouter } from 'next/router';
 import useModal from '@/hooks/useModal';
-import AddMaterialModalContent from '@/components/common/addmaterials/AddMaterialModalContent';
+import AddMaterialModalContent from '@/components/common/modal/addmaterials/AddMaterialModalContent';
+import Route from '@/utils/route';
 
 enum UserBarMenu {
 	NONE,
@@ -24,6 +23,12 @@ const UserBar = () => {
 	const [userBarMenu, setUserBarMenu] = useState<UserBarMenu>(0);
 	const { user } = useAuthStore();
 	const router = useRouter();
+
+	const pageLoginRoute = (): Route => {
+		return {
+			pathname: '/login',
+		};
+	};
 
 	const handleOpenMenu = (menu: UserBarMenu) => {
 		if (!user) router.push(pageLoginRoute());

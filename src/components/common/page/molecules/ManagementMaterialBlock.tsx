@@ -2,13 +2,12 @@ import MaterialWrapper from '@/components/common/page/atoms/MaterialWrapper';
 import Image from 'next/image';
 import DocumentsImage from '@/assets/material/documents.png';
 import { BiStar } from 'react-icons/bi';
-import Status from '@/components/materials/atoms/Status';
+import Status from '@/components/common/modal/common/Status';
 import React from 'react';
-import { Material } from '@/hooks/services/useMaterialService';
-import Favourite from '@/components/materials/atoms/Favourite';
+import { Material } from '@/hooks/services/useMaterialIdService';
 
 const ManagementMaterialBlock = ({
-	data: { title, description, status, user, createdDate },
+	data: { title, description, status, author, createdDate },
 	children,
 }: {
 	data: Material;
@@ -35,7 +34,7 @@ const ManagementMaterialBlock = ({
 
 					<div className="flex-none text-xs text-bold pt-1">
 						<div>
-							Dodane {createdDate.split('T')[0]} przez: {user}
+							Dodane {createdDate.split('T')[0]} przez: {author}
 						</div>
 					</div>
 				</div>

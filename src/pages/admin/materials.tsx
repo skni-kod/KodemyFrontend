@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Page from '@/components/common/Page';
-import AdminMaterialsContent from '@/components/admin/AdminMaterialsContent';
+import AdminMaterialsContent from '@/components/admin/materials/AdminMaterialsContent';
 import { page404Route } from '../404';
 import { useRouter } from 'next/router';
 import Container from '@/components/common/Container';
@@ -12,7 +12,7 @@ const Index = () => {
 	const { user } = useAuthStore();
 
 	useEffect(() => {
-		if (!user || (user && user.role.name === AuthUserRoleType.ROLE_USER)) {
+		if (!user || (user && user.role.name === AuthUserRoleType[AuthUserRoleType.ROLE_USER])) {
 			router.push(page404Route());
 		}
 	}, [router, user]);
