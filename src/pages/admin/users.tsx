@@ -4,6 +4,7 @@ import Page from '@/components/common/Page';
 import { useRouter } from 'next/router';
 import { AuthUserRoleType, useAuthStore } from '@/store/authSlice';
 import { page404Route } from '@/pages/404';
+import AdminUsersContent from '@/components/admin/users/AdminUsersContent';
 
 const Index = () => {
 	const router = useRouter();
@@ -18,7 +19,7 @@ const Index = () => {
 	return (
 		<Page title="Użytkownicy - Panel administracyjny" description="Widok zarządzania użytkownikami">
 			<Container className="max-w-7xl mx-auto">
-				<></>
+				<AdminUsersContent />
 			</Container>
 		</Page>
 	);
