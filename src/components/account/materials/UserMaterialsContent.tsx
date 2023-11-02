@@ -52,7 +52,13 @@ const UserMaterialsContent = () => {
 			...currentIds,
 			material: id,
 		});
-		if (id) handleOpenModal();
+		if (id) {
+			if (!isRatingModalOpen && !isAddedModalOpen && !isMarkModalOpen) {
+				handleOpenModal();
+			} else if (isRatingModalOpen || isAddedModalOpen || isMarkModalOpen) {
+				handleCloseModal();
+			}
+		}
 	};
 
 	return (
@@ -84,7 +90,7 @@ const UserMaterialsContent = () => {
 						/>
 					))}
 			</div>
-			{isOpen && (
+			{isOpen && !isRatingModalOpen && !isAddedModalOpen && !isMarkModalOpen && (
 				<Modal>
 					<MaterialModalContent materialId={currentIds.material} handleClose={handleCloseModal} />
 				</Modal>
