@@ -159,7 +159,7 @@ const AdminUsersContent = () => {
 									{userRolesData.map((role, index) => (
 										<li key={index}>
 											<button
-												className="w-full py-1 px-2 text-left border-none bg-transparent hover:text-sky-500 cursor-pointer transition duration-300"
+												className="w-full h-auto 2sm:py-[0.5vw] px-2 text-left border-none bg-transparent hover:text-sky-500 cursor-pointer transition duration-300"
 												onClick={() => handleRoleSelect(index)}
 											>
 												{transformRoleName(role)}
