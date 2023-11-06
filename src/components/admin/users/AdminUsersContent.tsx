@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import AvatarImage from '@/assets/avatar.png';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
+import { BrowserRouter, Link } from 'react-router-dom';
 
 interface UserData {
 	id: string;
@@ -139,10 +140,6 @@ const AdminUsersContent = () => {
 					<div className={content}>{userData.username}</div>
 				</div>
 				<div className={column}>
-					<h1>Email</h1>
-					<div className={content}>{userData.email || 'Brak adresu'}</div>
-				</div>
-				<div className={column}>
 					<h1>Data utworzenia</h1>
 					<div className={content}>{userData.createdDate.replace('T', ' ')}</div>
 				</div>
@@ -174,6 +171,17 @@ const AdminUsersContent = () => {
 				<div className={column}>
 					<h1>Ilość Materiałów:</h1>
 					<div className={content}>0</div>
+				</div>
+				<div className={column}>
+					<h1>Przejdz do profilu</h1>
+
+					<div className={content}>
+						<BrowserRouter basename="/account">
+							<button className="bg-sky-500 hover:bg-blue-600 text-white text-xs lg:text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded flex">
+								Przejdź do profilu
+							</button>
+						</BrowserRouter>
+					</div>
 				</div>
 			</div>
 		</div>

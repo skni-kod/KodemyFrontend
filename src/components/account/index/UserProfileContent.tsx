@@ -39,8 +39,10 @@ const UserProfileContent = () => {
 
 	return (
 		<div className="text-black2white">
-			<h1 className="text-2xl font-bold mb-4">Profil użytkownika:</h1>
-			<div className="grid grid-cols-2 gap-2 w-128">
+			<div className="px-0 md:px-[1vw]">
+				<h2 className="w-full mt-4 text-semibold text-[5vw] md:text-[36px]">Profil użytkownika:</h2>
+			</div>
+			<div className="grid grid-cols-2 gap-2 w-128 pt-2">
 				<p className="text-right">Nazwa użytkownika:</p>
 				<p>{userData.username}</p>
 
@@ -59,7 +61,7 @@ const UserProfileContent = () => {
 				<p>{userData.role.name.replace('ROLE_', '')}</p>
 
 				<p className="text-right">Liczba wysłanych materiałów:</p>
-				<p>?</p>
+				<p>0</p>
 			</div>
 		</div>
 	);
