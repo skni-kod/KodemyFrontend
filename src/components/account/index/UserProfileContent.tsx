@@ -34,12 +34,12 @@ const UserProfileContent = () => {
 	}, []);
 
 	if (!userData) {
-		return <div className="text-black2white">Loading...</div>;
+		return <div className="text-black2white md:pl-28 xl:pl-20 2xl:pl-6">Loading...</div>;
 	}
 
 	return (
-		<div className="text-black2white">
-			<h1 className="text-2xl font-bold mb-4">Profil użytkownika:</h1>
+		<div className="text-black2white md:pl-28 xl:pl-20 2xl:pl-6">
+			<h1 className="text-2xl font-bold mb-4 ">Profil użytkownika:</h1>
 			<div className="grid grid-cols-2 gap-2 w-128">
 				<p className="text-right">Nazwa użytkownika:</p>
 				<p>{userData.username}</p>
