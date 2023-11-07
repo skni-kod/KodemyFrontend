@@ -4,6 +4,7 @@ import AvatarMenuButton from '@/components/common/navbar/atoms/AvatarMenuButton'
 import { useAuthStore } from '@/store/authSlice';
 import usePermissions from '@/hooks/usePermissions';
 import { useEffect, useState } from 'react';
+import { fetchUserMe } from '@/hooks/data/fetchUserMe';
 
 export const pageAccountMaterialsRoute = (): Route => {
 	return {
@@ -52,18 +53,9 @@ const AvatarDropDownMenu = ({ className }: { className: string; handleClose?: ()
 	const [userData, setUserData] = useState<UserData | null>(null);
 	useEffect(() => {
 		const fetchData = async () => {
-			try {
-				const response = await fetch('http://localhost:8080/api/users/me', {
-					credentials: 'include',
-				});
-				if (response.status === 200) {
-					const data = await response.json();
-					setUserData(data);
-				} else {
-					console.error('Wystąpił błąd podczas pobierania danych');
-				}
-			} catch (error) {
-				console.error('Wystąpił błąd podczas pobierania danych:', error);
+			const data = await fetchUserMe();
+			if (data) {
+				setUserData(data);
 			}
 		};
 		fetchData();
