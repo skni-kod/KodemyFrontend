@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Avatar from '../../common/navbar/atoms/Avatar';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
+import { calculateTimeDifference } from '@/utils/calculateTimeDifference';
+import { transformRoleName } from '@/utils/transformRoleName';
 
 interface UserData {
 	id: string;
@@ -17,43 +19,6 @@ const UserProfileContent = () => {
 	const [userRolesData, setUserRolesData] = useState<string[]>([]);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
-	const transformRoleName = (role: string) => {
-		switch (role) {
-			case 'ROLE_USER':
-				return 'Użytkownik';
-			case 'ROLE_MODERATOR':
-				return 'Moderator';
-			case 'ROLE_ADMIN':
-				return 'Admin';
-			case 'ROLE_SUPERADMIN':
-				return 'SuperAdmin';
-			default:
-				return role;
-		}
-	};
-
-	const calculateTimeDifference = (createdDate: string) => {
-		const currentDate = new Date();
-		const creationDate = new Date(createdDate);
-		const timeDifference = currentDate.getTime() - creationDate.getTime();
-
-		const minutesDifference = Math.floor(timeDifference / (1000 * 60));
-		const hoursDifference = Math.floor(minutesDifference / 60);
-		const daysDifference = Math.floor(hoursDifference / 24);
-		const yearsDifference = Math.floor(daysDifference / 365); // Calculate years difference
-
-		if (yearsDifference > 0) {
-			return `${yearsDifference} lat temu`;
-		} else if (daysDifference > 0) {
-			return `${daysDifference} dni temu`;
-		} else if (hoursDifference > 0) {
-			return `${hoursDifference} godzin temu`;
-		} else if (minutesDifference > 0) {
-			return `${minutesDifference} minut temu`;
-		} else {
-			return 'Mniej niż 1 minutę temu';
-		}
-	};
 
 	useEffect(() => {
 		const userId = [1];
@@ -169,33 +134,27 @@ const UserProfileContent = () => {
 
 				<p className="text-right">Rola:</p>
 				<div className="{content} relative flex items-center">
-					{isAdminOrSuperAdmin ? (
+					{isAdminOrSuperAdmin && isEditing ? (
 						<>
-							{isEditing ? (
-								<>
-									<button onClick={handleMenuToggle} className="pr-1">
-										{transformRoleName(userData.role.name)}
-									</button>
-									{isMenuOpen ? <RxTriangleUp /> : <RxTriangleDown />}
-									{isMenuOpen && (
-										<div className="absolute right-12 top-0 w-fit z-10 bg-white2verydarkgrey mt-2">
-											<ul className="max-h-none w-max m-0 p-0 overflow-auto cursor-pointer list-none border-2 rounded-lg">
-												{userRolesData.map((role, index) => (
-													<li key={index}>
-														<button
-															className="w-full h-auto 2sm:py-[0.5vw] px-2 text-left border-none bg-transparent hover:text-sky-500 cursor-pointer transition duration-300"
-															onClick={() => handleRoleSelect(index)}
-														>
-															{transformRoleName(role)}
-														</button>
-													</li>
-												))}
-											</ul>
-										</div>
-									)}
-								</>
-							) : (
-								<span>{transformRoleName(userData.role.name)}</span>
+							<button onClick={handleMenuToggle} className="pr-1">
+								{transformRoleName(userData.role.name)}
+							</button>
+							{isMenuOpen ? <RxTriangleUp /> : <RxTriangleDown />}
+							{isMenuOpen && (
+								<div className="absolute right-12 top-0 w-fit z-10 bg-white2verydarkgrey mt-2">
+									<ul className="max-h-none w-max m-0 p-0 overflow-auto cursor-pointer list-none border-2 rounded-lg">
+										{userRolesData.map((role, index) => (
+											<li key={index}>
+												<button
+													className="w-full h-auto 2sm:py-[0.5vw] px-2 text-left border-none bg-transparent hover:text-sky-500 cursor-pointer transition duration-300"
+													onClick={() => handleRoleSelect(index)}
+												>
+													{transformRoleName(role)}
+												</button>
+											</li>
+										))}
+									</ul>
+								</div>
 							)}
 						</>
 					) : (

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import AvatarImage from '@/assets/avatar.png';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
 import Route from '@/utils/route';
+import { calculateTimeDifference } from '@/utils/calculateTimeDifference';
+import { transformRoleName } from '@/utils/transformRoleName';
 
 interface UserData {
 	id: string;
@@ -25,42 +27,6 @@ export const pageAccountIdRoute = (userid: number): Route => {
 
 const AdminUsersContent = () => {
 	const [userData, setUserData] = useState<UserData | null>(null);
-	const transformRoleName = (role: string) => {
-		switch (role) {
-			case 'ROLE_USER':
-				return 'Użytkownik';
-			case 'ROLE_MODERATOR':
-				return 'Moderator';
-			case 'ROLE_ADMIN':
-				return 'Admin';
-			case 'ROLE_SUPERADMIN':
-				return 'SuperAdmin';
-			default:
-				return role;
-		}
-	};
-	const calculateTimeDifference = (createdDate: string) => {
-		const currentDate = new Date();
-		const creationDate = new Date(createdDate);
-		const timeDifference = currentDate.getTime() - creationDate.getTime();
-
-		const minutesDifference = Math.floor(timeDifference / (1000 * 60));
-		const hoursDifference = Math.floor(minutesDifference / 60);
-		const daysDifference = Math.floor(hoursDifference / 24);
-		const yearsDifference = Math.floor(daysDifference / 365); // Calculate years difference
-
-		if (yearsDifference > 0) {
-			return `${yearsDifference} lat temu`;
-		} else if (daysDifference > 0) {
-			return `${daysDifference} dni temu`;
-		} else if (hoursDifference > 0) {
-			return `${hoursDifference} godzin temu`;
-		} else if (minutesDifference > 0) {
-			return `${minutesDifference} minut temu`;
-		} else {
-			return 'Mniej niż 1 minutę temu';
-		}
-	};
 
 	useEffect(() => {
 		const userId = [1];
