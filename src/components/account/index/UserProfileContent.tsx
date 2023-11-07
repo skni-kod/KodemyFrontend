@@ -16,6 +16,7 @@ const UserProfileContent = () => {
 	const [userData, setUserData] = useState<UserData | null>(null);
 	const [userRolesData, setUserRolesData] = useState<string[]>([]);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [isEditing, setIsEditing] = useState(false);
 	const transformRoleName = (role: string) => {
 		switch (role) {
 			case 'ROLE_USER':
@@ -78,7 +79,7 @@ const UserProfileContent = () => {
 
 	const sendUserRoleToDatabase = async (userId: string, newRole: number) => {
 		try {
-			const response = await fetch(`http://localhost:8081/api/users/${userId}/roles`, {
+			const response = await fetch(`http://localhost:8080/api/users/${userId}/roles`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -127,7 +128,7 @@ const UserProfileContent = () => {
 			<div className="px-0 md:px-[1vw]">
 				<h2 className="w-full mt-4 text-semibold text-[5vw] md:text-[36px]">Profil użytkownika:</h2>
 			</div>
-			<div className="grid grid-cols-2 gap-2 w-128 pt-2">
+			<div className="grid grid-cols-2 gap-2 w-auto pt-2">
 				<p className="text-right">Nazwa użytkownika:</p>
 				<p>{userData.username}</p>
 
@@ -146,25 +147,31 @@ const UserProfileContent = () => {
 				<div className="{content} relative flex items-center">
 					{isAdminOrSuperAdmin ? (
 						<>
-							<button onClick={handleMenuToggle} className="pr-1">
-								{transformRoleName(userData.role.name)}
-							</button>
-							{isMenuOpen ? <RxTriangleUp /> : <RxTriangleDown />}
-							{isMenuOpen && (
-								<div className="absolute right-2 top-full w-fit z-10 bg-white2verydarkgrey mt-2">
-									<ul className="max-h-none w-max m-0 p-0 overflow-auto cursor-pointer list-none border-2 rounded-lg">
-										{userRolesData.map((role, index) => (
-											<li key={index}>
-												<button
-													className="w-full h-auto 2sm:py-[0.5vw] px-2 text-left border-none bg-transparent hover:text-sky-500 cursor-pointer transition duration-300"
-													onClick={() => handleRoleSelect(index)}
-												>
-													{transformRoleName(role)}
-												</button>
-											</li>
-										))}
-									</ul>
-								</div>
+							{isEditing ? (
+								<>
+									<button onClick={handleMenuToggle} className="pr-1">
+										{transformRoleName(userData.role.name)}
+									</button>
+									{isMenuOpen ? <RxTriangleUp /> : <RxTriangleDown />}
+									{isMenuOpen && (
+										<div className="absolute right-12 top-0 w-fit z-10 bg-white2verydarkgrey mt-2">
+											<ul className="max-h-none w-max m-0 p-0 overflow-auto cursor-pointer list-none border-2 rounded-lg">
+												{userRolesData.map((role, index) => (
+													<li key={index}>
+														<button
+															className="w-full h-auto 2sm:py-[0.5vw] px-2 text-left border-none bg-transparent hover:text-sky-500 cursor-pointer transition duration-300"
+															onClick={() => handleRoleSelect(index)}
+														>
+															{transformRoleName(role)}
+														</button>
+													</li>
+												))}
+											</ul>
+										</div>
+									)}
+								</>
+							) : (
+								<span>{transformRoleName(userData.role.name)}</span>
 							)}
 						</>
 					) : (
@@ -179,8 +186,11 @@ const UserProfileContent = () => {
 					<>
 						<p className="text-right">Edycja profilu użytkownika:</p>
 						<p>
-							<button className="bg-sky-500 hover:bg-blue-600 text-white text-xs lg:text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded flex">
-								Edytuj
+							<button
+								className="bg-sky-500 hover:bg-blue-600 text-white text-xs lg:text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded flex"
+								onClick={() => setIsEditing(!isEditing)}
+							>
+								{isEditing ? 'Anuluj' : 'Edytuj'}
 							</button>
 						</p>
 					</>
