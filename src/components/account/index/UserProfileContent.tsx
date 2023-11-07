@@ -3,61 +3,26 @@ import Avatar from '../../common/navbar/atoms/Avatar';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
 import { calculateTimeDifference } from '@/utils/calculateTimeDifference';
 import { transformRoleName } from '@/utils/transformRoleName';
-
-interface UserData {
-	id: string;
-	username: string;
-	email: string | null;
-	createdDate: string;
-	role: {
-		name: string;
-	};
-}
+import { fetchRoles } from '@/hooks/data/FetchRoles';
+import { fetchUserById } from '@/hooks/data/FetchUserById';
+import { sendRole } from '@/hooks/data/sendRole';
 
 const UserProfileContent = () => {
-	const [userData, setUserData] = useState<UserData | null>(null);
 	const [userRolesData, setUserRolesData] = useState<string[]>([]);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 
+	const userId = '1';
+	const userData = fetchUserById(userId);
+
 	useEffect(() => {
-		const userId = [1];
-
-		const fetchData = async () => {
-			try {
-				const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
-					credentials: 'include',
-				});
-				if (response.status === 200) {
-					const data = await response.json();
-					setUserData(data);
-				} else {
-					console.error('Wystąpił błąd podczas pobierania danych');
-				}
-			} catch (error) {
-				console.error('Wystąpił błąd podczas pobierania danych:', error);
+		const getRolesData = async () => {
+			const rolesData = await fetchRoles();
+			if (rolesData) {
+				setUserRolesData(rolesData);
 			}
 		};
-
-		fetchData();
-
-		const fetchRoles = async () => {
-			try {
-				const response = await fetch(`http://localhost:8080/api/roles`, {
-					credentials: 'include',
-				});
-				if (response.status === 200) {
-					const dataroles = await response.json();
-					setUserRolesData(dataroles);
-				} else {
-					console.error('Wystąpił błąd podczas pobierania danych');
-				}
-			} catch (error) {
-				console.error('Wystąpił błąd podczas pobierania danych:', error);
-			}
-		};
-
-		fetchRoles();
+		getRolesData();
 	}, []);
 
 	const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
@@ -66,42 +31,17 @@ const UserProfileContent = () => {
 		setIsMenuOpen(!isMenuOpen);
 	};
 
-	const sendUserRoleToDatabase = async (userId: string, newRole: number) => {
-		try {
-			const response = await fetch(`http://localhost:8080/api/users/${userId}/roles`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ newRole }),
-				credentials: 'include',
-			});
-			console.log('response.status ', response.status);
-			if (response.status === 200) {
-				console.log('New role sent to the database successfully.');
-			} else {
-				console.error('Failed to send the new role to the database.');
-			}
-		} catch (error) {
-			console.error('An error occurred while sending the new role:', error);
-		}
-	};
-
-	const handleRoleSelect = (index: number) => {
+	const handleRoleSelect = async (index: number) => {
 		setCurrentRoleIndex(index);
 		setIsMenuOpen(false);
-		setUserData((prevUserData) => ({
-			...prevUserData!,
-			role: {
-				name: userRolesData[index],
-			},
-		}));
+		if (userData) {
+			userData.role.name = userRolesData[index];
+		}
 		const roleIndex = index + 1;
 		console.log('userRolesData[index] ', userRolesData[index]);
 		console.log('userData', userData);
-
 		if (userData) {
-			sendUserRoleToDatabase(userData.id, roleIndex);
+			await sendRole(userData.id, roleIndex);
 		}
 	};
 

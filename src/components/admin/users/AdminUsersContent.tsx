@@ -1,52 +1,21 @@
 import { useEffect, useState } from 'react';
 import AvatarImage from '@/assets/avatar.png';
-import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
 import Route from '@/utils/route';
 import { calculateTimeDifference } from '@/utils/calculateTimeDifference';
 import { transformRoleName } from '@/utils/transformRoleName';
+import { fetchUserById } from '@/hooks/data/FetchUserById';
 
-interface UserData {
-	id: string;
-	username: string;
-	email: string | null;
-	createdDate: string;
-	photo: string;
-	role: {
-		name: string;
-	};
-}
 export const pageAccountIdRoute = (userid: number): Route => {
 	const route = {
 		pathname: `/account/${userid}`,
 	};
-
 	window.location.href = route.pathname;
-
 	return route;
 };
 
 const AdminUsersContent = () => {
-	const [userData, setUserData] = useState<UserData | null>(null);
-
-	useEffect(() => {
-		const userId = [1];
-		const fetchData = async () => {
-			try {
-				const response = await fetch(`http://localhost:8081/api/users/${userId}`, {
-					credentials: 'include',
-				});
-				if (response.status === 200) {
-					const data = await response.json();
-					setUserData(data);
-				} else {
-					console.error('Wystąpił błąd podczas pobierania danych');
-				}
-			} catch (error) {
-				console.error('Wystąpił błąd podczas pobierania danych:', error);
-			}
-		};
-		fetchData();
-	}, []);
+	const userId = '1';
+	const userData = fetchUserById(userId);
 
 	if (!userData) {
 		return <div className="pl-0 md:pl-20 2xl:pl-0 text-black2white">Loading...</div>;
