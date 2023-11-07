@@ -31,6 +31,30 @@ const UserProfileContent = () => {
 				return role;
 		}
 	};
+
+	const calculateTimeDifference = (createdDate: string) => {
+		const currentDate = new Date();
+		const creationDate = new Date(createdDate);
+		const timeDifference = currentDate.getTime() - creationDate.getTime();
+
+		const minutesDifference = Math.floor(timeDifference / (1000 * 60));
+		const hoursDifference = Math.floor(minutesDifference / 60);
+		const daysDifference = Math.floor(hoursDifference / 24);
+		const yearsDifference = Math.floor(daysDifference / 365); // Calculate years difference
+
+		if (yearsDifference > 0) {
+			return `${yearsDifference} lat temu`;
+		} else if (daysDifference > 0) {
+			return `${daysDifference} dni temu`;
+		} else if (hoursDifference > 0) {
+			return `${hoursDifference} godzin temu`;
+		} else if (minutesDifference > 0) {
+			return `${minutesDifference} minut temu`;
+		} else {
+			return 'Mniej niż 1 minutę temu';
+		}
+	};
+
 	useEffect(() => {
 		const userId = [1];
 
@@ -141,7 +165,7 @@ const UserProfileContent = () => {
 				</div>
 
 				<p className="text-right">Data utworzenia:</p>
-				<p>{userData.createdDate.replace('T', ' ')}</p>
+				<p>{calculateTimeDifference(userData.createdDate)}</p>
 
 				<p className="text-right">Rola:</p>
 				<div className="{content} relative flex items-center">
