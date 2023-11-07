@@ -47,8 +47,11 @@ const AdminUsersContent = () => {
 		const minutesDifference = Math.floor(timeDifference / (1000 * 60));
 		const hoursDifference = Math.floor(minutesDifference / 60);
 		const daysDifference = Math.floor(hoursDifference / 24);
+		const yearsDifference = Math.floor(daysDifference / 365); // Calculate years difference
 
-		if (daysDifference > 0) {
+		if (yearsDifference > 0) {
+			return `${yearsDifference} lat temu`;
+		} else if (daysDifference > 0) {
 			return `${daysDifference} dni temu`;
 		} else if (hoursDifference > 0) {
 			return `${hoursDifference} godzin temu`;
