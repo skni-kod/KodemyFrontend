@@ -1,4 +1,4 @@
-export async function sendRole(userId: string, newRole: number) {
+export async function sendNewRole(userId: string, newRole: number) {
 	try {
 		const response = await fetch(`http://localhost:8080/api/users/${userId}/roles`, {
 			method: 'POST',

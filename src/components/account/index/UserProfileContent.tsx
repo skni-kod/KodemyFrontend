@@ -5,7 +5,7 @@ import { calculateTimeDifference } from '@/utils/calculateTimeDifference';
 import { transformRoleName } from '@/utils/transformRoleName';
 import { fetchRoles } from '@/hooks/data/FetchRoles';
 import { fetchUserById } from '@/hooks/data/FetchUserById';
-import { sendRole } from '@/hooks/data/sendRole';
+import { sendNewRole } from '@/hooks/data/sendNewRole';
 
 const UserProfileContent = () => {
 	const [userRolesData, setUserRolesData] = useState<string[]>([]);
@@ -41,7 +41,7 @@ const UserProfileContent = () => {
 		console.log('userRolesData[index] ', userRolesData[index]);
 		console.log('userData', userData);
 		if (userData) {
-			await sendRole(userData.id, roleIndex);
+			await sendNewRole(userData.id, roleIndex);
 		}
 	};
 
