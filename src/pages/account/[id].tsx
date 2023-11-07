@@ -23,18 +23,14 @@ export const pageLoginRoute = (): Route => {
 const Id = () => {
 	const [id, setId] = useState<number | undefined>(undefined);
 	const router = useRouter();
-	const { user } = useAuthStore();
 
 	useEffect(() => {
-		if (!user) {
-			router.push(pageLoginRoute());
-		}
 		const { id } = router.query;
 		if (typeof id === 'string') {
 			if (/^[0-9]+$/.test(id)) setId(parseInt(id));
 			else router.push(page404Route());
 		}
-	}, [router, router.query, router.asPath, user]);
+	}, [router, router.query, router.asPath]);
 
 	return (
 		<Page title="Konto - Panel użytkownika" description="Widok konta użytkownika">
