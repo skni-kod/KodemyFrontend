@@ -3,6 +3,7 @@ import AvatarMenuSeparator from '@/components/common/navbar/atoms/AvatarMenuSepa
 import AvatarMenuButton from '@/components/common/navbar/atoms/AvatarMenuButton';
 import { useAuthStore } from '@/store/authSlice';
 import usePermissions from '@/hooks/usePermissions';
+import { useEffect, useState } from 'react';
 
 export const pageAccountMaterialsRoute = (): Route => {
 	return {
@@ -24,19 +25,49 @@ export const pageAdminUsersRoute = (): Route => {
 		pathname: '/admin/users',
 	};
 };
-export const pageAccountRoute = (): Route => {
-	return {
-		pathname: '/account',
-	};
-};
 export const pageLogoutRoute = (): Route => {
 	return {
 		pathname: '/logout',
 	};
 };
+
+interface UserData {
+	id: number;
+	username: string;
+	email: string | null;
+	createdDate: string;
+	role: {
+		name: string;
+	};
+}
+export const pageAccountIdRoute = (userid: number): Route => {
+	return {
+		pathname: `/account/${userid}`,
+	};
+};
+
 const AvatarDropDownMenu = ({ className }: { className: string; handleClose?: () => void }) => {
 	const { user } = useAuthStore();
 	const { isModerator } = usePermissions();
+	const [userData, setUserData] = useState<UserData | null>(null);
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await fetch('http://localhost:8080/api/users/me', {
+					credentials: 'include',
+				});
+				if (response.status === 200) {
+					const data = await response.json();
+					setUserData(data);
+				} else {
+					console.error('Wystąpił błąd podczas pobierania danych');
+				}
+			} catch (error) {
+				console.error('Wystąpił błąd podczas pobierania danych:', error);
+			}
+		};
+		fetchData();
+	}, []);
 
 	return (
 		<div
@@ -61,7 +92,7 @@ const AvatarDropDownMenu = ({ className }: { className: string; handleClose?: ()
 						)}
 						<div>
 							<AvatarMenuSeparator value="Konto" className="px-2">
-								<AvatarMenuButton value="Profil" href={pageAccountRoute()} />
+								<AvatarMenuButton value="Profil" href={pageAccountIdRoute(user.id)} />
 								<AvatarMenuButton value="Wyloguj się" href={pageLogoutRoute()} />
 							</AvatarMenuSeparator>
 						</div>

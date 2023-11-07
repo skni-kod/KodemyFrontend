@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import AvatarImage from '@/assets/avatar.png';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
-import { BrowserRouter, Link } from 'react-router-dom';
+import Route from '@/utils/route';
 
 interface UserData {
 	id: string;
@@ -13,11 +13,18 @@ interface UserData {
 		name: string;
 	};
 }
+export const pageAccountIdRoute = (userid: number): Route => {
+	const route = {
+		pathname: `/account/${userid}`,
+	};
+
+	window.location.href = route.pathname;
+
+	return route;
+};
 
 const AdminUsersContent = () => {
 	const [userData, setUserData] = useState<UserData | null>(null);
-	const [userRolesData, setUserRolesData] = useState<string[]>([]);
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const transformRoleName = (role: string) => {
 		switch (role) {
 			case 'ROLE_USER':
@@ -30,6 +37,25 @@ const AdminUsersContent = () => {
 				return 'SuperAdmin';
 			default:
 				return role;
+		}
+	};
+	const calculateTimeDifference = (createdDate: string) => {
+		const currentDate = new Date();
+		const creationDate = new Date(createdDate);
+		const timeDifference = currentDate.getTime() - creationDate.getTime();
+
+		const minutesDifference = Math.floor(timeDifference / (1000 * 60));
+		const hoursDifference = Math.floor(minutesDifference / 60);
+		const daysDifference = Math.floor(hoursDifference / 24);
+
+		if (daysDifference > 0) {
+			return `${daysDifference} dni temu`;
+		} else if (hoursDifference > 0) {
+			return `${hoursDifference} godzin temu`;
+		} else if (minutesDifference > 0) {
+			return `${minutesDifference} minut temu`;
+		} else {
+			return 'Mniej niż 1 minutę temu';
 		}
 	};
 
@@ -51,70 +77,9 @@ const AdminUsersContent = () => {
 			}
 		};
 		fetchData();
-
-		const fetchRoles = async () => {
-			try {
-				const response = await fetch(`http://localhost:8081/api/roles`, {
-					credentials: 'include',
-				});
-				if (response.status === 200) {
-					const dataroles = await response.json();
-					setUserRolesData(dataroles);
-				} else {
-					console.error('Wystąpił błąd podczas pobierania danych');
-				}
-			} catch (error) {
-				console.error('Wystąpił błąd podczas pobierania danych:', error);
-			}
-		};
-
-		fetchRoles();
 	}, []);
 
-	const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
-
-	const handleMenuToggle = () => {
-		setIsMenuOpen(!isMenuOpen);
-	};
-
-	const sendUserRoleToDatabase = async (userId: string, newRole: number) => {
-		try {
-			const response = await fetch(`http://localhost:8081/api/users/${userId}/roles`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ newRole }),
-				credentials: 'include',
-			});
-			console.log('response.status ', response.status);
-			if (response.status === 200) {
-				console.log('New role sent to the database successfully.');
-			} else {
-				console.error('Failed to send the new role to the database.');
-			}
-		} catch (error) {
-			console.error('An error occurred while sending the new role:', error);
-		}
-	};
-
-	const handleRoleSelect = (index: number) => {
-		setCurrentRoleIndex(index);
-		setIsMenuOpen(false);
-		setUserData((prevUserData) => ({
-			...prevUserData!,
-			role: {
-				name: userRolesData[index],
-			},
-		}));
-		const roleIndex = index + 1;
-		console.log('userRolesData[index] ', userRolesData[index]);
-		if (userData) {
-			sendUserRoleToDatabase(userData.id, roleIndex);
-		}
-	};
-
-	if (!userData || !userRolesData) {
+	if (!userData) {
 		return <div className="pl-0 md:pl-20 2xl:pl-0 text-black2white">Loading...</div>;
 	}
 
@@ -141,31 +106,12 @@ const AdminUsersContent = () => {
 				</div>
 				<div className={column}>
 					<h1>Data utworzenia</h1>
-					<div className={content}>{userData.createdDate.replace('T', ' ')}</div>
+					<div className={content}>{calculateTimeDifference(userData.createdDate)}</div>
 				</div>
 				<div className={column}>
 					<h1>Rola</h1>
 					<div className="{content} relative flex items-center">
-						<button onClick={handleMenuToggle} className="pr-1">
-							{transformRoleName(userData.role.name)}
-						</button>
-						{isMenuOpen ? <RxTriangleUp /> : <RxTriangleDown />}
-						{isMenuOpen && (
-							<div className="absolute right-2 top-full w-fit z-10 bg-white2verydarkgrey mt-2">
-								<ul className="max-h-none w-max m-0 p-0 overflow-auto cursor-pointer list-none border-2 rounded-lg">
-									{userRolesData.map((role, index) => (
-										<li key={index}>
-											<button
-												className="w-full h-auto 2sm:py-[0.5vw] px-2 text-left border-none bg-transparent hover:text-sky-500 cursor-pointer transition duration-300"
-												onClick={() => handleRoleSelect(index)}
-											>
-												{transformRoleName(role)}
-											</button>
-										</li>
-									))}
-								</ul>
-							</div>
-						)}
+						{transformRoleName(userData.role.name)}
 					</div>
 				</div>
 				<div className={column}>
@@ -176,11 +122,12 @@ const AdminUsersContent = () => {
 					<h1>Przejdz do profilu</h1>
 
 					<div className={content}>
-						<BrowserRouter basename="/account">
-							<button className="bg-sky-500 hover:bg-blue-600 text-white text-xs lg:text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded flex">
-								Przejdź do profilu
-							</button>
-						</BrowserRouter>
+						<button
+							className="bg-sky-500 hover:bg-blue-600 text-white text-xs lg:text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded flex"
+							onClick={() => pageAccountIdRoute(parseInt(userData.id, 10))}
+						>
+							Przejdź do profilu
+						</button>
 					</div>
 				</div>
 			</div>

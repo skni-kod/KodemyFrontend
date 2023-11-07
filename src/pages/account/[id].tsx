@@ -2,17 +2,26 @@ import Page from '@/components/common/Page';
 import Container from '@/components/common/Container';
 import { useRouter } from 'next/router';
 import { useAuthStore } from '@/store/authSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import UserProfileContent from '@/components/account/index/UserProfileContent';
 import Route from '@/utils/route';
+import { page404Route } from '../404';
 
-const Index = () => {
-	const pageLoginRoute = (): Route => {
-		return {
-			pathname: '/login',
-		};
+export const pageAccountIdRoute = (id: number): Route => {
+	return {
+		pathname: '/account/[id]',
+		query: { id },
 	};
+};
 
+export const pageLoginRoute = (): Route => {
+	return {
+		pathname: '/login',
+	};
+};
+
+const Id = () => {
+	const [id, setId] = useState<number | undefined>(undefined);
 	const router = useRouter();
 	const { user } = useAuthStore();
 
@@ -20,7 +29,12 @@ const Index = () => {
 		if (!user) {
 			router.push(pageLoginRoute());
 		}
-	}, [router, user]);
+		const { id } = router.query;
+		if (typeof id === 'string') {
+			if (/^[0-9]+$/.test(id)) setId(parseInt(id));
+			else router.push(page404Route());
+		}
+	}, [router, router.query, router.asPath, user]);
 
 	return (
 		<Page title="Konto - Panel użytkownika" description="Widok konta użytkownika">
@@ -31,4 +45,4 @@ const Index = () => {
 	);
 };
 
-export default Index;
+export default Id;
