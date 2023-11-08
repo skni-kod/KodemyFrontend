@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import HeaderAllMaterials from '@/components/common/page/organisms/HeaderAllMaterials';
-import ResultCount from '@/components/common/page/atoms/ResultCount';
-import SortMenuButton from '@/components/common/SortMenuButton';
-import FilterMenuButton from '@/components/common/page/atoms/FilterMenuButton';
+import ResultCount from '@/components/common/filter/atoms/ResultCount';
+import SortMenuButton from '@/components/common/filter/SortMenuButton';
+import FilterMenuButton from '@/components/common/filter/atoms/FilterMenuButton';
 import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialIdService';
 import { openSearchBaseInitialState } from '@/utils/constant';
 import useFiltersMenu from '@/hooks/useFiltersMenu';

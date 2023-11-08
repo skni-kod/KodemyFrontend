@@ -1,4 +1,4 @@
-import FiltersMenu from '@/components/common/page/organisms/FiltersMenu';
+import FiltersMenu from '@/components/common/filter/organisms/FiltersMenu';
 import { useCallback, useContext, useState } from 'react';
 import { MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
 import { SearchFields, SortDirection } from '@/utils/model';

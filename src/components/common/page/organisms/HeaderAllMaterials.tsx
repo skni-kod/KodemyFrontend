@@ -1,7 +1,7 @@
 import HeaderButton from '@/components/common/page/atoms/HeaderButton';
 import { useSectionsStore } from '@/store/sectionsSlice';
 import { useState } from 'react';
-import FilterButtonsList from '@/components/common/page/molecules/FilterButtonsList';
+import FilterButtonsList from '@/components/common/filter/molecules/FilterButtonsList';
 
 type CurrentIds = {
 	section: number | undefined;

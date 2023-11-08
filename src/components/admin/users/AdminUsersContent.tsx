@@ -1,75 +1,92 @@
-import { useEffect, useState } from 'react';
-import AvatarImage from '@/assets/avatar.png';
-import Route from '@/utils/route';
-import { calculateTimeDifference } from '@/utils/calculateTimeDifference';
-import { transformRoleName } from '@/utils/transformRoleName';
-import { fetchUserById } from '@/hooks/data/FetchUserById';
-
-export const pageAccountIdRoute = (userid: number): Route => {
-	const route = {
-		pathname: `/account/${userid}`,
-	};
-	window.location.href = route.pathname;
-	return route;
-};
+import ResultCount from '@/components/common/filter/atoms/ResultCount';
+import AdminUsersBlock from './atoms/AdminUsersBlock';
+import SortMenuButton from '@/components/common/filter/SortMenuButton';
+import FilterMenuButton from '@/components/common/filter/atoms/FilterMenuButton';
+import useFiltersMenu from '@/hooks/useFiltersMenu';
+import { useCallback, useEffect, useState } from 'react';
 
 const AdminUsersContent = () => {
 	const userId = '1';
-	const userData = fetchUserById(userId);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [itemsPerPage, setItemsPerPage] = useState(4);
 
-	if (!userData) {
-		return <div className="pl-0 md:pl-20 2xl:pl-0 text-black2white">Loading...</div>;
-	}
+	const blockHeight = 200; // piksele
 
-	const column = 'flex flex-col p-[1vw] gap-[1.5vw] md:gap-3 text-[2vw] md:text-sm';
-	const content = 'flex items-center';
-	const avatarSize = 'h-[5vw] w-[5vw] 3sm:h-7 3sm:w-7';
+	const calculateItemsPerPage = useCallback(() => {
+		const windowHeight = window.innerHeight;
+		const newItemsPerPage = Math.floor(windowHeight / blockHeight);
+		return newItemsPerPage;
+	}, []);
+
+	useEffect(() => {
+		const handleResize = () => {
+			const newItemsPerPage = calculateItemsPerPage();
+			setCurrentPage(1);
+			setItemsPerPage(newItemsPerPage);
+		};
+
+		window.addEventListener('resize', handleResize);
+		handleResize();
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, [calculateItemsPerPage]);
+
+	const adminUserBlocks = Array.from({ length: 18 }, (_, index) => (
+		<AdminUsersBlock key={index} userId={userId} />
+	));
+
+	const totalItems = adminUserBlocks.length;
+	const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+	const handlePageChange = (newPage: number) => {
+		setCurrentPage(newPage);
+	};
+
+	const startIdx = (currentPage - 1) * itemsPerPage;
+	const endIdx = currentPage * itemsPerPage;
+	const visibleAdminUserBlocks = adminUserBlocks.slice(startIdx, endIdx);
+
+	const { FiltersMenu, isFilterMenuOpen, setIsFilterMenuOpen, filters } = useFiltersMenu();
+
 	return (
-		<div className="w-full px-4 md:pl-20 2xl:pl-0 text-black2white ">
-			<div className="px-0 md:px-[1vw]">
-				<h2 className="w-full mt-4 text-semibold text-[5vw] md:text-[36px]">Użytkownicy</h2>
-			</div>
-			<div className="flex text-black2white text-xs">
-				<div className={column}>
-					<h1>Logo</h1>
-					<img
-						src={userData ? userData.photo : AvatarImage.src}
-						alt="Avatar użytkownika"
-						className={`rounded-full ${avatarSize}`}
-					/>
+		<>
+			<div className="w-full px-3 md:pl-20 2xl:pl-0 text-black2white">
+				<div className="px-0 md:px-[1vw] pb-4">
+					<h2 className="w-full mt-4 text-semibold text-[5vw] md:text-[36px]">Użytkownicy</h2>
 				</div>
-				<div className={column}>
-					<h1>Nazwa</h1>
-					<div className={content}>{userData.username}</div>
-				</div>
-				<div className={column}>
-					<h1>Data utworzenia</h1>
-					<div className={content}>{calculateTimeDifference(userData.createdDate)}</div>
-				</div>
-				<div className={column}>
-					<h1>Rola</h1>
-					<div className="{content} relative flex items-center">
-						{transformRoleName(userData.role.name)}
-					</div>
-				</div>
-				<div className={column}>
-					<h1>Ilość Materiałów:</h1>
-					<div className={content}>0</div>
-				</div>
-				<div className={column}>
-					<h1>Przejdz do profilu</h1>
-
-					<div className={content}>
-						<button
-							className="bg-sky-500 hover:bg-blue-600 text-white text-xs lg:text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded flex"
-							onClick={() => pageAccountIdRoute(parseInt(userData.id, 10))}
-						>
-							Przejdź do profilu
-						</button>
+				<div className="flex justify-between items-center w-full pt-4 px-8">
+					<ResultCount value={totalItems} />
+					<div className="relative flex gap-x-8 text-black2white cursor-pointer">
+						{!isFilterMenuOpen && <SortMenuButton />}
+						<FilterMenuButton isMenuOpen={isFilterMenuOpen} setIsMenuOpen={setIsFilterMenuOpen} />
 					</div>
 				</div>
 			</div>
-		</div>
+			<div className="w-full px-3 text-black2white">{isFilterMenuOpen && <FiltersMenu />}</div>
+			<div className="flex flex-col w-full gap-4 pt-6 pb-4 px-3 md:pl-20 2xl:pl-0">
+				{visibleAdminUserBlocks}
+			</div>
+			<div className="flex justify-center text-black2white pt-1 pb-5">
+				<nav>
+					<ul className="pagination flex space-x-2">
+						{Array.from({ length: totalPages }, (_, index) => (
+							<li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+								<button
+									className={`page-link ${
+										currentPage === index + 1 ? 'active bg-blue-500 text-white rounded h-6 w-4' : ''
+									}`}
+									onClick={() => handlePageChange(index + 1)}
+								>
+									{index + 1}
+								</button>
+							</li>
+						))}
+					</ul>
+				</nav>
+			</div>
+		</>
 	);
 };
 export default AdminUsersContent;

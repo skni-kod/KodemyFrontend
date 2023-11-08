@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import useModal from '@/hooks/useModal';
 import Header from '@/components/category/organisms/Header';
 import MaterialModalContent from '@/components/common/modal/materials/content/MaterialModalContent';
-import FilterMenuButton from '@/components/common/page/atoms/FilterMenuButton';
-import SortMenuButton from '@/components/common/SortMenuButton';
+import FilterMenuButton from '@/components/common/filter/atoms/FilterMenuButton';
+import SortMenuButton from '@/components/common/filter/SortMenuButton';
 import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialIdService';
-import ResultCount from '@/components/common/page/atoms/ResultCount';
+import ResultCount from '@/components/common/filter/atoms/ResultCount';
 import useFiltersMenu from '@/hooks/useFiltersMenu';
 import { openSearchBaseInitialState } from '@/utils/constant';
 

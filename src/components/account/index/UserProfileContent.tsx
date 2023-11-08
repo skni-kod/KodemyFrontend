@@ -3,8 +3,8 @@ import Avatar from '../../common/navbar/atoms/Avatar';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
 import { calculateTimeDifference } from '@/utils/calculateTimeDifference';
 import { transformRoleName } from '@/utils/transformRoleName';
-import { fetchRoles } from '@/hooks/data/FetchRoles';
-import { fetchUserById } from '@/hooks/data/FetchUserById';
+import { fetchRoles } from '@/hooks/data/fetchRoles';
+import { fetchUserById } from '@/hooks/data/fetchUserById';
 import { sendNewRole } from '@/hooks/data/sendNewRole';
 
 const UserProfileContent = () => {
