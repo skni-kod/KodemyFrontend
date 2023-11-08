@@ -1,5 +1,4 @@
 import React from 'react';
-import { Material } from '@/hooks/services/useMaterialIdService';
 import MaterialWrapper from '@/components/common/page/atoms/MaterialWrapper';
 import { transformRoleName } from '@/utils/transformRoleName';
 import { calculateTimeDifference } from '@/utils/calculateTimeDifference';
@@ -37,11 +36,11 @@ const AdminUsersBlock = ({ userId }: MaterialProps) => {
 
 	return (
 		<MaterialWrapper onClick={() => handleOpenModal(userIdNumber)}>
-			<div className="flex-none ${avatarSize} p-[1vw] md:p-1 flex justify-center items-center aspect-square bg-gray-100">
+			<div className="flex-none ${avatarSize} p-[1vw] md:p-1 flex justify-center items-center aspect-square">
 				<img
 					src={userData ? userData.photo : AvatarImage.src}
 					alt="Avatar użytkownika"
-					className={`rounded-full ${avatarSize}`}
+					className={`rounded-full flex justify-center items-center ${avatarSize}`}
 				/>
 			</div>
 			<div className="grow flex justify-between items-center px-[3vw] md:px-5">
@@ -56,9 +55,11 @@ const AdminUsersBlock = ({ userId }: MaterialProps) => {
 			</div>
 			<div className="flex flex-col justify-center pl-[3vw] md:pl-5 border-l-2">
 				<div className="text-[2vw] md:text-sm flex flex-col">
-					<h1>Aktywny</h1>
+					<div className="flex items-center gap-1">
+						<span className="bg-green-300 w-2 h-2 rounded-md"></span>
+						<h1>Aktywny</h1>
+					</div>
 					<h1>Utworzono: {calculateTimeDifference(userData.createdDate)}</h1>
-					<h1>Ilość Materiałów: 0</h1>
 				</div>
 			</div>
 		</MaterialWrapper>

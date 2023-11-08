@@ -1,0 +1,66 @@
+import React from 'react';
+
+interface PageButtonsProps {
+	currentPage: number;
+	totalPages: number;
+	handlePageChange: (newPage: number) => void;
+}
+
+const PageButtons: React.FC<PageButtonsProps> = ({ currentPage, totalPages, handlePageChange }) => {
+	const paginationRange = [];
+	const paginationVisiblePages = 5; // Liczba stron do wyświetlenia
+
+	let startPage = currentPage - 2;
+	let endPage = currentPage + 2;
+
+	if (startPage < 1) {
+		startPage = 1;
+		endPage = Math.min(paginationVisiblePages, totalPages);
+	}
+
+	if (endPage > totalPages) {
+		endPage = totalPages;
+		startPage = Math.max(1, endPage - paginationVisiblePages + 1);
+	}
+
+	for (let i = startPage; i <= endPage; i++) {
+		paginationRange.push(i);
+	}
+	const shouldDisplayFirstPage = startPage > 2;
+	const shouldDisplayLastPage = endPage < totalPages - 1;
+
+	return (
+		<nav>
+			<ul className="pagination flex space-x-2">
+				{shouldDisplayFirstPage && (
+					<li>
+						<button onClick={() => handlePageChange(1)}>1</button>
+					</li>
+				)}
+				{shouldDisplayFirstPage && <li>...</li>}
+				{paginationRange.map((index) => (
+					<li key={index} className={` ${currentPage === index ? 'active' : ''}`}>
+						<button
+							className={` ${
+								currentPage === index
+									? 'active bg-blue-500 text-white rounded px-1.5 py-0'
+									: 'text-black2white'
+							}`}
+							onClick={() => handlePageChange(index)}
+						>
+							{index}
+						</button>
+					</li>
+				))}
+				{shouldDisplayLastPage && <li className="page-item disabled">...</li>}
+				{shouldDisplayLastPage && (
+					<li>
+						<button onClick={() => handlePageChange(totalPages)}>{totalPages}</button>
+					</li>
+				)}
+			</ul>
+		</nav>
+	);
+};
+
+export default PageButtons;
