@@ -22,8 +22,6 @@ const AdminUsersBlock = ({ userId }: MaterialProps) => {
 	const userIdNumber = Number(userId);
 	const userData = fetchUserById(userId);
 
-	const column = 'flex flex-col p-[1vw] gap-[1.5vw] md:gap-3 text-[2vw] md:text-sm';
-	const content = 'flex items-center';
 	const avatarSize = 'h-[12vw] w-[12vw] 3sm:h-16 3sm:w-16';
 
 	const handleOpenModal = (userIdNumber: number) => {
