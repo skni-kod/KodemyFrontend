@@ -33,7 +33,7 @@ const AdminUsersContent = () => {
 		};
 	}, [calculateItemsPerPage]);
 
-	const adminUserBlocks = Array.from({ length: 18 }, (_, index) => (
+	const adminUserBlocks = Array.from({ length: 71 }, (_, index) => (
 		<AdminUsersBlock key={index} userId={userId} />
 	));
 
@@ -47,6 +47,28 @@ const AdminUsersContent = () => {
 	const startIdx = (currentPage - 1) * itemsPerPage;
 	const endIdx = currentPage * itemsPerPage;
 	const visibleAdminUserBlocks = adminUserBlocks.slice(startIdx, endIdx);
+
+	const paginationRange = [];
+	const paginationVisiblePages = 5; // Liczba stron do wyświetlenia
+
+	let startPage = currentPage - 2;
+	let endPage = currentPage + 2;
+
+	if (startPage < 1) {
+		startPage = 1;
+		endPage = Math.min(paginationVisiblePages, totalPages);
+	}
+
+	if (endPage > totalPages) {
+		endPage = totalPages;
+		startPage = Math.max(1, endPage - paginationVisiblePages + 1);
+	}
+
+	for (let i = startPage; i <= endPage; i++) {
+		paginationRange.push(i);
+	}
+	const shouldDisplayFirstPage = startPage > 2;
+	const shouldDisplayLastPage = endPage < totalPages - 1;
 
 	const { FiltersMenu, isFilterMenuOpen, setIsFilterMenuOpen, filters } = useFiltersMenu();
 
@@ -71,18 +93,34 @@ const AdminUsersContent = () => {
 			<div className="flex justify-center text-black2white pt-1 pb-5">
 				<nav>
 					<ul className="pagination flex space-x-2">
-						{Array.from({ length: totalPages }, (_, index) => (
-							<li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+						{shouldDisplayFirstPage && (
+							<li className="page-item">
+								<button className="page-link" onClick={() => handlePageChange(1)}>
+									1
+								</button>
+							</li>
+						)}
+						{shouldDisplayFirstPage && <li className="page-item disabled">...</li>}
+						{paginationRange.map((index) => (
+							<li key={index} className={`page-item ${currentPage === index ? 'active' : ''}`}>
 								<button
 									className={`page-link ${
-										currentPage === index + 1 ? 'active bg-blue-500 text-white rounded h-6 w-4' : ''
+										currentPage === index ? 'active bg-blue-500 text-white rounded px-1.5 py-0' : ''
 									}`}
-									onClick={() => handlePageChange(index + 1)}
+									onClick={() => handlePageChange(index)}
 								>
-									{index + 1}
+									{index}
 								</button>
 							</li>
 						))}
+						{shouldDisplayLastPage && <li className="page-item disabled">...</li>}
+						{shouldDisplayLastPage && (
+							<li className="page-item">
+								<button className="page-link" onClick={() => handlePageChange(totalPages)}>
+									{totalPages}
+								</button>
+							</li>
+						)}
 					</ul>
 				</nav>
 			</div>
