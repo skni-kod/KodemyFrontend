@@ -6,10 +6,23 @@ import useFiltersMenu from '@/hooks/useFiltersMenu';
 import { useCallback, useEffect, useState } from 'react';
 import PageWrapper from '@/components/common/page/organisms/PageWrapper';
 
+interface UserData {
+	id: string;
+	username: string;
+	email: string | null;
+	createdDate: string;
+	photo: string;
+	role: {
+		name: string;
+	};
+}
+
 const AdminUsersContent = () => {
-	const userId = '1';
+	const [adminUserBlocks, setAdminUserBlocks] = useState<UserData[]>([]);
+	const [totalItems, setTotalItems] = useState(0);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [itemsPerPage, setItemsPerPage] = useState(4);
+	const [isFetching, setIsFetching] = useState(true);
 
 	const blockHeight = 200;
 
@@ -34,11 +47,6 @@ const AdminUsersContent = () => {
 		};
 	}, [calculateItemsPerPage]);
 
-	const adminUserBlocks = Array.from({ length: 71 }, (_, index) => (
-		<AdminUsersBlock key={index} userId={userId} />
-	));
-
-	const totalItems = adminUserBlocks.length;
 	const totalPages = Math.ceil(totalItems / itemsPerPage);
 
 	const handlePageChange = (newPage: number) => {
@@ -50,6 +58,24 @@ const AdminUsersContent = () => {
 	const visibleAdminUserBlocks = adminUserBlocks.slice(startIdx, endIdx);
 
 	const { FiltersMenu, isFilterMenuOpen, setIsFilterMenuOpen, filters } = useFiltersMenu();
+	// `http://localhost:8081/api/users?size=${visibleAdminUserBlocks}&sort=id&sort_direction=ASC`,
+	useEffect(() => {
+		console.log('itemsPerPage ', itemsPerPage);
+		console.log(`http://localhost:8081/api/users?size=${itemsPerPage}&sort=id&sort_direction=ASC`);
+		fetch(
+			`http://localhost:8081/api/users?size=${visibleAdminUserBlocks}&sort=id&sort_direction=ASC`,
+		)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('data ', data);
+				setAdminUserBlocks(data.content);
+				setTotalItems(data.totalElements);
+				setIsFetching(false);
+			})
+			.catch((error) => {
+				console.error('Error fetching data:', error);
+			});
+	}, []);
 
 	return (
 		<>
@@ -73,7 +99,13 @@ const AdminUsersContent = () => {
 				handlePageChange={handlePageChange}
 			>
 				<div className="flex flex-col w-full gap-4 pt-6 pb-4 px-3 md:pl-20 2xl:pl-0">
-					{visibleAdminUserBlocks}
+					{isFetching ? (
+						<p>Loading...</p>
+					) : (
+						visibleAdminUserBlocks.map((user, index) => (
+							<AdminUsersBlock key={index} userId={user.id} />
+						))
+					)}
 				</div>
 			</PageWrapper>
 		</>
