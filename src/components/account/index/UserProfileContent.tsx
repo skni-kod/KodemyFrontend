@@ -51,7 +51,7 @@ const UserProfileContent = () => {
 	};
 
 	if (!userData) {
-		return <div className="text-black2white">Loading...</div>;
+		return <div className="text-black2white md:pl-28 xl:pl-20 2xl:pl-6">Loading...</div>;
 	}
 
 	const isAdminOrSuperAdmin =

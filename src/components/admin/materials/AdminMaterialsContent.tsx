@@ -46,7 +46,7 @@ const AdminMaterialsContent = () => {
 
 	return (
 		<>
-			<div className="w-full px-3 text-black2white">
+			<div className="w-full px-3 text-black2white md:pl-28">
 				<HeaderAllMaterials headName="Statusy materiałów" />
 				<div className="flex justify-between items-center w-full pt-4 px-8">
 					<ResultCount value={materials.content.length} />
@@ -56,8 +56,8 @@ const AdminMaterialsContent = () => {
 					</div>
 				</div>
 			</div>
-			<div className="w-full px-3 text-black2white">{isFilterMenuOpen && <FiltersMenu />}</div>
-			<div className="flex flex-col w-full gap-4 pt-6 pb-4">
+			<div className="w-full px-3 text-black2white md:pl-28">{isFilterMenuOpen && <FiltersMenu />}</div>
+			<div className="flex flex-col w-full gap-4 pt-6 pb-4 md:pl-28 md:w-11/12 xl:w-full">
 				{materials &&
 					materials.content.map((material) => (
 						<ManagementMaterialBlock key={material.id} data={material}>
