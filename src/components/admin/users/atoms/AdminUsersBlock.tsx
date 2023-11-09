@@ -5,6 +5,7 @@ import { calculateTimeDifference } from '@/utils/calculateTimeDifference';
 import Route from '@/utils/route';
 import AvatarImage from '@/assets/avatar.png';
 import { fetchUserById } from '@/hooks/data/fetchUserById';
+import { AiOutlineArrowRight } from 'react-icons/ai';
 
 export const pageAccountIdRoute = (userid: number): Route => {
 	const route = {
@@ -22,7 +23,7 @@ const AdminUsersBlock = ({ userId }: MaterialProps) => {
 	const userIdNumber = Number(userId);
 	const userData = fetchUserById(userId);
 
-	const avatarSize = 'h-[12vw] w-[12vw] 3sm:h-16 3sm:w-16';
+	const avatarSize = 'h-[9vw] w-[9vw] 3sm:h-12 3sm:w-12';
 
 	const handleOpenModal = (userIdNumber: number) => {
 		pageAccountIdRoute(userIdNumber);
@@ -43,23 +44,19 @@ const AdminUsersBlock = ({ userId }: MaterialProps) => {
 			</div>
 			<div className="grow flex justify-between items-center px-[3vw] md:px-5">
 				<div>
-					<div className="text-[2.82vw] md:text-xl py-[1vw] md:py-1 text-black2white text-bold mt-0.5 text-ellipsis">
+					<span className="w-auto text-[2.82vw] md:text-xl py-[1vw] md:py-1 text-black2white text-bold mt-0.5 text-ellipsis">
 						{userData.username}
-					</div>
-					<div className="text-[2vw] md:text-sm py-[0.9vw] md:py-1 text-bold">
-						{transformRoleName(userData.role.name)}
-					</div>
+					</span>
+					<span className="w-auto text-[2vw] pl-4 md:text-sm py-[0.9vw] md:py-1 text-bold">
+						({transformRoleName(userData.role.name)})
+					</span>
+				</div>
+				<div className="flex items-center gap-1">
+					<span className="bg-green-300 w-2 h-2 rounded-md"></span>
+					<h1>Aktywny</h1>
 				</div>
 			</div>
-			<div className="flex flex-col justify-center pl-[3vw] md:pl-5 border-l-2">
-				<div className="text-[2vw] md:text-sm flex flex-col">
-					<div className="flex items-center gap-1">
-						<span className="bg-green-300 w-2 h-2 rounded-md"></span>
-						<h1>Aktywny</h1>
-					</div>
-					<h1>Utworzono: {calculateTimeDifference(userData.createdDate)}</h1>
-				</div>
-			</div>
+			<AiOutlineArrowRight />
 		</MaterialWrapper>
 	);
 };

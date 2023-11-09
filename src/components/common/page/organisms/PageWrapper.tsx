@@ -45,7 +45,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 	return (
 		<div>
 			{children}
-			<nav className="flex justify-center text-black2white pt-1 pb-5">
+			<nav className="flex justify-center text-black2white pt-6 pb-10">
 				<ul className="pagination flex space-x-2">
 					{shouldDisplayFirstPage && (
 						<li>
