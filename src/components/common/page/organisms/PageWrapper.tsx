@@ -45,7 +45,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 	return (
 		<div>
 			{children}
-			<nav className="flex justify-center text-black2white pt-6 pb-10">
+			<nav className="flex justify-center text-black2white pt-6 pb-10 text-[22px]">
 				<ul className="pagination flex space-x-2">
 					{shouldDisplayFirstPage && (
 						<li>
@@ -58,8 +58,8 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 							<button
 								className={` ${
 									currentPage === index
-										? 'active bg-blue-500 text-white rounded px-1.5 py-0'
-										: 'text-black2white'
+										? 'active bg-sky-500 hover:bg-blue-600 text-white rounded px-1.5 py-0 border border-sky-500 hover:border-blue-600'
+										: 'bg-none text-white rounded px-1.5 py-0'
 								}`}
 								onClick={() => handlePageChange(index)}
 							>

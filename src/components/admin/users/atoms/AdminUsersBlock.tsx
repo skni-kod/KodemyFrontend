@@ -37,7 +37,7 @@ const AdminUsersBlock = ({ userId }: MaterialProps) => {
 		<MaterialWrapper onClick={() => handleOpenModal(userIdNumber)}>
 			<div className="flex-none ${avatarSize} p-[1vw] md:p-1 flex justify-center items-center aspect-square">
 				<img
-					src={userData ? userData.photo : AvatarImage.src}
+					src={userData && userData.photo ? userData.photo : AvatarImage.src}
 					alt="Avatar użytkownika"
 					className={`rounded-full flex justify-center items-center ${avatarSize}`}
 				/>
