@@ -3,15 +3,17 @@ import React from 'react';
 interface PageWrapperProps {
 	currentPage: number;
 	totalPages: number;
-	handlePageChange: (newPage: number) => void;
+	setCurrentPage: (newPage: number) => void;
 	children: React.ReactNode;
+	routing: (currentPage: number) => void;
 }
 
 const PageWrapper: React.FC<PageWrapperProps> = ({
 	currentPage,
 	totalPages,
-	handlePageChange,
+	setCurrentPage,
 	children,
+	routing,
 }) => {
 	const paginationRange = [];
 	const paginationVisiblePages = 5;
@@ -35,6 +37,10 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 	const shouldDisplayFirstPage = startPage > 2;
 	const shouldDisplayLastPage = endPage < totalPages - 1;
 
+	const handlePageChange = (newPage: number) => {
+		setCurrentPage(newPage);
+		routing(newPage);
+	};
 	return (
 		<div>
 			{children}

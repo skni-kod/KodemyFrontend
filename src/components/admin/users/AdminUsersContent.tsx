@@ -3,8 +3,9 @@ import AdminUsersBlock from './atoms/AdminUsersBlock';
 import SortMenuButton from '@/components/common/filter/SortMenuButton';
 import FilterMenuButton from '@/components/common/filter/atoms/FilterMenuButton';
 import useFiltersMenu from '@/hooks/useFiltersMenu';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PageWrapper from '@/components/common/page/organisms/PageWrapper';
+import Route from '@/utils/route';
 
 interface UserData {
 	id: string;
@@ -16,54 +17,46 @@ interface UserData {
 		name: string;
 	};
 }
+export const pageAdminUsersRoute = (currentPage: number): Route => {
+	const route = {
+		pathname: `/admin/users/${currentPage}`,
+	};
+	window.location.href = route.pathname;
+	return route;
+};
 
-const AdminUsersContent = () => {
+export const AdminUsersContent = ({
+	currentPage,
+	setCurrentPage,
+}: {
+	currentPage: number;
+	setCurrentPage: (currentPage: number) => void;
+}) => {
 	const [adminUserBlocks, setAdminUserBlocks] = useState<UserData[]>([]);
 	const [totalItems, setTotalItems] = useState(0);
-	const [currentPage, setCurrentPage] = useState(1);
-	const [itemsPerPage, setItemsPerPage] = useState(4);
 	const [isFetching, setIsFetching] = useState(true);
 
-	const blockHeight = 200;
-
-	const calculateItemsPerPage = useCallback(() => {
-		const windowHeight = window.innerHeight;
-		const newItemsPerPage = Math.floor(windowHeight / blockHeight);
-		return newItemsPerPage;
-	}, []);
-
-	useEffect(() => {
-		const handleResize = () => {
-			const newItemsPerPage = calculateItemsPerPage();
-			setCurrentPage(1);
-			setItemsPerPage(newItemsPerPage);
-		};
-
-		window.addEventListener('resize', handleResize);
-		handleResize();
-
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-	}, [calculateItemsPerPage]);
-
+	const itemsPerPage = 10;
 	const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-	const handlePageChange = (newPage: number) => {
-		setCurrentPage(newPage);
-	};
 
 	const startIdx = (currentPage - 1) * itemsPerPage;
 	const endIdx = currentPage * itemsPerPage;
 	const visibleAdminUserBlocks = adminUserBlocks.slice(startIdx, endIdx);
 
 	const { FiltersMenu, isFilterMenuOpen, setIsFilterMenuOpen, filters } = useFiltersMenu();
-	// `http://localhost:8081/api/users?size=${visibleAdminUserBlocks}&sort=id&sort_direction=ASC`,
+
 	useEffect(() => {
-		console.log('itemsPerPage ', itemsPerPage);
-		console.log(`http://localhost:8081/api/users?size=${itemsPerPage}&sort=id&sort_direction=ASC`);
+		console.log('currentPage2', currentPage - 1);
+		console.log(
+			`http://localhost:8081/api/users?size=${itemsPerPage}&page=${
+				currentPage - 1
+			}&sort=id&sort_direction=ASC`,
+		);
+
 		fetch(
-			`http://localhost:8081/api/users?size=${visibleAdminUserBlocks}&sort=id&sort_direction=ASC`,
+			`http://localhost:8081/api/users?size=${itemsPerPage}&page=${
+				currentPage - 1
+			}&sort=id&sort_direction=ASC`,
 		)
 			.then((response) => response.json())
 			.then((data) => {
@@ -75,7 +68,7 @@ const AdminUsersContent = () => {
 			.catch((error) => {
 				console.error('Error fetching data:', error);
 			});
-	}, []);
+	}, [currentPage, itemsPerPage]);
 
 	return (
 		<>
@@ -96,7 +89,8 @@ const AdminUsersContent = () => {
 			<PageWrapper
 				currentPage={currentPage}
 				totalPages={totalPages}
-				handlePageChange={handlePageChange}
+				setCurrentPage={setCurrentPage}
+				routing={pageAdminUsersRoute}
 			>
 				<div className="flex flex-col w-full gap-4 pt-6 pb-4 px-3 md:pl-20 2xl:pl-0">
 					{isFetching ? (
@@ -111,4 +105,3 @@ const AdminUsersContent = () => {
 		</>
 	);
 };
-export default AdminUsersContent;

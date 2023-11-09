@@ -23,7 +23,7 @@ export const pageAdminMaterialsRoute = (): Route => {
 };
 export const pageAdminUsersRoute = (): Route => {
 	return {
-		pathname: '/admin/users',
+		pathname: '/admin/users/1',
 	};
 };
 export const pageLogoutRoute = (): Route => {
