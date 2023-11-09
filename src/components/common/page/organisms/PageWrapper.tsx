@@ -41,6 +41,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 		setCurrentPage(newPage);
 		routing(newPage);
 	};
+
 	return (
 		<div>
 			{children}

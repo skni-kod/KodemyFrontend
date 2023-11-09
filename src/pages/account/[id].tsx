@@ -21,8 +21,10 @@ export const pageLoginRoute = (): Route => {
 };
 
 const Id = () => {
-	const [id, setId] = useState<number | undefined>(undefined);
 	const router = useRouter();
+	const [id, setId] = useState<number>(
+		typeof router.query.id === 'string' ? Number(router.query.id) : 1,
+	);
 
 	useEffect(() => {
 		const { id } = router.query;
@@ -35,7 +37,7 @@ const Id = () => {
 	return (
 		<Page title="Konto - Panel użytkownika" description="Widok konta użytkownika">
 			<Container className="max-w-7xl mx-auto">
-				<UserProfileContent />
+				<UserProfileContent id={id} />
 			</Container>
 		</Page>
 	);

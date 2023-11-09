@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Avatar from '../../common/navbar/atoms/Avatar';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
 import { calculateTimeDifference } from '@/utils/calculateTimeDifference';
 import { transformRoleName } from '@/utils/transformRoleName';
@@ -7,18 +6,12 @@ import { fetchRoles } from '@/hooks/data/fetchRoles';
 import { fetchUserById } from '@/hooks/data/fetchUserById';
 import { sendNewRole } from '@/hooks/data/sendNewRole';
 import AvatarImage from '@/assets/avatar.png';
-import MaterialWrapper from '@/components/common/page/atoms/MaterialWrapper';
-import clsx from 'clsx';
-import RatingChart from '@/components/common/modal/materials/materialblock/molecules/rating/molecules/RatingChart';
-import { Rating } from 'react-simple-star-rating';
 
-const UserProfileContent = () => {
+const UserProfileContent = ({ id }: { id: number }) => {
 	const [userRolesData, setUserRolesData] = useState<string[]>([]);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
-
-	const userId = '1';
-	const userData = fetchUserById(userId);
+	const userData = fetchUserById(id.toString());
 
 	useEffect(() => {
 		const getRolesData = async () => {
@@ -43,8 +36,6 @@ const UserProfileContent = () => {
 			userData.role.name = userRolesData[index];
 		}
 		const roleIndex = index + 1;
-		console.log('userRolesData[index] ', userRolesData[index]);
-		console.log('userData', userData);
 		if (userData) {
 			await sendNewRole(userData.id, roleIndex);
 		}
