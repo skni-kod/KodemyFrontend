@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Material } from '@/hooks/services/useMaterialIdService';
 import DocumentsImage from '@/assets/material/documents.png';
 import Image from 'next/image';
@@ -10,6 +10,7 @@ import Modal from '@/components/common/modal/common/Modal';
 import MaterialModalRating from './molecules/rating/MaterialModalRating';
 import MaterialModalAdd from './molecules/add/MaterialModalAdd';
 import MaterialModalMark from './molecules/mark/MaterialModalMark';
+import { fetchMaterialGrades } from '@/hooks/data/fetchGrades';
 
 type MaterialProps = {
 	data: Material;
@@ -55,15 +56,38 @@ const MaterialBlock = ({
 	const handleCloseMarkModal = () => {
 		setIsMarkModalOpen(false);
 	};
+	const size = null;
+	const page = null;
 
-	const ratingFive = 0;
-	const ratingFour = 40;
-	const ratingThree = 100;
-	const ratingTwo = 20;
-	const ratingOne = 50;
-	const allRatings = ratingOne + ratingTwo + ratingThree + ratingFour + ratingFive;
-	const averageRating =
-		(5 * ratingFive + 4 * ratingFour + 3 * ratingThree + 2 * ratingTwo + ratingOne) / allRatings;
+	let ratingOne = 0;
+	let ratingTwo = 0;
+	let ratingThree = 0;
+	let ratingFour = 0;
+	let ratingFive = 0;
+	let averageRating = 0;
+	let allRatings = 1;
+	const today = new Date().toISOString().slice(0, 19);
+
+	useEffect(() => {
+		async function fetchData() {
+			try {
+				const materialData = await fetchMaterialGrades(id, createdDate, today, size, page);
+
+				console.log('materialData ', materialData);
+				if (materialData) {
+					const { ratingFive, ratingFour, ratingThree, ratingTwo, ratingOne } = materialData;
+					// Assign values from materialData to the variables
+				} else {
+					// Handle cases where data is null
+				}
+			} catch (error) {
+				// Handle query errors
+				console.error(error);
+			}
+		}
+
+		fetchData();
+	}, [id, createdDate, today, size, page]);
 
 	return (
 		<MaterialWrapper onClick={() => handleOpenModal(id)}>
