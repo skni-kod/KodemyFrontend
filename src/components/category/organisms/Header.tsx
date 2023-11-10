@@ -5,7 +5,7 @@ import { useSectionsStore } from '@/store/sectionsSlice';
 import useCategoryService, { CategoryDetailsResponse } from '@/hooks/services/useCategoryService';
 import { pageCategoryIdRoute } from '@/pages/category/[id]';
 import { useRouter } from 'next/router';
-import FilterButtonsList from '@/components/common/page/molecules/FilterButtonsList';
+import FilterButtonsList from '@/components/common/filter/molecules/FilterButtonsList';
 
 const Header = ({ categoryId }: { categoryId: number }) => {
 	const router = useRouter();

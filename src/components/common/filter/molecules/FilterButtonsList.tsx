@@ -1,5 +1,5 @@
-import FilterButton from '@/components/common/page/atoms/FilterButton';
 import { useFiltersContext } from '@/contexts/MaterialsFiltersContext';
+import FilterButton from '../atoms/FilterButton';
 
 const FilterButtonsList = () => {
 	const { filters, removeFilters } = useFiltersContext();
