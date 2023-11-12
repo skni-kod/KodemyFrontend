@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { pageCategoryIdRoute } from '@/pages/category/[id]';
+import { pageCategoryIdRoute } from '@/pages/category/[categoryId]';
 import { Section } from '@/hooks/services/useSectionService';
 
 interface SidebarSubmenuProps {
@@ -9,11 +9,7 @@ interface SidebarSubmenuProps {
 	expandedItemId: number | null;
 }
 
-const SidebarSubmenu = ({
-	section,
-	isExpandMenu,
-	expandedItemId,
-}: SidebarSubmenuProps) => {
+const SidebarSubmenu = ({ section, isExpandMenu, expandedItemId }: SidebarSubmenuProps) => {
 	const isExpandSubmenu = isExpandMenu && expandedItemId === section.id;
 
 	return (

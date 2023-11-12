@@ -9,8 +9,20 @@ import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMate
 import ResultCount from '@/components/common/filter/atoms/ResultCount';
 import useFiltersMenu from '@/hooks/useFiltersMenu';
 import { openSearchBaseInitialState } from '@/utils/constant';
+import PageWrapper from '../common/page/organisms/PageWrapper';
+import Route from '@/utils/route';
 
-const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
+export const pageCategoryRoute = (categoryId: number, currentPage: number): Route => {
+	const route = {
+		pathname: `/category/${categoryId}/page/${currentPage}`,
+	};
+	window.location.href = route.pathname;
+	return route;
+};
+
+const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: number }) => {
+	console.log('MaterialsContent ', categoryId);
+
 	const { getMaterials } = useMaterialService();
 	const [materials, setMaterials] = useState<MaterialOpenSearch>(openSearchBaseInitialState);
 
@@ -22,17 +34,22 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 	const [isAddedModalOpen, setIsAddedModalOpen] = useState(false);
 	const [isMarkModalOpen, setIsMarkModalOpen] = useState(false);
 
+	const currentPageForButtons = 1;
+	const totalPages = materials.totalPages;
+	const [currentPage, setCurrentPage] = useState(1);
+
 	useEffect(() => {
 		(async () => {
 			setMaterials(
 				await getMaterials(
 					filters({
 						categoryId,
+						page: currentPage,
 					}),
 				),
 			);
 		})();
-	}, [categoryId, getMaterials, filters]);
+	}, [categoryId, getMaterials, filters, currentPage]);
 
 	const handleOpenMaterialModal = (id: number) => {
 		setCurrentMaterialId(id);
@@ -57,7 +74,18 @@ const MaterialsContent = ({ categoryId }: { categoryId: number }) => {
 					</div>
 				</div>
 			</div>
-			<div className="w-full px-3 text-black2white md:pl-28">{isFilterMenuOpen && <FiltersMenu />}</div>
+			<div className="w-full px-3 text-black2white md:pl-28">
+				{isFilterMenuOpen && <FiltersMenu />}
+			</div>
+			<PageWrapper
+				currentPage={currentPage}
+				totalPages={totalPages}
+				setCurrentPage={setCurrentPage}
+				routing={(currentPage) => pageCategoryRoute(categoryId, currentPage)}
+			>
+				<div className="text-black2white">aasdasdsadadsaaaaaaaaaaaaaaaa</div>
+			</PageWrapper>
+
 			<div className="flex flex-col w-full gap-4 pt-6 pb-4 md:pl-28 md:w-11/12 xl:w-full">
 				{materials &&
 					materials.content.map((material) => (

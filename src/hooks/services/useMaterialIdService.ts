@@ -20,6 +20,7 @@ const useMaterialService = () => {
 				const response = await kodemyAPI.get(
 					`/api/materials?${basicParams}${mapSearchFieldsParam(searchFields)}`,
 				);
+				console.log('response.data ', response.data);
 				return response.data;
 			} catch (e) {}
 		},
@@ -91,7 +92,10 @@ export type Material = {
 		name: string;
 	};
 	// author jest podczas kożystania z MaterialOpenSearch
-	author: string;
+	author: {
+		id: number;
+		username: string;
+	};
 	avgGrade: number;
 };
 

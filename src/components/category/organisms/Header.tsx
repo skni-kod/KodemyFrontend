@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Section } from '@/hooks/services/useSectionService';
 import { useSectionsStore } from '@/store/sectionsSlice';
 import useCategoryService, { CategoryDetailsResponse } from '@/hooks/services/useCategoryService';
-import { pageCategoryIdRoute } from '@/pages/category/[id]';
+import { pageCategoryIdRoute } from '@/pages/category/[categoryId]';
 import { useRouter } from 'next/router';
 import FilterButtonsList from '@/components/common/filter/molecules/FilterButtonsList';
 

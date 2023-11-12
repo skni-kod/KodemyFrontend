@@ -4,7 +4,7 @@ import Link from 'next/link';
 import getSectionIco from '@/components/common/sidebar/helpers/SidebarAssets';
 import { Section } from '@/hooks/services/useSectionService';
 import clsx from 'clsx';
-import { pageCategoryIdRoute } from '@/pages/category/[id]';
+import { pageCategoryIdRoute } from '@/pages/category/[categoryId]';
 import { AiOutlineDown, AiOutlineRight } from 'react-icons/ai';
 import { useThemeStore } from '@/store/themeSlice';
 

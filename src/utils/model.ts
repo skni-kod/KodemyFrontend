@@ -13,5 +13,6 @@ export type SearchFields = {
 	createdDateTo?: string;
 	sectionId?: number;
 	categoryId?: number;
+	page?: number;
 	technologyIds?: number[];
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { pageCategoryIdRoute } from '@/pages/category/[id]';
+import { pageCategoryIdRoute } from '@/pages/category/[categoryId]';
 import { Section } from '@/hooks/services/useSectionService';
 
 interface PhoneDropDownMenuItemSubmenuProps {
