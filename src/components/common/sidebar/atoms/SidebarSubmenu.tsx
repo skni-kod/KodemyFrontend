@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { pageCategoryIdRoute } from '@/pages/category/[categoryId]';
 import { Section } from '@/hooks/services/useSectionService';
+import { pageCategoryIdRoute } from '@/pages/category/[categoryId]/page/[pageId]';
 
 interface SidebarSubmenuProps {
 	section: Section;

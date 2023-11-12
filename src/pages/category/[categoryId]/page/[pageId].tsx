@@ -1,5 +1,13 @@
 import { useRouter } from 'next/router';
 import MaterialsContent from '@/components/category/MaterialsContent';
+import Route from '@/utils/route';
+
+export const pageCategoryIdRoute = (id: number): Route => {
+	return {
+		pathname: '/category/[CategoryId]/page/[pageId]',
+		query: { id },
+	};
+};
 
 interface CategoryPageIdProps {
 	categoryId: number;
