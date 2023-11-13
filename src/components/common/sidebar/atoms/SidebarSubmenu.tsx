@@ -19,7 +19,7 @@ const SidebarSubmenu = ({ section, isExpandMenu, expandedItemId }: SidebarSubmen
 					{section.categories.map(({ id, name }) => (
 						<Link
 							key={id}
-							href={pageCategoryIdRoute(id)}
+							href={pageCategoryIdRoute(id, 1)}
 							className="flex items-center w-full px-3.5 py-1 pl-12 mt-1 rounded-lg no-underline overflow-hidden"
 						>
 							{name}

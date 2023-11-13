@@ -10,21 +10,13 @@ import ResultCount from '@/components/common/filter/atoms/ResultCount';
 import useFiltersMenu from '@/hooks/useFiltersMenu';
 import { openSearchBaseInitialState } from '@/utils/constant';
 import PageWrapper from '../common/page/organisms/PageWrapper';
-import Route from '@/utils/route';
-
-export const pageCategoryRoute = (categoryId: number, currentPage: number): Route => {
-	const route = {
-		pathname: `/category/${categoryId}/page/${currentPage}`,
-	};
-	window.location.href = route.pathname;
-	return route;
-};
+import { pageCategoryIdRoute } from '@/pages/category/[categoryId]/page/[pageId]';
 
 const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: number }) => {
-	console.log('MaterialsContent ', categoryId);
-
 	const { getMaterials } = useMaterialService();
 	const [materials, setMaterials] = useState<MaterialOpenSearch>(openSearchBaseInitialState);
+
+	console.log('materials ', materials);
 
 	const { Modal, isOpen, handleOpenModal, handleCloseModal } = useModal(false);
 	const [currentMaterialId, setCurrentMaterialId] = useState<number>();
@@ -81,7 +73,7 @@ const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: 
 				currentPage={currentPage}
 				totalPages={totalPages}
 				setCurrentPage={setCurrentPage}
-				routing={(currentPage) => pageCategoryRoute(categoryId, currentPage)}
+				routing={(currentPage) => pageCategoryIdRoute(categoryId, currentPage)}
 			>
 				<div className="text-black2white">aasdasdsadadsaaaaaaaaaaaaaaaa</div>
 			</PageWrapper>

@@ -4,9 +4,9 @@ import Link from 'next/link';
 import getSectionIco from '@/components/common/sidebar/helpers/SidebarAssets';
 import { Section } from '@/hooks/services/useSectionService';
 import clsx from 'clsx';
-import { pageCategoryIdRoute } from '@/pages/category/[categoryId]';
 import { AiOutlineDown, AiOutlineRight } from 'react-icons/ai';
 import { useThemeStore } from '@/store/themeSlice';
+import { pageCategoryIdRoute } from '@/pages/category/[categoryId]/page/[pageId]';
 
 interface SidebarItemProps {
 	section: Section;
@@ -64,7 +64,7 @@ const SidebarItem = ({
 					{categories.map(({ id, name }) => (
 						<Link
 							key={id}
-							href={pageCategoryIdRoute(id)}
+							href={pageCategoryIdRoute(id, 1)}
 							className="flex items-center w-full px-3.5 py-1 pl-12 mt-1 rounded-lg no-underline overflow-hidden hover:text-sky-500"
 							onClick={() => handleCloseSidebar()}
 						>

@@ -2,25 +2,21 @@ import { useRouter } from 'next/router';
 import MaterialsContent from '@/components/category/MaterialsContent';
 import Route from '@/utils/route';
 
-export const pageCategoryIdRoute = (id: number): Route => {
+export const pageCategoryIdRoute = (categoryId: number, pageId: number): Route => {
 	return {
-		pathname: '/category/[CategoryId]/page/[pageId]',
-		query: { id },
+		pathname: '/category/[categoryId]/page/[pageId]',
+		query: { categoryId, pageId },
 	};
 };
 
-interface CategoryPageIdProps {
-	categoryId: number;
-}
-
-const CategoryPageId: React.FC<CategoryPageIdProps> = ({ categoryId }) => {
+const CategoryPageId = () => {
 	const router = useRouter();
-	const { id } = router.query;
+	const { pageId } = router.query;
+	const { categoryId } = router.query;
 
-	console.log('CategoryPageId ', categoryId);
 	return (
 		<div className="bg-white2darkgrey mt-16">
-			<MaterialsContent categoryId={categoryId} pageId={Number(id)} />;
+			<MaterialsContent categoryId={Number(categoryId)} pageId={Number(pageId)} />;
 		</div>
 	);
 };

@@ -18,9 +18,9 @@ interface UserData {
 	};
 }
 
-export const pageCategoryIdRoute = (id: number): Route => {
+export const pageAdminUsers = (id: number): Route => {
 	return {
-		pathname: '/category/[id]',
+		pathname: '/admin/users/[id]',
 		query: { id },
 	};
 };
@@ -81,7 +81,7 @@ const Id = () => {
 				<AdminUsersContent
 					currentPageForUsers={Number(id)}
 					currentPageForButtons={Number(router.query.id)}
-					setCurrentPage={(id) => router.push(pageCategoryIdRoute(Number(id)))}
+					setCurrentPage={(id) => router.push(pageAdminUsers(Number(id)))}
 					adminUserBlocks={adminUserBlocks}
 					totalItems={totalElements}
 					isFetching={isFetching}
