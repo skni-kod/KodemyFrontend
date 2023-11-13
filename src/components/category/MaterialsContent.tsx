@@ -16,8 +16,6 @@ const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: 
 	const { getMaterials } = useMaterialService();
 	const [materials, setMaterials] = useState<MaterialOpenSearch>(openSearchBaseInitialState);
 
-	console.log('materials ', materials);
-
 	const { Modal, isOpen, handleOpenModal, handleCloseModal } = useModal(false);
 	const [currentMaterialId, setCurrentMaterialId] = useState<number>();
 
@@ -29,6 +27,7 @@ const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: 
 	const currentPageForButtons = 1;
 	const totalPages = materials.totalPages;
 	const [currentPage, setCurrentPage] = useState(1);
+	const totalElements = materials.totalElements;
 
 	useEffect(() => {
 		(async () => {
@@ -53,6 +52,9 @@ const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: 
 			}
 		}
 	};
+	console.log('materials ', materials);
+	console.log('totalPages ', totalPages);
+	console.log('totalElements ', totalElements);
 
 	return (
 		<>
@@ -75,25 +77,23 @@ const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: 
 				setCurrentPage={setCurrentPage}
 				routing={(currentPage) => pageCategoryIdRoute(categoryId, currentPage)}
 			>
-				<div className="text-black2white">aasdasdsadadsaaaaaaaaaaaaaaaa</div>
+				<div className="flex flex-col w-full gap-4 pt-6 pb-4 md:pl-28 md:w-11/12 xl:w-full">
+					{materials &&
+						materials.content.map((material) => (
+							<MaterialBlock
+								key={material.id}
+								data={material}
+								handleOpenModal={handleOpenMaterialModal}
+								isAddedModalOpen={isAddedModalOpen}
+								setIsAddedModalOpen={setIsAddedModalOpen}
+								isRatingModalOpen={isRatingModalOpen}
+								setIsRatingModalOpen={setIsRatingModalOpen}
+								isMarkModalOpen={isMarkModalOpen}
+								setIsMarkModalOpen={setIsMarkModalOpen}
+							/>
+						))}
+				</div>
 			</PageWrapper>
-
-			<div className="flex flex-col w-full gap-4 pt-6 pb-4 md:pl-28 md:w-11/12 xl:w-full">
-				{materials &&
-					materials.content.map((material) => (
-						<MaterialBlock
-							key={material.id}
-							data={material}
-							handleOpenModal={handleOpenMaterialModal}
-							isAddedModalOpen={isAddedModalOpen}
-							setIsAddedModalOpen={setIsAddedModalOpen}
-							isRatingModalOpen={isRatingModalOpen}
-							setIsRatingModalOpen={setIsRatingModalOpen}
-							isMarkModalOpen={isMarkModalOpen}
-							setIsMarkModalOpen={setIsMarkModalOpen}
-						/>
-					))}
-			</div>
 			{isOpen && !isRatingModalOpen && !isAddedModalOpen && !isMarkModalOpen && (
 				<Modal>
 					<MaterialModalContent materialId={currentMaterialId} handleClose={handleCloseModal} />
