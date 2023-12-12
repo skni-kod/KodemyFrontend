@@ -25,7 +25,7 @@ const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: 
 	const [isMarkModalOpen, setIsMarkModalOpen] = useState(false);
 
 	const currentPageForButtons = 1;
-	const totalPages = materials.totalPages;
+
 	const [currentPage, setCurrentPage] = useState(1);
 	const totalElements = materials.totalElements;
 
@@ -42,6 +42,8 @@ const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: 
 		})();
 	}, [categoryId, getMaterials, filters, currentPage]);
 
+	const totalPages = materials.totalPages;
+
 	const handleOpenMaterialModal = (id: number) => {
 		setCurrentMaterialId(id);
 		if (id) {
@@ -52,6 +54,7 @@ const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: 
 			}
 		}
 	};
+
 	console.log('materials ', materials);
 	console.log('totalPages ', totalPages);
 	console.log('totalElements ', totalElements);
@@ -61,7 +64,7 @@ const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: 
 			<div className="w-full px-3 text-black2white md:pl-28">
 				<Header categoryId={categoryId} />
 				<div className="flex justify-between items-center w-full pt-4 px-8">
-					<ResultCount value={materials.content.length} />
+					<ResultCount value={totalElements} />
 					<div className="relative flex gap-x-8 text-black2white cursor-pointer">
 						{!isFilterMenuOpen && <SortMenuButton />}
 						<FilterMenuButton isMenuOpen={isFilterMenuOpen} setIsMenuOpen={setIsFilterMenuOpen} />

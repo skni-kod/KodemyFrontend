@@ -43,7 +43,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 	};
 
 	return (
-		<div>
+		<div className="w-ful min-h-[67.5vh] px-20">
 			{children}
 			<nav className="flex justify-center text-black2white pt-6 pb-10 text-[22px]">
 				<ul className="pagination flex space-x-2">
