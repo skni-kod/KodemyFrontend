@@ -4,13 +4,18 @@ import { SearchFields, SortDirection } from '@/utils/model';
 import { defaultFilterParams } from '@/contexts/MaterialsFiltersContext';
 import { mapSearchFieldsParam } from '@/utils/constant';
 
-const useMaterialService = () => {
+interface useMaterialServiceProps {
+	currentPage: number;
+}
+
+const useMaterialService = ({ currentPage }: useMaterialServiceProps) => {
 	const defaultParamsValue = defaultFilterParams;
 
+	console.log('currentPage', currentPage);
 	const getMaterials = useCallback(
 		async ({
-			size = defaultParamsValue.size,
-			page = defaultParamsValue.page,
+			size = 10,
+			page = currentPage - 1,
 			sort = defaultParamsValue.sort,
 			sortDirection = SortDirection[defaultParamsValue.sortDirection],
 			searchFields = undefined,
@@ -20,7 +25,6 @@ const useMaterialService = () => {
 				const response = await kodemyAPI.get(
 					`/api/materials?${basicParams}${mapSearchFieldsParam(searchFields)}`,
 				);
-				console.log('response.data ', response.data);
 				return response.data;
 			} catch (e) {}
 		},

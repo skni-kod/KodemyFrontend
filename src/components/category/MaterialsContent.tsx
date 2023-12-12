@@ -11,38 +11,33 @@ import useFiltersMenu from '@/hooks/useFiltersMenu';
 import { openSearchBaseInitialState } from '@/utils/constant';
 import PageWrapper from '../common/page/organisms/PageWrapper';
 import { pageCategoryIdRoute } from '@/pages/category/[categoryId]/page/[pageId]';
+import router from 'next/router';
 
-const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: number }) => {
-	const { getMaterials } = useMaterialService();
-	const [materials, setMaterials] = useState<MaterialOpenSearch>(openSearchBaseInitialState);
-
+const MaterialsContent = ({
+	categoryId,
+	pageId,
+	materials,
+	FiltersMenu,
+	isFilterMenuOpen,
+	setIsFilterMenuOpen,
+	currentPageForButtons,
+	setCurrentPage,
+}: {
+	categoryId: number;
+	pageId: number;
+	materials: MaterialOpenSearch;
+	FiltersMenu: () => JSX.Element;
+	isFilterMenuOpen: boolean;
+	setIsFilterMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	currentPageForButtons: number;
+	setCurrentPage: (categoryId: number, pageId: number) => void;
+}) => {
 	const { Modal, isOpen, handleOpenModal, handleCloseModal } = useModal(false);
 	const [currentMaterialId, setCurrentMaterialId] = useState<number>();
 
-	const { FiltersMenu, isFilterMenuOpen, setIsFilterMenuOpen, filters } = useFiltersMenu();
 	const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
 	const [isAddedModalOpen, setIsAddedModalOpen] = useState(false);
 	const [isMarkModalOpen, setIsMarkModalOpen] = useState(false);
-
-	const currentPageForButtons = 1;
-
-	const [currentPage, setCurrentPage] = useState(1);
-	const totalElements = materials.totalElements;
-
-	useEffect(() => {
-		(async () => {
-			setMaterials(
-				await getMaterials(
-					filters({
-						categoryId,
-						page: currentPage,
-					}),
-				),
-			);
-		})();
-	}, [categoryId, getMaterials, filters, currentPage]);
-
-	const totalPages = materials.totalPages;
 
 	const handleOpenMaterialModal = (id: number) => {
 		setCurrentMaterialId(id);
@@ -54,6 +49,9 @@ const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: 
 			}
 		}
 	};
+
+	const totalElements = materials.totalElements;
+	const totalPages = materials.totalPages;
 
 	console.log('materials ', materials);
 	console.log('totalPages ', totalPages);
@@ -75,10 +73,12 @@ const MaterialsContent = ({ categoryId, pageId }: { categoryId: number; pageId: 
 				{isFilterMenuOpen && <FiltersMenu />}
 			</div>
 			<PageWrapper
-				currentPage={currentPage}
+				currentPage={currentPageForButtons}
 				totalPages={totalPages}
-				setCurrentPage={setCurrentPage}
-				routing={(currentPage) => pageCategoryIdRoute(categoryId, currentPage)}
+				setCurrentPage={(newPage: number) => setCurrentPage(categoryId, newPage)}
+				routing={(currentPage, categoryId) =>
+					router.push(pageCategoryIdRoute(Number(categoryId), Number(currentPage)))
+				}
 			>
 				<div className="flex flex-col w-full gap-4 pt-6 pb-4 md:pl-28 md:w-11/12 xl:w-full">
 					{materials &&

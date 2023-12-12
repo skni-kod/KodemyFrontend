@@ -5,7 +5,7 @@ interface PageWrapperProps {
 	totalPages: number;
 	setCurrentPage: (newPage: number) => void;
 	children: React.ReactNode;
-	routing: (currentPage: number) => void;
+	routing: (currentPage: number, categoryId?: number) => void;
 }
 
 const PageWrapper: React.FC<PageWrapperProps> = ({
@@ -15,6 +15,11 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 	children,
 	routing,
 }) => {
+	console.log('currentPage', currentPage);
+	console.log('totalPages', totalPages);
+	console.log('setCurrentPage', setCurrentPage);
+	console.log('routing', routing);
+
 	const paginationRange = [];
 	const paginationVisiblePages = 5;
 
