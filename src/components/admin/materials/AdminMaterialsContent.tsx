@@ -24,7 +24,7 @@ const currentIdsInitState: CurrentIds = {
 };
 
 const AdminMaterialsContent = () => {
-	const { getMaterials } = useMaterialService();
+	const { getMaterials } = useMaterialService({ currentPage: 1 });
 	const [materials, setMaterials] = useState<MaterialOpenSearch>(openSearchBaseInitialState);
 	const { FiltersMenu, filters, isFilterMenuOpen, setIsFilterMenuOpen } = useFiltersMenu();
 
@@ -56,7 +56,9 @@ const AdminMaterialsContent = () => {
 					</div>
 				</div>
 			</div>
-			<div className="w-full px-3 text-black2white md:pl-28">{isFilterMenuOpen && <FiltersMenu />}</div>
+			<div className="w-full px-3 text-black2white md:pl-28">
+				{isFilterMenuOpen && <FiltersMenu />}
+			</div>
 			<div className="flex flex-col w-full gap-4 pt-6 pb-4 md:pl-28 md:w-11/12 xl:w-full">
 				{materials &&
 					materials.content.map((material) => (

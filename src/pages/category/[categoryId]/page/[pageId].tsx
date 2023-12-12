@@ -57,7 +57,7 @@ const CategoryPageId = () => {
 				FiltersMenu={FiltersMenu}
 				isFilterMenuOpen={isFilterMenuOpen}
 				setIsFilterMenuOpen={setIsFilterMenuOpen}
-				currentPageForButtons={Number(router.query.id)}
+				currentPageForButtons={Number(pageId)}
 				setCurrentPage={(categoryId, pageId) =>
 					router.push(pageCategoryIdRoute(Number(categoryId), Number(pageId)))
 				}

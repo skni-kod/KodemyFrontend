@@ -53,10 +53,6 @@ const MaterialsContent = ({
 	const totalElements = materials.totalElements;
 	const totalPages = materials.totalPages;
 
-	console.log('materials ', materials);
-	console.log('totalPages ', totalPages);
-	console.log('totalElements ', totalElements);
-
 	return (
 		<>
 			<div className="w-full px-3 text-black2white md:pl-28">
