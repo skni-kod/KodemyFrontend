@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import kodemyAPI from '@/utils/kodemyAPI';
 import { SearchFields, SortDirection } from '@/utils/model';
 import { defaultFilterParams } from '@/contexts/MaterialsFiltersContext';
@@ -12,10 +12,14 @@ const useMaterialService = ({ currentPage }: useMaterialServiceProps) => {
 	const defaultParamsValue = defaultFilterParams;
 
 	console.log('currentPage', currentPage);
+
+	const currentPageRef = useRef(currentPage);
+	currentPageRef.current = currentPage;
+
 	const getMaterials = useCallback(
 		async ({
 			size = 10,
-			page = currentPage - 1,
+			page = currentPageRef.current - 1,
 			sort = defaultParamsValue.sort,
 			sortDirection = SortDirection[defaultParamsValue.sortDirection],
 			searchFields = undefined,
@@ -26,10 +30,15 @@ const useMaterialService = ({ currentPage }: useMaterialServiceProps) => {
 					`/api/materials?${basicParams}${mapSearchFieldsParam(searchFields)}`,
 				);
 				return response.data;
-			} catch (e) {}
+			} catch (e) {
+				console.error('getMaterials Error');
+			}
 		},
 		[defaultParamsValue],
 	);
+	useEffect(() => {
+		console.log('currentPage changed:', currentPage);
+	}, [currentPage]);
 
 	const getMaterialById = useCallback(async (id: number) => {
 		try {

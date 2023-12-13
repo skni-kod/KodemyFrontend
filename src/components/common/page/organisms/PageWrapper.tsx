@@ -6,6 +6,7 @@ interface PageWrapperProps {
 	setCurrentPage: (newPage: number) => void;
 	children: React.ReactNode;
 	routing: (currentPage: number, categoryId?: number) => void;
+	categoryId?: number;
 }
 
 const PageWrapper: React.FC<PageWrapperProps> = ({
@@ -14,12 +15,8 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 	setCurrentPage,
 	children,
 	routing,
+	categoryId,
 }) => {
-	console.log('currentPage', currentPage);
-	console.log('totalPages', totalPages);
-	console.log('setCurrentPage', setCurrentPage);
-	console.log('routing', routing);
-
 	const paginationRange = [];
 	const paginationVisiblePages = 5;
 
@@ -42,9 +39,15 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 	const shouldDisplayFirstPage = startPage > 2;
 	const shouldDisplayLastPage = endPage < totalPages - 1;
 
-	const handlePageChange = (newPage: number) => {
+	const handlePageChange = (newPage: number, categoryId?: number | undefined) => {
+		console.log('newPage', newPage);
+		console.log('newPagecategoryId', categoryId);
 		setCurrentPage(newPage);
-		routing(newPage);
+		if (categoryId === undefined) {
+			routing(newPage);
+		} else {
+			routing(newPage, categoryId);
+		}
 	};
 
 	return (
@@ -54,7 +57,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 				<ul className="pagination flex space-x-2">
 					{shouldDisplayFirstPage && (
 						<li>
-							<button onClick={() => handlePageChange(1)}>1</button>
+							<button onClick={() => handlePageChange(1, categoryId)}>1</button>
 						</li>
 					)}
 					{shouldDisplayFirstPage && <li>...</li>}
@@ -66,7 +69,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 										? 'active bg-sky-500 hover:bg-blue-600 text-white rounded px-1.5 py-0 border border-sky-500 hover:border-blue-600'
 										: 'bg-none text-white rounded px-1.5 py-0'
 								}`}
-								onClick={() => handlePageChange(index)}
+								onClick={() => handlePageChange(index, categoryId)}
 							>
 								{index}
 							</button>
@@ -75,7 +78,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 					{shouldDisplayLastPage && <li className="page-item disabled">...</li>}
 					{shouldDisplayLastPage && (
 						<li>
-							<button onClick={() => handlePageChange(totalPages)}>{totalPages}</button>
+							<button onClick={() => handlePageChange(totalPages, categoryId)}>{totalPages}</button>
 						</li>
 					)}
 				</ul>

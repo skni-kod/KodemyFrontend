@@ -73,8 +73,9 @@ const MaterialsContent = ({
 				totalPages={totalPages}
 				setCurrentPage={(newPage: number) => setCurrentPage(categoryId, newPage)}
 				routing={(currentPage, categoryId) =>
-					router.push(pageCategoryIdRoute(Number(categoryId), Number(currentPage)))
+					router.push(pageCategoryIdRoute(Number(categoryId), Number(pageId)))
 				}
+				categoryId={categoryId}
 			>
 				<div className="flex flex-col w-full gap-4 pt-6 pb-4 md:pl-28 md:w-11/12 xl:w-full">
 					{materials &&

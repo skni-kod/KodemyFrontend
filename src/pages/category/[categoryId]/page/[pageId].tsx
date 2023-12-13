@@ -43,7 +43,6 @@ const CategoryPageId = () => {
 		})();
 	}, [categoryId, getMaterials, filters, pageId]);
 
-	console.log('materials', materials);
 	if (materials === undefined) {
 		console.error('materials are undefined');
 	}
