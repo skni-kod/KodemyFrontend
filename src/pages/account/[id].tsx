@@ -14,12 +14,6 @@ export const pageAccountIdRoute = (id: number): Route => {
 	};
 };
 
-export const pageLoginRoute = (): Route => {
-	return {
-		pathname: '/login',
-	};
-};
-
 const Id = () => {
 	const router = useRouter();
 	const [id, setId] = useState<number>(

@@ -3,6 +3,13 @@ import { Metadata } from '@/pages/_app';
 import Page from '@/components/common/Page';
 import Container from '@/components/common/Container';
 import HomeContent from '@/components/home/HomeContent';
+import Route from '@/utils/route';
+
+export const pageHomeRoute = (): Route => {
+	return {
+		pathname: '/',
+	};
+};
 
 export default function Home() {
 	return (

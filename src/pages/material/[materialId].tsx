@@ -1,7 +1,9 @@
-import useMaterialService from '@/hooks/services/useMaterialIdService';
 import Route from '@/utils/route';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React from 'react';
+import Page from '@/components/common/Page';
+import Container from '@/components/common/Container';
+import MaterialsFiltersProvider from '@/contexts/MaterialsFiltersContext';
+import MaterialContent from '@/components/material/[materialId]';
 
 export const pageMaterialIdRoute = (materialId: number): Route => {
 	return {
@@ -11,46 +13,14 @@ export const pageMaterialIdRoute = (materialId: number): Route => {
 };
 
 const MaterialId = () => {
-	const router = useRouter();
-	const { getMaterialById } = useMaterialService();
-
-	const [material, setMaterial] = useState(null);
-
-	useEffect(() => {
-		const { materialId } = router.query;
-
-		const fetchMaterialById = async () => {
-			try {
-				const materialData = await getMaterialById(Number(materialId));
-				setMaterial(materialData);
-				console.log(materialData);
-			} catch (error) {
-				console.error('Error fetching material by ID', error);
-			}
-		};
-
-		if (materialId) {
-			fetchMaterialById();
-		}
-	}, [router.query, getMaterialById]);
-
 	return (
-		<div className="bg-white2verydarkgrey min-h-[100vh] py-20 w-full px-3 text-black2white md:pl-28">
-			{material ? (
-				<>
-					<h2 className="w-full mt-4 text-semibold text-[36px]">Tytuł: {material.title}</h2>
-					<div className="w-full mt-4 text-semibold text-[16px]">
-						<p>id: {material.id}</p>
-						<p>opis: {material.description}</p>
-						<p>autor: {material.author.username}</p>
-						<p>i tak dalej....</p>
-						<p>To jest do zrobienia</p>
-					</div>
-				</>
-			) : (
-				<p>Loading...</p>
-			)}
-		</div>
+		<Page title="Materiały" description="Widok strony materiałów">
+			<MaterialsFiltersProvider>
+				<Container className="max-w-7xl mx-auto">
+					<MaterialContent />
+				</Container>
+			</MaterialsFiltersProvider>
+		</Page>
 	);
 };
 

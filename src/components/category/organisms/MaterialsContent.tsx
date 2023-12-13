@@ -1,15 +1,16 @@
 import MaterialBlock from '@/components/common/modal/materials/materialblock/MaterialBlock';
 import { useEffect, useState } from 'react';
 import useModal from '@/hooks/useModal';
-import Header from '@/components/category/organisms/Header';
+import Header from '@/components/category/molecules/Header';
 import FilterMenuButton from '@/components/common/filter/atoms/FilterMenuButton';
 import SortMenuButton from '@/components/common/filter/SortMenuButton';
 import { MaterialOpenSearch } from '@/hooks/services/useMaterialIdService';
 import ResultCount from '@/components/common/filter/atoms/ResultCount';
-import PageWrapper from '../common/page/organisms/PageWrapper';
+import PageWrapper from '../../common/page/organisms/PageWrapper';
 import { pageCategoryIdRoute } from '@/pages/category/[categoryId]/page/[pageId]';
 import { useRouter } from 'next/router';
 import { pageMaterialIdRoute } from '@/pages/material/[materialId]';
+import MaterialContent from '@/components/material/[materialId]';
 
 const MaterialsContent = ({
 	categoryId,
@@ -53,6 +54,7 @@ const MaterialsContent = ({
 
 	const router = useRouter();
 
+	// By zobaczyć Modala trzeba zakomentować całego useEffect i odkomentować MaterialModalContent
 	useEffect(() => {
 		if (
 			isOpen &&

@@ -5,16 +5,17 @@ import { useAuthStore } from '@/store/authSlice';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import LoginContent from '@/components/login/login';
+import { pageHomeRoute } from '..';
+
+export const pageLoginRoute = (): Route => {
+	return {
+		pathname: '/login',
+	};
+};
 
 const Index = () => {
 	const { user } = useAuthStore();
 	const router = useRouter();
-
-	const pageHomeRoute = (): Route => {
-		return {
-			pathname: '/',
-		};
-	};
 
 	useEffect(() => {
 		if (user) router.push(pageHomeRoute());
