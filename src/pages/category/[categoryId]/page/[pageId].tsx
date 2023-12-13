@@ -44,7 +44,7 @@ const CategoryPageId = () => {
 	}
 
 	return (
-		<div className="bg-white2darkgrey mt-16">
+		<div className="bg-white2verydarkgrey pt-20">
 			<MaterialsContent
 				categoryId={Number(categoryId)}
 				pageId={Number(pageId)}
