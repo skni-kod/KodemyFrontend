@@ -40,8 +40,6 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 	const shouldDisplayLastPage = endPage < totalPages - 1;
 
 	const handlePageChange = (newPage: number, categoryId?: number | undefined) => {
-		console.log('newPage', newPage);
-		console.log('newPagecategoryId', categoryId);
 		setCurrentPage(newPage);
 		if (categoryId === undefined) {
 			routing(newPage);

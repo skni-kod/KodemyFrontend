@@ -5,10 +5,8 @@ import Header from '@/components/category/organisms/Header';
 import MaterialModalContent from '@/components/common/modal/materials/content/MaterialModalContent';
 import FilterMenuButton from '@/components/common/filter/atoms/FilterMenuButton';
 import SortMenuButton from '@/components/common/filter/SortMenuButton';
-import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialIdService';
+import { MaterialOpenSearch } from '@/hooks/services/useMaterialIdService';
 import ResultCount from '@/components/common/filter/atoms/ResultCount';
-import useFiltersMenu from '@/hooks/useFiltersMenu';
-import { openSearchBaseInitialState } from '@/utils/constant';
 import PageWrapper from '../common/page/organisms/PageWrapper';
 import { pageCategoryIdRoute } from '@/pages/category/[categoryId]/page/[pageId]';
 import router from 'next/router';
@@ -73,7 +71,7 @@ const MaterialsContent = ({
 				totalPages={totalPages}
 				setCurrentPage={(newPage: number) => setCurrentPage(categoryId, newPage)}
 				routing={(currentPage, categoryId) =>
-					router.push(pageCategoryIdRoute(Number(categoryId), Number(pageId)))
+					router.push(pageCategoryIdRoute(Number(categoryId), Number(currentPage)))
 				}
 				categoryId={categoryId}
 			>

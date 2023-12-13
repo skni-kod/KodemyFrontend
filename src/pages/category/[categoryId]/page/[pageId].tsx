@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import useMaterialService, { MaterialOpenSearch } from '@/hooks/services/useMaterialIdService';
 import { openSearchBaseInitialState } from '@/utils/constant';
 import useFiltersMenu from '@/hooks/useFiltersMenu';
-import { page404Route } from '@/pages/404';
 
 export const pageCategoryIdRoute = (categoryId: number, pageId: number): Route => {
 	return {
@@ -22,9 +21,6 @@ const CategoryPageId = () => {
 	if (pageId === undefined || categoryId === undefined) {
 		return <div>Loading...</div>;
 	}
-
-	console.log('pageId', pageId);
-	console.log('categoryId', categoryId);
 
 	const { getMaterials } = useMaterialService({ currentPage: Number(pageId) });
 	const [materials, setMaterials] = useState<MaterialOpenSearch>(openSearchBaseInitialState);

@@ -11,8 +11,6 @@ interface useMaterialServiceProps {
 const useMaterialService = ({ currentPage }: useMaterialServiceProps) => {
 	const defaultParamsValue = defaultFilterParams;
 
-	console.log('currentPage', currentPage);
-
 	const currentPageRef = useRef(currentPage);
 	currentPageRef.current = currentPage;
 
@@ -36,9 +34,7 @@ const useMaterialService = ({ currentPage }: useMaterialServiceProps) => {
 		},
 		[defaultParamsValue],
 	);
-	useEffect(() => {
-		console.log('currentPage changed:', currentPage);
-	}, [currentPage]);
+	useEffect(() => {}, [currentPage]);
 
 	const getMaterialById = useCallback(async (id: number) => {
 		try {
