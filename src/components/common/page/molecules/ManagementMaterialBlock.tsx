@@ -34,7 +34,7 @@ const ManagementMaterialBlock = ({
 
 					<div className="flex-none text-xs text-bold pt-1">
 						<div>
-							Dodane {createdDate.split('T')[0]} przez: {author}
+							Dodane {createdDate.split('T')[0]} przez: {author.username}
 						</div>
 					</div>
 				</div>

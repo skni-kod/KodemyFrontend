@@ -1,16 +1,23 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import kodemyAPI from '@/utils/kodemyAPI';
 import { SearchFields, SortDirection } from '@/utils/model';
 import { defaultFilterParams } from '@/contexts/MaterialsFiltersContext';
 import { mapSearchFieldsParam } from '@/utils/constant';
 
-const useMaterialService = () => {
+interface useMaterialServiceProps {
+	currentPage?: number;
+}
+
+const useMaterialService = ({ currentPage }: useMaterialServiceProps = {}) => {
 	const defaultParamsValue = defaultFilterParams;
+
+	const currentPageRef = useRef(currentPage);
+	currentPageRef.current = currentPage;
 
 	const getMaterials = useCallback(
 		async ({
-			size = defaultParamsValue.size,
-			page = defaultParamsValue.page,
+			size = 10,
+			page = currentPageRef.current ? currentPageRef.current - 1 : 0,
 			sort = defaultParamsValue.sort,
 			sortDirection = SortDirection[defaultParamsValue.sortDirection],
 			searchFields = undefined,
@@ -21,10 +28,13 @@ const useMaterialService = () => {
 					`/api/materials?${basicParams}${mapSearchFieldsParam(searchFields)}`,
 				);
 				return response.data;
-			} catch (e) {}
+			} catch (e) {
+				console.error('getMaterials Error');
+			}
 		},
 		[defaultParamsValue],
 	);
+	useEffect(() => {}, [currentPage]);
 
 	const getMaterialById = useCallback(async (id: number) => {
 		try {
@@ -91,7 +101,10 @@ export type Material = {
 		name: string;
 	};
 	// author jest podczas kożystania z MaterialOpenSearch
-	author: string;
+	author: {
+		id: number;
+		username: string;
+	};
 	avgGrade: number;
 };
 

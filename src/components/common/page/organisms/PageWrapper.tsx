@@ -5,7 +5,8 @@ interface PageWrapperProps {
 	totalPages: number;
 	setCurrentPage: (newPage: number) => void;
 	children: React.ReactNode;
-	routing: (currentPage: number) => void;
+	routing: (currentPage: number, categoryId?: number) => void;
+	categoryId?: number;
 }
 
 const PageWrapper: React.FC<PageWrapperProps> = ({
@@ -14,6 +15,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 	setCurrentPage,
 	children,
 	routing,
+	categoryId,
 }) => {
 	const paginationRange = [];
 	const paginationVisiblePages = 5;
@@ -37,19 +39,23 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 	const shouldDisplayFirstPage = startPage > 2;
 	const shouldDisplayLastPage = endPage < totalPages - 1;
 
-	const handlePageChange = (newPage: number) => {
+	const handlePageChange = (newPage: number, categoryId?: number | undefined) => {
 		setCurrentPage(newPage);
-		routing(newPage);
+		if (categoryId === undefined) {
+			routing(newPage);
+		} else {
+			routing(newPage, categoryId);
+		}
 	};
 
 	return (
-		<div>
+		<div className="w-ful min-h-[70.4vh] px-20">
 			{children}
 			<nav className="flex justify-center text-black2white pt-6 pb-10 text-[22px]">
 				<ul className="pagination flex space-x-2">
 					{shouldDisplayFirstPage && (
 						<li>
-							<button onClick={() => handlePageChange(1)}>1</button>
+							<button onClick={() => handlePageChange(1, categoryId)}>1</button>
 						</li>
 					)}
 					{shouldDisplayFirstPage && <li>...</li>}
@@ -61,7 +67,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 										? 'active bg-sky-500 hover:bg-blue-600 text-white rounded px-1.5 py-0 border border-sky-500 hover:border-blue-600'
 										: 'bg-none text-white rounded px-1.5 py-0'
 								}`}
-								onClick={() => handlePageChange(index)}
+								onClick={() => handlePageChange(index, categoryId)}
 							>
 								{index}
 							</button>
@@ -70,7 +76,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 					{shouldDisplayLastPage && <li className="page-item disabled">...</li>}
 					{shouldDisplayLastPage && (
 						<li>
-							<button onClick={() => handlePageChange(totalPages)}>{totalPages}</button>
+							<button onClick={() => handlePageChange(totalPages, categoryId)}>{totalPages}</button>
 						</li>
 					)}
 				</ul>

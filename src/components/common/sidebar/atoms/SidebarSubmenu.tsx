@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { pageCategoryIdRoute } from '@/pages/category/[id]';
 import { Section } from '@/hooks/services/useSectionService';
+import { pageCategoryIdRoute } from '@/pages/category/[categoryId]/page/[pageId]';
 
 interface SidebarSubmenuProps {
 	section: Section;
@@ -9,11 +9,7 @@ interface SidebarSubmenuProps {
 	expandedItemId: number | null;
 }
 
-const SidebarSubmenu = ({
-	section,
-	isExpandMenu,
-	expandedItemId,
-}: SidebarSubmenuProps) => {
+const SidebarSubmenu = ({ section, isExpandMenu, expandedItemId }: SidebarSubmenuProps) => {
 	const isExpandSubmenu = isExpandMenu && expandedItemId === section.id;
 
 	return (
@@ -23,7 +19,7 @@ const SidebarSubmenu = ({
 					{section.categories.map(({ id, name }) => (
 						<Link
 							key={id}
-							href={pageCategoryIdRoute(id)}
+							href={pageCategoryIdRoute(id, 1)}
 							className="flex items-center w-full px-3.5 py-1 pl-12 mt-1 rounded-lg no-underline overflow-hidden"
 						>
 							{name}

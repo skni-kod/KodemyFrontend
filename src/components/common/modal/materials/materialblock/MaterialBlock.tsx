@@ -115,12 +115,9 @@ const MaterialBlock = ({
 					<div className="text-sm text-bold">{description}</div>
 				</div>
 			</div>
-			{/* To będzie do wyrzucania jak będzie wyświetlało materiały tylko z statusem „APPROVED”  */}
-			{/* ten div u dołu  */}
 			<div className="flex flex-col justify-center w-auto py-5 px-2">
 				<Status status={status} />
 			</div>
-			{/* ten div u góry */}
 			<div className="flex flex-col justify-center w-auto py-5 px-2" onClick={openMarkModal}>
 				<button
 					className="text-black bg-yellow-400 rounded-lg px-3 py-0.5"
@@ -136,7 +133,7 @@ const MaterialBlock = ({
 				<Favourite />
 			</div>
 			<div className="flex flex-col justify-center w-52 min-w-52 min-h-5 h-16 pl-5 py-2 gap-1 border-l-2 text-xs">
-				<div>Dodane przez: {author}</div>
+				<div>Dodane przez: {author.username}</div>
 				<div>Data dodania: {createdDate.split('T')[0]}</div>
 			</div>
 			{isRatingModalOpen && (

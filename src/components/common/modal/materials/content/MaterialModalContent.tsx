@@ -37,7 +37,7 @@ const MaterialModalContent = ({
 					<div className="text-gray-500 mt-2 text-center">
 						Materiał został dodany:{' '}
 						<span className="font-semibold">{extractRRRRMMDD(material.createdDate)}</span> przez:{' '}
-						<span className="font-semibold cursor-pointer">{material.creator.username}</span>
+						<span className="font-semibold cursor-pointer">{material.author.username}</span>
 					</div>
 				</div>
 				<div className="flex flex-col gap-y-2 mt-6 text-sky-500 font-semibold">
