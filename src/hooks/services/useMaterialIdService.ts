@@ -5,10 +5,10 @@ import { defaultFilterParams } from '@/contexts/MaterialsFiltersContext';
 import { mapSearchFieldsParam } from '@/utils/constant';
 
 interface useMaterialServiceProps {
-	currentPage: number;
+	currentPage?: number;
 }
 
-const useMaterialService = ({ currentPage }: useMaterialServiceProps) => {
+const useMaterialService = ({ currentPage }: useMaterialServiceProps = {}) => {
 	const defaultParamsValue = defaultFilterParams;
 
 	const currentPageRef = useRef(currentPage);
@@ -17,7 +17,7 @@ const useMaterialService = ({ currentPage }: useMaterialServiceProps) => {
 	const getMaterials = useCallback(
 		async ({
 			size = 10,
-			page = currentPageRef.current - 1,
+			page = currentPageRef.current ? currentPageRef.current - 1 : 0,
 			sort = defaultParamsValue.sort,
 			sortDirection = SortDirection[defaultParamsValue.sortDirection],
 			searchFields = undefined,
