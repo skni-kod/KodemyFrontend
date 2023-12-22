@@ -2,15 +2,26 @@ import Title from '@/components/common/modal/common/Title';
 import CloseCross from '@/components/common/modal/common/CloseCross';
 import { Rating } from 'react-simple-star-rating';
 import { useState } from 'react';
+import { sendRatingToServer } from '@/hooks/data/fetchGrades';
 
-const MaterialModalMark = ({ handleCloseMarkModal }: { handleCloseMarkModal: () => void }) => {
-	const [rating, setRating] = useState(1);
+const MaterialModalMark = ({
+	handleCloseMarkModal,
+	id,
+}: {
+	handleCloseMarkModal: () => void;
+	id: number;
+}) => {
+	const [rating, setRating] = useState(0);
 
 	const handleRatingChange = (newRating: number) => {
 		const calculatedRating = newRating;
 		setRating(calculatedRating);
 	};
 
+	const handleSend = (id: number, rating: number) => {
+		handleCloseMarkModal();
+		sendRatingToServer(id, rating);
+	};
 	return (
 		<div className="relative w-128 p-3 bg-white2verydarkgrey rounded-2xl">
 			<CloseCross handleCloseCross={handleCloseMarkModal} />
@@ -32,7 +43,7 @@ const MaterialModalMark = ({ handleCloseMarkModal }: { handleCloseMarkModal: () 
 			<div className="relative bottom-0 left-0 flex justify-center w-full pb-3 pt-11">
 				<button
 					className="bg-yellow-400 hover:bg-yellow-500 text-black text-xs lg:text-sm 2sm:py-2 py-1 px-2 2sm:px-4 rounded"
-					onClick={() => handleCloseMarkModal()}
+					onClick={() => handleSend(id, rating)}
 				>
 					Wyślij ocenę
 				</button>

@@ -1,4 +1,5 @@
 import kodemyAPI from '@/utils/kodemyAPI';
+import { getToken } from './getToken';
 
 export async function fetchMaterialGrades(
 	materialId: number,
@@ -38,5 +39,37 @@ export async function fetchMaterialGrades(
 	} catch (error) {
 		console.error('Wystąpił błąd podczas pobierania ocen:', error);
 		return null;
+	}
+}
+
+export async function sendRatingToServer(materialId: number, rating: number) {
+	getToken();
+	const token =
+		'eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6WyJDQU5fQVBQUk9WRURfTUFURVJJQUwiLCJDQU5fSU5ERVgiLCJDQU5fQVNTSUdOX1JPTEVTIiwiQ0FOX01PRElGWV9URUNITk9MT0dJRVMiLCJDQU5fQVVUT19BUFBST1ZFRF9NQVRFUklBTCIsIkNBTl9HRVRfVVNFUl9JTkZPIiwiQ0FOX1JFQURfTk9USUZJQ0FUSU9OUyIsIkNBTl9HRVRfVVNFUlMiLCJDQU5fQkFOTklOR19VU0VSUyJdLCJpZCI6MSwidXNlcm5hbWUiOiJaZWdhcmVrUEwiLCJpYXQiOjE3MDMyNjk0MTAsImV4cCI6MTcwMzI3MzAxMH0.e1jYu6lzSV2HzUYSJsG6Te7j46UXallSRQ1y7prVozI';
+	try {
+		// const axiosResponse = await kodemyAPI.get(`/api/materials/${materialId}/grades`);		// to nie działa przez CORS
+		// console.log('axiosResponse', axiosResponse);
+		// const url = axiosResponse.config.baseURL + '/api/materials/${materialId}/grades';
+		// console.log('url', url);
+		const url = `http://localhost:8082/api/materials/${materialId}/grades`; // to działa
+		const response = await fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				grade: rating.toString(),
+			}),
+		});
+
+		console.log('sendRatingToServer response', response);
+		if (!response.ok) {
+			console.error('Błąd podczas wysyłania oceny do serwera:');
+		} else {
+			console.log('Ocena została pomyślnie wysłana do serwera.');
+		}
+	} catch (error) {
+		console.error('Błąd podczas wysyłania oceny:', error);
 	}
 }

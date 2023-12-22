@@ -35,14 +35,13 @@ const MaterialsContent = ({
 
 	const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
 	const [isAddedModalOpen, setIsAddedModalOpen] = useState(false);
-	const [isMarkModalOpen, setIsMarkModalOpen] = useState(false);
 
 	const handleOpenMaterialModal = (id: number) => {
 		setCurrentMaterialId(id);
 		if (id) {
-			if (!isRatingModalOpen && !isAddedModalOpen && !isMarkModalOpen) {
+			if (!isRatingModalOpen && !isAddedModalOpen) {
 				handleOpenModal();
-			} else if (isRatingModalOpen || isAddedModalOpen || isMarkModalOpen) {
+			} else if (isRatingModalOpen || isAddedModalOpen) {
 				handleCloseModal();
 			}
 		}
@@ -55,16 +54,10 @@ const MaterialsContent = ({
 
 	// By zobaczyć Modala trzeba zakomentować całego useEffect i odkomentować MaterialModalContent
 	useEffect(() => {
-		if (
-			isOpen &&
-			!isRatingModalOpen &&
-			!isAddedModalOpen &&
-			!isMarkModalOpen &&
-			currentMaterialId !== undefined
-		) {
+		if (isOpen && !isRatingModalOpen && !isAddedModalOpen && currentMaterialId !== undefined) {
 			router.push(pageMaterialIdRoute(currentMaterialId));
 		}
-	}, [isOpen, isRatingModalOpen, isAddedModalOpen, isMarkModalOpen, currentMaterialId]);
+	}, [isOpen, isRatingModalOpen, isAddedModalOpen, currentMaterialId]);
 
 	return (
 		<>
@@ -101,8 +94,6 @@ const MaterialsContent = ({
 								setIsAddedModalOpen={setIsAddedModalOpen}
 								isRatingModalOpen={isRatingModalOpen}
 								setIsRatingModalOpen={setIsRatingModalOpen}
-								isMarkModalOpen={isMarkModalOpen}
-								setIsMarkModalOpen={setIsMarkModalOpen}
 							/>
 						))}
 				</div>
