@@ -1,15 +1,16 @@
 import MaterialBlock from '@/components/common/modal/materials/materialblock/MaterialBlock';
 import { useEffect, useState } from 'react';
 import useModal from '@/hooks/useModal';
-import Header from '@/components/category/organisms/Header';
-import MaterialModalContent from '@/components/common/modal/materials/content/MaterialModalContent';
+import Header from '@/components/category/molecules/Header';
 import FilterMenuButton from '@/components/common/filter/atoms/FilterMenuButton';
 import SortMenuButton from '@/components/common/filter/SortMenuButton';
 import { MaterialOpenSearch } from '@/hooks/services/useMaterialIdService';
 import ResultCount from '@/components/common/filter/atoms/ResultCount';
-import PageWrapper from '../common/page/organisms/PageWrapper';
+import PageWrapper from '../../common/page/organisms/PageWrapper';
 import { pageCategoryIdRoute } from '@/pages/category/[categoryId]/page/[pageId]';
-import router from 'next/router';
+import { useRouter } from 'next/router';
+import { pageMaterialIdRoute } from '@/pages/material/[materialId]';
+import MaterialContent from '@/components/material/[materialId]';
 
 const MaterialsContent = ({
 	categoryId,
@@ -50,6 +51,21 @@ const MaterialsContent = ({
 
 	const totalElements = materials.totalElements;
 	const totalPages = materials.totalPages;
+
+	const router = useRouter();
+
+	// By zobaczyć Modala trzeba zakomentować całego useEffect i odkomentować MaterialModalContent
+	useEffect(() => {
+		if (
+			isOpen &&
+			!isRatingModalOpen &&
+			!isAddedModalOpen &&
+			!isMarkModalOpen &&
+			currentMaterialId !== undefined
+		) {
+			router.push(pageMaterialIdRoute(currentMaterialId));
+		}
+	}, [isOpen, isRatingModalOpen, isAddedModalOpen, isMarkModalOpen, currentMaterialId]);
 
 	return (
 		<>
@@ -92,11 +108,11 @@ const MaterialsContent = ({
 						))}
 				</div>
 			</PageWrapper>
-			{isOpen && !isRatingModalOpen && !isAddedModalOpen && !isMarkModalOpen && (
+			{/* {isOpen && !isRatingModalOpen && !isAddedModalOpen && !isMarkModalOpen && (
 				<Modal>
 					<MaterialModalContent materialId={currentMaterialId} handleClose={handleCloseModal} />
 				</Modal>
-			)}
+			)} */}
 		</>
 	);
 };

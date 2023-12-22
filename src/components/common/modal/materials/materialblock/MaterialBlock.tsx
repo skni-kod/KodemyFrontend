@@ -11,6 +11,7 @@ import MaterialModalRating from './molecules/rating/MaterialModalRating';
 import MaterialModalAdd from './molecules/add/MaterialModalAdd';
 import MaterialModalMark from './molecules/mark/MaterialModalMark';
 import { fetchMaterialGrades } from '@/hooks/data/fetchGrades';
+import { IoIosArrowForward } from 'react-icons/io';
 
 type MaterialProps = {
 	data: Material;
@@ -91,50 +92,55 @@ const MaterialBlock = ({
 
 	return (
 		<MaterialWrapper onClick={() => handleOpenModal(id)}>
-			<div className="flex-none h-20 w-20 flex justify-center items-center aspect-square bg-gray-100">
-				<Image
-					src={DocumentsImage.src}
-					alt="Materiał Kodemy"
-					className="aspect-square"
-					width="50"
-					height="50"
-				/>
-			</div>
-			<div className="grow flex justify-between items-center px-5">
-				<div>
-					<div onClick={openRatingModal}>
-						<Rating
-							initialValue={averageRating}
-							SVGstyle={{ display: 'inline' }}
-							size={16}
-							allowFraction
-							readonly
-						/>
+			<div className="flex justify-start">
+				<div className="flex-none h-20 w-20 flex justify-center items-center aspect-square bg-gray-100">
+					<Image
+						src={DocumentsImage.src}
+						alt="Materiał Kodemy"
+						className="aspect-square"
+						width="50"
+						height="50"
+					/>
+				</div>
+				<div className="grow flex justify-between items-center px-5">
+					<div>
+						<div onClick={openRatingModal}>
+							<Rating
+								initialValue={averageRating}
+								SVGstyle={{ display: 'inline' }}
+								size={16}
+								allowFraction
+								readonly
+							/>
+						</div>
+						<div className="text-xl text-black2white text-bold mt-0.5 text-ellipsis">{title}</div>
+						<div className="text-sm text-bold">
+							{author.username}, {createdDate.split('T')[0]}
+						</div>
 					</div>
-					<div className="text-xl text-black2white text-bold mt-0.5 text-ellipsis">{title}</div>
-					<div className="text-sm text-bold">{description}</div>
 				</div>
 			</div>
-			<div className="flex flex-col justify-center w-auto py-5 px-2">
-				<Status status={status} />
-			</div>
-			<div className="flex flex-col justify-center w-auto py-5 px-2" onClick={openMarkModal}>
-				<button
-					className="text-black bg-yellow-400 rounded-lg px-3 py-0.5"
-					title="Usuń z ulubionych"
+			<div className="flex justify-end items-center">
+				{/* <div className="flex flex-col justify-center w-auto py-5 px-2">
+					<Status status={status} />
+				</div>
+				<div className="flex flex-col justify-center w-auto py-5 px-2" onClick={openMarkModal}>
+					<button
+						className="text-black bg-yellow-400 rounded-lg px-3 py-0.5"
+						title="Usuń z ulubionych"
+					>
+						Oceń
+					</button>
+				</div>*/}
+				<div
+					className="flex flex-col w-auto min-w-52 min-h-5 h-16 py-5 px-2 border-r-2"
+					onClick={openAddedModal}
 				>
-					Oceń
-				</button>
-			</div>
-			<div
-				className="flex flex-col justify-center w-auto min-w-52 min-h-5 h-16 py-5 px-2 border-l-2"
-				onClick={openAddedModal}
-			>
-				<Favourite />
-			</div>
-			<div className="flex flex-col justify-center w-52 min-w-52 min-h-5 h-16 pl-5 py-2 gap-1 border-l-2 text-xs">
-				<div>Dodane przez: {author.username}</div>
-				<div>Data dodania: {createdDate.split('T')[0]}</div>
+					<Favourite />
+				</div>
+				<div className="pl-2">
+					<IoIosArrowForward className="text-3xl" />
+				</div>
 			</div>
 			{isRatingModalOpen && (
 				<Modal>

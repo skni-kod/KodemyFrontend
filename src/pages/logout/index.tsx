@@ -17,7 +17,7 @@ const Index = () => {
 	useEffect(() => {
 		router.push(logoutApiAuth(router.asPath));
 	}, [router]);
-	return null;
+	return <div className="bg-white2verydarkgrey w-screen min-h-screen"></div>;
 };
 
 export default Index;

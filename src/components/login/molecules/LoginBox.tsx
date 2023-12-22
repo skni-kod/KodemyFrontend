@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Route from '@/utils/route';
 import { IconType } from 'react-icons';
 import { useRouter } from 'next/router';
+import { pageLoginRoute } from '@/pages/login';
 
 type AuthProvider = {
 	name: string;
@@ -21,12 +22,6 @@ type AuthProviders = {
 };
 
 const authorizeApiAuth = (originPathName: string): AuthProviders => {
-	const pageLoginRoute = (): Route => {
-		return {
-			pathname: '/login',
-		};
-	};
-
 	return {
 		github: {
 			name: 'Github',
