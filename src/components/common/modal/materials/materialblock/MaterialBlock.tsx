@@ -60,13 +60,13 @@ const MaterialBlock = ({
 	const size = null;
 	const page = null;
 
-	let ratingOne = 0;
-	let ratingTwo = 0;
-	let ratingThree = 0;
-	let ratingFour = 0;
-	let ratingFive = 0;
-	let averageRating = 0;
-	let allRatings = 1;
+	const [ratingOne, setRatingOne] = useState(0);
+	const [ratingTwo, setRatingTwo] = useState(0);
+	const [ratingThree, setRatingThree] = useState(0);
+	const [ratingFour, setRatingFour] = useState(0);
+	const [ratingFive, setRatingFive] = useState(0);
+	const [allRatings, setAllRatings] = useState(1);
+	const [averageRating, setAverageRating] = useState(0);
 	const today = new Date().toISOString().slice(0, 19);
 
 	useEffect(() => {
@@ -74,15 +74,23 @@ const MaterialBlock = ({
 			try {
 				const materialData = await fetchMaterialGrades(id, createdDate, today, size, page);
 
-				console.log('materialData ', materialData);
 				if (materialData) {
-					const { ratingFive, ratingFour, ratingThree, ratingTwo, ratingOne } = materialData;
-					// Assign values from materialData to the variables
+					setRatingOne(materialData.ratingOne);
+					setRatingTwo(materialData.ratingTwo);
+					setRatingThree(materialData.ratingThree);
+					setRatingFour(materialData.ratingFour);
+					setRatingFive(materialData.ratingFive);
+					setAllRatings(
+						materialData.ratingOne +
+							materialData.ratingTwo +
+							materialData.ratingThree +
+							materialData.ratingFour +
+							materialData.ratingFive,
+					);
 				} else {
-					// Handle cases where data is null
+					console.error('materialDataGrade is NULL');
 				}
 			} catch (error) {
-				// Handle query errors
 				console.error(error);
 			}
 		}

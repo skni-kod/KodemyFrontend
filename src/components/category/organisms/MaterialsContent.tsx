@@ -10,7 +10,6 @@ import PageWrapper from '../../common/page/organisms/PageWrapper';
 import { pageCategoryIdRoute } from '@/pages/category/[categoryId]/page/[pageId]';
 import { useRouter } from 'next/router';
 import { pageMaterialIdRoute } from '@/pages/material/[materialId]';
-import MaterialContent from '@/components/material/[materialId]';
 
 const MaterialsContent = ({
 	categoryId,

@@ -8,12 +8,8 @@ export async function fetchMaterialGrades(
 	page: number | null,
 ) {
 	try {
-		console.log('materialId ', materialId);
-		console.log('fromDate ', fromDate);
-		console.log('toDate ', toDate);
-
 		const response = await kodemyAPI.get(
-			`/api/materials/${materialId}/grades?from=${fromDate}&to=${toDate}`,
+			`/api/materials/${materialId}/grades?sort=createdDate&sort_direction=DESC&search_fields=%7B%22materialId%22%3A%2015%7D`,
 			{
 				params: {
 					from: fromDate,

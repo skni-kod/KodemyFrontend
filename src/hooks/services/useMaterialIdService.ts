@@ -27,6 +27,7 @@ const useMaterialService = ({ currentPage }: useMaterialServiceProps = {}) => {
 				const response = await kodemyAPI.get(
 					`/api/materials?${basicParams}${mapSearchFieldsParam(searchFields)}`,
 				);
+				console.log('response in Material Service', response.data);
 				return response.data;
 			} catch (e) {
 				console.error('getMaterials Error');
