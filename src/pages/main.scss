@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	font-family: 'Poppins', 'Comic Sans MS', 'Times New Roman', sans-serif;
+}
+
+html,
+body,
+:root {
+	min-height: 100%;
+	font-size: 14px;
+	line-height: 1.25rem;
+}
+
+@layer base {
+	:root {
+		--primary-color: 2 132 199; // blue
+		--text2primary-color: 186 230 253;
+		--overlay2primary-color: 240 240 240;
+		--secondary-color: 48 49 52;
+		--text2secondary-color: 48 49 52;
+		--background-color: 255 255 255; //white
+		--text2background-color: 48 49 52;
+		--placeholder2background-color: 107 114 128; // gray-500
+		--error-color: 176 0 32;
+		--webkit-scrollbar-color: 200 200 200;
+	}
+
+	@mixin root-dark {
+		:root {
+			--primary-color: 2 132 199;
+			--text2primary-color: 186 230 253;
+			--overlay2primary-color: 240 240 240;
+			--secondary-color: 48 49 52;
+			--text2secondary-color: 48 49 52;
+			--background-color: 48 49 52;
+			--text2background-color: 255 255 255;
+			--placeholder2background-color: 107 114 128; // gray-500
+		}
+	}
+
+	/*@media (prefers-color-scheme: dark) {
+		@include root-dark;
+	}*/
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: rgb(var(--webkit-scrollbar-color));
+	border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: transparent;
+	border-radius: 6px;
+}

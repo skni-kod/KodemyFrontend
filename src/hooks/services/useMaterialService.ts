@@ -3,6 +3,7 @@ import kodemyAPI from '@/utils/kodemyAPI';
 import { SearchFields, SortDirection } from '@/utils/model';
 import { defaultFilterParams } from '@/contexts/MaterialsFiltersContext';
 import { mapSearchFieldsParam } from '@/utils/constant';
+import { Pageable } from '@/utils/model/Pageable';
 
 const useMaterialService = () => {
 	const defaultParamsValue = defaultFilterParams;
@@ -49,19 +50,6 @@ type OpenSearchParams = {
 	searchFields?: SearchFields;
 };
 
-export type OpenSearchBase = {
-	content: Array<any>;
-	pageable: {
-		offset: number;
-		pageNumber: number;
-		pageSize: number;
-		paged: boolean;
-	};
-	size: number;
-	totalElements: number;
-	totalPages: number;
-};
-
 export enum MaterialStatus {
 	PENDING,
 	APPROVED,
@@ -76,25 +64,14 @@ export type Material = {
 	description: string;
 	link: string;
 	status: string;
-	// creator jest podczas kożystania z Material
-	creator: {
+	active: boolean;
+	avgGrade: number;
+	author: {
 		id: number;
 		username: string;
 	};
 	createdDate: string;
 	sectionId: number;
 	categoryId: number;
-	technologyIds: number[];
-	active: boolean;
-	type: {
-		id: number;
-		name: string;
-	};
-	// author jest podczas kożystania z MaterialOpenSearch
-	author: string;
-	avgGrade: number;
-};
-
-export type MaterialOpenSearch = OpenSearchBase & {
-	content: Array<Material>;
+	technologies: { id: number; name: string }[];
 };

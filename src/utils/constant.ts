@@ -1,6 +1,6 @@
 import { Category, Section } from '@/hooks/services/useSectionService';
 import { SearchFields } from '@/utils/model';
-import { OpenSearchBase } from '@/hooks/services/useMaterialIdService';
+import {Pageable} from "@/utils/model/Pageable";
 
 export const sortSectionCategory = (section: Section[]) => {
 	section?.forEach((section: Section) => {
@@ -40,7 +40,7 @@ export const mapSearchFieldsParam = (searchFields: SearchFields | undefined) => 
 	return '';
 };
 
-export const openSearchBaseInitialState: OpenSearchBase = {
+export const pageInitialState: Pageable<any> = {
 	content: [],
 	size: 20,
 	pageable: {

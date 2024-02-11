@@ -17,7 +17,7 @@ export type SectionResponse = Section[];
 const useSectionService = () => {
 	const getSections = useCallback(async () => {
 		try {
-			const response = await kodemyAPI.get(`/api/sections`);
+			const response = await kodemyAPI.get<Section[]>(`/api/sections`);
 			return response.data;
 		} catch (e) {}
 	}, []);

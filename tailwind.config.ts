@@ -8,8 +8,8 @@ const config: Config = {
 	],
 	theme: {
 		screens: {
-			'2sm': '375px',
-			'3sm': '530px',
+			'2xs': '375px',
+			xs: '530px',
 			sm: '640px',
 			md: '768px',
 			lg: '1024px',
@@ -18,33 +18,42 @@ const config: Config = {
 		},
 		extend: {
 			colors: {
-				white2white: 'rgb(var(--color-white2white) / <alpha-value>)',
-				white2darkgrey: 'rgb(var(--color-white2darkgrey) / <alpha-value>)',
-				white2verydarkgrey: 'rgb(var(--color-white2verydarkgrey) / <alpha-value>)',
-				grey2white: 'rgb(var(--color-grey2white) / <alpha-value>)',
-				black2white: 'rgb(var(--color-black2white) / <alpha-value>)',
-				black2grey: 'rgb(var(--color-black2grey) / <alpha-value>)',
-				sky2002sky600: 'rgb(var(--color-sky2002sky600) / <alpha-value>)',
-				sky6002sky200: 'rgb(var(--color-sky6002sky200) / <alpha-value>)',
+				primary: 'rgb(var(--primary-color) / <alpha-value>)',
+				text2primary: 'rgb(var(--text2primary-color) / <alpha-value>)',
+				overlay2primary: 'rgb(var(--overlay2primary-color) / <alpha-value>)',
+				secondary: 'rgb(var(--secondary-color) / <alpha-value>)',
+				text2secondary: 'rgb(var(--text2secondary-color) / <alpha-value>)',
+				bg: 'rgb(var(--background-color) / <alpha-value>)',
+				text2bg: 'rgb(var(--text2background-color) / <alpha-value>)',
+				placeholder2bg: 'rgb(var(--placeholder2background-color) / <alpha-value>)',
 			},
-			backgroundImage: {
-				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+			maxWidth: {
+				'2xs': '375px',
+				xs: '530px',
+				sm: '640px',
+				md: '768px',
+				lg: '1024px',
+				xl: '1280px',
+				'2xl': '1536px',
 			},
-			backgroundColor: {
-				'blue-green': 'linear-gradient(90deg, blue, blue 50%, green 50%)',
+			width: {
+				inherit: 'inherit',
+				18: '4.5rem',
+				22: '5.5rem',
 			},
-			transitionProperty: {
-				width: 'width',
+			height: {
+				inherit: 'inherit',
 			},
-			spacing: {
-				'88': '22rem',
-				'112': '28rem',
-				'128': '32rem',
+			padding: {
+				'1/2': '50%',
+				'1/4': '25%',
 			},
-			minHeight: {
-				'96': '24rem',
-				'112': '28rem',
+			zIndex: {
+				5: '5',
+				15: '15',
+				25: '25',
+				35: '35',
+				45: '45',
 			},
 		},
 	},
