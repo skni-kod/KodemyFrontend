@@ -7,6 +7,7 @@ import { LuDot } from 'react-icons/lu';
 import { User } from '@/hooks/services/useUserService';
 import { FaCircle } from 'react-icons/fa6';
 import clsx from 'clsx';
+import IsActiveStatus from '@/components/admin/users_page/page_content/IsActiveStatus';
 
 type UserBlockProps = {
 	data: User;
@@ -20,8 +21,6 @@ export default function UserBlock({ data: user, children }: UserBlockProps) {
 		setIsOpenDetails((prevState) => !prevState);
 	};
 
-	const isActive = Math.floor(Math.random() * 2) % 2 === 0;
-
 	return (
 		<div>
 			<div
@@ -29,15 +28,7 @@ export default function UserBlock({ data: user, children }: UserBlockProps) {
 				onClick={handleOpenDetails}
 			>
 				<div className="flex justify-between items-center w-full text-sm">
-					<div
-						className={clsx(
-							'flex items-center leading-none',
-							isActive ? 'text-green-500' : 'text-red-500',
-						)}
-					>
-						<FaCircle />
-						&nbsp;{isActive ? 'Aktywny' : 'Nieaktywny'}
-					</div>
+					<IsActiveStatus isActive={Math.floor(Math.random() * 2) % 2 === 0} />
 					<div className="text-placeholder2bg">{user.createdDate.split('T')[0]}</div>
 				</div>
 				<div className="flex justify-between gap-6 w-full py-3">

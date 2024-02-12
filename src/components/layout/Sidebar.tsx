@@ -1,4 +1,4 @@
-import SidebarMenu from '@/components/layout/menu/SidebarMenu';
+import SidebarMenu from '@/components/menus/SidebarMenu';
 import SidebarFooter from '@/components/layout/sidebar/SidebarFooter';
 
 export default function Sidebar({ className }: { className?: string }) {

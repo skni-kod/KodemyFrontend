@@ -15,21 +15,7 @@ export const Metadata = {
 	description: 'Kodemy to najlepszy zbiór materiałów',
 };
 
-const Content = ({ className, children }: { className?: string; children: React.ReactNode }) => {
-	const { isOpen } = useSidebarContext();
 
-	return (
-		<main className={className}>
-			<Sidebar
-				className={clsx(
-					'fixed top-0 h-full pt-[4rem] bg-bg text-text2bg shadow-md',
-					isOpen ? 'w-64' : 'w-[3.75rem]',
-				)}
-			/>
-			<div className={clsx('w-full min-h-full', isOpen ? 'pl-64' : 'pl-[3.75rem]')}>{children}</div>
-		</main>
-	);
-};
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
@@ -41,10 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
 			<Provider store={store}>
 				<SidebarStateProvider>
 					<div className="flex flex-col w-full h-screen max-h-screen">
-						<Navbar className="w-full h-[3.75rem]" />
-						<Content className="flex-1 pt-20">
-							<Component {...pageProps} />
-						</Content>
+						<Component {...pageProps} />
 					</div>
 				</SidebarStateProvider>
 			</Provider>

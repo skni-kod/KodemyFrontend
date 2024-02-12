@@ -25,6 +25,7 @@ const config: Config = {
 				text2secondary: 'rgb(var(--text2secondary-color) / <alpha-value>)',
 				bg: 'rgb(var(--background-color) / <alpha-value>)',
 				text2bg: 'rgb(var(--text2background-color) / <alpha-value>)',
+				overlay2bg: 'rgb(var(--overlay2background-color) / <alpha-value>)',
 				placeholder2bg: 'rgb(var(--placeholder2background-color) / <alpha-value>)',
 			},
 			maxWidth: {

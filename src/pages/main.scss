@@ -16,13 +16,14 @@ body,
 
 @layer base {
 	:root {
-		--primary-color: 2 132 199; // blue
+		--primary-color: 2 132 199; // sky
 		--text2primary-color: 186 230 253;
 		--overlay2primary-color: 240 240 240;
 		--secondary-color: 48 49 52;
 		--text2secondary-color: 48 49 52;
 		--background-color: 255 255 255; //white
 		--text2background-color: 48 49 52;
+		--overlay2background-color: 240 240 240; //light-grey
 		--placeholder2background-color: 107 114 128; // gray-500
 		--error-color: 176 0 32;
 		--webkit-scrollbar-color: 200 200 200;

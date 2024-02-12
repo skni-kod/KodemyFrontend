@@ -1,5 +1,5 @@
 import { GiHamburgerMenu } from 'react-icons/gi';
-import PageLogo from '@/components/layout/navbar/left/PageLogo';
+import KodemyLogo from '@/components/layout/navbar/left/KodemyLogo';
 import HamburgerMenuIcoBtn from '@/components/layout/navbar/left/HamburgerMenuIcoBtn';
 
 export default function NavbarLeft() {
@@ -7,7 +7,7 @@ export default function NavbarLeft() {
 		<div className="flex items-center h-full">
 			<HamburgerMenuIcoBtn />
 			<div className="h-full">
-				<PageLogo />
+				<KodemyLogo />
 			</div>
 		</div>
 	);

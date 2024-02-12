@@ -5,7 +5,7 @@ import { Metadata } from '@/pages/_app';
 import { useRef } from 'react';
 import Link from 'next/link';
 
-export default function PageLogo() {
+export default function KodemyLogo() {
 	const image = [KodemyImageDark, KodemyImageWhite][0];
 	const btnRef = useRef<HTMLAnchorElement>(null);
 

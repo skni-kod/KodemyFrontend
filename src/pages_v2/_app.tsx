@@ -5,7 +5,9 @@ import Head from 'next/head';
 import Sidebar from '@/components/common/sidebar/Sidebar';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
-import ErrorInterceptorProvider, { ErrorInterceptorContext } from '@/contexts/ErrorInterceptorContext';
+import ErrorInterceptorProvider, {
+	ErrorInterceptorContext,
+} from '@/contexts/ErrorInterceptorContext';
 import React, { useContext, useEffect, useState } from 'react';
 import Navbar from '@/components/common/navbar/Navbar';
 import { useAuthStore } from '@/store/authSlice';

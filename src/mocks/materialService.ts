@@ -1,7 +1,7 @@
-import { MaterialOpenSearch } from '@/hooks/services/useMaterialService';
-import { pageInitialState } from '@/utils/constant';
+import {Pageable} from "@/utils/model/Pageable";
+import {Material} from "@/hooks/services/useMaterialService";
 
-export function getMaterials(): MaterialOpenSearch {
+export function getMaterials(): Pageable<Material> {
 	return {
 		size: 20,
 		pageable: {
