@@ -14,6 +14,8 @@ type UserBlockProps = {
 	children: React.ReactNode;
 };
 
+const mapUserRole = (role: string) => role.substring(role.indexOf('_') + 1);
+
 export default function UserBlock({ data: user, children }: UserBlockProps) {
 	const [isOpenDetails, setIsOpenDetails] = useState<boolean>(false);
 
@@ -45,7 +47,7 @@ export default function UserBlock({ data: user, children }: UserBlockProps) {
 						<h3 className="text-lg font-semibold text-primary">
 							{user.id}: {user.username}
 						</h3>
-						<div className="pt-1">Rola: {user.role.name}</div>
+						<div className="pt-1">{mapUserRole(user.role.name)}</div>
 						<div className="flex items-center pt-1 text-placeholder2bg">{user.email}</div>
 					</div>
 				</div>

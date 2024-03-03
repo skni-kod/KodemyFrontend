@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import kodemyAPI from '@/utils/kodemyAPI';
-import { SearchFields, SortDirection } from '@/utils/model';
+import { MaterialSearchFields, SortDirection } from '@/utils/model';
 import { defaultFilterParams } from '@/contexts/FiltersContext';
 import { mapSearchFieldsParam } from '@/utils/constant';
 import { Pageable } from '@/utils/model/Pageable';
@@ -47,7 +47,7 @@ type OpenSearchParams = {
 	page?: number;
 	sort?: string;
 	sortDirection?: string;
-	searchFields?: SearchFields;
+	searchFields?: MaterialSearchFields;
 };
 
 export enum MaterialStatus {

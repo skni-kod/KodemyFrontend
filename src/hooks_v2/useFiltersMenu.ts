@@ -1,14 +1,14 @@
 import FiltersMenu from '@/components/common/filter/organisms/FiltersMenu';
 import { useCallback, useContext, useState } from 'react';
 import { FiltersContext } from '@/contexts/FiltersContext';
-import { SearchFields, SortDirection } from '@/utils/model';
+import { MaterialSearchFields, SortDirection } from '@/utils/model';
 
 const useFiltersMenu = () => {
 	const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);
 	const { filters } = useContext(FiltersContext);
 
 	const mapFilters = useCallback(
-		(searchFields?: SearchFields) => {
+		(searchFields?: MaterialSearchFields) => {
 			const size = filters['size']?.value;
 			const page = filters['page']?.value;
 			const sort = filters['sort']?.value;

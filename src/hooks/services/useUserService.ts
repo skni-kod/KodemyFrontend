@@ -1,5 +1,28 @@
+import { useCallback } from 'react';
+import kodemyAPI from '@/utils/kodemyAPI';
+import { UserSearchFields, SearchParams } from '@/utils/model';
+import mapSearchParams from '@/utils/mapSearchParams';
+
 const useUserService = () => {
-	return {};
+	const getUsers = useCallback(async (params: SearchParams<UserSearchFields>) => {
+		try {
+			console.log(params);
+			const response = await kodemyAPI.get(`/api/users?${mapSearchParams(params)}`);
+			return response.data;
+		} catch (e) {}
+	}, []);
+
+	const getUserById = useCallback(async (id: number) => {
+		try {
+			const response = await kodemyAPI.get(`/api/materials/${id}`);
+			return response.data;
+		} catch (e) {}
+	}, []);
+
+	return {
+		getUsers,
+		getUserById,
+	};
 };
 
 export default useUserService;

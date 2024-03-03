@@ -15,6 +15,7 @@ export default function UserAvatarBtn({ onClick = () => {} }: { onClick?: () => 
 					width={(divRef.current.clientHeight * AvatarImage.width) / AvatarImage.height}
 					height={divRef.current.clientHeight}
 					onClick={onClick}
+					priority={true}
 				/>
 			)}
 		</div>
