@@ -4,8 +4,8 @@ import AuthProvidersBtns from '@/components/auth/AuthProvidersBtns';
 
 export default function Auth() {
 	return (
-		<Page clear>
-			<div className="w-2xs mx-auto">
+		<Page>
+			<div className="w-full max-w-2xs mx-auto">
 				<div className="flex justify-center h-12">
 					<KodemyLogo />
 				</div>

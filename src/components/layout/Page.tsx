@@ -1,34 +1,21 @@
-import React from 'react';
-import Navbar from '@/components/layout/Navbar';
-import { Content } from '@/components/layout/Content';
-import { useSidebarContext } from '@/contexts/SidebarStateContext';
-import Sidebar from '@/components/layout/Sidebar';
-import clsx from 'clsx';
+import React, { useCallback, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import { useAuthStore } from '@/store/authSlice';
+import { jwtDecode } from 'jwt-decode';
 
-type PageProps = {
-	clear?: boolean;
-	children: React.ReactNode;
-};
+export default function Page({ children }: { children: React.ReactNode }) {
+	const [cookies] = useCookies<'jwtsession', { jwtsession?: string }>();
+	const { user, setAuth } = useAuthStore();
 
-export default function Page({ clear = false, children }: PageProps) {
-	const { isOpen } = useSidebarContext();
+	const updateUser = useCallback(() => {
+		if (cookies.jwtsession) {
+			setAuth(jwtDecode(cookies.jwtsession));
+		}
+	}, [cookies.jwtsession, setAuth]);
 
-	return (
-		<>
-			{!clear && <Navbar className="w-full h-[3.75rem]" />}
-			<main className="flex-1 pt-20">
-				{!clear && (
-					<Sidebar
-						className={clsx(
-							'fixed top-0 h-full pt-[4rem] bg-bg text-text2bg shadow-md',
-							isOpen ? 'w-64' : 'w-[3.75rem]',
-						)}
-					/>
-				)}
-				<div className={clsx('w-full min-h-full', !clear && (isOpen ? 'pl-64' : 'pl-[3.75rem]'))}>
-					<div className="w-full max-w-lg p-4 m-auto">{children}</div>
-				</div>
-			</main>
-		</>
-	);
+	useEffect(() => {
+		cookies.jwtsession && !user && updateUser();
+	}, [cookies.jwtsession, updateUser, user]);
+
+	return <>{children}</>;
 }

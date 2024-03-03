@@ -1,20 +1,30 @@
 import { useCallback } from 'react';
 import kodemyAPI from '@/utils/kodemyAPI';
-import { SearchFields } from '@/utils/model';
+import { SearchFields, SortDirection } from '@/utils/model';
+import { defaultFilterParams } from '@/contexts/FiltersContext';
 import { mapSearchFieldsParam } from '@/utils/constant';
+import { Pageable } from '@/utils/model/Pageable';
 
 const useMaterialService = () => {
+	const defaultParamsValue = defaultFilterParams;
+
 	const getMaterials = useCallback(
-		async ({ size, page, sort, sortDirection, searchFields }: OpenSearchParams) => {
+		async ({
+			size = defaultParamsValue.size,
+			page = defaultParamsValue.page,
+			sort = defaultParamsValue.sort,
+			sortDirection = SortDirection[defaultParamsValue.sortDirection],
+			searchFields = undefined,
+		}: OpenSearchParams) => {
 			try {
 				const basicParams = `size=${size}&page=${page}&sort=${sort}&sort_direction=${sortDirection}`;
 				const response = await kodemyAPI.get(
 					`/api/materials?${basicParams}${mapSearchFieldsParam(searchFields)}`,
 				);
-				return response.data ? response.data : [];
+				return response.data;
 			} catch (e) {}
 		},
-		[],
+		[defaultParamsValue],
 	);
 
 	const getMaterialById = useCallback(async (id: number) => {

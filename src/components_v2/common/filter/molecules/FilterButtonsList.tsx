@@ -1,4 +1,4 @@
-import { useFiltersContext } from '@/contexts/MaterialsFiltersContext';
+import { useFiltersContext } from '@/contexts/FiltersContext';
 import FilterButton from '../atoms/FilterButton';
 
 const FilterButtonsList = () => {

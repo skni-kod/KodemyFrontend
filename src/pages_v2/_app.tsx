@@ -21,7 +21,7 @@ export const Metadata = {
 
 const Body = ({ children }: { children: React.ReactNode }) => {
 	const { error, dispatchError } = useContext(ErrorInterceptorContext);
-	const { user, setUser } = useAuthStore();
+	const { user, setAuth } = useAuthStore();
 	const { getMe, checkAuth } = useAuthService();
 	const [isAuthed, setIsAuthed] = useState<boolean>(false);
 
@@ -34,10 +34,10 @@ const Body = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {
 		if (isAuthed && !user) {
 			(async () => {
-				setUser(await getMe());
+				setAuth(await getMe());
 			})();
 		}
-	}, [getMe, isAuthed, setUser, user]);
+	}, [getMe, isAuthed, setAuth, user]);
 
 	return <>{children}</>;
 };

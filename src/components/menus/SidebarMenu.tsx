@@ -40,10 +40,7 @@ export default function SidebarMenu() {
 									/>
 								</div>
 								{isOpen && (
-									<div className="flex-1 flex gap-2 justify-between items-center">
-										<div className="flex-1 whitespace-nowrap overflow-hidden">{section.name}</div>
-										<AiOutlineRight />
-									</div>
+									<div className="flex-1 whitespace-nowrap overflow-hidden">{section.name}</div>
 								)}
 							</Link>
 						</li>

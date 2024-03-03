@@ -3,42 +3,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StoreDispatch, StoreState } from '@/store/store';
 import { useCallback } from 'react';
 
-export enum AuthUserRoleType {
-	ROLE_USER,
-	ROLE_MODERATOR,
-	ROLE_ADMIN,
-	ROLE_SUPERADMIN,
-}
-
-type AuthUserRole = {
-	id: number;
-	name: string;
-};
-
-type AuthUser = {
-	id: 1;
-	username: string;
-	email: string | undefined;
-	photo: string;
-	createdDate: string;
-	role: AuthUserRole;
-};
-
 export type AuthState = {
-	authUser?: AuthUser;
+	user: User | null;
+};
+
+export type Jwt = {
+	id: number;
+	username: string;
+	authorities: string[];
+	iat: number;
+	exp: number;
+};
+
+export type User = {
+	id: number;
+	username: string;
 };
 
 const authSlice = createSlice({
 	name: 'auth',
 	initialState: {
-		authUser: undefined,
+		user: null,
 	},
 	reducers: {
 		setAuth(state, action) {
-			state.authUser = action.payload;
+			state.user = action.payload;
 		},
 		dispatchAuth(state) {
-			state.authUser = undefined;
+			state.user = null;
 		},
 	},
 });
@@ -46,23 +38,30 @@ const authSlice = createSlice({
 export default authSlice;
 
 export const useAuthStore = () => {
-	const { authUser } = useSelector<StoreState, AuthState>((state) => state.auth);
+	const { user } = useSelector<StoreState, AuthState>((state) => state.auth);
 	const dispatch = useDispatch<StoreDispatch>();
 
-	const setUser = useCallback(
-		(user: AuthUser) => {
-			dispatch(authSlice.actions.setAuth(user));
+	const setAuth = useCallback(
+		(jwt: Jwt) => {
+			dispatch(authSlice.actions.setAuth(mapUser(jwt)));
 		},
 		[dispatch],
 	);
 
-	const logout = useCallback(() => {
+	const mapUser = (jwt: Jwt): User => {
+		return {
+			id: jwt.id,
+			username: jwt.username,
+		};
+	};
+
+	const unset = useCallback(() => {
 		dispatch(authSlice.actions.dispatchAuth());
 	}, [dispatch]);
 
 	return {
-		setUser,
-		user: authUser,
-		logout,
+		user,
+		setAuth,
+		unset,
 	};
 };

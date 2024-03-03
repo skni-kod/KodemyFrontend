@@ -9,8 +9,8 @@ enum DetailsMode {
 }
 
 const menu: { name: string; mode: DetailsMode; clickable: boolean }[] = [
-	{ name: 'Przegląd', mode: DetailsMode.OVERVIEW, clickable: true },
-	{ name: 'Oceny', mode: DetailsMode.GRADES, clickable: false },
+	{ mode: DetailsMode.OVERVIEW, name: 'Przegląd', clickable: true },
+	{ mode: DetailsMode.GRADES, name: 'Oceny', clickable: false },
 ];
 
 export default function DetailsDropDown({ id }: { id: number }) {
@@ -38,7 +38,6 @@ export default function DetailsDropDown({ id }: { id: number }) {
 				))}
 			</div>
 			{openMode === DetailsMode.OVERVIEW && <DetailsModePreview id={id} />}
-			{openMode === DetailsMode.GRADES && <DetailsModeGrades id={id} />}
 		</div>
 	);
 }

@@ -8,23 +8,35 @@ import {
 	IoPersonOutline,
 	IoSettingsOutline,
 } from 'react-icons/io5';
+import { useEffect, useRef } from 'react';
+import { useAuthStore } from '@/store/authSlice';
 
-export default function UserDropDownMenu({
-	menuRef,
-	onLinkClick,
-}: {
-	menuRef: React.RefObject<HTMLDivElement>;
-	onLinkClick: () => void;
-}) {
+export default function UserDropDownMenu({ onLinkClick }: { onLinkClick: () => void }) {
+	const { user } = useAuthStore();
+	const ref = useRef<HTMLDivElement>(null);
+
+	const handleClickOutside = (event: MouseEvent) => {
+		ref.current && !ref.current.contains(event.target as Node) && onLinkClick();
+	};
+
+	useEffect(() => {
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [handleClickOutside]);
+
+	if (!user) return null;
+
 	return (
 		<div
-			className="absolute top-full right-0 w-64 min-h-32 mt-0.5 p-2 bg-bg text-text2bg shadow-md"
-			ref={menuRef}
+			className="absolute top-full right-0 w-64 min-h-32 mt-0.5 mr-1 p-2 bg-bg text-text2bg shadow-md"
+			ref={ref}
 		>
-			<div className="flex items-center gap-2 p-2">
+			<div className="flex items-center gap-2 px-2 pt-2 pb-4">
 				<div className="w-8 h-8 aspect-square bg-gray-500"></div>
 				<div className="flex-1 flex flex-col">
-					<div>Nickname</div>
+					<div>{user.username}</div>
 				</div>
 			</div>
 			<div className="flex flex-col px-2">
@@ -65,7 +77,13 @@ export default function UserDropDownMenu({
 						label={'Ustawienia'}
 						onClick={onLinkClick}
 					/>
-					<UserMenuLink href={''} ico={IoLogOutOutline} label={'Wyloguj'} onClick={onLinkClick} />
+					<UserMenuLink
+						href="http://localhost:8080/api/oauth2/logout?redirect_uri=http://localhost:3000"
+						ico={IoLogOutOutline}
+						label={'Wyloguj'}
+						onClick={onLinkClick}
+						passHref
+					/>
 				</UserMenuGroup>
 			</div>
 		</div>

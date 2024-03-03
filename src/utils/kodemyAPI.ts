@@ -12,8 +12,14 @@ const config = {
 const kodemyAPI = axios.create(config);
 
 kodemyAPI.interceptors.request.use(
-	(config) => config,
-	(error) => Promise.reject(error),
+	(config) => {
+		console.debug('Sending request to:', config.url);
+		return config;
+	},
+	(error) => {
+		console.error('Error occurred while sending request:', error);
+		return Promise.reject(error);
+	},
 );
 
 export default kodemyAPI;
