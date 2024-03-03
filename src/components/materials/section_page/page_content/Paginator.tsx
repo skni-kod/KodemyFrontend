@@ -2,9 +2,9 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { PaginatorBtn } from '@/components/materials/section_page/page_content/PaginatorBtn';
-import { useCallback } from 'react';
-import createQueryParams from '@/utils/createQueryParams';
 import { useSearchParams } from 'next/navigation';
+import updateSearchParams from '@/utils/createQueryParams';
+import { PAGE_PARAM } from '@/utils/filters';
 
 type PaginatorProps = {
 	page: number;
@@ -13,19 +13,16 @@ type PaginatorProps = {
 
 const classNames = 'h-10 p-2 border-2 rounded-2xl shrink-0 shadow-md cursor-pointer';
 
-export default function Paginator({ page, total }: PaginatorProps) {
+export default function Paginator({ total }: PaginatorProps) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 
 	const handlePageChange = (page: number) => {
-		router.push(router.pathname + refreshCategoryParam(page.toString()));
+		const newParams = updateSearchParams(searchParams.toString(), {
+			[PAGE_PARAM]: page.toString(),
+		});
+		router.push(router.pathname + `?${newParams}`);
 	};
-
-	const refreshCategoryParam = useCallback(
-		(value: string) => createQueryParams(searchParams.toString(), 'page', value),
-		[searchParams],
-	);
-
 	const renderPageButtons = () => {
 		return (
 			<>

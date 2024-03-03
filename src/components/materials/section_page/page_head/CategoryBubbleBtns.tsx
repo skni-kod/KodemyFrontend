@@ -1,11 +1,11 @@
 import { useSidebarContext } from '@/contexts/SidebarStateContext';
 import CategoryBubbleBtn from '@/components/materials/section_page/page_head/CategoryBubbleBtn';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
-import createQueryParams from '@/utils/createQueryParams';
 import { useFiltersContext } from '@/contexts/FiltersContext';
 import { CATEGORY_IDS_PARAM } from '@/utils/filters';
+import updateSearchParams from '@/utils/createQueryParams';
 
 export default function CategoryBubbleBtns({ id }: { id: number }) {
 	const { menuData } = useSidebarContext();
@@ -16,22 +16,20 @@ export default function CategoryBubbleBtns({ id }: { id: number }) {
 	const { filters } = useFiltersContext();
 
 	useEffect(() => {
-		if (filters[CATEGORY_IDS_PARAM])
-			setSelectedCategories((filters[CATEGORY_IDS_PARAM] as string).split(',').map((id) => +id));
-	}, [filters, searchParams]);
+		setSelectedCategories(
+			filters[CATEGORY_IDS_PARAM]
+				? (filters[CATEGORY_IDS_PARAM] as string).split(',').map((id) => +id)
+				: null,
+		);
+	}, [filters]);
 
 	const handleSelect = (id: number) => {
 		if (selectedCategories && selectedCategories.includes(id)) return;
-		const value = selectedCategories ? [...selectedCategories, id] : [id];
-		router.push(router.pathname + refreshCategoryParam(value));
+		const newParams = updateSearchParams(searchParams.toString(), {
+			[CATEGORY_IDS_PARAM]: (selectedCategories ? [...selectedCategories, id] : [id]).toString(),
+		});
+		router.push(router.pathname + `?${newParams}`);
 	};
-
-	const refreshCategoryParam = useCallback(
-		(value: number[]) =>
-			createQueryParams(searchParams.toString(), CATEGORY_IDS_PARAM, value.toString()),
-		[searchParams],
-	);
-
 	if (!id || !menuData || !menuData[id]) return null;
 
 	return (

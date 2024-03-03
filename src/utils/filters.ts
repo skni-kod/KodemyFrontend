@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from 'querystring';
-import { defaultPageSizes, FiltersDict } from '@/contexts/FiltersContext';
+import { FiltersDict } from '@/contexts/FiltersContext';
 
 export const SIZE_PARAM = 'size';
 export const PAGE_PARAM = 'page';
@@ -27,13 +27,15 @@ function mapPage(query: ParsedUrlQuery) {
 
 function mapSortDirection(query: ParsedUrlQuery) {
 	var sortDirection = query[SORT_DIRECTION_PARAM];
-	return sortDirection && sortDirection === 'asc' ? 'ASC' : 'DESC';
+	if (sortDirection && (sortDirection === 'asc' || sortDirection === 'desc')) return sortDirection;
+	return undefined;
 }
 
 function mapBasic(query: ParsedUrlQuery) {
 	return {
 		[SIZE_PARAM]: mapSize(query),
 		[PAGE_PARAM]: mapPage(query),
+		[SORT_PARAM]: query[SORT_PARAM],
 		[SORT_DIRECTION_PARAM]: mapSortDirection(query),
 	};
 }
