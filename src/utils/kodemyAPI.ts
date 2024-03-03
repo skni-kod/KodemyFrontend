@@ -13,7 +13,7 @@ const kodemyAPI = axios.create(config);
 
 kodemyAPI.interceptors.request.use(
 	(config) => {
-		console.debug('Sending request to:', config.url);
+		console.log('Sending request:', config.method, config.url);
 		return config;
 	},
 	(error) => {

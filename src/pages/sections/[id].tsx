@@ -4,9 +4,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import CategoryBubbleBtns from '@/components/materials/section_page/page_head/CategoryBubbleBtns';
 import { pageInitialState } from '@/utils/constant';
 import MaterialUserBlock from '@/components/materials/section_page/page_content/MaterialUserBlock';
-import { getMaterials } from '@/mocks/materialService';
 import ResultCount from '@/components/materials/section_page/page_content/ResultCount';
-import SortOrderBtn from '@/components/materials/section_page/page_content/SortOrderBtn';
+import SortOrderBtn, {
+	ORDER_MENUS,
+} from '@/components/materials/section_page/page_content/SortOrderBtn';
 import Paginator from '@/components/materials/section_page/page_content/Paginator';
 import { useSidebarContext } from '@/contexts/SidebarStateContext';
 import DetailsDropDown from '@/components/materials/section_page/page_content/material_dropdown/DetailsDropDown';
@@ -19,6 +20,7 @@ import {
 	PAGE_PARAM,
 	SIZE_PARAM,
 	SORT_DIRECTION_PARAM,
+	SORT_PARAM,
 } from '@/utils/filters';
 
 export default function SectionsId() {
@@ -26,7 +28,7 @@ export default function SectionsId() {
 	const router = useRouter();
 	const id = Number(router.query.id);
 	const { menuData } = useSidebarContext();
-	const { filters } = useFiltersContext();
+	const { setFilters } = useFiltersContext();
 	const [materials, setMaterials] = useState<Pageable<Material>>(pageInitialState);
 	const { getMaterials } = useMaterialService();
 
@@ -36,19 +38,26 @@ export default function SectionsId() {
 				router.push('/404');
 				return;
 			}
+			const filtersParams = mapForMaterials(router.query);
+			setFilters(filtersParams);
 			(async () => {
 				try {
+					const sortElement = ORDER_MENUS.find(
+						({ field, order }) =>
+							field === filtersParams[SORT_PARAM] && order === filtersParams[SORT_DIRECTION_PARAM],
+					);
+					const categoryIds: number[] | undefined =
+						filtersParams[CATEGORY_IDS_PARAM] &&
+						(filtersParams[CATEGORY_IDS_PARAM] as string).split(',').map((id) => +id);
 					setMaterials(
 						await getMaterials({
-							size: filters[SIZE_PARAM] ? +filters[SIZE_PARAM] : 20,
-							page: filters[PAGE_PARAM] ? +filters[PAGE_PARAM] : 0,
-							sort: 'createdDate',
-							sortDirection: filters[SORT_DIRECTION_PARAM] ? filters[SORT_DIRECTION_PARAM] : 'DESC',
+							size: filtersParams[SIZE_PARAM] ? +filtersParams[SIZE_PARAM] : 20,
+							page: filtersParams[PAGE_PARAM] ? +filtersParams[PAGE_PARAM] : 0,
+							sort: (sortElement && sortElement.apiKey) || 'createdDate',
+							sortDirection: 'DESC',
 							searchFields: {
 								sectionId: id,
-								categoryIds: filters[CATEGORY_IDS_PARAM]
-									? (filters[CATEGORY_IDS_PARAM] as string).split(',').map((id) => +id)
-									: undefined,
+								categoryIds: categoryIds || undefined,
 							},
 						}),
 					);
@@ -57,10 +66,11 @@ export default function SectionsId() {
 				}
 			})();
 		}
-	}, [id, filters, getMaterials, menuData, router]);
+	}, [id, getMaterials, menuData, router, setFilters]);
 
 	if (isNaN(id) || id <= 0) return null;
 	if (!menuData || !menuData.some((data) => data.id === id)) return null;
+	if (isLoading) return null;
 
 	return (
 		<Page>

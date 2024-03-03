@@ -42,9 +42,7 @@ const FiltersProvider = ({ children }: { children: React.ReactNode }) => {
 
 	const modifyFilters = useCallback((dict: FiltersDict) => setFilters(dict), []);
 
-	const clearFilters = () => {
-		setFilters({});
-	};
+	const clearFilters = useCallback(() => setFilters({}), []);
 
 	return (
 		<FiltersContext.Provider

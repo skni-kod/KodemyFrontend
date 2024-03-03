@@ -1,6 +1,6 @@
 import './main.scss';
 import type { AppProps } from 'next/app';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
@@ -10,7 +10,7 @@ import SidebarStateProvider, { useSidebarContext } from '@/contexts/SidebarState
 import Sidebar from '@/components/layout/Sidebar';
 import clsx from 'clsx';
 import { CookiesProvider } from 'react-cookie';
-import FiltersProvider from '@/contexts/FiltersContext';
+import FiltersProvider, { useFiltersContext } from '@/contexts/FiltersContext';
 
 export const Metadata = {
 	title: 'Kodemy',
@@ -19,6 +19,9 @@ export const Metadata = {
 
 function Content({ children }: { children: React.ReactNode }) {
 	const { isOpen } = useSidebarContext();
+	const { clearFilters } = useFiltersContext();
+
+	useEffect(() => clearFilters(), [clearFilters]);
 
 	return (
 		<div className="flex flex-col w-full h-screen max-h-screen">
