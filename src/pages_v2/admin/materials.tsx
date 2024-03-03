@@ -4,7 +4,7 @@ import AdminMaterialsContent from '@/components/admin/materials/AdminMaterialsCo
 import { page404Route } from '../404';
 import { useRouter } from 'next/router';
 import Container from '@/components/common/Container';
-import MaterialsFiltersProvider from '@/contexts/MaterialsFiltersContext';
+import FiltersProvider from '@/contexts/FiltersContext';
 import { AuthUserRoleType, useAuthStore } from '@/store/authSlice';
 
 const Index = () => {
@@ -22,11 +22,11 @@ const Index = () => {
 			title="Statusy materiałów - Panel administracyjny"
 			description="Widok zarządzania dodanymi materiałami"
 		>
-			<MaterialsFiltersProvider>
+			<FiltersProvider>
 				<Container className="max-w-7xl mx-auto">
 					<AdminMaterialsContent />
 				</Container>
-			</MaterialsFiltersProvider>
+			</FiltersProvider>
 		</Page>
 	);
 };

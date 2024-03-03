@@ -48,7 +48,7 @@ export default function MaterialUserBlock({ data: material, children }: Material
 					<div className="flex-1">
 						<h3 className="text-lg font-semibold text-primary">{material.title}</h3>
 						<div className="pt-1">{material.author.username}</div>
-						<div className="flex items-center pt-1 text-placeholder2bg">
+						<div className="flex items-center pt-1.5 text-placeholder2bg">
 							{material.technologies.map(({ name }, index) => (
 								<React.Fragment key={index}>
 									<span>{name}</span>

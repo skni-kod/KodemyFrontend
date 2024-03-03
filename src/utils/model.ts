@@ -12,6 +12,6 @@ export type SearchFields = {
 	createdDateFrom?: string;
 	createdDateTo?: string;
 	sectionId?: number;
-	categoryId?: number;
+	categoryIds?: number[];
 	technologyIds?: number[];
 };

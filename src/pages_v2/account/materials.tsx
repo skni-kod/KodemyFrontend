@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Page from '@/components_v2/common/Page';
 import { useRouter } from 'next/router';
 import Container from '@/components_v2/common/Container';
-import MaterialsFiltersProvider from '@/contexts/MaterialsFiltersContext';
+import FiltersProvider from '@/contexts/FiltersContext';
 import { useAuthStore } from '@/store/authSlice';
 import UserMaterialsContent from '@/components_v2/account/materials/UserMaterialsContent';
 import Route from '@/utils/route';
@@ -28,11 +28,11 @@ const Index = () => {
 			title="Twoje materiały - Konto użytkownika"
 			description="Widok zarządzania dodanymi materiałami"
 		>
-			<MaterialsFiltersProvider>
+			<FiltersProvider>
 				<Container className="max-w-7xl mx-auto">
 					<UserMaterialsContent />
 				</Container>
-			</MaterialsFiltersProvider>
+			</FiltersProvider>
 		</Page>
 	);
 };

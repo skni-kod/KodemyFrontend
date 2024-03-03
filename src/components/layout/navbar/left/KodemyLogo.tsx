@@ -10,7 +10,7 @@ export default function KodemyLogo() {
 	const btnRef = useRef<HTMLAnchorElement>(null);
 
 	return (
-		<Link href={''} className="block h-full" ref={btnRef}>
+		<Link href="/" className="block h-full" ref={btnRef}>
 			{btnRef.current && (
 				<Image
 					src={image.src}

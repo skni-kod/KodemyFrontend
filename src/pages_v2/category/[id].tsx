@@ -5,7 +5,7 @@ import MaterialsContent from '@/components_v2/category/MaterialsContent';
 import Route from '@/utils/route';
 import { useEffect, useState } from 'react';
 import { page404Route } from '@/pages_v2/404';
-import MaterialsFiltersProvider from '@/contexts/MaterialsFiltersContext';
+import FiltersProvider from '@/contexts/FiltersContext';
 
 export const pageCategoryIdRoute = (id: number): Route => {
 	return {
@@ -28,11 +28,11 @@ const Id = () => {
 
 	return (
 		<Page title="Lista materiałów" description="Spis wszystkich materiałów danej kategorii.">
-			<MaterialsFiltersProvider>
+			<FiltersProvider>
 				<Container className="max-w-7xl mx-auto">
 					{id && <MaterialsContent categoryId={id} />}
 				</Container>
-			</MaterialsFiltersProvider>
+			</FiltersProvider>
 		</Page>
 	);
 };

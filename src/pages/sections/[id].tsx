@@ -1,6 +1,6 @@
 import Page from '@/components/layout/Page';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import CategoryBubbleBtns from '@/components/materials/section_page/page_head/CategoryBubbleBtns';
 import { pageInitialState } from '@/utils/constant';
 import MaterialUserBlock from '@/components/materials/section_page/page_content/MaterialUserBlock';
@@ -10,45 +10,57 @@ import SortOrderBtn from '@/components/materials/section_page/page_content/SortO
 import Paginator from '@/components/materials/section_page/page_content/Paginator';
 import { useSidebarContext } from '@/contexts/SidebarStateContext';
 import DetailsDropDown from '@/components/materials/section_page/page_content/material_dropdown/DetailsDropDown';
-import {Pageable} from "@/utils/model/Pageable";
-import {Material} from "@/hooks/services/useMaterialService";
+import { Pageable } from '@/utils/model/Pageable';
+import useMaterialService, { Material } from '@/hooks/services/useMaterialService';
+import { useFiltersContext } from '@/contexts/FiltersContext';
+import {
+	CATEGORY_IDS_PARAM,
+	mapForMaterials,
+	PAGE_PARAM,
+	SIZE_PARAM,
+	SORT_DIRECTION_PARAM,
+} from '@/utils/filters';
 
 export default function SectionsId() {
+	const [isLoading, setIsLoading] = useState(true);
 	const router = useRouter();
 	const id = Number(router.query.id);
 	const { menuData } = useSidebarContext();
+	const { filters } = useFiltersContext();
+	const [materials, setMaterials] = useState<Pageable<Material>>(pageInitialState);
+	const { getMaterials } = useMaterialService();
 
 	useEffect(() => {
 		if (router.query.id) {
-			if (id || id > 0) return;
-			if (menuData && menuData.find((data) => data.id === id)) return;
-			router.push('/404');
+			if (!id || isNaN(id) || id <= 0 || !menuData || !menuData.some((data) => data.id === id)) {
+				router.push('/404');
+				return;
+			}
+			(async () => {
+				try {
+					setMaterials(
+						await getMaterials({
+							size: filters[SIZE_PARAM] ? +filters[SIZE_PARAM] : 20,
+							page: filters[PAGE_PARAM] ? +filters[PAGE_PARAM] : 0,
+							sort: 'createdDate',
+							sortDirection: filters[SORT_DIRECTION_PARAM] ? filters[SORT_DIRECTION_PARAM] : 'DESC',
+							searchFields: {
+								sectionId: id,
+								categoryIds: filters[CATEGORY_IDS_PARAM]
+									? (filters[CATEGORY_IDS_PARAM] as string).split(',').map((id) => +id)
+									: undefined,
+							},
+						}),
+					);
+				} finally {
+					setIsLoading(false);
+				}
+			})();
 		}
-	}, [id, menuData, router]);
-
-	const [materials, setMaterials] = useState<Pageable<Material>>(pageInitialState);
-	/*const { getMaterials } = useMaterialService();
-
-	useEffect(() => {
-		(async () => {
-			setMaterials(
-				await getMaterials({
-					size: 20,
-					page: 0,
-					sort: 'createdDate',
-					sortDirection: 'DESC',
-					searchFields: {},
-				}),
-			);
-		})();
-	}, [id, getMaterials]);*/
-
-	useEffect(() => {
-		setMaterials(getMaterials);
-	}, []);
+	}, [id, filters, getMaterials, menuData, router]);
 
 	if (isNaN(id) || id <= 0) return null;
-	if (!menuData || !menuData.find((data) => data.id === id)) return null;
+	if (!menuData || !menuData.some((data) => data.id === id)) return null;
 
 	return (
 		<Page>

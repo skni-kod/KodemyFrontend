@@ -1,5 +1,5 @@
 import { materialStatusPolishVerbs, statusDict } from '@/components/common/modal/common/Status';
-import { defaultPageSizes, MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
+import { defaultPageSizes, FiltersContext } from '@/contexts/FiltersContext';
 import Select from '@/components/common/page/atoms/Select';
 import PhraseInput from '@/components/common/page/atoms/PhraseInput';
 import { sortMenuValues } from '@/components/common/filter/SortMenuButton';
@@ -13,7 +13,7 @@ const sortValues = sortMenuValues.map(
 );
 
 const FiltersMenu = () => {
-	const filtersContext = useContext(MaterialsFiltersContext);
+	const filtersContext = useContext(FiltersContext);
 	const materialStatuses = materialStatusPolishVerbs();
 
 	const handlePhrase = (phrase: string | undefined) => {

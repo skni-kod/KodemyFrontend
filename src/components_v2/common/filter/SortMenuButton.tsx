@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { MaterialsFiltersContext } from '@/contexts/MaterialsFiltersContext';
+import { FiltersContext } from '@/contexts/FiltersContext';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
 import { capitalizeString } from '@/utils/constant';
 import { SortDirection } from '@/utils/model';
@@ -24,7 +24,7 @@ export const sortMenuValues: SortFilter[] = [
 ];
 
 const SortMenuButton = () => {
-	const { addFilters } = useContext(MaterialsFiltersContext);
+	const { addFilters } = useContext(FiltersContext);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const handleToggleMenu = () => setIsMenuOpen((isMenuOpen) => !isMenuOpen);
 

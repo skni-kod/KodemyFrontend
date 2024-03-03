@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react';
-import { Material } from '@/hooks/services/useMaterialService';
+import useMaterialService, { Material } from '@/hooks/services/useMaterialService';
 import { getMaterials } from '@/mocks/materialService';
 import Link from 'next/link';
 import { FaAngleRight } from 'react-icons/fa6';
 
 export default function DetailsModePreview({ id }: { id: number }) {
+	const [isLoading, setIsLoading] = useState(true);
 	const [materialPreview, setMaterialPreview] = useState<Material | null>(null);
 
-	/*const { getMaterialById } = useMaterialService();
-
-  useEffect(() => {
-    (async () => {
-      setMaterialPreview(await getMaterialById(id));
-    })();
-  }, [getMaterialById, id]);*/
+	const { getMaterialById } = useMaterialService();
 
 	useEffect(() => {
-		if (!materialPreview) {
-			setMaterialPreview(getMaterials().content[id]);
-		}
-	}, [id, materialPreview]);
+		(async () => {
+			try {
+				setMaterialPreview(await getMaterialById(id));
+			} finally {
+				setIsLoading(false);
+			}
+		})();
+	}, [id, getMaterialById]);
 
 	if (!materialPreview) return null;
+	if (isLoading) return null;
 
 	return (
 		<div className="p-7">
