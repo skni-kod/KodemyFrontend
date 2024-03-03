@@ -3,7 +3,15 @@ export enum SortDirection {
 	ASC,
 }
 
-export type SearchFields = {
+export type SearchParams<T> = {
+	size: number;
+	page: number;
+	sort: string;
+	sortDirection: 'ASC' | 'DESC';
+	searchFields?: T;
+};
+
+export type MaterialSearchFields = {
 	phrase?: string;
 	id?: number;
 	title?: string;
@@ -14,4 +22,10 @@ export type SearchFields = {
 	sectionId?: number;
 	categoryIds?: number[];
 	technologyIds?: number[];
+};
+
+export type UserSearchFields = {
+	username?: string;
+	email?: string;
+	role?: string;
 };

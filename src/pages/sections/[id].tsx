@@ -6,7 +6,7 @@ import { pageInitialState } from '@/utils/constant';
 import MaterialUserBlock from '@/components/materials/section_page/page_content/MaterialUserBlock';
 import ResultCount from '@/components/materials/section_page/page_content/ResultCount';
 import SortOrderBtn, {
-	ORDER_MENUS,
+	MAT_ORDER_OPTIONS,
 } from '@/components/materials/section_page/page_content/SortOrderBtn';
 import Paginator from '@/components/materials/section_page/page_content/Paginator';
 import { useSidebarContext } from '@/contexts/SidebarStateContext';
@@ -42,7 +42,7 @@ export default function SectionsId() {
 			setFilters(filtersParams);
 			(async () => {
 				try {
-					const sortElement = ORDER_MENUS.find(
+					const sortElement = MAT_ORDER_OPTIONS.find(
 						({ field, order }) =>
 							field === filtersParams[SORT_PARAM] && order === filtersParams[SORT_DIRECTION_PARAM],
 					);

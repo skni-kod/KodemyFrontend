@@ -1,5 +1,5 @@
 import { Category, Section } from '@/hooks/services/useSectionService';
-import { SearchFields } from '@/utils/model';
+import { MaterialSearchFields } from '@/utils/model';
 import { Pageable } from '@/utils/model/Pageable';
 
 export const sortSectionCategory = (section: Section[]) => {
@@ -19,10 +19,6 @@ export const extractRRRRMMDD = (date: string) => {
 
 export const capitalizeString = (str: string) =>
 	str?.charAt(0).toUpperCase() + str?.slice(1).toLowerCase();
-
-export const mapSearchFieldsParam = (searchFields: SearchFields | undefined) => {
-	return searchFields ? `&search_fields=${encodeURIComponent(JSON.stringify(searchFields))}` : '';
-};
 
 export const pageInitialState: Pageable<any> = {
 	content: [],
