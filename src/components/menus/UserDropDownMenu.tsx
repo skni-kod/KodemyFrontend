@@ -30,7 +30,7 @@ export default function UserDropDownMenu({ onLinkClick }: { onLinkClick: () => v
 
 	return (
 		<div
-			className="absolute top-full right-0 w-64 min-h-32 mt-0.5 mr-1 p-2 bg-bg text-text2bg shadow-md"
+			className="absolute top-full right-0 w-68 min-h-32 mt-0.5 mr-1 p-2 bg-bg text-text2bg shadow-md"
 			ref={ref}
 		>
 			<div className="flex items-center gap-2 px-2 pt-2 pb-4">

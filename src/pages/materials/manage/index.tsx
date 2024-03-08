@@ -1,28 +1,28 @@
 import Page from '@/components/layout/Page';
 import SectionBubbleBtns from '@/components/admin/materials_page/page_head/SectionBubbleBtns';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useMaterialService, { Material } from '@/hooks/services/useMaterialService';
 import { pageInitialState } from '@/utils/constant';
 import { getMaterials } from '@/mocks/materialService';
 import Paginator from '@/components/materials/section_page/page_content/Paginator';
 import DetailsDropDown from '@/components/admin/materials_page/page_content/material_dropdown/DetailsDropDown';
 import SortOrderBtn, {
-	ORDER_MENUS,
+	MAT_ORDER_OPTIONS,
 } from '@/components/materials/section_page/page_content/SortOrderBtn';
 import ResultCount from '@/components/materials/section_page/page_content/ResultCount';
 import MaterialUserBlock from '@/components/materials/section_page/page_content/MaterialUserBlock';
 import { Pageable } from '@/utils/model/Pageable';
 import { useRouter } from 'next/router';
-import { useSidebarContext } from '@/contexts/SidebarStateContext';
 import { useFiltersContext } from '@/contexts/FiltersContext';
 import {
 	CATEGORY_IDS_PARAM,
 	mapForMaterials,
-	PAGE_PARAM,
+	PAGE_PARAM, PHRASE_PARAM,
 	SIZE_PARAM,
 	SORT_DIRECTION_PARAM,
 	SORT_PARAM,
 } from '@/utils/filters';
+import AdminFilterForm from '@/components/admin/materials_page/page_head/AdminFilterForm';
 
 export default function MaterialsManage() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +36,7 @@ export default function MaterialsManage() {
 		setFilters(filtersParams);
 		(async () => {
 			try {
-				const sortElement = ORDER_MENUS.find(
+				const sortElement = MAT_ORDER_OPTIONS.find(
 					({ field, order }) =>
 						field === filtersParams[SORT_PARAM] && order === filtersParams[SORT_DIRECTION_PARAM],
 				);
@@ -47,9 +47,11 @@ export default function MaterialsManage() {
 					await getMaterials({
 						size: filtersParams[SIZE_PARAM] ? +filtersParams[SIZE_PARAM] : 20,
 						page: filtersParams[PAGE_PARAM] ? +filtersParams[PAGE_PARAM] : 0,
-						sort: (sortElement && sortElement.apiKey) || 'createdDate',
+						sort: (sortElement && sortElement.apiField) || 'createdDate',
 						sortDirection: 'DESC',
-						searchFields: {},
+						searchFields: {
+							phrase: filtersParams[PHRASE_PARAM] || undefined,
+						},
 					}),
 				);
 			} finally {
@@ -66,6 +68,10 @@ export default function MaterialsManage() {
 				<h2 className="w-full text-4xl text-semibold">Materiały użytkowników</h2>
 				<div className="w-full pt-5 px-4">
 					<SectionBubbleBtns />
+				</div>
+				<div className="w-full pt-6 px-4">
+					<h3 className="w-full text-2xl pb-5">Czego szukasz?</h3>
+					<AdminFilterForm />
 				</div>
 				<div className="py-2">
 					<div className="flex justify-between items-center w-full px-4 pt-5">

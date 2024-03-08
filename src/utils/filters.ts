@@ -1,11 +1,15 @@
 import { ParsedUrlQuery } from 'querystring';
 import { FiltersDict } from '@/contexts/FiltersContext';
+import phraseInput from '@/components_v2/common/page/atoms/PhraseInput';
 
 export const SIZE_PARAM = 'size';
 export const PAGE_PARAM = 'page';
 export const SORT_PARAM = 'sort';
 export const SORT_DIRECTION_PARAM = 'sort_dir';
 export const CATEGORY_IDS_PARAM = 'category';
+export const PHRASE_PARAM = 'phrase';
+export const GRADES_PARAM = 'grades';
+export const TECHNOLOGIES_PARAM = 'technologies';
 
 const DEFAULT_PAGE_SIZES = [10, 20, 40];
 
@@ -43,6 +47,8 @@ function mapBasic(query: ParsedUrlQuery) {
 export function mapForMaterials(query: ParsedUrlQuery): FiltersDict {
 	const filters: FiltersDict = mapBasic(query);
 	if (query[CATEGORY_IDS_PARAM]) filters[CATEGORY_IDS_PARAM] = query[CATEGORY_IDS_PARAM];
+	if (query[PHRASE_PARAM]) filters[PHRASE_PARAM] = query[PHRASE_PARAM];
+	if (query[GRADES_PARAM]) filters[GRADES_PARAM] = query[GRADES_PARAM];
 	return filters;
 }
 

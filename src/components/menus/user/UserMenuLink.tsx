@@ -14,7 +14,7 @@ export default function UserMenuLink({ href, ico, label, onClick, passHref }: Us
 	return (
 		<Link
 			href={href}
-			className="flex items-center gap-2 px-1 py-1 hover:bg-overlay2bg cursor-pointer"
+			className="flex items-center gap-2 px-1 py-1 hover:bg-overlay2bg tracking-wide cursor-pointer"
 			onClick={onClick}
 			passHref={passHref}
 		>

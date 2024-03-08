@@ -8,7 +8,7 @@ import { SORT_DIRECTION_PARAM, SORT_PARAM } from '@/utils/filters';
 import { OrderSortOption } from '@/components/materials/section_page/page_content/SortOrderBtn';
 
 export const USER_ORDER_OPTIONS: OrderSortOption[] = [
-	{ label: 'Najnowszy', field: 'date', order: 'desc', apiKey: 'createdDate' },
+	{ label: 'Najnowszy', field: 'date', order: 'desc', apiField: 'createdDate' },
 ];
 
 export default function UserSortOrderBtn() {
