@@ -35,6 +35,7 @@ export default function CategoryBubbleBtns({ id }: { id: number }) {
 		});
 		router.push(router.pathname + `?${newParams}`);
 	};
+
 	if (!id || !menuData || !menuData[id]) return null;
 
 	return (
