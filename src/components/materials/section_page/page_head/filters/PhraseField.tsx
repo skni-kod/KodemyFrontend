@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import updateSearchParams from '@/utils/createQueryParams';
 import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
-import { GRADES_PARAM, PHRASE_PARAM } from '@/utils/filters';
+import { PHRASE_PARAM } from '@/utils/filters';
 import { useFiltersContext } from '@/contexts/FiltersContext';
 
 export default function PhraseField({ className }: { className: string }) {

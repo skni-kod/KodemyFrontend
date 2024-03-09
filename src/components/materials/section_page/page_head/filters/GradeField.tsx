@@ -1,9 +1,9 @@
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa6';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
 import updateSearchParams from '@/utils/createQueryParams';
-import { CATEGORY_IDS_PARAM, GRADES_PARAM, PHRASE_PARAM } from '@/utils/filters';
+import { GRADES_PARAM } from '@/utils/filters';
 import { useFiltersContext } from '@/contexts/FiltersContext';
 
 export const GRADES_OPTIONS: { label: string; value?: number }[] = [

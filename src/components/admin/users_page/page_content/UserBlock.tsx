@@ -1,12 +1,6 @@
-import { Rating } from 'react-simple-star-rating';
 import Image from 'next/image';
-import DocumentsImage from '@/assets/material/documents.png';
 import React, { useState } from 'react';
-import { Material } from '@/hooks/services/useMaterialService';
-import { LuDot } from 'react-icons/lu';
 import { User } from '@/hooks/services/useUserService';
-import { FaCircle } from 'react-icons/fa6';
-import clsx from 'clsx';
 import IsActiveStatus from '@/components/admin/users_page/page_content/IsActiveStatus';
 
 type UserBlockProps = {

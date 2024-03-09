@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { User } from '@/hooks/services/useUserService';
 import { getUsers } from '@/mocks/authService';
 import UserMeBlock from '@/components/me/me_page/page_content/UserMeBlock';
-import DetailsDropDown from "@/components/me/me_page/page_content/user_dropdown/DetailsDropDown";
+import DetailsDropDown from '@/components/me/me_page/page_content/user_dropdown/DetailsDropDown';
 
 export default function UsersMe() {
 	const [user, setUser] = useState<User | null>(null);

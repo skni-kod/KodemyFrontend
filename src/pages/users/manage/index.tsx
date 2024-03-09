@@ -5,23 +5,17 @@ import Paginator from '@/components/materials/section_page/page_content/Paginato
 import ResultCount from '@/components/materials/section_page/page_content/ResultCount';
 import { Pageable } from '@/utils/model/Pageable';
 import useUserService, { User } from '@/hooks/services/useUserService';
-import { getUsers } from '@/mocks/authService';
 import UserBlock from '@/components/admin/users_page/page_content/UserBlock';
 import DetailsDropDown from '@/components/admin/users_page/page_content/user_dropdown/DetailsDropDown';
 import { useRouter } from 'next/router';
-import { useSidebarContext } from '@/contexts/SidebarStateContext';
 import { useFiltersContext } from '@/contexts/FiltersContext';
-import useMaterialService, { Material } from '@/hooks/services/useMaterialService';
 import {
-	CATEGORY_IDS_PARAM,
-	mapForMaterials,
 	mapForUsers,
 	PAGE_PARAM,
 	SIZE_PARAM,
 	SORT_DIRECTION_PARAM,
 	SORT_PARAM,
 } from '@/utils/filters';
-import SortOrderBtn, { MAT_ORDER_OPTIONS } from '@/components/materials/section_page/page_content/SortOrderBtn';
 import UserSortOrderBtn, {
 	USER_ORDER_OPTIONS,
 } from '@/components/admin/users_page/page_content/UserSortOrderBtn';

@@ -3,7 +3,6 @@ import SectionBubbleBtns from '@/components/admin/materials_page/page_head/Secti
 import React, { useEffect, useState } from 'react';
 import useMaterialService, { Material } from '@/hooks/services/useMaterialService';
 import { pageInitialState } from '@/utils/constant';
-import { getMaterials } from '@/mocks/materialService';
 import Paginator from '@/components/materials/section_page/page_content/Paginator';
 import DetailsDropDown from '@/components/admin/materials_page/page_content/material_dropdown/DetailsDropDown';
 import SortOrderBtn, {
@@ -17,7 +16,8 @@ import { useFiltersContext } from '@/contexts/FiltersContext';
 import {
 	CATEGORY_IDS_PARAM,
 	mapForMaterials,
-	PAGE_PARAM, PHRASE_PARAM,
+	PAGE_PARAM,
+	PHRASE_PARAM,
 	SIZE_PARAM,
 	SORT_DIRECTION_PARAM,
 	SORT_PARAM,

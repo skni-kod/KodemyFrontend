@@ -1,8 +1,6 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React from 'react';
 import { User } from '@/hooks/services/useUserService';
-import { FaCircle } from 'react-icons/fa6';
-import clsx from 'clsx';
 
 type UserBlockProps = {
 	data: User;

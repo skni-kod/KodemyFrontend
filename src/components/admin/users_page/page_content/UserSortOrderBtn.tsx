@@ -4,7 +4,7 @@ import { useFiltersContext } from '@/contexts/FiltersContext';
 import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
 import updateSearchParams from '@/utils/createQueryParams';
-import { SORT_DIRECTION_PARAM, SORT_PARAM } from '@/utils/filters';
+import { SORT_PARAM } from '@/utils/filters';
 import { OrderSortOption } from '@/components/materials/section_page/page_content/SortOrderBtn';
 
 export const USER_ORDER_OPTIONS: OrderSortOption[] = [

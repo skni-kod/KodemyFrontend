@@ -1,5 +1,4 @@
 import { Category, Section } from '@/hooks/services/useSectionService';
-import { MaterialSearchFields } from '@/utils/model';
 import { Pageable } from '@/utils/model/Pageable';
 
 export const sortSectionCategory = (section: Section[]) => {

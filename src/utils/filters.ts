@@ -1,6 +1,5 @@
 import { ParsedUrlQuery } from 'querystring';
 import { FiltersDict } from '@/contexts/FiltersContext';
-import phraseInput from '@/components_v2/common/page/atoms/PhraseInput';
 
 export const SIZE_PARAM = 'size';
 export const PAGE_PARAM = 'page';

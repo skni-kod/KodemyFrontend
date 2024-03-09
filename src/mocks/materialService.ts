@@ -1,5 +1,5 @@
-import {Pageable} from "@/utils/model/Pageable";
-import {Material} from "@/hooks/services/useMaterialService";
+import { Pageable } from '@/utils/model/Pageable';
+import { Material } from '@/hooks/services/useMaterialService';
 
 export function getMaterials(): Pageable<Material> {
 	return {

@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import useMaterialService, { Material } from '@/hooks/services/useMaterialService';
-import { getMaterials } from '@/mocks/materialService';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import DetailsModePreview from '@/components/materials/section_page/page_content/material_dropdown/mode/DetailsModePreview';
 import DetailsModeGrades from '@/components/materials/section_page/page_content/material_dropdown/mode/DetailsModeGrades';

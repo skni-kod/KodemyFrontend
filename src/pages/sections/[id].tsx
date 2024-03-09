@@ -1,6 +1,6 @@
 import Page from '@/components/layout/Page';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CategoryBubbleBtns from '@/components/materials/section_page/page_head/CategoryBubbleBtns';
 import { pageInitialState } from '@/utils/constant';
 import MaterialUserBlock from '@/components/materials/section_page/page_content/MaterialUserBlock';
