@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import kodemyAPI from '@/utils/kodemyAPI';
-import { UserSearchFields, SearchParams } from '@/utils/model';
+import { SearchParams, UserSearchFields } from '@/utils/model';
 import mapSearchParams from '@/utils/mapSearchParams';
 
 const useUserService = () => {

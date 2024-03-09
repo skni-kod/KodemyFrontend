@@ -24,9 +24,14 @@ export default function CategoryBubbleBtns({ id }: { id: number }) {
 	}, [filters]);
 
 	const handleSelect = (id: number) => {
-		if (selectedCategories && selectedCategories.includes(id)) return;
 		const newParams = updateSearchParams(searchParams.toString(), {
-			[CATEGORY_IDS_PARAM]: (selectedCategories ? [...selectedCategories, id] : [id]).toString(),
+			[CATEGORY_IDS_PARAM]: (() => {
+				if (selectedCategories && selectedCategories.includes(id)) {
+					return selectedCategories.filter((value) => value != id);
+				} else {
+					return selectedCategories ? [...selectedCategories, id] : [id];
+				}
+			})().toString(),
 		});
 		router.push(router.pathname + `?${newParams}`);
 	};

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import useMaterialService, { Material } from '@/hooks/services/useMaterialService';
-import { getMaterials } from '@/mocks/materialService';
 import Link from 'next/link';
 import { FaAngleRight } from 'react-icons/fa6';
 

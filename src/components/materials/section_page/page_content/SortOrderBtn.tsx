@@ -4,21 +4,22 @@ import { useFiltersContext } from '@/contexts/FiltersContext';
 import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
 import updateSearchParams from '@/utils/createQueryParams';
-import { SORT_DIRECTION_PARAM, SORT_PARAM } from '@/utils/filters';
+import { SORT_PARAM } from '@/utils/filters';
+import clsx from 'clsx';
 
 export type OrderSortOption = {
 	label: string;
 	field: string;
 	order: 'asc' | 'desc';
-	apiKey: string;
+	apiField: string;
 };
 
 export const MAT_ORDER_OPTIONS: OrderSortOption[] = [
-	{ label: 'Najnowsze', field: 'date', order: 'desc', apiKey: 'createdDate' },
-	{ label: 'Najwyżej oceniane', field: 'grade', order: 'desc', apiKey: 'avgGrade' },
+	{ label: 'Najnowsze', field: 'date', order: 'desc', apiField: 'createdDate' },
+	{ label: 'Najwyżej oceniane', field: 'grade', order: 'desc', apiField: 'avgGrade' },
 ];
 
-export default function SortOrderBtn() {
+export default function SortOrderBtn({ className = '' }: { className?: string }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedOrder, setSelectedOrder] = useState<number | undefined>(0);
 	const { filters } = useFiltersContext();
@@ -37,12 +38,12 @@ export default function SortOrderBtn() {
 		const newParams = updateSearchParams(searchParams.toString(), {
 			[SORT_PARAM]: order.field,
 		});
-		router.push(router.pathname + `?${newParams}`);
 		setIsOpen(false);
+		router.push(router.pathname + `?${newParams}`);
 	};
 
 	return (
-		<div className="relative text-primary">
+		<div className={clsx('relative text-primary', className)}>
 			<button className="flex items-center px-2 py-1 font-semibold" onClick={handleToogle}>
 				<span>Sortuj:&nbsp;</span>
 				<span>{MAT_ORDER_OPTIONS[selectedOrder || 0].label}</span>

@@ -1,6 +1,6 @@
 import Page from '@/components/layout/Page';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CategoryBubbleBtns from '@/components/materials/section_page/page_head/CategoryBubbleBtns';
 import { pageInitialState } from '@/utils/constant';
 import MaterialUserBlock from '@/components/materials/section_page/page_content/MaterialUserBlock';
@@ -18,10 +18,12 @@ import {
 	CATEGORY_IDS_PARAM,
 	mapForMaterials,
 	PAGE_PARAM,
+	PHRASE_PARAM,
 	SIZE_PARAM,
 	SORT_DIRECTION_PARAM,
 	SORT_PARAM,
 } from '@/utils/filters';
+import FilterForm from '@/components/materials/section_page/page_head/FilterForm';
 
 export default function SectionsId() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -53,11 +55,12 @@ export default function SectionsId() {
 						await getMaterials({
 							size: filtersParams[SIZE_PARAM] ? +filtersParams[SIZE_PARAM] : 20,
 							page: filtersParams[PAGE_PARAM] ? +filtersParams[PAGE_PARAM] : 0,
-							sort: (sortElement && sortElement.apiKey) || 'createdDate',
+							sort: (sortElement && sortElement.apiField) || 'createdDate',
 							sortDirection: 'DESC',
 							searchFields: {
 								sectionId: id,
 								categoryIds: categoryIds || undefined,
+								phrase: filtersParams[PHRASE_PARAM] || undefined,
 							},
 						}),
 					);
@@ -80,6 +83,10 @@ export default function SectionsId() {
 				</h2>
 				<div className="w-full pt-5 px-4">
 					<CategoryBubbleBtns id={id} />
+				</div>
+				<div className="w-full pt-6 px-4">
+					<h3 className="w-full text-2xl pb-5">Czego szukasz?</h3>
+					<FilterForm />
 				</div>
 				<div className="py-2">
 					<div className="flex justify-between items-center w-full px-4 pt-5">

@@ -3,7 +3,6 @@ import { useCallback, useEffect } from 'react';
 import useSectionService from '@/hooks/services/useSectionService';
 import { useThemeStore } from '@/store/themeSlice';
 import getIconAsset from '@/components/layout/sidebar/helper/SidebarAssets';
-import { AiOutlineRight } from 'react-icons/ai';
 import Image from 'next/image';
 import Link from 'next/link';
 

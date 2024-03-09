@@ -1,4 +1,3 @@
-import { GiHamburgerMenu } from 'react-icons/gi';
 import KodemyLogo from '@/components/layout/navbar/left/KodemyLogo';
 import HamburgerMenuIcoBtn from '@/components/layout/navbar/left/HamburgerMenuIcoBtn';
 
