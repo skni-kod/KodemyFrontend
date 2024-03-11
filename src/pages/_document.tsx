@@ -12,7 +12,6 @@ export default function Document() {
 				/>
 			</Head>
 			<Main />
-			<div id="mroot" />
 			<NextScript />
 		</Html>
 	);

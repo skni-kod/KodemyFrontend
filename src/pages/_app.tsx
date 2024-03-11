@@ -24,21 +24,24 @@ function Content({ children }: { children: React.ReactNode }) {
 	useEffect(() => clearFilters(), [clearFilters]);
 
 	return (
-		<div className="grid grid-cols-1 grid-rows-[3.75rem_1fr] gap-2 w-full h-screen max-h-screen">
-			<Navbar className="h-[3.75rem] w-full relative" />
-			<main className="row-start-2 w-full h-full">
-				{
-					<Sidebar
-						className={`fixed top-0 h-full pt-[4rem] bg-bg text-text2bg shadow-md ${
-							isOpen ? 'w-64' : 'w-[3.75rem]'
-						}`}
-					/>
-				}
-				<div className={`w-full min-h-full ${isOpen ? 'pl-64' : 'pl-[3.75rem]'}`}>
-					<div className="w-full max-w-lg p-4 m-auto">{children}</div>
-				</div>
-			</main>
-		</div>
+		<>
+			<div className="grid grid-cols-1 grid-rows-[3.75rem_1fr] gap-2 w-full h-screen max-h-screen">
+				<Navbar className="h-[3.75rem] w-full relative" />
+				<main className="row-start-2 w-full h-full">
+					{
+						<Sidebar
+							className={`fixed top-0 h-full pt-[4rem] bg-bg text-text2bg shadow-md ${
+								isOpen ? 'w-64' : 'w-[3.75rem]'
+							}`}
+						/>
+					}
+					<div className={`w-full min-h-full ${isOpen ? 'pl-64' : 'pl-[3.75rem]'}`}>
+						<div className="w-full max-w-lg p-4 m-auto">{children}</div>
+					</div>
+				</main>
+			</div>
+			<div id="m-root" />
+		</>
 	);
 }
 

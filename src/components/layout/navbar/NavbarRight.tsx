@@ -5,7 +5,7 @@ import SearchIcoBtn from '@/components/layout/navbar/right/SearchIcoBtn';
 import { useState } from 'react';
 import UserDropDownMenu from '@/components/menus/UserDropDownMenu';
 import { useAuthStore } from '@/store/authSlice';
-import Button from '@/components/basics/Button';
+import Button from '@/components/utils/Button';
 import { useRouter } from 'next/router';
 
 export default function NavbarRight() {
@@ -19,12 +19,12 @@ export default function NavbarRight() {
 				<SearchIcoBtn onClick={() => {}} />
 				{user ? (
 					<>
-						<AddMaterialIcoBtn onClick={() => {}} />
+						<AddMaterialIcoBtn />
 						<NotificationIcoBtn onClick={() => {}} />
 						<UserAvatarBtn onClick={() => setIsDropDownMenuOpen(() => !isDropDownMenuOpen)} />
 					</>
 				) : (
-					<Button value="Zaloguj się" onClick={() => push('/auth')} />
+					<Button onClick={() => push('/auth')}>Zaloguj się</Button>
 				)}
 			</div>
 			{isDropDownMenuOpen && <UserDropDownMenu onLinkClick={() => setIsDropDownMenuOpen(false)} />}

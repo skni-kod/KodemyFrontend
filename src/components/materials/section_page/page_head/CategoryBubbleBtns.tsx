@@ -8,7 +8,7 @@ import { CATEGORY_IDS_PARAM } from '@/utils/filters';
 import updateSearchParams from '@/utils/createQueryParams';
 
 export default function CategoryBubbleBtns({ id }: { id: number }) {
-	const { menuData } = useSidebarContext();
+	const { sections } = useSidebarContext();
 	const [selectedCategories, setSelectedCategories] = useState<number[] | null>(null);
 
 	const router = useRouter();
@@ -36,11 +36,11 @@ export default function CategoryBubbleBtns({ id }: { id: number }) {
 		router.push(router.pathname + `?${newParams}`);
 	};
 
-	if (!id || !menuData || !menuData[id]) return null;
+	if (!id || !sections || !sections[id]) return null;
 
 	return (
 		<div className="flex items-center flex-wrap w-full gap-4 text-xl text-semibold text-center">
-			{menuData[id].categories.map(({ id, name }) => (
+			{sections[id].categories.map(({ id, name }) => (
 				<CategoryBubbleBtn
 					key={id}
 					name={name}
