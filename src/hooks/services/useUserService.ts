@@ -14,7 +14,7 @@ const useUserService = () => {
 
 	const getUserById = useCallback(async (id: number) => {
 		try {
-			const response = await kodemyAPI.get(`/api/materials/${id}`);
+			const response = await kodemyAPI.get<User>(`/api/materials/${id}`);
 			return response.data;
 		} catch (e) {}
 	}, []);

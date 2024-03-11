@@ -50,7 +50,7 @@ export default function UserDropDownMenu({ onLinkClick }: { onLinkClick: () => v
 				</UserMenuGroup>
 				<UserMenuGroup label="ZAWARTOŚĆ">
 					<UserMenuLink
-						href={''}
+						href={`/materials/users/${user.id}`}
 						ico={IoDocumentOutline}
 						label={'Twoje materiały'}
 						onClick={onLinkClick}
