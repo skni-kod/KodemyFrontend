@@ -1,19 +1,31 @@
 import Image from 'next/image';
 import AvatarImage from '@/assets/avatar.png';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function UserAvatarBtn({ onClick = () => {} }: { onClick?: () => void }) {
-	const divRef = useRef<HTMLDivElement>(null);
+	const [containerHeight, setContainerHeight] = useState<number | null>(null);
+
+	useEffect(() => {
+		const updateContainerHeight = () => {
+			const height = document.getElementById('avatar-container')?.clientHeight || null;
+			setContainerHeight(height);
+		};
+		updateContainerHeight();
+		window.addEventListener('resize', updateContainerHeight);
+		return () => {
+			window.removeEventListener('resize', updateContainerHeight);
+		};
+	}, []);
 
 	return (
-		<div className="h-full" ref={divRef}>
-			{divRef.current && (
+		<div id="avatar-container" className="h-full">
+			{containerHeight && (
 				<Image
-					src={/*user ? user.photo :*/ AvatarImage.src}
+					src={AvatarImage}
 					alt="Avatar użytkownika"
-					className="rounded-full cursor-pointer"
-					width={(divRef.current.clientHeight * AvatarImage.width) / AvatarImage.height}
-					height={divRef.current.clientHeight}
+					className="w-full h-full rounded-full cursor-pointer"
+					width={(containerHeight * AvatarImage.width) / AvatarImage.height}
+					height={containerHeight}
 					onClick={onClick}
 					priority={true}
 				/>

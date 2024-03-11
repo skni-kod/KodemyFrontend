@@ -1,8 +1,15 @@
 import Page from '@/components/layout/Page';
 import KodemyLogo from '@/components/layout/navbar/left/KodemyLogo';
 import AuthProvidersBtns from '@/components/auth/AuthProvidersBtns';
+import { useAuthStore } from '@/store/authSlice';
+import { useRouter } from 'next/router';
 
 export default function Auth() {
+	const { user } = useAuthStore();
+	const router = useRouter();
+
+	if (user) router.push('/');
+
 	return (
 		<Page>
 			<div className="w-full max-w-2xs mx-auto">

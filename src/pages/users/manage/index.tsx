@@ -2,7 +2,7 @@ import Page from '@/components/layout/Page';
 import React, { useEffect, useState } from 'react';
 import { pageInitialState } from '@/utils/constant';
 import Paginator from '@/components/materials/section_page/page_content/Paginator';
-import ResultCount from '@/components/materials/section_page/page_content/ResultCount';
+import ResultCount from '@/components/materials/section_page/page_content/sort_and_result/ResultCount';
 import { Pageable } from '@/utils/model/Pageable';
 import useUserService, { User } from '@/hooks/services/useUserService';
 import UserBlock from '@/components/admin/users_page/page_content/UserBlock';

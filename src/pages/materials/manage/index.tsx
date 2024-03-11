@@ -4,11 +4,11 @@ import React, { useEffect, useState } from 'react';
 import useMaterialService, { Material } from '@/hooks/services/useMaterialService';
 import { pageInitialState } from '@/utils/constant';
 import Paginator from '@/components/materials/section_page/page_content/Paginator';
-import DetailsDropDown from '@/components/admin/materials_page/page_content/material_dropdown/DetailsDropDown';
+import ManageDetailsDropDown from '@/components/admin/materials_page/page_content/material_dropdown/ManageDetailsDropDown';
 import SortOrderBtn, {
 	MAT_ORDER_OPTIONS,
-} from '@/components/materials/section_page/page_content/SortOrderBtn';
-import ResultCount from '@/components/materials/section_page/page_content/ResultCount';
+} from '@/components/materials/section_page/page_content/sort_and_result/SortOrderBtn';
+import ResultCount from '@/components/materials/section_page/page_content/sort_and_result/ResultCount';
 import MaterialUserBlock from '@/components/materials/section_page/page_content/MaterialUserBlock';
 import { Pageable } from '@/utils/model/Pageable';
 import { useRouter } from 'next/router';
@@ -22,7 +22,13 @@ import {
 	SORT_DIRECTION_PARAM,
 	SORT_PARAM,
 } from '@/utils/filters';
-import AdminFilterForm from '@/components/admin/materials_page/page_head/AdminFilterForm';
+import ManageFiltersForm from '@/components/admin/materials_page/page_head/ManageFiltersForm';
+import FiltersBlock from '@/components/materials/section_page/page_head/FiltersBlock';
+import PaginationBlock from '@/components/materials/section_page/page_content/PaginationBlock';
+import SortAndResultBlock from '@/components/materials/section_page/page_content/SortAndResultBlock';
+import PageHeader from '@/components/materials/section_page/page_content/PageHeader';
+import MaterialListBlock from '@/components/materials/section_page/page_content/MaterialListBlock';
+import BubbleBtnsBlock from '@/components/materials/section_page/page_content/BubbleBtnsBlock';
 
 export default function MaterialsManage() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -65,29 +71,23 @@ export default function MaterialsManage() {
 	return (
 		<Page>
 			<div>
-				<h2 className="w-full text-4xl text-semibold">Materiały użytkowników</h2>
-				<div className="w-full pt-5 px-4">
+				<PageHeader title="Materiały użytkowników" />
+				<BubbleBtnsBlock>
 					<SectionBubbleBtns />
-				</div>
-				<div className="w-full pt-6 px-4">
-					<h3 className="w-full text-2xl pb-5">Czego szukasz?</h3>
-					<AdminFilterForm />
-				</div>
+				</BubbleBtnsBlock>
+				<FiltersBlock>
+					<ManageFiltersForm />
+				</FiltersBlock>
 				<div className="py-2">
-					<div className="flex justify-between items-center w-full px-4 pt-5">
-						<SortOrderBtn />
-						<ResultCount value={materials.content.length} />
-					</div>
-					<div className="flex flex-col gap-6 w-full pt-5">
-						{materials.content.map((material, index) => (
-							<MaterialUserBlock key={index} data={material}>
-								<DetailsDropDown id={material.id} />
-							</MaterialUserBlock>
-						))}
-					</div>
-					<div className="flex justify-center w-full pt-6">
-						<Paginator page={materials.pageable.pageNumber} total={materials.totalPages} />
-					</div>
+					<SortAndResultBlock resultCount={materials.content.length} />
+					<MaterialListBlock
+						materials={materials.content}
+						DetailsDropDownComponent={ManageDetailsDropDown}
+					/>
+					<PaginationBlock
+						pageNumber={materials.pageable.pageNumber}
+						totalPages={materials.totalPages}
+					/>
 				</div>
 			</div>
 		</Page>

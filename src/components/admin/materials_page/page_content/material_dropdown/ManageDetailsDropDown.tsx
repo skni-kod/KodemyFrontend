@@ -17,7 +17,7 @@ const menu: { name: string; mode: DetailsMode; clickable: boolean }[] = [
 	{ name: 'Historia', mode: DetailsMode.HISTORY, clickable: false },
 ];
 
-export default function DetailsDropDown({ id }: { id: number }) {
+export default function ManageDetailsDropDown({ id }: { id: number }) {
 	const [openMode, setOpenMode] = useState<DetailsMode>(DetailsMode.OVERVIEW);
 
 	const handleMode = (mode: DetailsMode) => setOpenMode(mode);

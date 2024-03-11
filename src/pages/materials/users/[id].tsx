@@ -28,11 +28,12 @@ import FiltersBlock from '@/components/materials/section_page/page_head/FiltersB
 import PaginationBlock from '@/components/materials/section_page/page_content/PaginationBlock';
 import SortAndResultBlock from '@/components/materials/section_page/page_content/SortAndResultBlock';
 import PageHeader from '@/components/materials/section_page/page_content/PageHeader';
-import ManageDetailsDropDown from '@/components/admin/materials_page/page_content/material_dropdown/ManageDetailsDropDown';
 import MaterialListBlock from '@/components/materials/section_page/page_content/MaterialListBlock';
 import BubbleBtnsBlock from '@/components/materials/section_page/page_content/BubbleBtnsBlock';
+import SectionBubbleBtns from '@/components/admin/materials_page/page_head/SectionBubbleBtns';
+import ManageDetailsDropDown from '@/components/admin/materials_page/page_content/material_dropdown/ManageDetailsDropDown';
 
-export default function SectionsId() {
+export default function MaterialUsers() {
 	const [isLoading, setIsLoading] = useState(true);
 	const router = useRouter();
 	const id = Number(router.query.id);
@@ -40,10 +41,14 @@ export default function SectionsId() {
 	const { setFilters } = useFiltersContext();
 	const [materials, setMaterials] = useState<Pageable<Material>>(pageInitialState);
 	const { getMaterials } = useMaterialService();
+	const [user] = useState<{ id: number; username: string } | undefined>({
+		id: 1,
+		username: 'ExampleUserName',
+	});
 
 	useEffect(() => {
 		if (router.query.id) {
-			if (!id || isNaN(id) || id <= 0 || !sections || !sections.some((data) => data.id === id)) {
+			if (!id || isNaN(id) || id <= 0) {
 				router.push('/404');
 				return;
 			}
@@ -79,15 +84,17 @@ export default function SectionsId() {
 	}, [id, getMaterials, sections, router, setFilters]);
 
 	if (isNaN(id) || id <= 0) return null;
-	if (!sections || !sections.some((data) => data.id === id)) return null;
+	if (!user) return null;
 	if (isLoading) return null;
 
 	return (
 		<Page>
 			<div>
-				<PageHeader title={sections.find((data) => data.id === id)?.name} />
+				<PageHeader
+					title={id === user.id ? 'Twoje materiały' : `Materiały użytkownika ${user.username}`}
+				/>
 				<BubbleBtnsBlock>
-					<CategoryBubbleBtns id={id} />
+					<SectionBubbleBtns />
 				</BubbleBtnsBlock>
 				<FiltersBlock>
 					<FiltersForm />
@@ -96,7 +103,7 @@ export default function SectionsId() {
 					<SortAndResultBlock resultCount={materials.content.length} />
 					<MaterialListBlock
 						materials={materials.content}
-						DetailsDropDownComponent={DetailsDropDown}
+						DetailsDropDownComponent={id === user.id ? ManageDetailsDropDown : DetailsDropDown}
 					/>
 					<PaginationBlock
 						pageNumber={materials.pageable.pageNumber}
