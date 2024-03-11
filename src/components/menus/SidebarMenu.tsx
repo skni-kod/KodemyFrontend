@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 export default function SidebarMenu() {
 	const { themeMode } = useThemeStore();
-	const { menuData, setMenuData, isOpen } = useSidebarContext();
+	const { sections, setMenuData, isOpen } = useSidebarContext();
 	const { getSections } = useSectionService();
 
 	const handleInitSection = useCallback(() => {
@@ -16,14 +16,14 @@ export default function SidebarMenu() {
 	}, [getSections, setMenuData]);
 
 	useEffect(() => {
-		!menuData && handleInitSection();
-	}, [handleInitSection, menuData]);
+		!sections && handleInitSection();
+	}, [handleInitSection, sections]);
 
 	return (
 		<nav className="flex-1">
 			<ul className="flex flex-col items-center gap-1 w-full py-2 px-0 list-none">
-				{menuData &&
-					menuData.map((section, idx) => (
+				{sections &&
+					sections.map((section, idx) => (
 						<li key={idx} className="w-full">
 							<Link
 								href={`/sections/${section.id}`}

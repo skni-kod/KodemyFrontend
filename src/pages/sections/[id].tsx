@@ -29,14 +29,14 @@ export default function SectionsId() {
 	const [isLoading, setIsLoading] = useState(true);
 	const router = useRouter();
 	const id = Number(router.query.id);
-	const { menuData } = useSidebarContext();
+	const { sections } = useSidebarContext();
 	const { setFilters } = useFiltersContext();
 	const [materials, setMaterials] = useState<Pageable<Material>>(pageInitialState);
 	const { getMaterials } = useMaterialService();
 
 	useEffect(() => {
 		if (router.query.id) {
-			if (!id || isNaN(id) || id <= 0 || !menuData || !menuData.some((data) => data.id === id)) {
+			if (!id || isNaN(id) || id <= 0 || !sections || !sections.some((data) => data.id === id)) {
 				router.push('/404');
 				return;
 			}
@@ -69,17 +69,17 @@ export default function SectionsId() {
 				}
 			})();
 		}
-	}, [id, getMaterials, menuData, router, setFilters]);
+	}, [id, getMaterials, sections, router, setFilters]);
 
 	if (isNaN(id) || id <= 0) return null;
-	if (!menuData || !menuData.some((data) => data.id === id)) return null;
+	if (!sections || !sections.some((data) => data.id === id)) return null;
 	if (isLoading) return null;
 
 	return (
 		<Page>
 			<div>
 				<h2 className="w-full text-4xl text-semibold">
-					{menuData.find((data) => data.id === id)?.name}
+					{sections.find((data) => data.id === id)?.name}
 				</h2>
 				<div className="w-full pt-5 px-4">
 					<CategoryBubbleBtns id={id} />

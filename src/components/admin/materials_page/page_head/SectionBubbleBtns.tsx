@@ -8,7 +8,7 @@ import { CATEGORY_IDS_PARAM } from '@/utils/filters';
 import updateSearchParams from '@/utils/createQueryParams';
 
 export default function SectionBubbleBtns() {
-	const { menuData } = useSidebarContext();
+	const { sections } = useSidebarContext();
 	const [openSection, setOpenSection] = useState<number | null>(null);
 	const [selectedCategories, setSelectedCategories] = useState<number[] | null>(null);
 
@@ -24,11 +24,11 @@ export default function SectionBubbleBtns() {
 		);
 	}, [filters]);
 
-	if (!menuData) return null;
+	if (!sections) return null;
 
 	return (
 		<div className="flex items-center flex-wrap w-full gap-4 text-xl text-semibold text-center">
-			{menuData.map(({ id, name, categories }) => (
+			{sections.map(({ id, name, categories }) => (
 				<SectionBubbleBtn
 					key={id}
 					name={name}
