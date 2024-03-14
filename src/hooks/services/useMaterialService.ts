@@ -49,5 +49,5 @@ export type Material = {
 	createdDate: string;
 	sectionId: number;
 	categoryId: number;
-	technologies: { id: number; name: string }[];
+	tags: { id: number; name: string }[];
 };

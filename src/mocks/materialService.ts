@@ -28,7 +28,7 @@ export function getMaterials(): Pageable<Material> {
 				createdDate: '2024-02-10T14:30:00',
 				sectionId: 10,
 				categoryId: 20,
-				technologies: [
+				tags: [
 					{
 						id: 1,
 						name: 'Java',
@@ -55,7 +55,7 @@ export function getMaterials(): Pageable<Material> {
 				createdDate: '2024-01-25T10:45:00',
 				sectionId: 11,
 				categoryId: 21,
-				technologies: [
+				tags: [
 					{
 						id: 3,
 						name: 'Python',
@@ -81,7 +81,7 @@ export function getMaterials(): Pageable<Material> {
 				createdDate: '2023-12-20T09:15:00',
 				sectionId: 12,
 				categoryId: 22,
-				technologies: [
+				tags: [
 					{
 						id: 5,
 						name: 'HTML',
@@ -112,7 +112,7 @@ export function getMaterials(): Pageable<Material> {
 				createdDate: '2024-02-05T11:00:00',
 				sectionId: 13,
 				categoryId: 23,
-				technologies: [
+				tags: [
 					{
 						id: 8,
 						name: 'Uczenie maszynowe',
@@ -138,7 +138,7 @@ export function getMaterials(): Pageable<Material> {
 				createdDate: '2024-01-15T16:20:00',
 				sectionId: 14,
 				categoryId: 24,
-				technologies: [
+				tags: [
 					{
 						id: 10,
 						name: 'Cyberbezpieczeństwo',
