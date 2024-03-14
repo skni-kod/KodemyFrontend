@@ -49,10 +49,10 @@ export default function MaterialUserBlock({ data: material, children }: Material
 						<h3 className="text-lg font-semibold text-primary">{material.title}</h3>
 						<div className="pt-1">{material.author.username}</div>
 						<div className="flex items-center pt-1.5 text-placeholder2bg">
-							{material.technologies.map(({ name }, index) => (
+							{material.tags.map(({ name }, index) => (
 								<React.Fragment key={index}>
 									<span>{name}</span>
-									{index < material.technologies.length - 1 && <LuDot />}
+									{index < material.tags.length - 1 && <LuDot />}
 								</React.Fragment>
 							))}
 						</div>
