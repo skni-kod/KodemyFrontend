@@ -11,9 +11,7 @@ type PaginatorProps = {
 	total: number;
 };
 
-const classNames = 'h-10 p-2 border-2 rounded-2xl shrink-0 shadow-md cursor-pointer';
-
-export default function Paginator({ total }: PaginatorProps) {
+const Paginator: React.FC<PaginatorProps> = ({ page, total }) => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 
@@ -23,61 +21,72 @@ export default function Paginator({ total }: PaginatorProps) {
 		});
 		router.push(router.pathname + `?${newParams}`);
 	};
-	const renderPageButtons = () => {
-		return (
-			<>
-				<PaginatorBtn
-					className="block leading-none aspect-square"
-					onClick={() => handlePageChange(1)}
-					selected={false}
-				>
-					1
-				</PaginatorBtn>
-				<HiOutlineDotsHorizontal />
-				<PaginatorBtn
-					className="block leading-none aspect-square"
-					onClick={() => handlePageChange(3)}
-					selected={false}
-				>
-					3
-				</PaginatorBtn>
-				<PaginatorBtn
-					className="block leading-none aspect-square"
-					onClick={() => {}}
-					selected={true}
-				>
-					4
-				</PaginatorBtn>
-				<PaginatorBtn
-					className="block leading-none aspect-square"
-					onClick={() => handlePageChange(4)}
-					selected={false}
-				>
-					5
-				</PaginatorBtn>
-				<HiOutlineDotsHorizontal />
-				<PaginatorBtn
-					className="block leading-none aspect-square"
-					onClick={() => handlePageChange(total)}
-					selected={false}
-				>
-					{total}
-				</PaginatorBtn>
-			</>
-		);
-	};
+
+	const paginationVisiblePages = 3;
+	const paginationRange = [];
+
+	let startPage = Math.max(1, page - Math.floor(paginationVisiblePages / 2));
+	let endPage = Math.min(total, startPage + paginationVisiblePages - 1);
+
+	if (endPage - startPage + 1 < paginationVisiblePages) {
+		startPage = Math.max(1, endPage - paginationVisiblePages + 1);
+	}
+
+	for (let i = startPage; i <= endPage; i++) {
+		paginationRange.push(i);
+	}
 
 	return (
 		<div className="flex items-center gap-6 mx-auto">
-			<PaginatorBtn className="flex items-center" onClick={() => {}} selected>
-				<FaArrowLeft />
-				&nbsp;Poprzednia
-			</PaginatorBtn>
-			<div className="flex items-center gap-2">{renderPageButtons()}</div>
-			<PaginatorBtn className="flex items-center" onClick={() => {}} selected>
-				Następna&nbsp;
-				<FaArrowRight />
-			</PaginatorBtn>
+			{page > 1 && (
+				<PaginatorBtn
+					className="flex items-center"
+					onClick={() => handlePageChange(page - 1)}
+					selected={true}
+				>
+					<FaArrowLeft />
+					&nbsp;Poprzednia
+				</PaginatorBtn>
+			)}
+			<div className="flex items-center gap-2">
+				{startPage > 1 && (
+					<>
+						<PaginatorBtn onClick={() => handlePageChange(1)} selected={page === 1}>
+							1
+						</PaginatorBtn>
+						{startPage > 2 && <HiOutlineDotsHorizontal />}
+					</>
+				)}
+				{paginationRange.map((pageNum) => (
+					<PaginatorBtn
+						key={pageNum}
+						onClick={() => handlePageChange(pageNum)}
+						selected={page === pageNum}
+					>
+						{pageNum}
+					</PaginatorBtn>
+				))}
+				{endPage < total && (
+					<>
+						{total - endPage > 1 && <HiOutlineDotsHorizontal />}
+						<PaginatorBtn onClick={() => handlePageChange(total)} selected={page === total}>
+							{total}
+						</PaginatorBtn>
+					</>
+				)}
+			</div>
+			{page < total && (
+				<PaginatorBtn
+					className="flex items-center"
+					onClick={() => handlePageChange(page + 1)}
+					selected={true}
+				>
+					Następna&nbsp;
+					<FaArrowRight />
+				</PaginatorBtn>
+			)}
 		</div>
 	);
-}
+};
+
+export default Paginator;

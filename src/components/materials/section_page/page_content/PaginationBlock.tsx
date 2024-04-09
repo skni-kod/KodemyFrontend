@@ -10,7 +10,7 @@ export default function PaginationBlock({
 }) {
 	return (
 		<div className="flex justify-center w-full pt-6">
-			<Paginator page={pageNumber} total={totalPages} />
+			<Paginator page={pageNumber + 1} total={totalPages} />
 		</div>
 	);
 }
