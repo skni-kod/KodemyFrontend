@@ -13,9 +13,17 @@ import { CookiesProvider } from 'react-cookie';
 import FiltersProvider, { useFiltersContext } from '@/contexts/FiltersContext';
 
 export const Metadata = {
-	title: 'Kodemy',
+	title: {
+		template: '%s | Kodemy',
+		default: 'Kodemy',
+	},
 	description: 'Kodemy to najlepszy zbiór materiałów',
 };
+
+function generateTitle(pageTitle: string | undefined) {
+	const { template, default: defaultTitle } = Metadata.title;
+	return pageTitle ? template.replace('%s', pageTitle) : defaultTitle;
+  }
 
 function Content({ children }: { children: React.ReactNode }) {
 	const { isOpen } = useSidebarContext();
@@ -51,6 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
 			<Head>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href={FaviconImage.src} />
+				<title>{generateTitle("")}</title>
 			</Head>
 			<Provider store={store}>
 				<CookiesProvider>
