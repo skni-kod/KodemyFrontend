@@ -42,8 +42,8 @@ export default function UsersManage() {
 					await getUsers({
 						size: filtersParams[SIZE_PARAM] ? +filtersParams[SIZE_PARAM] : 20,
 						page: filtersParams[PAGE_PARAM] ? +filtersParams[PAGE_PARAM] : 0,
-						sort: (sortElement && sortElement.apiField) || 'createdDate',
-						sortDirection: 'DESC',
+						sort: (sortElement && sortElement.apiField) || 'username',
+						sortDirection: 'ASC',
 						searchFields: undefined,
 					}),
 				);

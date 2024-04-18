@@ -4,11 +4,13 @@ import clsx from 'clsx';
 enum DetailsMode {
 	MANAGE,
 	SESSIONS,
+	OVERVIEW
 }
 
 const menu: { name: string; mode: DetailsMode; clickable: boolean }[] = [
 	{ name: 'Zarządzaj', mode: DetailsMode.MANAGE, clickable: false },
 	{ name: 'Sesje', mode: DetailsMode.SESSIONS, clickable: false },
+	{ name: 'Przegląd', mode: DetailsMode.OVERVIEW, clickable: false },
 ];
 
 export default function DetailsDropDown({ id }: { id: number }) {
@@ -19,7 +21,7 @@ export default function DetailsDropDown({ id }: { id: number }) {
 	if (isNaN(id) || id <= 0) return null;
 
 	return (
-		<div className="border border-2 shadow-md">
+		<div className="border shadow-md">
 			<div className="flex items-center justify-center w-full border-b">
 				{menu.map(({ name, mode, clickable }, index) => (
 					<button
