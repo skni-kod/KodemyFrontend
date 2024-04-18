@@ -20,7 +20,7 @@ export const Metadata = {
 	description: 'Kodemy to najlepszy zbiór materiałów',
 };
 
-function generateTitle(pageTitle: string | undefined) {
+export function generateTitle(pageTitle: string | undefined) {
 	const { template, default: defaultTitle } = Metadata.title;
 	return pageTitle ? template.replace('%s', pageTitle) : defaultTitle;
   }
@@ -60,6 +60,7 @@ export default function App({ Component, pageProps }: AppProps) {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href={FaviconImage.src} />
 				<title>{generateTitle("")}</title>
+				<meta name="description" content={Metadata.description} />
 			</Head>
 			<Provider store={store}>
 				<CookiesProvider>

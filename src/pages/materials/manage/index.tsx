@@ -29,6 +29,8 @@ import SortAndResultBlock from '@/components/materials/section_page/page_content
 import PageHeader from '@/components/materials/section_page/page_content/PageHeader';
 import MaterialListBlock from '@/components/materials/section_page/page_content/MaterialListBlock';
 import BubbleBtnsBlock from '@/components/materials/section_page/page_content/BubbleBtnsBlock';
+import Head from 'next/head';
+import { generateTitle } from '@/pages/_app';
 
 export default function MaterialsManage() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -70,6 +72,9 @@ export default function MaterialsManage() {
 
 	return (
 		<Page>
+			<Head>
+				<title>{generateTitle("Materiały użytkowników")}</title>
+			</Head>
 			<div>
 				<PageHeader title="Materiały użytkowników" />
 				<BubbleBtnsBlock>

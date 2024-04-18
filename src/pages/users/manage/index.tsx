@@ -19,6 +19,8 @@ import {
 import UserSortOrderBtn, {
 	USER_ORDER_OPTIONS,
 } from '@/components/admin/users_page/page_content/UserSortOrderBtn';
+import Head from 'next/head';
+import { generateTitle } from '@/pages/_app';
 
 export default function UsersManage() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -55,6 +57,9 @@ export default function UsersManage() {
 
 	return (
 		<Page>
+			<Head>
+				<title>{generateTitle("Użytkownicy")}</title>
+			</Head>
 			<div>
 				<h2 className="w-full text-4xl text-semibold">Użytkownicy</h2>
 				<div className="py-2">

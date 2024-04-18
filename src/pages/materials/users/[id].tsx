@@ -32,6 +32,8 @@ import MaterialListBlock from '@/components/materials/section_page/page_content/
 import BubbleBtnsBlock from '@/components/materials/section_page/page_content/BubbleBtnsBlock';
 import SectionBubbleBtns from '@/components/admin/materials_page/page_head/SectionBubbleBtns';
 import ManageDetailsDropDown from '@/components/admin/materials_page/page_content/material_dropdown/ManageDetailsDropDown';
+import Head from 'next/head';
+import { generateTitle } from '@/pages/_app';
 
 export default function MaterialUsers() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -89,6 +91,9 @@ export default function MaterialUsers() {
 
 	return (
 		<Page>
+			<Head>
+				<title>{generateTitle(id === user.id ? 'Twoje materiały' : `Materiały użytkownika ${user.username}`)}</title>
+			</Head>
 			<div>
 				<PageHeader
 					title={id === user.id ? 'Twoje materiały' : `Materiały użytkownika ${user.username}`}
