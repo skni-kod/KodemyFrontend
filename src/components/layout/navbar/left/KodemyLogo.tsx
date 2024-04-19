@@ -5,7 +5,7 @@ import { Metadata } from '@/pages/_app';
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 
-export default function KodemyLogo() {
+export default function KodemyLogo({ ratio = 1 }) {
 	const image = [KodemyImageDark, KodemyImageWhite][0];
 	const btnRef = useRef<HTMLAnchorElement>(null);
 	const [imgDimensions, setImgDimensions] = useState({ width: 0, height: 0 });
@@ -13,11 +13,11 @@ export default function KodemyLogo() {
 	useEffect(() => {
 		if (btnRef.current) {
 			setImgDimensions({
-				width: (btnRef.current.clientHeight * image.width) / image.height,
-				height: btnRef.current.clientHeight,
+				width: ((btnRef.current.clientHeight * image.width) / image.height) * ratio,
+				height: btnRef.current.clientHeight * ratio,
 			});
 		}
-	}, [btnRef.current]);
+	}, [btnRef.current, ratio]);
 
 	return (
 		<Link href="/" className="block h-full" ref={btnRef}>
