@@ -3,6 +3,8 @@ import KodemyLogo from '@/components/layout/navbar/left/KodemyLogo';
 import AuthProvidersBtns from '@/components/auth/AuthProvidersBtns';
 import { useAuthStore } from '@/store/authSlice';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+import { generateTitle } from '../_app';
 
 export default function Auth() {
 	const { user } = useAuthStore();
@@ -12,6 +14,9 @@ export default function Auth() {
 
 	return (
 		<Page>
+			<Head>
+				<title>{generateTitle("Logowanie")}</title>
+			</Head>
 			<div className="w-full max-w-2xs mx-auto">
 				<div className="flex justify-center h-12">
 					<KodemyLogo />

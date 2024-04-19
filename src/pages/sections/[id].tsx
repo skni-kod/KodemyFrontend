@@ -31,6 +31,8 @@ import PageHeader from '@/components/materials/section_page/page_content/PageHea
 import ManageDetailsDropDown from '@/components/admin/materials_page/page_content/material_dropdown/ManageDetailsDropDown';
 import MaterialListBlock from '@/components/materials/section_page/page_content/MaterialListBlock';
 import BubbleBtnsBlock from '@/components/materials/section_page/page_content/BubbleBtnsBlock';
+import Head from 'next/head';
+import { generateTitle } from '../_app';
 
 export default function SectionsId() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -84,6 +86,9 @@ export default function SectionsId() {
 
 	return (
 		<Page>
+			<Head>
+				<title>{generateTitle(sections.find((data) => data.id === id)?.name)}</title>
+			</Head>
 			<div>
 				<PageHeader title={sections.find((data) => data.id === id)?.name} />
 				<BubbleBtnsBlock>

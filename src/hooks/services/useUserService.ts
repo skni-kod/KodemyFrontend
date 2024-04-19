@@ -8,6 +8,7 @@ const useUserService = () => {
 		try {
 			console.log(params);
 			const response = await kodemyAPI.get(`/api/users?${mapSearchParams(params)}`);
+
 			return response.data;
 		} catch (e) {}
 	}, []);
