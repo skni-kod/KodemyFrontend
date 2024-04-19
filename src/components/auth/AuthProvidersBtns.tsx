@@ -27,11 +27,11 @@ export default function AuthProvidersBtns() {
 				<Link
 					key={index}
 					href={href}
-					className="flex items-center gap-2 p-3 rounded-lg border"
+					className="flex items-center gap-2 p-1 xs:p-2 lg:p-3 rounded-lg border border-secondary hover:bg-white"
 					passHref
 				>
 					{React.createElement(type, { className: color, style: iconStyles })}
-					<h3>Kontynuuj z {name}</h3>
+					<h3 className='text-sm md:text-base text-center'>Kontynuuj z {name}</h3>
 				</Link>
 			))}
 		</>

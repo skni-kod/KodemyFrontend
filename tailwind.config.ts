@@ -59,6 +59,9 @@ const config: Config = {
 				35: '35',
 				45: '45',
 			},
+			boxShadow: {
+				bottomShadow: "0px 6px 20px 2px rgba(107, 114, 128, 1)",
+			},
 		},
 	},
 	plugins: [],
