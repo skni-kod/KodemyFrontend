@@ -6,6 +6,7 @@ import { useAuthStore } from '@/store/authSlice';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { generateTitle } from '../_app';
+import Toast from '@/components/utils/Toast';
 
 export default function Auth() {
 	const { user } = useAuthStore();
@@ -31,6 +32,7 @@ export default function Auth() {
 				<div className="flex justify-center py-10">
 					<SkniKodLogo ratio={0.1}/>
 				</div>
+				<Toast message="Aaaaaaaaaaaaa zajebiscie aaaaaaaaaa" type="info" durationMs={5000}/>
 			</div>
 		</Page>
 	);
