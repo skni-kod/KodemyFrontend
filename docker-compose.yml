@@ -1,0 +1,18 @@
+services:
+  frontend:
+    image: kodemy-frontend:latest
+    ports:
+      - ${EXPOSE_PORT}:3000
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - frontend_vol:/app
+    networks:
+      - kodemy_frontend
+
+networks:
+  kodemy_frontend:
+
+volumes:
+  frontend_vol:
+    driver: local

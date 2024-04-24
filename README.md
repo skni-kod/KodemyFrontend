@@ -5,6 +5,7 @@ Frontend of Kodemy, using Next.js, Typescript and Tailwind CSS.
 ```bash
 npm install
 
+npm ci
 ```
 
 ## Running the project
@@ -17,7 +18,6 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 
 ## Requirements:
 

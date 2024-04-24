@@ -1,10 +1,11 @@
+/* eslint-disable prettier/prettier */
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
 	content: [
 		'./src/pages/**/*.{js,ts,jsx,tsx,mdx}',
 		'./src/components/**/*.{js,ts,jsx,tsx,mdx}',
-		'./src/app/**/*.{js,ts,jsx,tsx,mdx}',
+		'./src/methods/**/*.{js,ts,jsx,tsx,mdx}',
 	],
 	theme: {
 		screens: {
@@ -17,16 +18,42 @@ const config: Config = {
 			'2xl': '1536px',
 		},
 		extend: {
+			boxShadow: {
+				bottomShadow: '0px 6px 20px 2px rgba(107, 114, 128, 1)',
+				greenShadow: '0px 0px 22px 1px rgba(72, 187, 120, 1)',
+				redShadow: '0px 0px 22px 1px rgba(245, 101, 101, 1)',
+				blueShadow: '0px 0px 22px 1px rgba(59, 130, 246, 1)',
+				yellowShadow: '0px 0px 22px 1px rgba(236, 201, 75, 1)',
+			},
 			colors: {
 				primary: 'rgb(var(--primary-color) / <alpha-value>)',
-				text2primary: 'rgb(var(--text2primary-color) / <alpha-value>)',
-				overlay2primary: 'rgb(var(--overlay2primary-color) / <alpha-value>)',
+				primaryHover: 'rgb(var(--primary-hover-color) / <alpha-value>)',
+				textOnPrimary: 'rgb(var(--text-on-primary-color) / <alpha-value>)',
 				secondary: 'rgb(var(--secondary-color) / <alpha-value>)',
-				text2secondary: 'rgb(var(--text2secondary-color) / <alpha-value>)',
+				textOnSecondary: 'rgb(var(--text-on-secondary-color) / <alpha-value>)',
 				bg: 'rgb(var(--background-color) / <alpha-value>)',
-				text2bg: 'rgb(var(--text2background-color) / <alpha-value>)',
-				overlay2bg: 'rgb(var(--overlay2background-color) / <alpha-value>)',
-				placeholder2bg: 'rgb(var(--placeholder2background-color) / <alpha-value>)',
+				bgHover: 'rgb(var(--background-hover-color) / <alpha-value>)',
+				error: 'rgb(var(--error-color) / <alpha-value>)',
+				grade: 'rgb(var(--grade) / <alpha-value>)',
+				gradeText: 'rgb(var(--secondary-color) / <alpha-value>)',
+			},
+			height: {
+				inherit: 'inherit',
+				nav: '3.75rem',
+				fullContent: 'calc(100vh - 3.5rem - 0.5rem - 0.5rem)',
+				navMenu: '2.625rem',
+			},
+			inset: {
+				nav: '3.75rem',
+				navMenu: '2.625rem',
+			},
+			margin: {
+				side: '4.5rem',
+				expandSide: '16rem',
+				nav: '3.75rem',
+			},
+			minHeight: {
+				fullContent: 'calc(100vh - 3.75rem)',
 			},
 			maxWidth: {
 				'2xs': '375px',
@@ -37,6 +64,14 @@ const config: Config = {
 				xl: '1280px',
 				'2xl': '1536px',
 			},
+			maxHeight: {
+				fullContent: 'calc(100vh - 3.5rem - 0.5rem - 0.5rem)',
+			},
+			padding: {
+				'1/2': '50%',
+				'1/4': '25%',
+				nav: '3.75rem',
+			},
 			width: {
 				inherit: 'inherit',
 				18: '4.5rem',
@@ -44,13 +79,8 @@ const config: Config = {
 				68: '17rem',
 				104: '26rem',
 				128: '32rem',
-			},
-			height: {
-				inherit: 'inherit',
-			},
-			padding: {
-				'1/2': '50%',
-				'1/4': '25%',
+				side: '4.5rem',
+				expandSide: '16rem',
 			},
 			zIndex: {
 				5: '5',
@@ -58,9 +88,6 @@ const config: Config = {
 				25: '25',
 				35: '35',
 				45: '45',
-			},
-			boxShadow: {
-				bottomShadow: "0px 6px 20px 2px rgba(107, 114, 128, 1)",
 			},
 		},
 	},

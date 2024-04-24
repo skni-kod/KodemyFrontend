@@ -1,17 +1,16 @@
+'use client';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { useSidebarContext } from '@/contexts/SidebarStateContext';
+import { useSidebar } from '@/contexts/SidebarContext';
+import React from 'react';
 
 export default function HamburgerMenuIcoBtn() {
-	const { isOpen, setIsOpen } = useSidebarContext();
-
-	const handleToggleSidebar = () => setIsOpen(!isOpen);
+	const sidebar = useSidebar();
 
 	return (
-		<button
-			className="flex justify-center items-center h-full aspect-square"
-			onClick={handleToggleSidebar}
-		>
-			<GiHamburgerMenu className="block h-full w-full p-1/4" />
-		</button>
+		<div className="cursor-pointer" onClick={sidebar.handleToggle}>
+			<button className="flex aspect-square h-nav w-side items-center justify-center">
+				<GiHamburgerMenu className="block h-full w-full p-1/4" />
+			</button>
+		</div>
 	);
 }

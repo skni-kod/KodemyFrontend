@@ -16,17 +16,18 @@ const ErrorInterceptorProvider = ({ children }: { children: React.ReactNode }) =
 		? 5000
 		: parseInt(process.env.NEXT_PUBLIC_ERROR_HOLD_TIME_IN_MS);
 
-	const dispatchError = useCallback((message: string | null) => {
-		setError(message);
-		setTimeout(() => {
-			setError('');
-		}, errorHoldTime);
-	}, []);
+	const dispatchError = useCallback(
+		(message: string | null) => {
+			setError(message);
+			setTimeout(() => {
+				setError('');
+			}, errorHoldTime);
+		},
+		[errorHoldTime],
+	);
 
 	return (
-		<ErrorInterceptorContext.Provider value={{ error, dispatchError }}>
-			{children}
-		</ErrorInterceptorContext.Provider>
+		<ErrorInterceptorContext.Provider value={{ error, dispatchError }}>{children}</ErrorInterceptorContext.Provider>
 	);
 };
 

@@ -16,16 +16,11 @@ const Modal = ({ className, children, onClose }: ModalProps) => {
 	}, [mNode, mRoot]);
 
 	return ReactDOM.createPortal(
-		<div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center w-full h-full z-40">
-			<div
-				className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-5 bg-bg rounded-md ${className}`}
-			>
-				<div className="w-full flex justify-end">
-					<button
-						className="font-semibold text-primary hover:overlay2primary aspect-square"
-						onClick={onClose}
-					>
-						<AiOutlineClose height={100} width={100} />
+		<div className="fixed inset-0 z-40 flex h-full w-full items-center justify-center bg-black bg-opacity-25 backdrop-blur-sm">
+			<div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md bg-bg p-5 ${className}`}>
+				<div className="flex w-full justify-end">
+					<button className="hover:overlay2primary aspect-square font-semibold text-primary" onClick={onClose}>
+						<AiOutlineClose height={120} width={120} className="h-6 w-6" />
 					</button>
 				</div>
 				<div className="w-full px-6 pb-6 pt-0.5">{children}</div>
