@@ -32,7 +32,7 @@ export default function Auth() {
 				<div className="flex justify-center py-10">
 					<SkniKodLogo ratio={0.1}/>
 				</div>
-				<Toast message="Aaaaaaaaaaaaa zajebiscie aaaaaaaaaa" type="info" durationMs={5000}/>
+				<Toast message="Aaaaaaaaaaaaa zajebiscie aaaaaaaaaa" type="warning" durationMs={500000}/>
 			</div>
 		</Page>
 	);
