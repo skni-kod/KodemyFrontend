@@ -42,10 +42,10 @@ const Toast: React.FC<ToastProps> = ({ message, type, durationMs }) => {
   }
 
   return (
-    <div className={`flex flex-row items-center fixed bottom-0 right-0 m-6 p-4 w-72 rounded ${bgColor} ${shadowColor} text-white`}>
+    <div className={`flex flex-row items-center justify-around h-24 sm:h-auto fixed bottom-0 right-0 sm:m-6 p-4 w-full sm:w-80 rounded ${bgColor} ${shadowColor} text-white`}>
       <p>{message}</p>
       <div className='flex items-center justify-center'>
-        <IoIosCloseCircleOutline className='w-5 h-5 ml-3 cursor-pointer' onClick={() => setIsVisible(false)}/>
+        <IoIosCloseCircleOutline className='w-8 sm:w-5 h-8 sm:h-5 ml-3 cursor-pointer' onClick={() => setIsVisible(false)}/>
       </div>
     </div>
   );
