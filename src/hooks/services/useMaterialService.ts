@@ -40,14 +40,13 @@ export type Material = {
 	description: string;
 	link: string;
 	status: string;
-	active: boolean;
-	avgGrade: number;
+	type: { id: number; name: string };
+	tags: [{ id: number; name: string }];
+	averageGrade: number;
+	gradeStats: [number];
 	author: {
 		id: number;
 		username: string;
 	};
 	createdDate: string;
-	sectionId: number;
-	categoryId: number;
-	tags: { id: number; name: string }[];
 };
