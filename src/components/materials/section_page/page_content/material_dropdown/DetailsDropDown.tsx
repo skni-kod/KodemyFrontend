@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import DetailsModePreview from '@/components/materials/section_page/page_content/material_dropdown/mode/DetailsModePreview';
+import DetailsModeGrades from '@/components/materials/section_page/page_content/material_dropdown/mode/DetailsModeGrades';
 
 enum DetailsMode {
 	OVERVIEW,
@@ -9,7 +10,7 @@ enum DetailsMode {
 
 const menu: { name: string; mode: DetailsMode; clickable: boolean }[] = [
 	{ mode: DetailsMode.OVERVIEW, name: 'Przegląd', clickable: true },
-	{ mode: DetailsMode.GRADES, name: 'Oceny', clickable: false },
+	{ mode: DetailsMode.GRADES, name: 'Oceny', clickable: true },
 ];
 
 export default function DetailsDropDown({ id }: { id: number }) {
@@ -20,7 +21,7 @@ export default function DetailsDropDown({ id }: { id: number }) {
 	if (isNaN(id) || id <= 0) return null;
 
 	return (
-		<div className="border border-2 shadow-md">
+		<div className="border-2 shadow-md">
 			<div className="flex items-center justify-center w-full border-b">
 				{menu.map(({ name, mode, clickable }, index) => (
 					<button
@@ -37,6 +38,7 @@ export default function DetailsDropDown({ id }: { id: number }) {
 				))}
 			</div>
 			{openMode === DetailsMode.OVERVIEW && <DetailsModePreview id={id} />}
+			{openMode === DetailsMode.GRADES && <DetailsModeGrades id={id} />}
 		</div>
 	);
 }

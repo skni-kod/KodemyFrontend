@@ -12,7 +12,7 @@ enum DetailsMode {
 
 const menu: { name: string; mode: DetailsMode; clickable: boolean }[] = [
 	{ name: 'Przegląd', mode: DetailsMode.OVERVIEW, clickable: true },
-	{ name: 'Oceny', mode: DetailsMode.GRADES, clickable: false },
+	{ name: 'Oceny', mode: DetailsMode.GRADES, clickable: true },
 	{ name: 'Zarządzaj', mode: DetailsMode.MANAGE, clickable: false },
 	{ name: 'Historia', mode: DetailsMode.HISTORY, clickable: false },
 ];
