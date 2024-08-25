@@ -1,38 +1,63 @@
-import React from 'react';
+'use client';
+import React, { useEffect } from 'react';
 import { AiFillGithub } from 'react-icons/ai';
-import Link from 'next/link';
 import { IconType } from 'react-icons';
+import { useRouter } from 'next/navigation';
+import { TEXT } from '@/utils/constant';
+import useFetchState, { Status } from '@/utils/hooks/useFetchState';
+import { ProviderLiResponse } from '@/services/auth/types';
+import AuthService from '@/services/auth/authService';
+import Loading from '@/components/common/Loading';
+import Error from '@/components/common/Error';
 
-const PROVIDERS: { name: string; href: string; ico: { type: IconType; color: string } }[] = [
+const PROVIDERS: { name: string; icoType: IconType; icoColor: string }[] = [
 	{
-		name: 'Github',
-		href: 'http://localhost:8080/api/oauth2/authorize/github?redirect_uri=http://localhost:3000',
-		ico: {
-			type: AiFillGithub,
-			color: 'text-slate-800',
-		},
+		name: 'github',
+		icoType: AiFillGithub,
+		icoColor: 'text-slate-800',
 	},
 ];
 
-const iconStyles = {
-	width: '3vh',
+const PROVIDERS_MAP = PROVIDERS.reduce(
+	(acc, provider) => {
+		acc[provider.name] = {
+			icoType: provider.icoType,
+			icoColor: provider.icoColor,
+		};
+		return acc;
+	},
+	{} as Record<string, { icoType: IconType; icoColor: string }>,
+);
+
+const iconStyles: React.CSSProperties = {
+	width: '1.75rem',
 	height: 'auto',
 	aspectRatio: '1 / 1',
 };
 
 export default function AuthProvidersBtns() {
+	const { data: providers, status, fetch: fetchProviders } = useFetchState<ProviderLiResponse[]>();
+	const router = useRouter();
+
+	useEffect(() => fetchProviders(AuthService.getProviders), [fetchProviders]);
+
+	if (status === Status.PENDING) return <Loading scale="small" />;
+	if (status === Status.ERROR || !providers) return <Error />;
+
 	return (
 		<>
-			{PROVIDERS.map(({ name, href, ico: { type, color } }, index) => (
-				<Link
+			{providers.map(({ provider, authorize }, index) => (
+				<button
 					key={index}
-					href={href}
-					className="flex items-center gap-2 p-1 xs:p-2 lg:p-3 rounded-lg border border-secondary hover:bg-white"
-					passHref
+					onClick={() => router.push(`${process.env.NEXT_PUBLIC_API_URL}${authorize}`)}
+					className="flex items-center gap-2 rounded-lg border border-secondary bg-bg px-4 py-2 hover:bg-bgHover hover:text-primaryHover"
 				>
-					{React.createElement(type, { className: color, style: iconStyles })}
-					<h3 className='text-sm md:text-base text-center'>Kontynuuj z {name}</h3>
-				</Link>
+					{React.createElement(PROVIDERS_MAP[provider].icoType, {
+						className: PROVIDERS_MAP[provider].icoColor,
+						style: iconStyles,
+					})}
+					<h3 className="text-center text-sm md:text-base">{`${TEXT.AUTH.CONTINUE_WITH} ${provider.toUpperCase()}`}</h3>
+				</button>
 			))}
 		</>
 	);
