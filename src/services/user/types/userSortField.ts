@@ -1,14 +1,10 @@
-enum MaterialSortField {
-	TITLE,
+enum UserSortField {
 	ID,
-	DESCRIPTION,
-	STATUS,
-	IS_ACTIVE,
-	AVG_GRADE,
-	AUTHOR,
-	CREATED_DATE,
-	SECTION_ID,
-	CATEGORY_ID,
+	USERNAME,
+	EMAIL,
+	ROLE,
+	IS_EXPIRED,
+	IS_ENABLED,
 }
 
-export default MaterialSortField;
+export default UserSortField;

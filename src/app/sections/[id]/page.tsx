@@ -1,9 +1,9 @@
 import React from 'react';
-import { doIf, isNumber } from '@/utils/methods';
+import { doIf, isNumber, parseFieldsFromURLSearchParam } from '@/utils/methods';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import SectionByIdPageContent from '@/components/materials/section_by_id_page/SectionByIdPageContent';
-import { MaterialSearchParams } from '@/utils/types';
+import { SearchParams } from '@/utils/types';
 import PageQueryProps from '@/utils/types/page/pageQueryProps';
 import { PAGE_TITLE } from '@/utils/constant';
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function SectionByIdPage({
 	params,
 	searchParams,
-}: PageQueryProps<MaterialSearchParams> & {
+}: PageQueryProps<SearchParams<string>> & {
 	params: { id: string };
 }) {
 	doIf(!isNumber(params.id), () => notFound());
@@ -23,7 +23,7 @@ export default function SectionByIdPage({
 		<SectionByIdPageContent
 			title={metadata.title?.toString() ?? ''}
 			id={Number(params.id)}
-			searchParams={searchParams ?? {}}
+			searchParams={parseFieldsFromURLSearchParam(searchParams?.fields ?? '')}
 		/>
 	);
 }

@@ -14,6 +14,7 @@ export default function SectionBubbleBtns() {
 	const [activatedSectionId, setActivatedSectionId] = useState<number | null>(null);
 
 	useEffect(() => fetchSections(SectionService.getSections), [fetchSections]);
+
 	const findSectionName = useCallback(() => {
 		return (sections && sections.find((section) => section.id === activatedSectionId)?.name) || activatedSectionId;
 	}, [activatedSectionId, sections]);

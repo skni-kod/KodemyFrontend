@@ -1,24 +1,19 @@
 import { Rating } from 'react-simple-star-rating';
 import React, { useEffect } from 'react';
-import { Material } from '@/services/material/types';
-import { FetchStateStatus } from '@/utils/api/types';
 import MaterialService from '@/services/material/materialService';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
-import useFetchState from '@/utils/hooks/useFetchState';
+import useFetchState, { Status } from '@/utils/hooks/useFetchState';
+import { Material } from '@/services/material/types';
+
 
 export default function DetailsModeGrades({ id }: { id: number }) {
 	const { data: material, status, fetch } = useFetchState<Material>();
 
 	useEffect(() => fetch(() => MaterialService.getMaterialById(id)), []);
 
-	if (status == FetchStateStatus.LOADING)
-		return (
-			<div className="pt-4">
-				<Loading />
-			</div>
-		);
-	if (status == FetchStateStatus.ERROR || !material) return <Error />;
+	if (status === Status.PENDING) return <Loading scale="small" />;
+	if (status === Status.ERROR || !material) return <Error />;
 
 	return (
 		<div className="p-7">

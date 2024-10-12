@@ -1,4 +1,4 @@
-export function transformRoleName(role: string) {
+export default function transformRoleName(role: string) {
 	switch (role) {
 		case 'ROLE_USER':
 			return 'Użytkownik';

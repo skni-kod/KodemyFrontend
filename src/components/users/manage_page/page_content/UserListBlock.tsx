@@ -4,10 +4,10 @@ import UserListItem from '@/components/users/manage_page/page_content/UserListIt
 
 export default function UserListBlock({
 	users,
-	DetailsDropDownComponent,
+	DetailsDropDownComponentProp,
 }: {
 	users: UserSearch[];
-	DetailsDropDownComponent: React.ComponentType<{ id: number }>;
+	DetailsDropDownComponentProp: React.ComponentType<{ id: number }>;
 }) {
 	return (
 		<div className="flex w-full flex-col gap-6 pt-5">
@@ -15,7 +15,7 @@ export default function UserListBlock({
 				<>
 					{users.map((user, index) => (
 						<UserListItem key={index} data={user}>
-							<DetailsDropDownComponent id={user.id} />
+							<DetailsDropDownComponentProp id={user.id} />
 						</UserListItem>
 					))}
 				</>

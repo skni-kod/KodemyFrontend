@@ -13,7 +13,7 @@ import { MaterialSearch } from '@/services/material/types';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
-import { MATERIAL_PAGE_SIZE, MATERIAL_PAGE_SORT, MATERIAL_PAGE_SORT_DIRECTION } from '@/utils/constant';
+import { DEFAULT_PAGE_SIZE, DEFAULT_MATERIAL_PAGE_SORT, DEFAULT_PAGE_SORT_DIRECTION } from '@/utils/constant';
 import UserService from '@/services/user/userService';
 import UserSortOrderBtn from '@/components/users/manage_page/page_content/sort_and_result/UserSortOrderBtn';
 import UserListBlock from '@/components/users/manage_page/page_content/UserListBlock';
@@ -29,10 +29,10 @@ export default function UserResultsDisplay({ searchParams, DetailsDropDownCompon
 	useEffect(() => {
 		fetchUsers(() => {
 			return UserService.getUsers({
-				size: searchParams.size ?? MATERIAL_PAGE_SIZE,
+				size: searchParams.size ?? DEFAULT_PAGE_SIZE,
 				page: searchParams.page ?? 0,
-				sort: searchParams.sort ? MAT_ORDER_OPTIONS[searchParams.sort].field : MATERIAL_PAGE_SORT,
-				sort_direction: searchParams.sort ? MAT_ORDER_OPTIONS[searchParams.sort].order : MATERIAL_PAGE_SORT_DIRECTION,
+				sort: searchParams.sort ? MAT_ORDER_OPTIONS[searchParams.sort].field : DEFAULT_MATERIAL_PAGE_SORT,
+				sort_direction: searchParams.sort ? MAT_ORDER_OPTIONS[searchParams.sort].order : DEFAULT_PAGE_SORT_DIRECTION,
 				filters: undefined,
 			});
 		});

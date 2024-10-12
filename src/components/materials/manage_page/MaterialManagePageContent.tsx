@@ -14,7 +14,7 @@ type MaterialManagePageContentProps = MetadataProps & {
 export default function MaterialManagePageContent({ title, searchParams }: MaterialManagePageContentProps) {
 	return (
 		<PageContent headerValue={title}>
-			<SectionBubbleBtns activesCategoryIds={searchParams.fields?.categoryIds} />
+			<SectionBubbleBtns />
 			<FiltersBlock fields={searchParams.fields ?? {}} />
 			<MaterialResultsDisplay searchParams={searchParams} DetailsDropDownComponent={ManageDetailsDropDown} />
 		</PageContent>

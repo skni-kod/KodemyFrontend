@@ -1,4 +1,4 @@
-export function calculateTimeDifference(createdDate: string) {
+export default function calculateTimeDifference(createdDate: string) {
 	const currentDate = new Date();
 	const creationDate = new Date(createdDate);
 	const timeDifference = currentDate.getTime() - creationDate.getTime();
@@ -12,19 +12,13 @@ export function calculateTimeDifference(createdDate: string) {
 	if (yearsDifference > 0) {
 		return yearsDifference === 1 ? `${yearsDifference} rok temu` : `${yearsDifference} lat temu`;
 	} else if (monthsDifference > 0) {
-		return monthsDifference === 1
-			? `${monthsDifference} miesiąc temu`
-			: `${monthsDifference} miesiące temu`;
+		return monthsDifference === 1 ? `${monthsDifference} miesiąc temu` : `${monthsDifference} miesiące temu`;
 	} else if (daysDifference > 0) {
 		return daysDifference === 1 ? `${daysDifference} dzień temu` : `${daysDifference} dni temu`;
 	} else if (hoursDifference > 0) {
-		return hoursDifference === 1
-			? `${hoursDifference} godzinę temu`
-			: `${hoursDifference} godziny temu`;
+		return hoursDifference === 1 ? `${hoursDifference} godzinę temu` : `${hoursDifference} godziny temu`;
 	} else if (minutesDifference > 0) {
-		return minutesDifference === 1
-			? `${minutesDifference} minutę temu`
-			: `${minutesDifference} minuty temu`;
+		return minutesDifference === 1 ? `${minutesDifference} minutę temu` : `${minutesDifference} minuty temu`;
 	} else {
 		return 'Mniej niż 1 minutę temu';
 	}

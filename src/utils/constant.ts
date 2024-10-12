@@ -1,5 +1,6 @@
 import { MaterialSortField } from '@/services/material/types';
 import { SortDirection } from '@/utils/api/types';
+import { UserSortField } from '@/services/user/types';
 
 export const METADATA = {
 	ASSETS: [],
@@ -54,6 +55,8 @@ export const TEXT = {
 	LOOKING_FOR: 'Szukaj',
 };
 
-export const MATERIAL_PAGE_SIZE = 20;
-export const MATERIAL_PAGE_SORT = MaterialSortField.CREATED_DATE;
-export const MATERIAL_PAGE_SORT_DIRECTION = SortDirection.DESC;
+export const DEFAULT_PAGE_SIZE = 20;
+export const DEFAULT_PAGE_SORT_DIRECTION = SortDirection.DESC;
+
+export const DEFAULT_MATERIAL_PAGE_SORT = MaterialSortField.CREATED_DATE;
+export const DEFAULT_USER_PAGE_SORT = UserSortField.ID;

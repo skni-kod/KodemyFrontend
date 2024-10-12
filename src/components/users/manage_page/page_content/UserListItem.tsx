@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { User } from '@/services/user/types';
+import { User, UserSearch } from '@/services/user/types';
 import IsActiveStatus from '@/components/users/manage_page/page_content/IsActiveStatus';
 
 type UserBlockProps = {
-	data: User;
+	data: UserSearch;
 	children: React.ReactNode;
 };
 
@@ -25,7 +25,7 @@ export default function UserListItem({ data: user, children }: UserBlockProps) {
 			>
 				<div className="flex w-full items-center justify-between text-sm">
 					<IsActiveStatus isActive={Math.floor(Math.random() * 2) % 2 === 0} />
-					<div className="">{user.createdDate.split('T')[0]}</div>
+					<div className="">{user.createdDate.toString().split('T')[0]}</div>
 				</div>
 				<div className="flex w-full justify-between gap-6 py-3">
 					<div>

@@ -6,7 +6,7 @@ import UserDropDownMenu from '@/components/layout/navbar/right/UserDropDownMenu'
 import { useRouter } from 'next/navigation';
 import ComponentParentProps from '@/utils/types/node/componentParentProps';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa6';
-import clsx from 'clsx';
+import AddMaterialModal from '@/components/materials/add_modal/AddMaterialModal';
 
 enum Menu {
 	OFF,
@@ -35,6 +35,7 @@ const MenuBtnWrapper = ({
 
 export default function UserActionBtns() {
 	const [menuOpen, setMenuOpen] = useState<Menu>(Menu.OFF);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
 	const router = useRouter();
 
@@ -42,12 +43,9 @@ export default function UserActionBtns() {
 		setMenuOpen(menuOpen == menu ? Menu.OFF : menu);
 	};
 
-	const handleMenuSearchClick = () => {
-		handleMenuClick(Menu.OFF);
-	};
-
 	const handleMenuAddMaterialClick = () => {
-		handleMenuClick(Menu.OFF);
+		setMenuOpen(Menu.OFF);
+		setIsModalOpen(true);
 	};
 
 	const dropdownMenuClassName = 'top-navMenu absolute -right-[0.66rem] z-50 mt-0.5';
@@ -55,7 +53,8 @@ export default function UserActionBtns() {
 	return (
 		<>
 			<MenuBtnWrapper onClick={() => {}}>
-				<SlPlus className="h-full text-2xl text-primary" />
+				<SlPlus className="h-full text-2xl text-primary" onClick={handleMenuAddMaterialClick}/>
+				<AddMaterialModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 			</MenuBtnWrapper>
 			<MenuBtnWrapper onClick={() => handleMenuClick(Menu.NOTIFICATION)}>
 				<div className="relative">

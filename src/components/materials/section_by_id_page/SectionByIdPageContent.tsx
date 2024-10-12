@@ -1,6 +1,6 @@
 'use client';
 import React, { useCallback, useEffect } from 'react';
-import { MaterialSearchParams } from '@/utils/types';
+import { MaterialSearchParams, SearchParams } from '@/utils/types';
 import PageContent from '@/components/layout/PageContent';
 import SectionService from '@/services/section/sectionService';
 import Loading from '@/components/common/Loading';

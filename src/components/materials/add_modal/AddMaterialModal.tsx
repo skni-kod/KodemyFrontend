@@ -1,12 +1,17 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '@/components/utils/Modal';
-import { useSidebarContext } from '@/contexts/SidebarStateContext';
 import SectionSelect from '@/components/materials/add_modal/stages/SectionSelect';
 import Button from '@/components/utils/Button';
 import { FaArrowRight } from 'react-icons/fa';
 import AddMaterial from '@/components/materials/add_modal/stages/AddMaterial';
 import CategorySelect from '@/components/materials/add_modal/stages/CategorySelect';
 import StageDots from '@/components/materials/add_modal/StageDots';
+import useFetchState, { Status } from '@/utils/hooks/useFetchState';
+import { Section } from '@/services/section/types';
+import SectionService from '@/services/section/sectionService';
+import Loading from '@/components/common/Loading';
+import Error from '@/components/common/Error';
+import { TEXT } from '@/utils/constant';
 
 enum Stage {
 	SECTION,
@@ -14,22 +19,20 @@ enum Stage {
 	DETAILS,
 }
 
-export default function AddMaterialModal({
-	isOpen,
-	onClose,
-}: {
-	isOpen: boolean;
-	onClose: () => void;
-}) {
+export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
 	const [stage, setStage] = useState<Stage>(Stage.SECTION);
-	const { sections } = useSidebarContext();
+	const { data: sections, status, fetch: fetchSections } = useFetchState<Section[]>();
+
+	useEffect(() => fetchSections(SectionService.getSections), [fetchSections]);
+
 	const [data, setData] = useState<{
 		sectionId?: number;
 		categoryId?: number;
 		details?: any;
 	}>({});
 
-	if (!sections) return null;
+	if (status === Status.PENDING) return <Loading full />;
+	if (status === Status.ERROR || !sections) return <Error />;
 
 	const getModalSize = () => {
 		switch (stage) {
@@ -102,7 +105,7 @@ export default function AddMaterialModal({
 						{/*TODO Subheader <h4>Materiał zostanie dodany do: section/category</>*/}
 					</div>
 					<div className="w-full pt-8">{getStageComponent()}</div>
-					<div className="flex flex-col items-center gap-2 w-full pt-8">
+					<div className="flex w-full flex-col items-center gap-2 pt-8">
 						<Button onClick={() => setStage((state) => state + 1)} disabled={isStageBtnDisabled()}>
 							Następna&nbsp;
 							<FaArrowRight />

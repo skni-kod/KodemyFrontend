@@ -3,10 +3,10 @@ import Image from 'next/image';
 import DocumentsImage from '@/assets/material/documents.png';
 import React, { useState } from 'react';
 import { LuDot } from 'react-icons/lu';
-import { Material } from '@/services/material/types';
+import { Material, MaterialSearch } from '@/services/material/types';
 
 type MaterialUserBlockProps = {
-	data: Material;
+	data: MaterialSearch;
 	children: React.ReactNode;
 };
 
@@ -26,7 +26,7 @@ export default function MaterialListItem({ data: material, children }: MaterialU
 				<div className="flex w-full items-center justify-between text-sm">
 					<div className="flex items-center">
 						<Rating
-							initialValue={material.averageGrade}
+							initialValue={material.avgGrade}
 							SVGstyle={{ display: 'inline' }}
 							size={16}
 							allowFraction

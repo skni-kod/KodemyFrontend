@@ -20,7 +20,7 @@ type SidebarSection = {
 	icon: { light: string; dark: string };
 };
 
-const sidebarSections: SidebarSection[] = [
+export const sidebarSections: SidebarSection[] = [
 	{
 		id: 1,
 		name: 'Aplikacje webowe',

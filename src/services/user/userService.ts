@@ -14,7 +14,7 @@ export default class UserService extends ApiService {
 			page: page.toString(),
 			sort: UserSortField[sort],
 			sort_direction: SortDirection[sort_direction],
-			searchFields: filters ? JSON.stringify(filters) : '{}',
+			filters: filters ? JSON.stringify(filters) : '{}',
 		});
 
 		try {

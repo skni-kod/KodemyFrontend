@@ -13,7 +13,8 @@ import { MaterialSearch } from '@/services/material/types';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
-import { MATERIAL_PAGE_SIZE, MATERIAL_PAGE_SORT, MATERIAL_PAGE_SORT_DIRECTION } from '@/utils/constant';
+import { DEFAULT_PAGE_SIZE, DEFAULT_MATERIAL_PAGE_SORT, DEFAULT_PAGE_SORT_DIRECTION } from '@/utils/constant';
+import { parseFieldsFromURLSearchParam } from '@/utils/methods';
 
 interface MaterialResultsDisplayProps {
 	searchParams: MaterialSearchParams;
@@ -29,11 +30,11 @@ export default function MaterialResultsDisplay({
 	useEffect(() => {
 		fetchMaterials(() => {
 			return MaterialService.getMaterials({
-				size: searchParams.size ?? MATERIAL_PAGE_SIZE,
+				size: searchParams.size ?? DEFAULT_PAGE_SIZE,
 				page: searchParams.page ?? 0,
-				sort: searchParams.sort ? MAT_ORDER_OPTIONS[searchParams.sort].field : MATERIAL_PAGE_SORT,
-				sort_direction: searchParams.sort ? MAT_ORDER_OPTIONS[searchParams.sort].order : MATERIAL_PAGE_SORT_DIRECTION,
-				filters: searchParams.fields,
+				sort: searchParams.sort ? MAT_ORDER_OPTIONS[searchParams.sort].field : DEFAULT_MATERIAL_PAGE_SORT,
+				sort_direction: searchParams.sort ? MAT_ORDER_OPTIONS[searchParams.sort].order : DEFAULT_PAGE_SORT_DIRECTION,
+				filters: { ...searchParams.fields },
 			});
 		});
 	}, [fetchMaterials, searchParams]);
