@@ -11,6 +11,7 @@ import { Section } from '@/services/section/types';
 import SectionService from '@/services/section/sectionService';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
+import MaterialService from '@/services/material/materialService';
 
 enum Stage {
 	SECTION,
@@ -142,6 +143,23 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 		setStage((prevStage) => prevStage + 1);
 	};
 
+	const handlePublish = async () => {
+		try {
+			const response = await MaterialService.publishMaterial({
+				title: data.details.title,
+				description: data.details.description,
+				link: data.details.link,
+				typeId: data.sectionId!,
+				categoryId: data.categoryId!,
+				tagsIds: data.details.tagsIds.map((tagId: number[]) => Number(tagId)),
+			});
+			console.log('Material published successfully:', response);
+			handleClose();
+		} catch (error) {
+			console.error('Error publishing material:', error);
+		}
+	};
+
 	console.log('data', data);
 	return (
 		<>
@@ -157,9 +175,12 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 								<FaArrowLeft />
 								&nbsp; Poprzednie
 							</Button>
-							<Button onClick={handleNextClick} disabled={isNextStageBtnDisabled()}>
-								Następna&nbsp;
-								<FaArrowRight />
+							<Button
+								onClick={stage === Stage.SUMMARY ? handlePublish : handleNextClick}
+								disabled={isNextStageBtnDisabled()}
+							>
+								{stage === Stage.SUMMARY ? 'Opublikuj' : 'Następna'}&nbsp;
+								{stage === Stage.SUMMARY ? null : <FaArrowRight />}
 							</Button>
 						</div>
 						<StageDots count={Object.keys(Stage).length / 2} activeIndex={stage} />
