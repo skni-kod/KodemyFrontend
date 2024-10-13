@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from '@/components/utils/Modal';
 import SectionSelect from '@/components/materials/add_modal/stages/SectionSelect';
 import Button from '@/components/utils/Button';
-import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import AddMaterial from '@/components/materials/add_modal/stages/AddMaterial';
 import CategorySelect from '@/components/materials/add_modal/stages/CategorySelect';
 import StageDots from '@/components/materials/add_modal/StageDots';
@@ -11,7 +11,6 @@ import { Section } from '@/services/section/types';
 import SectionService from '@/services/section/sectionService';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
-import { TEXT } from '@/utils/constant';
 
 enum Stage {
 	SECTION,
@@ -31,8 +30,21 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 		details?: any;
 	}>({});
 
+	const [formData, setFormData] = useState({
+		title: '',
+		description: '',
+		link: '',
+		tagsIds: [],
+	});
+
 	if (status === Status.PENDING) return <Loading full />;
 	if (status === Status.ERROR || !sections) return <Error />;
+
+	const handleSectionSelect = (id: number) => {
+		if (data.sectionId !== id) {
+			setData({ sectionId: id, categoryId: undefined });
+		}
+	};
 
 	const getModalSize = () => {
 		switch (stage) {
@@ -59,13 +71,7 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 	const getStageComponent = () => {
 		switch (stage) {
 			case Stage.SECTION:
-				return (
-					<SectionSelect
-						sections={sections}
-						onClick={(id) => setData({ ...data, sectionId: id })}
-						selected={data.sectionId}
-					/>
-				);
+				return <SectionSelect sections={sections} onClick={handleSectionSelect} selected={data.sectionId} />;
 			case Stage.CATEGORY:
 				return (
 					<CategorySelect
@@ -75,7 +81,7 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 					/>
 				);
 			case Stage.DETAILS:
-				return <AddMaterial />;
+				return <AddMaterial initialData={formData} onChange={(details) => setFormData(details)} />;
 		}
 	};
 
@@ -85,31 +91,52 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 		onClose();
 	};
 
-	const isStageBtnDisabled = () => {
+	const isPreviousStageBtnDisabled = () => {
+		return stage === Stage.SECTION;
+	};
+
+	const isNextStageBtnDisabled = () => {
 		switch (stage) {
 			case Stage.SECTION:
 				return !data.sectionId;
 			case Stage.CATEGORY:
 				return !data.sectionId || !data.categoryId;
 			case Stage.DETAILS:
-				return !data.details;
+				return !formData.title || !formData.description || !formData.link || formData.tagsIds.length === 0;
 		}
 	};
 
+	const handlePreviousClick = () => {
+		setStage((prevStage) => prevStage - 1);
+	};
+
+	const handleNextClick = () => {
+		if (stage === Stage.DETAILS) {
+			setData({ ...data, details: formData });
+		}
+		setStage((prevStage) => prevStage + 1);
+	};
+
+	console.log('data', data);
 	return (
 		<>
 			{isOpen && (
 				<Modal onClose={handleClose} className={`${getModalSize()} max-w-xs xs:w-full`}>
 					<div className="w-full text-center">
 						<h3 className="text-3xl font-semibold">{getModalHeader()}</h3>
-						{/*TODO Subheader <h4>Materiał zostanie dodany do: section/category</>*/}
 					</div>
 					<div className="w-full pt-8">{getStageComponent()}</div>
 					<div className="flex w-full flex-col items-center gap-2 pt-8">
-						<Button onClick={() => setStage((state) => state + 1)} disabled={isStageBtnDisabled()}>
-							Następna&nbsp;
-							<FaArrowRight />
-						</Button>
+						<div className="flex gap-2">
+							<Button onClick={handlePreviousClick} disabled={isPreviousStageBtnDisabled()}>
+								<FaArrowLeft />
+								&nbsp; Poprzednie
+							</Button>
+							<Button onClick={handleNextClick} disabled={isNextStageBtnDisabled()}>
+								Następna&nbsp;
+								<FaArrowRight />
+							</Button>
+						</div>
 						<StageDots count={Object.keys(Stage).length / 2} activeIndex={stage} />
 					</div>
 				</Modal>
