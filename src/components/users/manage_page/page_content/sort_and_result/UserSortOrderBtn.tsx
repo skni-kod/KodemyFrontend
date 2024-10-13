@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa6';
-import { useRouter } from 'next/router';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { SortDirection } from '@/utils/api/types';
 
 type SortOrderBtnProps = {
@@ -15,7 +14,9 @@ export type OrderSortOption = {
 	order: SortDirection;
 };
 
-export const USER_ORDER_OPTIONS: OrderSortOption[] = [{ label: 'Data utworzenia', field: null, order: SortDirection.DESC }];
+export const USER_ORDER_OPTIONS: OrderSortOption[] = [
+	{ label: 'Data utworzenia', field: null, order: SortDirection.DESC },
+];
 
 export default function UserSortOrderBtn({ className = '', activeSort }: SortOrderBtnProps) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -50,9 +51,7 @@ export default function UserSortOrderBtn({ className = '', activeSort }: SortOrd
 						{USER_ORDER_OPTIONS.map((el, idx) => (
 							<li
 								key={idx}
-								className={`w-full px-2 py-2 ${
-									idx === selectedOrder && 'font-semibold text-primary'
-								} cursor-pointer`}
+								className={`w-full px-2 py-2 ${idx === selectedOrder && 'font-semibold text-primary'} cursor-pointer`}
 								onClick={() => handleOrder(idx)}
 							>
 								{el.label}

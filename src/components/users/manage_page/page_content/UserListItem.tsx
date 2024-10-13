@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { User, UserSearch } from '@/services/user/types';
+import { UserSearch } from '@/services/user/types';
 import IsActiveStatus from '@/components/users/manage_page/page_content/IsActiveStatus';
 
 type UserBlockProps = {
@@ -32,7 +32,7 @@ export default function UserListItem({ data: user, children }: UserBlockProps) {
 						<Image
 							src={user.photo}
 							alt={`Avatar użytkownika ${user.username}`}
-							className="aspect-square"
+							className="aspect-square rounded-full"
 							width="65"
 							height="65"
 						/>

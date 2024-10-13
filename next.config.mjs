@@ -10,6 +10,16 @@ const nextConfig = {
 			destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`,
 		},
 	],
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'avatars.githubusercontent.com',
+				port: '',
+				pathname: '/**',
+			},
+		],
+	},
 };
 
 export default nextConfig;
