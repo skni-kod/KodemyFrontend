@@ -16,6 +16,7 @@ enum Stage {
 	SECTION,
 	CATEGORY,
 	DETAILS,
+	SUMMARY,
 }
 
 export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -51,8 +52,8 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 			case Stage.SECTION:
 				return 'w-128';
 			case Stage.CATEGORY:
-				return 'w-full';
 			case Stage.DETAILS:
+			case Stage.SUMMARY:
 				return 'w-full';
 		}
 	};
@@ -65,6 +66,8 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 				return 'Wybierz kategorię';
 			case Stage.DETAILS:
 				return 'Opisz materiał';
+			case Stage.SUMMARY:
+				return 'Podsumowanie';
 		}
 	};
 
@@ -81,7 +84,26 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 					/>
 				);
 			case Stage.DETAILS:
-				return <AddMaterial initialData={formData} onChange={(details) => setFormData(details)} />;
+				return (
+					<AddMaterial
+						initialData={formData}
+						onChange={(details) => {
+							setFormData(details);
+						}}
+					/>
+				);
+			case Stage.SUMMARY:
+				return (
+					<div>
+						<h4>Podsumowanie</h4>
+						<p>Section ID: {data.sectionId}</p>
+						<p>Category ID: {data.categoryId}</p>
+						<p>Title: {data.details?.title}</p>
+						<p>Description: {data.details?.description}</p>
+						<p>Link: {data.details?.link}</p>
+						<p>Tags: {data.details?.tagsIds.join(', ')}</p>
+					</div>
+				);
 		}
 	};
 
@@ -102,7 +124,7 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 			case Stage.CATEGORY:
 				return !data.sectionId || !data.categoryId;
 			case Stage.DETAILS:
-				return !formData.title || !formData.description || !formData.link || formData.tagsIds.length === 0;
+				return false;
 		}
 	};
 
@@ -112,7 +134,10 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 
 	const handleNextClick = () => {
 		if (stage === Stage.DETAILS) {
-			setData({ ...data, details: formData });
+			setData((prevData) => ({
+				...prevData,
+				details: formData,
+			}));
 		}
 		setStage((prevStage) => prevStage + 1);
 	};

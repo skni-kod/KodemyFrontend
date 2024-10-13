@@ -12,6 +12,13 @@ export default function AddMaterial({
 	const [link, setLink] = useState(initialData?.link || '');
 	const [tagsIds, setTagsIds] = useState<string[]>(initialData?.tagsIds || []);
 
+	useEffect(() => {
+		setTitle(initialData?.title || '');
+		setDescription(initialData?.description || '');
+		setLink(initialData?.link || '');
+		setTagsIds(initialData?.tagsIds || []);
+	}, [initialData]);
+
 	return (
 		<div className="flex w-full flex-col gap-4">
 			<div className="form-group">
@@ -63,7 +70,11 @@ export default function AddMaterial({
 					id="tags"
 					type="text"
 					value={tagsIds.join(', ')}
-					onChange={(e) => setTagsIds(e.target.value.split(',').map((tag) => tag.trim()))}
+					onChange={(e) => {
+						const tags = e.target.value.split(',').map((tag) => tag.trim());
+						setTagsIds(tags);
+						onChange({ title, description, link, tagsIds: tags });
+					}}
 					className="w-full rounded-lg border p-2"
 					placeholder="Podaj tagi, oddzielone przecinkami"
 				/>
