@@ -1,36 +1,43 @@
+'use client';
+import React, { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
-import KodemyImageDark from '@/assets/logo/dark/kodemyBig.png';
-import KodemyImageWhite from '@/assets/logo/white/kodemyBig.png';
-import { Metadata } from '@/pages/_app';
-import Link from 'next/link';
-import { useEffect, useState, useRef } from 'react';
+import Kodemy from '@/assets/logo/dark/kodemyBig.png';
 
-export default function KodemyLogo({ ratio = 1 }) {
-	const image = [KodemyImageDark, KodemyImageWhite][0];
-	const btnRef = useRef<HTMLAnchorElement>(null);
-	const [imgDimensions, setImgDimensions] = useState({ width: 0, height: 0 });
+type KodemyLogoProps = {
+	className?: string;
+	ratio?: number;
+};
+
+export default function KodemyLogo({ className = 'h-full w-full', ratio = 1 }: KodemyLogoProps) {
+	const [image, setImage] = useState<{ src: string; width: number; height: number }>({
+		src: Kodemy.src,
+		width: Kodemy.width,
+		height: Kodemy.height,
+	});
+
+	/*const importImg = useMemo(() => {
+		return import('@/assets/logo/dark/kodemyBig.png');
+	}, []);
 
 	useEffect(() => {
-		if (btnRef.current) {
-			setImgDimensions({
-				width: ((btnRef.current.clientHeight * image.width) / image.height) * ratio,
-				height: btnRef.current.clientHeight * ratio,
-			});
-		}
-	}, [btnRef.current, ratio]);
+		importImg.then(({ default: { src, width, height } }) => {
+			setImage({ src, width: clientHeight * (width / height) * ratio, height: clientHeight * ratio });
+		});
+	}, [importImg, ratio]);*/
 
 	return (
-		<Link href="/" className="block h-full" ref={btnRef}>
-			{imgDimensions.width && imgDimensions.height && (
-				<Image
-					src={image.src}
-					alt={Metadata.title.default}
-					className="cursor-pointer md:block"
-					width={imgDimensions.width}
-					height={imgDimensions.height}
-					priority={true}
-				/>
-			)}
-		</Link>
+		<div className={className}>
+			<Image
+				src={image.src}
+				width={image.width}
+				height={image.height}
+				alt="Logo strony"
+				style={{
+					height: '100%',
+					width: 'auto',
+				}}
+				priority
+			/>
+		</div>
 	);
 }

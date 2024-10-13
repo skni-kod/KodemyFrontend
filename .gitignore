@@ -1,11 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-HELP.md
-
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
+.yarn/install-state.gz
 
 # testing
 /coverage
@@ -25,7 +24,6 @@ HELP.md
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
 
 # local env files
 .env*.local
@@ -36,9 +34,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# WebStorm
-/.idea
-
-# VS Code
-.vscode/

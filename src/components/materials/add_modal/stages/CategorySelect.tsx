@@ -1,8 +1,5 @@
-import { Category, Section } from '@/hooks/services/useSectionService';
-import getIconAsset from '@/components/layout/sidebar/helper/SidebarAssets';
-import Image from 'next/image';
-import { useThemeStore } from '@/store/themeSlice';
 import clsx from 'clsx';
+import { Category } from '@/services/section/types';
 
 type CategorySelectProps = {
 	categories: Category[];
@@ -12,19 +9,17 @@ type CategorySelectProps = {
 
 export default function CategorySelect({ categories, selected, onClick }: CategorySelectProps) {
 	return (
-		<ul className="flex flex-col items-center gap-4 w-full list-none">
+		<ul className="flex w-full list-none flex-col items-center gap-4">
 			{categories.map(({ id, name }) => (
 				<li
 					key={id}
 					className={clsx(
-						'flex items-center gap-4 w-full px-6 py-4 border-2 rounded-xl',
-						selected !== id
-							? 'border-overlay2bg hover:bg-overlay2bg cursor-pointer'
-							: 'border-primary text-primary',
+						'flex w-full items-center gap-4 rounded-xl border-2 px-6 py-4',
+						selected !== id ? 'border-overlay2bg hover:bg-overlay2bg cursor-pointer' : 'border-primary text-primary',
 					)}
 					onClick={() => onClick(id)}
 				>
-					<span className="w-full text-xl font-normal text-center">{name}</span>
+					<span className="w-full text-center text-xl font-normal">{name}</span>
 				</li>
 			))}
 		</ul>

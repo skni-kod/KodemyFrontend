@@ -1,13 +1,100 @@
-import SidebarMenu from '@/components/menus/SidebarMenu';
-import SidebarFooter from '@/components/layout/sidebar/SidebarFooter';
+'use client';
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import codingLanguage from '@/assets/section/dark/coding-language.png';
+import codingLanguageWhite from '@/assets/section/white/coding-language.png';
+import consoleI from '@/assets/section/dark/console.png';
+import consoleIWhite from '@/assets/section/white/console.png';
+import internet from '@/assets/section/dark/internet.png';
+import internetWhite from '@/assets/section/white/internet.png';
+import moreInfo from '@/assets/section/dark/more-information.png';
+import moreInfoWhite from '@/assets/section/white/more-information.png';
+import retroGame from '@/assets/section/dark/retro-game.png';
+import retroGameWhite from '@/assets/section/white/retro-game.png';
+import { useSidebar } from '@/contexts/SidebarContext';
 
-export default function Sidebar({ className }: { className?: string }) {
+type SidebarSection = {
+	id: number;
+	name: string;
+	icon: { light: string; dark: string };
+};
+
+export const sidebarSections: SidebarSection[] = [
+	{
+		id: 1,
+		name: 'Aplikacje webowe',
+		icon: {
+			light: internet.src,
+			dark: internetWhite.src,
+		},
+	},
+	{
+		id: 2,
+		name: 'GameDev',
+		icon: {
+			light: consoleI.src,
+			dark: consoleIWhite.src,
+		},
+	},
+	{
+		id: 3,
+		name: 'Elektronika/Retro',
+		icon: {
+			light: retroGame.src,
+			dark: retroGameWhite.src,
+		},
+	},
+	{
+		id: 4,
+		name: 'Programowanie',
+		icon: {
+			light: codingLanguage.src,
+			dark: codingLanguageWhite.src,
+		},
+	},
+	{
+		id: 5,
+		name: 'Inne',
+		icon: {
+			light: moreInfo.src,
+			dark: moreInfoWhite.src,
+		},
+	},
+];
+
+export default function Sidebar() {
+	const sidebar = useSidebar();
+
 	return (
-		<div className={className}>
-			<nav className="flex flex-col w-inherit h-inherit">
-				<SidebarMenu />
-				<SidebarFooter />
-			</nav>
+		<div className={`fixed min-h-full ${!sidebar.isOpen ? 'w-side' : 'w-expandSide'} bg-bg shadow-md`}>
+			<ul className="flex h-full w-full list-none flex-col pt-2">
+				{sidebarSections.map(({ id, name, icon }) => (
+					<Link
+						key={id}
+						href={`/sections/${id}`}
+						className="flex w-full cursor-pointer flex-row items-center bg-bg hover:bg-bgHover"
+					>
+						<div className="p-5">
+							<Image
+								src={icon.light}
+								width={24}
+								height={24}
+								alt={name}
+								style={{
+									width: 'auto',
+									height: 'auto',
+								}}
+							/>
+						</div>
+						{
+							<span className={`transition-width duration-300 ease-in-out ${!sidebar.isOpen ? 'hidden w-0' : ''}`}>
+								{name}
+							</span>
+						}
+					</Link>
+				))}
+			</ul>
 		</div>
 	);
 }

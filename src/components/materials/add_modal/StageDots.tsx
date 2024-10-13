@@ -8,13 +8,9 @@ interface StageDotsProps {
 export default function StageDots({ count, activeIndex }: StageDotsProps) {
 	return (
 		<div>
-			{[...Array(count)].map((_, idx) => (
-				<div key={idx} className="inline-block m-1">
-					<div
-						className={`${idx === activeIndex ? 'w-6' : 'w-4'} h-4 rounded-full bg-gray-500`}
-					></div>
-				</div>
-			))}
+			<div className="m-1 inline-block">
+				<span className="h-4">{activeIndex + 1}</span> / <span className="h-4">{count}</span>
+			</div>
 		</div>
 	);
 }

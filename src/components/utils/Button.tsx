@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function Button({
 	children,
 	onClick,
@@ -9,7 +11,7 @@ export default function Button({
 }) {
 	return (
 		<button
-			className="flex items-center bg-primary text-text2primary font-semibold px-3 py-2 rounded"
+			className="flex h-[2.5rem] cursor-pointer items-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-textOnPrimary hover:bg-primaryHover"
 			onClick={onClick}
 			disabled={disabled}
 		>
