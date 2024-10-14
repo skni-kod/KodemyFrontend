@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 import UserByIdPageContent from '@/components/users/by_id_page/UserByIdPageContent';
 
 export const metadata: Metadata = {
-	title: 'Profil użytkownika',
+	title: 'Konto użytkownika',
 };
 
 export default function UserByIdPage({

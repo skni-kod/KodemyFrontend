@@ -1,4 +1,4 @@
-import Title from '@/components/common/modal/common/Title';
+import Title from '@/components/common/modal/common/UserCardTitle';
 import CloseCross from '@/components/common/modal/common/CloseCross';
 import { Rating } from 'react-simple-star-rating';
 import { useState } from 'react';

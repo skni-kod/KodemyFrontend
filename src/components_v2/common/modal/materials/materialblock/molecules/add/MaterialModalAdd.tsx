@@ -1,4 +1,4 @@
-import Title from '@/components/common/modal/common/Title';
+import Title from '@/components/common/modal/common/UserCardTitle';
 import CloseCross from '@/components/common/modal/common/CloseCross';
 import CloseButton from '@/components/common/modal/common/CloseButton';
 import List from './atoms/List';

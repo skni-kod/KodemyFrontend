@@ -1,72 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
 import AvatarImage from '@/assets/avatar.png';
-import Title from '@/components/users/by_id_page/page_content/Title';
-
-interface UserData {
-	id: string;
-	username: string;
-	email: string | null;
-	createdDate: string;
-	photo: string;
-	role: {
-		name: string;
-	};
-}
-
-function transformRoleName(role: string) {
-	switch (role) {
-		case 'ROLE_USER':
-			return 'Użytkownik';
-		case 'ROLE_MODERATOR':
-			return 'Moderator';
-		case 'ROLE_ADMIN':
-			return 'Admin';
-		case 'ROLE_SUPERADMIN':
-			return 'SuperAdmin';
-		default:
-			return role;
-	}
-}
-
-function calculateTimeDifference(createdDate: string) {
-	const currentDate = new Date();
-	const creationDate = new Date(createdDate);
-	const timeDifference = currentDate.getTime() - creationDate.getTime();
-
-	const minutesDifference = Math.floor(timeDifference / (1000 * 60));
-	const hoursDifference = Math.floor(minutesDifference / 60);
-	const daysDifference = Math.floor(hoursDifference / 24);
-	const monthsDifference = Math.floor(daysDifference / 30);
-	const yearsDifference = Math.floor(daysDifference / 365);
-
-	if (yearsDifference > 0) {
-		return yearsDifference === 1 ? `${yearsDifference} rok temu` : `${yearsDifference} lat temu`;
-	} else if (monthsDifference > 0) {
-		return monthsDifference === 1
-			? `${monthsDifference} miesiąc temu`
-			: `${monthsDifference} miesiące temu`;
-	} else if (daysDifference > 0) {
-		return daysDifference === 1 ? `${daysDifference} dzień temu` : `${daysDifference} dni temu`;
-	} else if (hoursDifference > 0) {
-		return hoursDifference === 1
-			? `${hoursDifference} godzinę temu`
-			: `${hoursDifference} godziny temu`;
-	} else if (minutesDifference > 0) {
-		return minutesDifference === 1
-			? `${minutesDifference} minutę temu`
-			: `${minutesDifference} minuty temu`;
-	} else {
-		return 'Mniej niż 1 minutę temu';
-	}
-}
-
+import UserCardTitle from '@/components/users/by_id_page/page_content/UserCardTitle';
+import { User } from '@/services/user/types';
+import { calculateTimeDifference, transformRoleName } from '@/utils/methods';
+import UserCardBody from '@/components/users/by_id_page/page_content/UserCardBody';
+import UserCard from '@/components/users/by_id_page/page_content/UserCard';
+import { TEXT } from '@/utils/constant';
 
 interface UserDetailsSectionProps {
-	userData: UserData;
+	user: User;
 }
 
-const UserDetailsSection: React.FC<UserDetailsSectionProps> = ({ userData }) => {
+const UserDetailsSection: React.FC<UserDetailsSectionProps> = ({ user }) => {
 	const [isEditingProfile, setIsEditingProfile] = useState(false);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
@@ -87,49 +33,45 @@ const UserDetailsSection: React.FC<UserDetailsSectionProps> = ({ userData }) => 
 
 	const tab = 'ml-4';
 	return (
-		<div className="pb-[2vw] px-[4vw] md:pb-4 md:px-9 shadow-md border-2 rounded-3xl bg-white2black text-grey2white border-grey2white ">
-			<Title
-				title={'Szczegóły'}
+		<UserCard>
+			<UserCardTitle
+				title={TEXT.USER.USER_DETAILS}
 				isAdminOrSuperAdmin={false}
 				isEditing={isEditingProfile}
 				setIsEditing={setIsEditingProfile}
 			/>
-			<div className="flex justify-between items-center">
-				<div
-					className={`flex-none ${avatarSize} p-[1vw] md:p-1 flex justify-center items-center aspect-square`}
-				>
+			<UserCardBody>
+				<div className={`flex-none ${avatarSize} flex aspect-square items-center justify-center p-[1vw] md:p-1`}>
 					<img
-						src={userData && userData.photo ? userData.photo : AvatarImage.src}
-						alt="Avatar użytkownika"
-						className={`rounded-full flex justify-center items-center ${avatarSize}`}
+						src={user && user.photo ? user.photo : AvatarImage.src}
+						alt={TEXT.USER.AVATAR}
+						className={`flex items-center justify-center rounded-full ${avatarSize}`}
 					/>
 				</div>
-				<div className="grow flex justify-between items-center px-[3vw] md:px-5">
+				<div className="flex grow items-center justify-between px-[3vw] md:px-5">
 					<div>
-						<div className="text-[2.82vw] md:text-xl py-[1vw] md:py-1 text-black2white text-bold mt-0.5 text-ellipsis">
-							{userData.username}
+						<div className="text-black2white text-bold text-ellipsis py-[1vw] text-[2.82vw] md:py-1 md:text-xl">
+							{user.username}
 						</div>
-						<div className="text-[2vw] md:text-sm py-[0.9vw] md:py-1 text-bold">
-							Email: <div className={tab}>{userData.email || 'Brak adresu email'}</div>
+						<div className="text-bold py-[0.9vw] text-[2vw] md:py-1 md:text-sm">
+							{TEXT.USER.EMAIL}: <div className={tab}>{user.email || 'Brak adresu email'}</div>
 						</div>
-						<h1 className="text-[2vw] md:text-sm py-[0.9vw] md:py-1 text-bold relative">
-							Rola:
+						<h1 className="text-bold relative py-[0.9vw] text-[2vw] md:py-1 md:text-sm">
+							{TEXT.USER.ROLE}:
 							<div className={tab}>
 								{isAdminOrSuperAdmin && isEditingProfile ? (
 									<>
 										<button onClick={handleMenuToggle} className="pr-1">
-											{transformRoleName(userData.role.name)}{' '}
+											{transformRoleName(user.role.name)}
 										</button>
-										<span className="inline-block">
-											{isMenuOpen ? <RxTriangleUp /> : <RxTriangleDown />}
-										</span>
+										<span className="inline-block">{isMenuOpen ? <RxTriangleUp /> : <RxTriangleDown />}</span>
 										{isMenuOpen && (
-											<div className="absolute right-7 top-10 w-fit z-10 bg-white2verydarkgrey mt-2">
-												<ul className="max-h-none w-max m-0 p-0 overflow-auto cursor-pointer list-none border-2 rounded-lg">
+											<div className="bg-white2verydarkgrey absolute right-7 top-10 z-10 mt-2 w-fit">
+												<ul className="m-0 max-h-none w-max cursor-pointer list-none overflow-auto rounded-lg border-2 p-0">
 													{userRolesData.map((role, index) => (
 														<li key={index}>
 															<button
-																className="w-full h-auto 2sm:py-[0.5vw] px-2 text-left border-none bg-transparent hover:text-sky-500 cursor-pointer transition duration-300"
+																className="2sm:py-[0.5vw] h-auto w-full cursor-pointer border-none bg-transparent px-2 text-left transition duration-300 hover:text-sky-500"
 																onClick={() => handleRoleSelect(index)}
 															>
 																{transformRoleName(role)}
@@ -141,18 +83,17 @@ const UserDetailsSection: React.FC<UserDetailsSectionProps> = ({ userData }) => 
 										)}
 									</>
 								) : (
-									<span>{transformRoleName(userData.role.name)}</span>
+									<span>{transformRoleName(user.role.name)}</span>
 								)}
 							</div>
 						</h1>
-						<div className="text-[2vw] md:text-sm py-[0.9vw] md:py-1 text-bold">
-							Utworzono:
-							<div className={tab}>{calculateTimeDifference(userData.createdDate)}</div>
+						<div className="text-bold py-[0.9vw] text-[2vw] md:py-1 md:text-sm">
+							{TEXT.USER.CREATED}:<div className={tab}>{calculateTimeDifference(user.createdDate)}</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+			</UserCardBody>
+		</UserCard>
 	);
 };
 
