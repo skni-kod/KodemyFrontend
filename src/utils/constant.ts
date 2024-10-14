@@ -71,6 +71,7 @@ export const TEXT = {
 	},
 	IMPLEMENTATION_PROCESS: 'W trakcie implementacji',
 	NOT_FOUND_ELEMENTS: 'Nie znaleziono elementów',
+	INPUT_PHRASE: 'Wpisz frazę',
 };
 
 export const DEFAULT_PAGE_SIZE = 20;

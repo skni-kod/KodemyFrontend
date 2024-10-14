@@ -29,9 +29,10 @@ export default function CategoryBubbleBtns({ sections, activeSectionId, activesC
 		});
 
 		const params = new URLSearchParams(searchParams);
-		const fields = JSON.parse(params.get('fields') ?? '{}');
-		console.log({ ...fields, categoryIds });
-		params.set('fields', JSON.stringify({ ...fields, categoryIds }));
+		params.set(
+			'fields',
+			buildFieldsForURLSearchParam({ ...parseFieldsFromURLSearchParam(params.get('fields')), categoryIds }),
+		);
 		router.push(`?${params}`);
 	};
 

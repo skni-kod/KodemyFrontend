@@ -1,11 +1,11 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { MaterialSearchParams } from '@/utils/types';
-import { doIf, isNumber } from '@/utils/methods';
+import { MaterialSearchParams, SearchParams } from '@/utils/types';
+import { doIf, isNumber, parseFieldsFromURLSearchParam } from '@/utils/methods';
 import { notFound } from 'next/navigation';
 import MaterialsByUserIdPageContent from '@/components/materials/by_user_page/MaterialsByUserIdPageContent';
 import PageQueryProps from '@/utils/types/page/pageQueryProps';
-import { PAGE_TITLE } from '@/utils/constant';
+import { DEFAULT_PAGE_SIZE, PAGE_TITLE } from '@/utils/constant';
 
 export const metadata: Metadata = {
 	title: PAGE_TITLE.MATERIAL_BY_USER,
@@ -14,14 +14,20 @@ export const metadata: Metadata = {
 export default function MaterialsByUserIdPage({
 	params: { id },
 	searchParams,
-}: PageQueryProps<MaterialSearchParams> & { params: { id: string } }) {
+}: PageQueryProps<SearchParams<string>> & { params: { id: string } }) {
 	doIf(!isNumber(id), () => notFound());
+	const materialSearchParams: MaterialSearchParams = {
+		page: searchParams?.page ?? 1,
+		size: searchParams?.size ?? DEFAULT_PAGE_SIZE,
+		sort: searchParams?.sort ?? 0,
+		fields: parseFieldsFromURLSearchParam(searchParams?.fields),
+	};
 
 	return (
 		<MaterialsByUserIdPageContent
 			title={metadata.title?.toString() ?? ''}
 			id={Number(id)}
-			searchParams={searchParams ?? {}}
+			searchParams={materialSearchParams}
 		/>
 	);
 }

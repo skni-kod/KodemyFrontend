@@ -1,4 +1,4 @@
-import SearchParams from '@/utils/types/searchParams';
+import { SearchParamsEnhanced } from '@/utils/types/index';
 
 export type UserFields = {
 	phrase?: string;
@@ -7,6 +7,6 @@ export type UserFields = {
 	role?: string;
 };
 
-type UserSearchParams = SearchParams<UserFields>;
+type UserSearchParams = SearchParamsEnhanced<UserFields>;
 
 export default UserSearchParams;
