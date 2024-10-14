@@ -1,14 +1,16 @@
+import { TEXT } from '@/utils/constant';
+
 export default function transformRoleName(role: string) {
 	switch (role) {
 		case 'ROLE_USER':
-			return 'Użytkownik';
+			return TEXT.USER.ROLES.ROLE_USER;
 		case 'ROLE_MODERATOR':
-			return 'Moderator';
+			return TEXT.USER.ROLES.ROLE_MODERATOR;
 		case 'ROLE_ADMIN':
-			return 'Admin';
+			return TEXT.USER.ROLES.ROLE_ADMIN;
 		case 'ROLE_SUPERADMIN':
-			return 'SuperAdmin';
+			return TEXT.USER.ROLES.ROLE_SUPERADMIN;
 		default:
-			return role;
+			return TEXT.USER.ROLES.UNKNOWN;
 	}
 }

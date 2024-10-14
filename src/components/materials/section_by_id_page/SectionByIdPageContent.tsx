@@ -28,7 +28,7 @@ export default function SectionByIdPageContent({ title, id: sectionId, searchPar
 	}, [sectionId, sections, title]);
 
 	if (status === Status.PENDING) return <Loading full />;
-	if (status === Status.ERROR || !sections) return <Error />;
+	if (status === Status.ERROR || !sections) return <Error container />;
 
 	return (
 		<PageContent headerValue={findSectionName()}>
