@@ -6,9 +6,9 @@ export enum Status {
 	ERROR,
 }
 
-const useFetchState = <T>() => {
+const useFetchState = <T>(startStatus?: Status) => {
 	const [state, setState] = useState<T | null>(null);
-	const [status, setStatus] = useState<Status>(Status.PENDING);
+	const [status, setStatus] = useState<Status>(startStatus ?? Status.PENDING);
 
 	const fetch = useCallback((fetchFunction: () => Promise<any>) => {
 		fetchFunction()

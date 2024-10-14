@@ -8,6 +8,7 @@ import DetailsDropDown from '@/components/materials/section_by_id_page/page_cont
 import MetadataProps from '@/utils/types/page/metadataProps';
 import FiltersBlock from '@/components/materials/common/page_head/FiltersBlock';
 import { useSessionContext } from '@/contexts/SessionContext';
+import { PAGE_TITLE } from '@/utils/constant';
 
 type MaterialsByUserIdPageContentProps = MetadataProps & {
 	id: number;
@@ -22,9 +23,9 @@ export default function MaterialsByUserIdPageContent({
 	const { session } = useSessionContext();
 
 	return (
-		<PageContent headerValue={'Materiały: ' + session?.user.username}>
+		<PageContent headerValue={session ? 'Materiały: ' + session.user.username : PAGE_TITLE.MATERIAL_BY_USER}>
 			<SectionBubbleBtns />
-			<FiltersBlock fields={searchParams.fields ?? {}} />
+			<FiltersBlock fields={searchParams.fields} />
 			<MaterialResultsDisplay searchParams={searchParams} DetailsDropDownComponent={DetailsDropDown} />
 		</PageContent>
 	);

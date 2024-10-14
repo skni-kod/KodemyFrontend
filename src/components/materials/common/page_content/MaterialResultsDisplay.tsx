@@ -13,8 +13,6 @@ import { MaterialSearch } from '@/services/material/types';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
-import { DEFAULT_PAGE_SIZE, DEFAULT_MATERIAL_PAGE_SORT, DEFAULT_PAGE_SORT_DIRECTION } from '@/utils/constant';
-import { parseFieldsFromURLSearchParam } from '@/utils/methods';
 
 interface MaterialResultsDisplayProps {
 	searchParams: MaterialSearchParams;
@@ -30,10 +28,10 @@ export default function MaterialResultsDisplay({
 	useEffect(() => {
 		fetchMaterials(() => {
 			return MaterialService.getMaterials({
-				size: searchParams.size ?? DEFAULT_PAGE_SIZE,
-				page: searchParams.page ?? 0,
-				sort: searchParams.sort ? MAT_ORDER_OPTIONS[searchParams.sort].field : DEFAULT_MATERIAL_PAGE_SORT,
-				sort_direction: searchParams.sort ? MAT_ORDER_OPTIONS[searchParams.sort].order : DEFAULT_PAGE_SORT_DIRECTION,
+				size: searchParams.size,
+				page: searchParams.page - 1,
+				sort: MAT_ORDER_OPTIONS[searchParams.sort].field,
+				sort_direction: MAT_ORDER_OPTIONS[searchParams.sort].order,
 				filters: { ...searchParams.fields },
 			});
 		});

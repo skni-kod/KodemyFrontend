@@ -1,4 +1,4 @@
-import SearchParams from '@/utils/types/searchParams';
+import { SearchParamsEnhanced } from '@/utils/types/index';
 
 export type MaterialFields = {
 	phrase?: string;
@@ -6,6 +6,6 @@ export type MaterialFields = {
 	grade?: number;
 };
 
-type MaterialSearchParams = SearchParams<MaterialFields>;
+type MaterialSearchParams = SearchParamsEnhanced<MaterialFields>;
 
 export default MaterialSearchParams;
