@@ -34,14 +34,7 @@ export default class MaterialService extends ApiService {
 		}
 	}
 
-	public static async publishMaterial(material: {
-		title: string;
-		description: string;
-		link: string;
-		typeId: number;
-		categoryId: number;
-		tagsIds: number[];
-	}): Promise<MaterialAdd> {
+	public static async publishMaterial(material: MaterialAdd): Promise<MaterialAdd> {
 		console.log('material', material);
 		try {
 			const response = await kodemyApi.post<MaterialAdd>('/api/materials', material);

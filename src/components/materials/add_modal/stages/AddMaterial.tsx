@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import TypesService from '@/services/tag/typesService';
+import useFetchState, { Status } from '@/utils/hooks/useFetchState';
+import Loading from '@/components/common/Loading';
+import Error from '@/components/common/Error';
+import Tags from '@/services/tag/types/tags';
 
 export default function AddMaterial({
 	onChange,
@@ -18,6 +23,14 @@ export default function AddMaterial({
 		setLink(initialData?.link || '');
 		setTagsIds(initialData?.tagsIds || []);
 	}, [initialData]);
+
+	const { data: tags, status, fetch } = useFetchState<Tags>();
+	useEffect(() => fetch((): Promise<Tags> => TypesService.getTags()), []);
+
+	if (status === Status.PENDING) return <Loading scale="small" />;
+	if (status === Status.ERROR || !tags) return <Error />;
+
+	console.log('tags', tags);
 
 	return (
 		<div className="flex w-full flex-col gap-4">
