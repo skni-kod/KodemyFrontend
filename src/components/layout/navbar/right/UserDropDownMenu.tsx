@@ -9,6 +9,7 @@ import {
 import Link from 'next/link';
 import { IconType } from 'react-icons';
 import { useSessionContext } from '@/contexts/SessionContext';
+import { TEXT, USER_NAV_MENU } from '@/utils/constant';
 
 enum Menu {
 	HEADER,
@@ -33,7 +34,7 @@ export default function UserDropDownMenu({ menuClassName }: UserDropDownMenuProp
 	const menus: MenuLink[] = [
 		{
 			type: Menu.LINK,
-			label: 'Konto użytkownika',
+			label: USER_NAV_MENU.LINK.USER_ACCOUNT,
 			icon: IoPersonOutline,
 			href: `/users/${session?.user.id}`,
 		},
@@ -43,7 +44,7 @@ export default function UserDropDownMenu({ menuClassName }: UserDropDownMenuProp
 		},
 		{
 			type: Menu.LINK,
-			label: 'Twoje materiały',
+			label: USER_NAV_MENU.LINK.YOUR_MATERIALS,
 			icon: IoDocumentOutline,
 			href: `/materials/users/${session?.user.id}`,
 			isParsed: true,
@@ -54,13 +55,13 @@ export default function UserDropDownMenu({ menuClassName }: UserDropDownMenuProp
 		},
 		{
 			type: Menu.LINK,
-			label: 'Materiały użytkowników',
+			label: USER_NAV_MENU.LINK.USERS_MATERIALS,
 			icon: IoFileTrayOutline,
 			href: '/materials/manage',
 		},
 		{
 			type: Menu.LINK,
-			label: 'Użytkownicy',
+			label: USER_NAV_MENU.LINK.USERS,
 			icon: IoPersonOutline,
 			href: '/users/manage',
 		},
@@ -68,15 +69,15 @@ export default function UserDropDownMenu({ menuClassName }: UserDropDownMenuProp
 			type: Menu.HEADER,
 			label: 'KONTO',
 		},
-		{
+		/*{
 			type: Menu.LINK,
-			label: 'Ustawienia',
+			label: USER_NAV_MENU.LINK.SETTINGS,
 			icon: IoSettingsOutline,
 			href: '/settings',
-		},
+		},*/
 		{
 			type: Menu.LINK,
-			label: 'Wyloguj',
+			label: USER_NAV_MENU.LINK.LOGOUT,
 			icon: IoLogOutOutline,
 			href: '/auth/logout',
 		},
@@ -94,7 +95,7 @@ export default function UserDropDownMenu({ menuClassName }: UserDropDownMenuProp
 							</div>
 						) : (
 							<Link
-								className="hover:bg-bgHover flex cursor-pointer items-center gap-1 bg-bg px-1 py-2 tracking-wide"
+								className="flex cursor-pointer items-center gap-1 bg-bg px-1 py-2 tracking-wide hover:bg-bgHover"
 								href={href!}
 							>
 								{React.createElement(icon!)}

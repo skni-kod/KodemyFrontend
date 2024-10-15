@@ -1,6 +1,7 @@
 import React from 'react';
 import { UserSearch } from '@/services/user/types';
 import UserListItem from '@/components/users/manage_page/page_content/UserListItem';
+import { TEXT } from '@/utils/constant';
 
 export default function UserListBlock({
 	users,
@@ -20,7 +21,7 @@ export default function UserListBlock({
 					))}
 				</>
 			) : (
-				<div className="w-full pt-2.5 text-center">Nie znaleziono elementów</div>
+				<div className="w-full pt-2.5 text-center">{TEXT.NOT_FOUND_ELEMENTS}</div>
 			)}
 		</div>
 	);

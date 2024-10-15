@@ -1,5 +1,9 @@
-import { useState } from 'react';
-import Title from '@/components/users/by_id_page/page_content/Title';
+import React, { useState } from 'react';
+import UserCardTitle from '@/components/users/by_id_page/page_content/UserCardTitle';
+import { User } from '@/services/user/types';
+import UserCardBody from '@/components/users/by_id_page/page_content/UserCardBody';
+import UserCard from '@/components/users/by_id_page/page_content/UserCard';
+import { TEXT } from '@/utils/constant';
 
 interface UserData {
 	id: string;
@@ -13,26 +17,25 @@ interface UserData {
 }
 
 interface UserDetailsSectionProps {
-	userData: UserData;
+	user: User;
 }
 
-const UserSessionSection: React.FC<UserDetailsSectionProps> = ({ userData }) => {
+const UserSessionSection: React.FC<UserDetailsSectionProps> = ({ user }) => {
 	const [isEditingSession, setIsEditingSession] = useState(false);
-	const isAdminOrSuperAdmin =
-		userData.role.name === 'ROLE_ADMIN' || userData.role.name === 'ROLE_SUPERADMIN';
+	const isAdminOrSuperAdmin = user.role.name === 'ROLE_ADMIN' || user.role.name === 'ROLE_SUPERADMIN';
 
 	return (
-		<div className="pb-[2vw] px-[4vw] md:pb-4 md:px-9 shadow-md border-2 rounded-3xl bg-white2black text-grey2white border-grey2white ">
-			<Title
-				title={'Sesja'}
-				isAdminOrSuperAdmin={isAdminOrSuperAdmin}
+		<UserCard>
+			<UserCardTitle
+				title={TEXT.USER.USER_SESSIONS}
+				isAdminOrSuperAdmin={false}
 				isEditing={isEditingSession}
 				setIsEditing={setIsEditingSession}
 			/>
-			<div className="flex justify-between items-center ">
-				Strona dodycząca aktywności użytkownika
-			</div>
-		</div>
+			<UserCardBody>
+				<span className="italic text-gray-600">{TEXT.IMPLEMENTATION_PROCESS}</span>
+			</UserCardBody>
+		</UserCard>
 	);
 };
 

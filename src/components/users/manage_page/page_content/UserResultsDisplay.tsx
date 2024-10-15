@@ -6,7 +6,7 @@ import SortOrderBtn, {
 import ResultCount from '@/components/common/page_content/sort_and_result/ResultCount';
 import MaterialListBlock from '@/components/materials/section_by_id_page/page_content/MaterialListBlock';
 import Paginator from '@/components/common/page_content/Paginator';
-import { MaterialSearchParams } from '@/utils/types';
+import { MaterialSearchParams, UserSearchParams } from '@/utils/types';
 import MaterialService from '@/services/material/materialService';
 import { Pageable } from '@/utils/api/types';
 import { MaterialSearch } from '@/services/material/types';
@@ -15,25 +15,28 @@ import Error from '@/components/common/Error';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 import { DEFAULT_PAGE_SIZE, DEFAULT_MATERIAL_PAGE_SORT, DEFAULT_PAGE_SORT_DIRECTION } from '@/utils/constant';
 import UserService from '@/services/user/userService';
-import UserSortOrderBtn from '@/components/users/manage_page/page_content/sort_and_result/UserSortOrderBtn';
+import UserSortOrderBtn, {
+	USER_ORDER_OPTIONS,
+} from '@/components/users/manage_page/page_content/sort_and_result/UserSortOrderBtn';
 import UserListBlock from '@/components/users/manage_page/page_content/UserListBlock';
+import UserSearch from '@/services/user/types/userSearch';
 
 interface UserResultsDisplayProps {
-	searchParams: MaterialSearchParams;
+	searchParams: UserSearchParams;
 	DetailsDropDownComponent: React.ComponentType<{ id: number }>;
 }
 
 export default function UserResultsDisplay({ searchParams, DetailsDropDownComponent }: UserResultsDisplayProps) {
-	const { data: users, status, fetch: fetchUsers } = useFetchState<Pageable<MaterialSearch>>();
+	const { data: users, status, fetch: fetchUsers } = useFetchState<Pageable<UserSearch>>();
 
 	useEffect(() => {
 		fetchUsers(() => {
 			return UserService.getUsers({
-				size: searchParams.size ?? DEFAULT_PAGE_SIZE,
-				page: searchParams.page ?? 0,
-				sort: searchParams.sort ? MAT_ORDER_OPTIONS[searchParams.sort].field : DEFAULT_MATERIAL_PAGE_SORT,
-				sort_direction: searchParams.sort ? MAT_ORDER_OPTIONS[searchParams.sort].order : DEFAULT_PAGE_SORT_DIRECTION,
-				filters: undefined,
+				size: searchParams.size,
+				page: searchParams.page,
+				sort: USER_ORDER_OPTIONS[searchParams.sort].field,
+				sort_direction: USER_ORDER_OPTIONS[searchParams.sort].order,
+				filters: searchParams.fields,
 			});
 		});
 	}, [fetchUsers, searchParams]);
@@ -52,7 +55,7 @@ export default function UserResultsDisplay({ searchParams, DetailsDropDownCompon
 				<UserSortOrderBtn activeSort={searchParams.sort} />
 				<ResultCount value={users.content.length} />
 			</div>
-			<UserListBlock users={users.content} DetailsDropDownComponent={DetailsDropDownComponent} />
+			<UserListBlock users={users.content} DetailsDropDownComponentProp={DetailsDropDownComponent} />
 			<div className="flex w-full justify-center pt-6">
 				<Paginator page={users.pageable.pageNumber + 1} total={users.totalPages} />
 			</div>

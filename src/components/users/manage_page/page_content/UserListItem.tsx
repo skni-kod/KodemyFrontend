@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { UserSearch } from '@/services/user/types';
 import IsActiveStatus from '@/components/users/manage_page/page_content/IsActiveStatus';
+import AvatarImage from '@/assets/avatar.png';
 
 type UserBlockProps = {
 	data: UserSearch;
@@ -24,13 +25,13 @@ export default function UserListItem({ data: user, children }: UserBlockProps) {
 				onClick={handleOpenDetails}
 			>
 				<div className="flex w-full items-center justify-between text-sm">
-					<IsActiveStatus isActive={Math.floor(Math.random() * 2) % 2 === 0} />
+					<IsActiveStatus isActive={user.isEnabled} />
 					<div className="">{user.createdDate.toString().split('T')[0]}</div>
 				</div>
 				<div className="flex w-full justify-between gap-6 py-3">
 					<div>
 						<Image
-							src={user.photo}
+							src={user.photo ?? AvatarImage.src}
 							alt={`Avatar użytkownika ${user.username}`}
 							className="aspect-square rounded-full"
 							width="65"

@@ -28,7 +28,7 @@ export default function UserResultsDisplay({ searchParams, DetailsDropDownCompon
 			return UserService.getUsers({
 				size: searchParams.size ?? DEFAULT_PAGE_SIZE,
 				page: searchParams.page ?? 0,
-				sort: searchParams.sort ? USER_ORDER_OPTIONS[searchParams.sort].field : DEFAULT_USER_PAGE_SORT,
+				sort: USER_ORDER_OPTIONS[searchParams.sort].field,
 				sort_direction: searchParams.sort ? USER_ORDER_OPTIONS[searchParams.sort].order : DEFAULT_PAGE_SORT_DIRECTION,
 				filters: searchParams.fields,
 			});

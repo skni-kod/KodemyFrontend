@@ -3,6 +3,7 @@ import { FaAngleDown, FaAngleUp } from 'react-icons/fa6';
 import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { MaterialFields } from '@/utils/types/materialSearchParams';
+import { buildFieldsForURLSearchParam, isHasText, parseFieldsFromURLSearchParam } from '@/utils/methods';
 
 type GradeFieldProps = {
 	className: string;
@@ -28,11 +29,13 @@ export default function GradeField({ className, activeGrade }: GradeFieldProps) 
 	const handleGrade = (idx: number) => {
 		setSelectedGrade((prevState) => (prevState == idx ? 0 : idx));
 		const params = new URLSearchParams(searchParams);
-		const fields: MaterialFields = {
-			...JSON.parse(params.get('fields') ?? '{}'),
-			grade: idx,
-		};
-		params.set('fields', JSON.stringify(fields));
+		params.set(
+			'fields',
+			buildFieldsForURLSearchParam({
+				...parseFieldsFromURLSearchParam(params.get('fields')),
+				grade: idx,
+			}),
+		);
 		router.push(`?${params}`);
 	};
 

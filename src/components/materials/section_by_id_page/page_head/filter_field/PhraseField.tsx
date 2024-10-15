@@ -2,8 +2,9 @@
 import { FaArrowRight } from 'react-icons/fa6';
 import { useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { isHasText } from '@/utils/methods';
+import { buildFieldsForURLSearchParam, isHasText, parseFieldsFromURLSearchParam } from '@/utils/methods';
 import { MaterialFields } from '@/utils/types/materialSearchParams';
+import { TEXT } from '@/utils/constant';
 
 type PhraseFieldProps = {
 	className: string;
@@ -18,18 +19,20 @@ export default function PhraseField({ className, activePhrase }: PhraseFieldProp
 
 	const handlePhrase = () => {
 		const params = new URLSearchParams(searchParams);
-		const fields: MaterialFields = {
-			...JSON.parse(params.get('fields') ?? '{}'),
-			phrase: isHasText(phrase) ? phrase : undefined,
-		};
-		params.set('fields', JSON.stringify(fields));
+		params.set(
+			'fields',
+			buildFieldsForURLSearchParam({
+				...parseFieldsFromURLSearchParam(params.get('fields')),
+				phrase: isHasText(phrase) ? phrase : undefined,
+			}),
+		);
 		router.push(`?${params}`);
 	};
 
 	return (
 		<div className={className}>
 			<input
-				placeholder="Wpisz frazę"
+				placeholder={TEXT.INPUT_PHRASE}
 				className="border-0 bg-transparent focus:outline-none"
 				value={phrase}
 				name="phrase"

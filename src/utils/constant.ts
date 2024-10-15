@@ -28,7 +28,7 @@ export const USER_NAV_MENU = {
 		LOGOUT: 'Wyloguj',
 		SETTINGS: 'Ustawienia',
 		USER_ACCOUNT: 'Konto użytkownika',
-		USER_MATERIALS: 'Materiały użytkowników',
+		USERS_MATERIALS: 'Materiały użytkowników',
 		USERS: 'Użytkownicy',
 		YOUR_MATERIALS: 'Twoje materiały',
 	},
@@ -53,6 +53,25 @@ export const TEXT = {
 	WHAT_LOOKING_FOR: 'Czego szukasz?',
 	SIGN_IN: 'Zaloguj się',
 	LOOKING_FOR: 'Szukaj',
+	USER: {
+		EMAIL: 'E-mail',
+		ROLE: 'Rola',
+		ROLES: {
+			ROLE_USER: 'Użytkownik',
+			ROLE_MODERATOR: 'Moderator',
+			ROLE_ADMIN: 'Administrator',
+			ROLE_SUPERADMIN: 'Administrator',
+			UNKNOWN: 'Nowa rola',
+		},
+		CREATED: 'Utworzono',
+		USER_MATERIALS: 'Materiały użytkownika',
+		USER_SESSIONS: 'Sesje użytkownika',
+		USER_DETAILS: 'Szczegóły',
+		AVATAR: 'Avatar użytkownika',
+	},
+	IMPLEMENTATION_PROCESS: 'W trakcie implementacji',
+	NOT_FOUND_ELEMENTS: 'Nie znaleziono elementów',
+	INPUT_PHRASE: 'Wpisz frazę',
 };
 
 export const DEFAULT_PAGE_SIZE = 20;
