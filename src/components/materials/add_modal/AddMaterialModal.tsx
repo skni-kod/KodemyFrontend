@@ -39,6 +39,8 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 		tagsIds: [],
 	});
 
+	console.log('formData', formData);
+
 	if (status === Status.PENDING) return <Loading full />;
 	if (status === Status.ERROR || !sections) return <Error />;
 
@@ -111,6 +113,12 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 	const handleClose = () => {
 		setStage(Stage.SECTION);
 		setData({});
+		setFormData({
+			title: '',
+			description: '',
+			link: '',
+			tagsIds: [],
+		});
 		onClose();
 	};
 
@@ -154,6 +162,13 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 				tagsIds: data.details.tagsIds.map((tagId: number[]) => Number(tagId)),
 			});
 			console.log('Material published successfully:', response);
+			setFormData({
+				title: '',
+				description: '',
+				link: '',
+				tagsIds: [],
+			});
+			setData({});
 			handleClose();
 		} catch (error) {
 			console.error('Error publishing material:', error);
