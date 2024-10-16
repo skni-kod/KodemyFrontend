@@ -6,7 +6,7 @@ import Error from '@/components/common/Error';
 import Tags from '@/services/tag/types/tags';
 import { Details } from '@/components/materials/add_modal/AddMaterialModal';
 import Tag from '@/services/tag/types/tag';
-
+import { IoCloseOutline } from 'react-icons/io5';
 export default function AddMaterial({
 	onChange,
 	initialData,
@@ -20,6 +20,7 @@ export default function AddMaterial({
 	const [tagsIds, setTagsIds] = useState(initialData.tagsIds);
 	const [tagSearch, setTagSearch] = useState('');
 	const [filteredTags, setFilteredTags] = useState<Tags>([]);
+	const [showTagList, setShowTagList] = useState(false);
 
 	const { data: tags, status, fetch } = useFetchState<Tags>();
 	useEffect(() => fetch((): Promise<Tags> => TypesService.getTags()), []);
@@ -39,6 +40,16 @@ export default function AddMaterial({
 			setTagsIds(newTagsIds);
 			onChange({ title, description, link, tagsIds: newTagsIds });
 		}
+	};
+
+	const handleRemoveTag = (tagId: number) => {
+		const newTagsIds = tagsIds.filter((id) => id !== tagId);
+		setTagsIds(newTagsIds);
+		onChange({ title, description, link, tagsIds: newTagsIds });
+	};
+
+	const handleTagInputClick = () => {
+		setShowTagList(true);
 	};
 
 	if (status === Status.PENDING) return <Loading scale="small" />;
@@ -68,7 +79,7 @@ export default function AddMaterial({
 					id="description"
 					value={description}
 					onChange={(e) => setDescription(e.target.value)}
-					className="w-full rounded-lg border p-2"
+					className="w-full resize-none rounded-lg border p-2"
 					placeholder="Podaj opis materiału"
 				></textarea>
 			</div>
@@ -99,10 +110,11 @@ export default function AddMaterial({
 					onChange={(e) => setTagSearch(e.target.value)}
 					className="w-full rounded-lg border p-2"
 					placeholder="Wpisz nazwę tagu"
+					onClick={handleTagInputClick}
 				/>
 			</div>
 
-			{filteredTags.length > 0 && (
+			{showTagList && filteredTags.length > 0 && (
 				<div className="form-group">
 					<ul className="max-h-40 w-full overflow-y-auto rounded-lg border">
 						{filteredTags.map((tag) => (
@@ -122,8 +134,15 @@ export default function AddMaterial({
 					{tagsIds.map((tagId) => {
 						const tag = tags.find((t) => t.id === tagId);
 						return tag ? (
-							<span key={tag.id} className="rounded bg-gray-200 p-2">
-								{tag.name}
+							<span
+								key={tag.id}
+								className="group relative flex cursor-pointer items-center justify-center rounded bg-gray-200 p-2"
+								onClick={() => handleRemoveTag(tag.id)}
+							>
+								<span className="text-lg text-gray-800">{tag.name}</span>
+								<span className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
+									<IoCloseOutline className="h-10 w-10 font-semibold text-gray-600" />
+								</span>
 							</span>
 						) : null;
 					})}

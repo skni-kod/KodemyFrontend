@@ -87,6 +87,13 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 		}
 	};
 
+	const handleAddMaterialChange = (details: Details) => {
+		setData((prevData) => ({
+			...prevData,
+			details,
+		}));
+	};
+
 	const getStageComponent = () => {
 		switch (stage) {
 			case Stage.SECTION:
@@ -100,17 +107,7 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 					/>
 				);
 			case Stage.DETAILS:
-				return (
-					<AddMaterial
-						initialData={data.details!}
-						onChange={(details: Details) => {
-							setData((prevData) => ({
-								...prevData,
-								details,
-							}));
-						}}
-					/>
-				);
+				return <AddMaterial initialData={data.details!} onChange={handleAddMaterialChange} />;
 			case Stage.SUMMARY:
 				return (
 					<div className="text-center">
@@ -175,9 +172,6 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 			);
 
 			console.log('Material published successfully:', response);
-			setData({
-				details: emptyDetails,
-			});
 			handleClose();
 		} catch (error) {
 			console.error('Error publishing material:', error);
