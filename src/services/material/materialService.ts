@@ -34,11 +34,13 @@ export default class MaterialService extends ApiService {
 		}
 	}
 
-	public static async publishMaterial(material: MaterialAdd): Promise<MaterialAdd> {
-		console.log('material', material);
+	public static async publishMaterial(material: MaterialAdd, token: string): Promise<MaterialAdd> {
 		try {
-			const response = await kodemyApi.post<MaterialAdd>('/api/materials', material);
-			console.log('response', response);
+			const response = await kodemyApi.post<MaterialAdd>('/api/materials', material, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
 			return response.data;
 		} catch (err) {
 			return Promise.reject(new InternalServerErrorApiError());

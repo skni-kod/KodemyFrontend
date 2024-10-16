@@ -12,6 +12,7 @@ import SectionService from '@/services/section/sectionService';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
 import MaterialService from '@/services/material/materialService';
+import { useSessionContext } from '@/contexts/SessionContext';
 
 enum Stage {
 	SECTION,
@@ -21,6 +22,7 @@ enum Stage {
 }
 
 export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+	const { session } = useSessionContext();
 	const [stage, setStage] = useState<Stage>(Stage.SECTION);
 	const { data: sections, status, fetch: fetchSections } = useFetchState<Section[]>();
 
@@ -153,14 +155,23 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 
 	const handlePublish = async () => {
 		try {
-			const response = await MaterialService.publishMaterial({
-				title: data.details.title,
-				description: data.details.description,
-				link: data.details.link,
-				typeId: data.sectionId!,
-				categoryId: data.categoryId!,
-				tagsIds: data.details.tagsIds.map((tagId: number[]) => Number(tagId)),
-			});
+			if (!session || !session.token?.bearer) {
+				console.error('No session or Bearer token found');
+				return;
+			}
+
+			const response = await MaterialService.publishMaterial(
+				{
+					title: data.details.title,
+					description: data.details.description,
+					link: data.details.link,
+					typeId: data.sectionId!,
+					categoryId: data.categoryId!,
+					tagsIds: data.details.tagsIds.map((tagId: number[]) => Number(tagId)),
+				},
+				session.token.bearer,
+			);
+
 			console.log('Material published successfully:', response);
 			setFormData({
 				title: '',
