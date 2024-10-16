@@ -95,15 +95,15 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 				return (
 					<CategorySelect
 						categories={data.sectionId ? sections[data.sectionId].categories : []}
-						onClick={(id) => setData({ ...data, categoryId: id })}
+						onClick={(id: number) => setData({ ...data, categoryId: id })}
 						selected={data.categoryId}
 					/>
 				);
 			case Stage.DETAILS:
 				return (
 					<AddMaterial
-						initialData={data.details}
-						onChange={(details) => {
+						initialData={data.details!}
+						onChange={(details: Details) => {
 							setData((prevData) => ({
 								...prevData,
 								details,

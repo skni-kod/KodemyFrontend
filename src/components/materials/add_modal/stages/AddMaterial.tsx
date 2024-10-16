@@ -12,27 +12,20 @@ export default function AddMaterial({
 	initialData,
 }: {
 	onChange: (details: Details) => void;
-	initialData?: Details;
+	initialData: Details;
 }) {
-	const [title, setTitle] = useState(initialData?.title || '');
-	const [description, setDescription] = useState(initialData?.description || '');
-	const [link, setLink] = useState(initialData?.link || '');
-	const [tagsIds, setTagsIds] = useState<number[]>(initialData?.tagsIds || []);
+	const [title, setTitle] = useState(initialData.title);
+	const [description, setDescription] = useState(initialData.description);
+	const [link, setLink] = useState(initialData.link);
+	const [tagsIds, setTagsIds] = useState(initialData.tagsIds);
 	const [tagSearch, setTagSearch] = useState('');
 	const [filteredTags, setFilteredTags] = useState<Tags>([]);
-
-	useEffect(() => {
-		setTitle(initialData?.title || '');
-		setDescription(initialData?.description || '');
-		setLink(initialData?.link || '');
-		setTagsIds(initialData?.tagsIds || []);
-	}, [initialData]);
 
 	const { data: tags, status, fetch } = useFetchState<Tags>();
 	useEffect(() => fetch((): Promise<Tags> => TypesService.getTags()), []);
 
 	useEffect(() => {
-		if (tags && tagSearch) {
+		if (tags) {
 			const search = tagSearch.toLowerCase();
 			setFilteredTags(tags.filter((tag: Tag) => tag.name.toLowerCase().includes(search) && !tagsIds.includes(tag.id)));
 		} else {
