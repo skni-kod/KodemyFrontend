@@ -63,6 +63,8 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 		}
 	};
 
+	console.log('data', data);
+
 	const getModalSize = () => {
 		switch (stage) {
 			case Stage.SECTION:
@@ -101,7 +103,7 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 			case Stage.CATEGORY:
 				return (
 					<CategorySelect
-						categories={data.sectionId ? sections[data.sectionId].categories : []}
+						categories={data.sectionId ? sections[data.sectionId - 1].categories : []}
 						onClick={(id: number) => setData({ ...data, categoryId: id })}
 						selected={data.categoryId}
 					/>
