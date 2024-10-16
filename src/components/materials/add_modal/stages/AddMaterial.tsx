@@ -4,20 +4,22 @@ import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
 import Tags from '@/services/tag/types/tags';
+import { Details } from '@/components/materials/add_modal/AddMaterialModal';
+import Tag from '@/services/tag/types/tag';
 
 export default function AddMaterial({
 	onChange,
 	initialData,
 }: {
-	onChange: (details: any) => void;
-	initialData?: any;
+	onChange: (details: Details) => void;
+	initialData?: Details;
 }) {
 	const [title, setTitle] = useState(initialData?.title || '');
 	const [description, setDescription] = useState(initialData?.description || '');
 	const [link, setLink] = useState(initialData?.link || '');
 	const [tagsIds, setTagsIds] = useState<number[]>(initialData?.tagsIds || []);
-	const [tagSearch, setTagSearch] = useState(''); // State for tag search
-	const [filteredTags, setFilteredTags] = useState<Tags>([]); // State for filtered tags
+	const [tagSearch, setTagSearch] = useState('');
+	const [filteredTags, setFilteredTags] = useState<Tags>([]);
 
 	useEffect(() => {
 		setTitle(initialData?.title || '');
@@ -32,11 +34,7 @@ export default function AddMaterial({
 	useEffect(() => {
 		if (tags && tagSearch) {
 			const search = tagSearch.toLowerCase();
-			setFilteredTags(
-				tags.filter(
-					(tag) => tag.name.toLowerCase().includes(search) && !tagsIds.includes(tag.id), // Exclude selected tags
-				),
-			);
+			setFilteredTags(tags.filter((tag: Tag) => tag.name.toLowerCase().includes(search) && !tagsIds.includes(tag.id)));
 		} else {
 			setFilteredTags([]);
 		}
@@ -44,7 +42,7 @@ export default function AddMaterial({
 
 	const handleAddTag = (tagId: number) => {
 		if (!tagsIds.includes(tagId)) {
-			const newTagsIds = [...tagsIds, tagId];
+			const newTagsIds: number[] = [...tagsIds, tagId];
 			setTagsIds(newTagsIds);
 			onChange({ title, description, link, tagsIds: newTagsIds });
 		}

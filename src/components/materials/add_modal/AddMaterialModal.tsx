@@ -21,6 +21,20 @@ enum Stage {
 	SUMMARY,
 }
 
+export type Details = {
+	title: string;
+	description: string;
+	link: string;
+	tagsIds: number[];
+};
+
+const emptyDetails: Details = {
+	title: '',
+	description: '',
+	link: '',
+	tagsIds: [],
+};
+
 export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
 	const { session } = useSessionContext();
 	const [stage, setStage] = useState<Stage>(Stage.SECTION);
@@ -31,24 +45,21 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 	const [data, setData] = useState<{
 		sectionId?: number;
 		categoryId?: number;
-		details?: any;
-	}>({});
-
-	const [formData, setFormData] = useState({
-		title: '',
-		description: '',
-		link: '',
-		tagsIds: [],
+		details?: Details;
+	}>({
+		details: emptyDetails,
 	});
-
-	console.log('formData', formData);
 
 	if (status === Status.PENDING) return <Loading full />;
 	if (status === Status.ERROR || !sections) return <Error />;
 
 	const handleSectionSelect = (id: number) => {
 		if (data.sectionId !== id) {
-			setData({ sectionId: id, categoryId: undefined });
+			setData((prevData) => ({
+				...prevData,
+				sectionId: id,
+				categoryId: undefined,
+			}));
 		}
 	};
 
@@ -72,7 +83,7 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 			case Stage.DETAILS:
 				return 'Opisz materiał';
 			case Stage.SUMMARY:
-				return 'Podsumowanie';
+				return 'Potwierdzenie publikacji';
 		}
 	};
 
@@ -91,22 +102,20 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 			case Stage.DETAILS:
 				return (
 					<AddMaterial
-						initialData={formData}
+						initialData={data.details}
 						onChange={(details) => {
-							setFormData(details);
+							setData((prevData) => ({
+								...prevData,
+								details,
+							}));
 						}}
 					/>
 				);
 			case Stage.SUMMARY:
 				return (
-					<div>
-						<h4>Podsumowanie</h4>
-						<p>Section ID: {data.sectionId}</p>
-						<p>Category ID: {data.categoryId}</p>
-						<p>Title: {data.details?.title}</p>
-						<p>Description: {data.details?.description}</p>
-						<p>Link: {data.details?.link}</p>
-						<p>Tags: {data.details?.tagsIds.join(', ')}</p>
+					<div className="text-center">
+						<h4>Czy na pewno chcesz opublikować ten materiał?</h4>
+						<p>Po kliknięciu &ldquo;Opublikuj&rdquo;, materiał zostanie udostępniony.</p>
 					</div>
 				);
 		}
@@ -114,12 +123,8 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 
 	const handleClose = () => {
 		setStage(Stage.SECTION);
-		setData({});
-		setFormData({
-			title: '',
-			description: '',
-			link: '',
-			tagsIds: [],
+		setData({
+			details: emptyDetails,
 		});
 		onClose();
 	};
@@ -135,7 +140,10 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 			case Stage.CATEGORY:
 				return !data.sectionId || !data.categoryId;
 			case Stage.DETAILS:
-				return false;
+				return !data.sectionId || !data.categoryId;
+			case Stage.SUMMARY:
+				const { title, description, link, tagsIds = [] } = data.details || {};
+				return !title?.trim() || !description?.trim() || !link?.trim() || tagsIds.length === 0;
 		}
 	};
 
@@ -144,12 +152,6 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 	};
 
 	const handleNextClick = () => {
-		if (stage === Stage.DETAILS) {
-			setData((prevData) => ({
-				...prevData,
-				details: formData,
-			}));
-		}
 		setStage((prevStage) => prevStage + 1);
 	};
 
@@ -162,31 +164,26 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 
 			const response = await MaterialService.publishMaterial(
 				{
-					title: data.details.title,
-					description: data.details.description,
-					link: data.details.link,
+					title: data.details!.title,
+					description: data.details!.description,
+					link: data.details!.link,
 					typeId: data.sectionId!,
 					categoryId: data.categoryId!,
-					tagsIds: data.details.tagsIds.map((tagId: number[]) => Number(tagId)),
+					tagsIds: data.details!.tagsIds,
 				},
 				session.token.bearer,
 			);
 
 			console.log('Material published successfully:', response);
-			setFormData({
-				title: '',
-				description: '',
-				link: '',
-				tagsIds: [],
+			setData({
+				details: emptyDetails,
 			});
-			setData({});
 			handleClose();
 		} catch (error) {
 			console.error('Error publishing material:', error);
 		}
 	};
 
-	console.log('data', data);
 	return (
 		<>
 			{isOpen && (
