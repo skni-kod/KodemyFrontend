@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa6';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { SortDirection } from '@/utils/api/types';
+import { UserSortField } from '@/services/user/types';
 
 type SortOrderBtnProps = {
 	className?: string;
@@ -15,7 +16,7 @@ export type OrderSortOption = {
 };
 
 export const USER_ORDER_OPTIONS: OrderSortOption[] = [
-	{ label: 'Data utworzenia', field: null, order: SortDirection.DESC },
+	{ label: 'Identyfikator', field: UserSortField.ID, order: SortDirection.ASC },
 ];
 
 export default function UserSortOrderBtn({ className = '', activeSort }: SortOrderBtnProps) {
