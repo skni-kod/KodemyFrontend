@@ -53,9 +53,7 @@ export default function SortOrderBtn({ className = '', activeSort }: SortOrderBt
 						{MAT_ORDER_OPTIONS.map((el, idx) => (
 							<li
 								key={idx}
-								className={`w-full px-2 py-2 ${
-									idx === selectedOrder && 'font-semibold text-primary'
-								} cursor-pointer`}
+								className={`w-full px-2 py-2 ${idx === selectedOrder && 'font-semibold text-primary'} cursor-pointer`}
 								onClick={() => handleOrder(idx)}
 							>
 								{el.label}

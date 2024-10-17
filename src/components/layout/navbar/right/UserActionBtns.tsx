@@ -53,7 +53,7 @@ export default function UserActionBtns() {
 	return (
 		<>
 			<MenuBtnWrapper onClick={() => {}}>
-				<SlPlus className="h-full text-2xl text-primary" onClick={handleMenuAddMaterialClick}/>
+				<SlPlus className="h-full text-2xl text-primary" onClick={handleMenuAddMaterialClick} />
 				<AddMaterialModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 			</MenuBtnWrapper>
 			<MenuBtnWrapper onClick={() => handleMenuClick(Menu.NOTIFICATION)}>

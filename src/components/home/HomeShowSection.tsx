@@ -6,7 +6,7 @@ import { TEXT } from '@/utils/constant';
 
 export default function HomeShowSection() {
 	return (
-		<section className="min-h-fullContent relative flex w-full items-center">
+		<section className="relative flex min-h-fullContent w-full items-center">
 			<div className="absolute bottom-0 left-0 flex h-full w-full items-end justify-center overflow-hidden">
 				<ShowBlockImage />
 			</div>

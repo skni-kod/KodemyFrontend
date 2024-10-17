@@ -9,7 +9,7 @@ export default function Button({
 }) {
 	return (
 		<button
-			className="hover:bg-primaryHover flex items-center rounded bg-primary px-3 py-1 font-normal text-textOnPrimary"
+			className="flex items-center rounded bg-primary px-3 py-1 font-normal text-textOnPrimary hover:bg-primaryHover"
 			onClick={onClick}
 			disabled={disabled}
 		>

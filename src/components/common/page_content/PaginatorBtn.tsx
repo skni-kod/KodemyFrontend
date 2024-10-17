@@ -20,14 +20,7 @@ export function PaginatorBtn({
 	return (
 		<>
 			{visible && (
-				<button
-					className={clsx(
-						className,
-						selected ? 'border-primary' : '',
-						classNames,
-					)}
-					onClick={onClick}
-				>
+				<button className={clsx(className, selected ? 'border-primary' : '', classNames)} onClick={onClick}>
 					{children}
 				</button>
 			)}

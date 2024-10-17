@@ -23,7 +23,7 @@ export default function UserAvatarBtn({ onClick = () => {} }: { onClick?: () => 
 				<Image
 					src={AvatarImage}
 					alt="Avatar użytkownika"
-					className="w-full h-full rounded-full cursor-pointer"
+					className="h-full w-full cursor-pointer rounded-full"
 					width={(containerHeight * AvatarImage.width) / AvatarImage.height}
 					height={containerHeight}
 					onClick={onClick}

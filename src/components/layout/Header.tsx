@@ -23,7 +23,7 @@ export default function Header() {
 					</div>
 				</div>
 				<div className="flex h-nav items-center pr-2">
-					<div className="h-navMenu flex flex-row items-center gap-2">
+					<div className="flex h-navMenu flex-row items-center gap-2">
 						<UserActionBlock />
 					</div>
 				</div>

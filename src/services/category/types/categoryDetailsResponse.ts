@@ -1,4 +1,4 @@
-import { Section } from '@/services/section/types/section';
+import { Section } from '@/services/section/types';
 
 type CategoryDetailsResponse = {
 	id: number;

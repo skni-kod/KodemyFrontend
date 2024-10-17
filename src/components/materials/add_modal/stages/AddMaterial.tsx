@@ -23,7 +23,7 @@ export default function AddMaterial({
 	const [showTagList, setShowTagList] = useState(false);
 
 	const { data: tags, status, fetch } = useFetchState<Tags>();
-	useEffect(() => fetch((): Promise<Tags> => TypesService.getTags()), []);
+	useEffect(() => fetch((): Promise<Tags> => TypesService.getTags()), [fetch]);
 
 	useEffect(() => {
 		if (tags) {

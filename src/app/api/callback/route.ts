@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { HttpStatusCode } from 'axios';
 import { NextApiResponse } from 'next';
+import { AUTH_PRE_SESSION } from '@/utils/constant';
 
 const redirectInit = { status: HttpStatusCode.PermanentRedirect };
 
-export const PRE_SESSION = 'pre_session';
-
 const preSessionCookie = {
-	name: PRE_SESSION,
+	name: AUTH_PRE_SESSION,
 	path: '/',
 	maxAge: 300,
 	sameSite: 'Strict',

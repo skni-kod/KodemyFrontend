@@ -3,7 +3,7 @@ import React from 'react';
 import { jwtDecode } from 'jwt-decode';
 import AuthService from '@/services/auth/authService';
 import { deleteCookie, getCookie } from 'cookies-next';
-import { PRE_SESSION } from '@/app/api/callback/route';
+import { AUTH_PRE_SESSION } from '@/utils/constant';
 
 const __SESSION_CACHE: {
 	signUri: string;
@@ -116,11 +116,11 @@ const SessionProvider = ({ session: sessionProp = undefined, signUri, children }
 		};
 
 		const loadFromAuthState = async () => {
-			const authStateCookieValue = getCookie(PRE_SESSION, {});
+			const authStateCookieValue = getCookie(AUTH_PRE_SESSION, {});
 			if (authStateCookieValue) {
 				const authStateJson = JSON.parse(atob(authStateCookieValue));
 				if (authStateJson) {
-					deleteCookie(PRE_SESSION, {});
+					deleteCookie(AUTH_PRE_SESSION, {});
 					return await checkOrUpdateTokens(authStateJson).then((tokens) =>
 						updateSession(tokens.bearer, tokens.refresh),
 					);

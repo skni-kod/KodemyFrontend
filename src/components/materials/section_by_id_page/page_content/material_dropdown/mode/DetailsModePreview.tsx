@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { FaAngleRight } from 'react-icons/fa6';
 import { Material } from '@/services/material/types';
-import { FetchState, FetchStateStatus } from '@/utils/api/types';
 import MaterialService from '@/services/material/materialService';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';

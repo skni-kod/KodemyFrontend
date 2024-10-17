@@ -12,7 +12,7 @@ export default function CategoryBubbleBtn({ name, onClick, selected = false }: C
 		<div
 			onClick={onClick}
 			className={clsx(
-				'shrink-0 cursor-pointer rounded-3xl border-2 bg-bg hover:bg-bgHover p-3 shadow-md',
+				'shrink-0 cursor-pointer rounded-3xl border-2 bg-bg p-3 shadow-md hover:bg-bgHover',
 				selected ? 'border-primary text-primary' : 'text-secondary',
 			)}
 		>

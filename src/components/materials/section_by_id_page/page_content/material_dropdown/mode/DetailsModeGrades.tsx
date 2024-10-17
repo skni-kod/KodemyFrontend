@@ -6,11 +6,10 @@ import Error from '@/components/common/Error';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 import { Material } from '@/services/material/types';
 
-
 export default function DetailsModeGrades({ id }: { id: number }) {
 	const { data: material, status, fetch } = useFetchState<Material>();
 
-	useEffect(() => fetch(() => MaterialService.getMaterialById(id)), []);
+	useEffect(() => fetch(() => MaterialService.getMaterialById(id)), [fetch, id]);
 
 	if (status === Status.PENDING) return <Loading scale="small" />;
 	if (status === Status.ERROR || !material) return <Error />;

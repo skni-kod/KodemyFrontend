@@ -9,8 +9,7 @@ type FiltersBlockProps = ComponentParentProps & {
 };
 
 export default function UserFiltersBlock({ fields }: FiltersBlockProps) {
-	const FILTER_FIELD_CLASSNAMES =
-		'flex items-center gap-2.5 p-2.5 border-2 rounded-2xl overflow-hidden';
+	const FILTER_FIELD_CLASSNAMES = 'flex items-center gap-2.5 p-2.5 border-2 rounded-2xl overflow-hidden';
 
 	return (
 		<div className="w-full px-4">

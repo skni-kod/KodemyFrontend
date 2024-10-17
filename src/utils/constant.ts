@@ -74,6 +74,8 @@ export const TEXT = {
 	INPUT_PHRASE: 'Wpisz frazę',
 };
 
+export const AUTH_PRE_SESSION = 'pre_session';
+
 export const DEFAULT_PAGE_SIZE = 20;
 export const DEFAULT_PAGE_SORT_DIRECTION = SortDirection.DESC;
 

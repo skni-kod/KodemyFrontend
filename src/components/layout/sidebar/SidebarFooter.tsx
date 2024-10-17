@@ -1,3 +1,3 @@
 export default function SidebarFooter() {
-	return <div className="w-full h-12 py-1.5"></div>;
+	return <div className="h-12 w-full py-1.5"></div>;
 }

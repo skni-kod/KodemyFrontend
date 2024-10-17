@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
 import AvatarImage from '@/assets/avatar.png';
 import UserCardTitle from '@/components/users/by_id_page/page_content/UserCardTitle';
@@ -7,6 +7,7 @@ import { calculateTimeDifference, transformRoleName } from '@/utils/methods';
 import UserCardBody from '@/components/users/by_id_page/page_content/UserCardBody';
 import UserCard from '@/components/users/by_id_page/page_content/UserCard';
 import { TEXT } from '@/utils/constant';
+import Image from 'next/image';
 
 interface UserDetailsSectionProps {
 	user: User;
@@ -42,7 +43,7 @@ const UserDetailsSection: React.FC<UserDetailsSectionProps> = ({ user }) => {
 			/>
 			<UserCardBody>
 				<div className={`flex-none ${avatarSize} flex aspect-square items-center justify-center p-[1vw] md:p-1`}>
-					<img
+					<Image
 						src={user && user.photo ? user.photo : AvatarImage.src}
 						alt={TEXT.USER.AVATAR}
 						className={`flex items-center justify-center rounded-full ${avatarSize}`}

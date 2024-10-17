@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import DetailsModePreview
-	from '@/components/materials/section_by_id_page/page_content/material_dropdown/mode/DetailsModePreview';
-import DetailsModeGrades
-	from '@/components/materials/section_by_id_page/page_content/material_dropdown/mode/DetailsModeGrades';
+import DetailsModePreview from '@/components/materials/section_by_id_page/page_content/material_dropdown/mode/DetailsModePreview';
+import DetailsModeGrades from '@/components/materials/section_by_id_page/page_content/material_dropdown/mode/DetailsModeGrades';
 
 enum DetailsMode {
 	OVERVIEW,
