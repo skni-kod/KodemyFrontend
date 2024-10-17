@@ -5,6 +5,8 @@ import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 import { Material } from '@/services/material/types';
+import Link from 'next/link';
+import { FaAngleRight } from 'react-icons/fa6';
 
 export default function DetailsModeGrades({ id }: { id: number }) {
 	const { data: material, status, fetch } = useFetchState<Material>();
@@ -18,28 +20,41 @@ export default function DetailsModeGrades({ id }: { id: number }) {
 		<div className="p-7">
 			<div className="w-full">
 				<h2 className="text-lg font-semibold">Oceny</h2>
-				<p className="pt-2">Średnia ocen: {material.averageGrade.toFixed(3)}</p>
+				<p className="pt-2">Średnia ocen: {material.averageGrade.toFixed(2)}</p>
 			</div>
 			<table>
 				<tbody>
-					{material.gradeStats.map((stat, index) => (
-						<tr className="border-b" key={index}>
-							<td className="flex items-center px-4 py-2">
-								<Rating
-									initialValue={material.gradeStats.length - index}
-									SVGstyle={{ display: 'inline' }}
-									size={16}
-									allowFraction
-									readonly
-								/>
-							</td>
-							<td className="px-4 py-2">
-								<h1>{stat}</h1>
-							</td>
-						</tr>
-					))}
+					{material.gradeStats
+						.slice()
+						.reverse()
+						.map((stat, index) => {
+							return (
+								<tr key={index}>
+									<td className="flex items-center px-4 py-2">
+										<Rating
+											initialValue={material.gradeStats.length - index}
+											SVGstyle={{ display: 'inline' }}
+											size={16}
+											allowFraction
+											readonly
+										/>
+									</td>
+									<td className="px-4 py-2">
+										<h1>{stat}</h1>
+									</td>
+								</tr>
+							);
+						})}
 				</tbody>
 			</table>
+			<div className="flex w-full justify-end pt-4">
+				<Link
+					href={material.link}
+					className="bg-grade text-gradeText flex h-9 items-center gap-1 rounded-xl px-4 text-lg font-semibold"
+				>
+					Przejdź <FaAngleRight />
+				</Link>
+			</div>
 		</div>
 	);
 }
