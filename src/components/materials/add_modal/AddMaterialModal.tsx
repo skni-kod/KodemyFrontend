@@ -63,8 +63,6 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 		}
 	};
 
-	console.log('data', data);
-
 	const getModalSize = () => {
 		switch (stage) {
 			case Stage.SECTION:

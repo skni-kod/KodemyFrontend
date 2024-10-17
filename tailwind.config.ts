@@ -29,6 +29,8 @@ const config: Config = {
 				bg: 'rgb(var(--background-color) / <alpha-value>)',
 				bgHover: 'rgb(var(--background-hover-color) / <alpha-value>)',
 				error: 'rgb(var(--error-color) / <alpha-value>)',
+				grade: 'rgb(var(--grade) / <alpha-value>)',
+				gradeText: 'rgb(var(--secondary-color) / <alpha-value>)',
 			},
 			height: {
 				inherit: 'inherit',
