@@ -17,8 +17,8 @@ export default function SectionSelect({ sections, selected, onClick }: SectionSe
 				<li
 					key={id}
 					className={clsx(
-						'flex w-full items-center gap-2 rounded-xl border-2 px-3 py-2',
-						selected !== id ? 'cursor-pointer' : 'border-primary text-primary',
+						'flex w-full items-center gap-2 rounded-xl border-2 bg-bg px-3 py-2',
+						selected !== id ? 'cursor-pointer hover:bg-bgHover' : 'border-primary text-primary',
 					)}
 					onClick={() => onClick(id)}
 				>

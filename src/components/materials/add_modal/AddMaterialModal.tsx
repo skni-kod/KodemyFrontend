@@ -40,7 +40,9 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 	const [stage, setStage] = useState<Stage>(Stage.SECTION);
 	const { data: sections, status, fetch: fetchSections } = useFetchState<Section[]>();
 
-	useEffect(() => fetchSections(SectionService.getSections), [fetchSections]);
+	useEffect(() => {
+		isOpen && fetchSections(SectionService.getSections);
+	}, [fetchSections, isOpen]);
 
 	const [data, setData] = useState<{
 		sectionId?: number;
@@ -50,8 +52,8 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 		details: emptyDetails,
 	});
 
+	if (!isOpen) return <></>;
 	if (status === Status.PENDING) return <Loading full />;
-	if (status === Status.ERROR || !sections) return <Error />;
 
 	const handleSectionSelect = (id: number) => {
 		if (data.sectionId !== id) {
@@ -94,7 +96,7 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 		}));
 	};
 
-	const getStageComponent = () => {
+	const getStageComponent = (sections: Section[]) => {
 		switch (stage) {
 			case Stage.SECTION:
 				return <SectionSelect sections={sections} onClick={handleSectionSelect} selected={data.sectionId} />;
@@ -112,7 +114,7 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 				return (
 					<div className="text-center">
 						<h4>Czy na pewno chcesz opublikować ten materiał?</h4>
-						<p>Po kliknięciu &ldquo;Opublikuj&rdquo;, materiał zostanie udostępniony.</p>
+						<p className="pt-2">Po kliknięciu &ldquo;Opublikuj&rdquo;, materiał zostanie udostępniony.</p>
 					</div>
 				);
 		}
@@ -182,26 +184,36 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 		<>
 			{isOpen && (
 				<Modal onClose={handleClose} className={`${getModalSize()} max-w-xs xs:w-full`}>
-					<div className="w-full text-center">
-						<h3 className="text-3xl font-semibold">{getModalHeader()}</h3>
-					</div>
-					<div className="w-full pt-8">{getStageComponent()}</div>
-					<div className="flex w-full flex-col items-center gap-2 pt-8">
-						<div className="flex gap-2">
-							<Button onClick={handlePreviousClick} disabled={isPreviousStageBtnDisabled()}>
-								<FaArrowLeft />
-								&nbsp; Poprzednie
-							</Button>
-							<Button
-								onClick={stage === Stage.SUMMARY ? handlePublish : handleNextClick}
-								disabled={isNextStageBtnDisabled()}
-							>
-								{stage === Stage.SUMMARY ? 'Opublikuj' : 'Następna'}&nbsp;
-								{stage === Stage.SUMMARY ? null : <FaArrowRight />}
-							</Button>
-						</div>
-						<StageDots count={Object.keys(Stage).length / 2} activeIndex={stage} />
-					</div>
+					{status === Status.ERROR || !sections ? (
+						<Error />
+					) : (
+						<>
+							<div className="w-full text-center">
+								<h3 className="text-3xl font-semibold">{getModalHeader()}</h3>
+							</div>
+							<div className="w-full pt-8">{getStageComponent(sections)}</div>
+							<div className="flex w-full flex-col items-center gap-2 pt-8">
+								<div className="flex items-center gap-2">
+									<Button onClick={handlePreviousClick} disabled={isPreviousStageBtnDisabled()}>
+										<span className="flex items-center gap-2">
+											<FaArrowLeft />
+											Poprzednie
+										</span>
+									</Button>
+									<StageDots count={Object.keys(Stage).length / 2} activeIndex={stage} />
+									<Button
+										onClick={stage === Stage.SUMMARY ? handlePublish : handleNextClick}
+										disabled={isNextStageBtnDisabled()}
+									>
+										<span className="flex items-center gap-2">
+											{stage === Stage.SUMMARY ? 'Opublikuj' : 'Następna'}
+											{stage === Stage.SUMMARY ? null : <FaArrowRight />}
+										</span>
+									</Button>
+								</div>
+							</div>
+						</>
+					)}
 				</Modal>
 			)}
 		</>

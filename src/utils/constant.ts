@@ -72,6 +72,13 @@ export const TEXT = {
 	IMPLEMENTATION_PROCESS: 'W trakcie implementacji',
 	NOT_FOUND_ELEMENTS: 'Nie znaleziono elementów',
 	INPUT_PHRASE: 'Wpisz frazę',
+	ADD_MATERIAL_MODAL: {
+		TITLE: 'Tytuł materiału',
+		DESC: 'Opis materiału',
+		LINK: 'Link do materiału',
+		FIND_TAGS: 'Szukaj tagów',
+		SELECTED_TAGS: 'Zaznaczone tagi',
+	},
 };
 
 export const AUTH_PRE_SESSION = 'pre_session';

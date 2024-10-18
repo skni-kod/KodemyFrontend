@@ -3,6 +3,7 @@ import { FaAngleDown, FaAngleUp } from 'react-icons/fa6';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { SortDirection } from '@/utils/api/types';
 import { UserSortField } from '@/services/user/types';
+import clsx from 'clsx';
 
 type SortOrderBtnProps = {
 	className?: string;
@@ -16,7 +17,8 @@ export type OrderSortOption = {
 };
 
 export const USER_ORDER_OPTIONS: OrderSortOption[] = [
-	{ label: 'Identyfikator', field: UserSortField.ID, order: SortDirection.ASC },
+	{ label: 'Identyfikator: rosnąco', field: UserSortField.ID, order: SortDirection.ASC },
+	{ label: 'Identyfikator: malejąco', field: UserSortField.ID, order: SortDirection.DESC },
 ];
 
 export default function UserSortOrderBtn({ className = '', activeSort }: SortOrderBtnProps) {
@@ -36,7 +38,7 @@ export default function UserSortOrderBtn({ className = '', activeSort }: SortOrd
 	};
 
 	return (
-		<div className={`relative text-primary ${className}`}>
+		<div className={clsx('relative text-primary', className)}>
 			<button className="flex items-center px-2 py-1 font-semibold" onClick={handleToggle}>
 				<span>Sortuj:&nbsp;</span>
 				<span>{USER_ORDER_OPTIONS[selectedOrder].label}</span>
@@ -47,7 +49,7 @@ export default function UserSortOrderBtn({ className = '', activeSort }: SortOrd
 				)}
 			</button>
 			{isOpen && (
-				<div className="absolute top-full z-10 mt-1 w-52 bg-bg p-4 shadow">
+				<div className="absolute top-full z-10 mt-1 w-full bg-bg p-4 shadow">
 					<ul className="flex w-full flex-col">
 						{USER_ORDER_OPTIONS.map((el, idx) => (
 							<li

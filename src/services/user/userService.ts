@@ -12,7 +12,7 @@ export default class UserService extends ApiService {
 
 		const requestParams = new URLSearchParams({
 			size: size.toString(),
-			page: page.toString(),
+			page: page > 0 ? (page - 1).toString() : '0',
 			sort: UserSortField[sort],
 			sort_direction: SortDirection[sort_direction],
 			filters: filters ? JSON.stringify(filters) : '{}',
@@ -21,7 +21,7 @@ export default class UserService extends ApiService {
 		try {
 			return await kodemyApi.get<Pageable<UserSearch>>(`/api/users?${requestParams}`).then((res) => res.data);
 		} catch (err) {
-			console.log(err);
+			console.debug(err);
 			return Promise.reject(new InternalServerErrorApiError());
 		}
 	}

@@ -14,8 +14,8 @@ export default function CategorySelect({ categories, selected, onClick }: Catego
 				<li
 					key={id}
 					className={clsx(
-						'flex w-full items-center gap-4 rounded-xl border-2 px-6 py-4',
-						selected !== id ? 'border-overlay2bg hover:bg-overlay2bg cursor-pointer' : 'border-primary text-primary',
+						'flex w-full items-center gap-4 rounded-xl border-2 bg-bg px-6 py-4',
+						selected !== id ? 'cursor-pointer hover:bg-bgHover' : 'border-primary text-primary',
 					)}
 					onClick={() => onClick(id)}
 				>

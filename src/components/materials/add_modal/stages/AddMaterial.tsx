@@ -5,8 +5,19 @@ import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
 import Tags from '@/services/tag/types/tags';
 import { Details } from '@/components/materials/add_modal/AddMaterialModal';
-import Tag from '@/services/tag/types/tag';
 import { IoCloseOutline } from 'react-icons/io5';
+import { TEXT } from '@/utils/constant';
+import Tag from '@/services/tag/types/tag';
+
+const Label = ({ htmlFor, value, starred = false }: { htmlFor: string; value: string; starred?: boolean }) => {
+	return (
+		<label htmlFor={htmlFor} className="block pb-1.5 text-left text-gray-700">
+			{value}
+			{starred ? '*' : ''}:
+		</label>
+	);
+};
+
 export default function AddMaterial({
 	onChange,
 	initialData,
@@ -23,7 +34,7 @@ export default function AddMaterial({
 	const [showTagList, setShowTagList] = useState(false);
 
 	const { data: tags, status, fetch } = useFetchState<Tags>();
-	useEffect(() => fetch((): Promise<Tags> => TypesService.getTags()), [fetch]);
+	useEffect(() => fetch(TypesService.getTags), [fetch]);
 
 	useEffect(() => {
 		if (tags) {
@@ -58,9 +69,7 @@ export default function AddMaterial({
 	return (
 		<div className="flex w-full flex-col gap-4">
 			<div className="form-group">
-				<label htmlFor="title" className="block text-left text-gray-700">
-					Tytuł materiału:
-				</label>
+				<Label htmlFor={title} value={TEXT.ADD_MATERIAL_MODAL.TITLE} />
 				<input
 					id="title"
 					type="text"
@@ -72,9 +81,7 @@ export default function AddMaterial({
 			</div>
 
 			<div className="form-group">
-				<label htmlFor="description" className="block text-left text-gray-700">
-					Opis materiału:
-				</label>
+				<Label htmlFor="description" value={TEXT.ADD_MATERIAL_MODAL.DESC} />
 				<textarea
 					id="description"
 					value={description}
@@ -85,9 +92,7 @@ export default function AddMaterial({
 			</div>
 
 			<div className="form-group">
-				<label htmlFor="link" className="block text-left text-gray-700">
-					Link do materiału*:
-				</label>
+				<Label htmlFor="link" value={TEXT.ADD_MATERIAL_MODAL.LINK} starred />
 				<input
 					id="link"
 					type="text"
@@ -100,9 +105,7 @@ export default function AddMaterial({
 			</div>
 
 			<div className="form-group">
-				<label htmlFor="tags" className="block text-left text-gray-700">
-					Szukaj tagów:
-				</label>
+				<Label htmlFor="tags" value={TEXT.ADD_MATERIAL_MODAL.FIND_TAGS} />
 				<input
 					id="tagSearch"
 					type="text"
@@ -112,10 +115,7 @@ export default function AddMaterial({
 					placeholder="Wpisz nazwę tagu"
 					onClick={handleTagInputClick}
 				/>
-			</div>
-
-			{showTagList && filteredTags.length > 0 && (
-				<div className="form-group">
+				{showTagList && filteredTags.length > 0 && (
 					<ul className="max-h-40 w-full overflow-y-auto rounded-lg border">
 						{filteredTags.map((tag) => (
 							<li key={tag.id} onClick={() => handleAddTag(tag.id)} className="cursor-pointer p-2 hover:bg-gray-100">
@@ -123,25 +123,22 @@ export default function AddMaterial({
 							</li>
 						))}
 					</ul>
-				</div>
-			)}
+				)}
+			</div>
 
 			<div className="form-group">
-				<label htmlFor="tagsSelected" className="block text-left text-gray-700">
-					Zaznaczone tagi:
-				</label>
+				<Label htmlFor="tagsSelected" value={TEXT.ADD_MATERIAL_MODAL.SELECTED_TAGS} />
 				<div className="flex flex-wrap gap-2">
 					{tagsIds.map((tagId) => {
 						const tag = tags.find((t) => t.id === tagId);
 						return tag ? (
 							<span
-								key={tag.id}
-								className="group relative flex cursor-pointer items-center justify-center rounded bg-gray-200 p-2"
+								className="relative flex cursor-pointer items-center rounded bg-gray-200 p-2"
 								onClick={() => handleRemoveTag(tag.id)}
 							>
-								<span className="text-lg text-gray-800">{tag.name}</span>
-								<span className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
-									<IoCloseOutline className="h-10 w-10 font-semibold text-gray-600" />
+								<span className="text-gray-800">{tag.name}</span>
+								<span className="flex items-center justify-center">
+									<IoCloseOutline className="h-6 w-6 font-semibold text-gray-600" />
 								</span>
 							</span>
 						) : null;

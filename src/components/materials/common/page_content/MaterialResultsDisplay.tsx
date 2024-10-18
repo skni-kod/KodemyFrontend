@@ -29,7 +29,7 @@ export default function MaterialResultsDisplay({
 		fetchMaterials(() => {
 			return MaterialService.getMaterials({
 				size: searchParams.size,
-				page: searchParams.page - 1,
+				page: searchParams.page,
 				sort: MAT_ORDER_OPTIONS[searchParams.sort].field,
 				sort_direction: MAT_ORDER_OPTIONS[searchParams.sort].order,
 				filters: { ...searchParams.fields },

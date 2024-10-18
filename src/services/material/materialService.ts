@@ -12,7 +12,7 @@ export default class MaterialService extends ApiService {
 
 		const requestParams = new URLSearchParams({
 			size: size.toString(),
-			page: page.toString(),
+			page: page > 0 ? (page - 1).toString() : '0',
 			sort: MaterialSortField[sort],
 			sort_direction: SortDirection[sort_direction],
 			filters: filters ? JSON.stringify(filters) : '{}',
