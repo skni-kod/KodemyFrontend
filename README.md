@@ -48,8 +48,10 @@ To review dependencies that have newer versions, run:
 npm outdated
 ```
 
-To check for vulnerabilities and safely update dependencies, run:
+To safely update dependencies, run:
 
 ```bash
-npm audit
+npm update
 ```
+
+> **Note**: This command will update dependencies with **patch** changes (e.g., `18.3.3` to `18.3.12`) and **minor** updates (e.g., `1.7.4` to `1.8.1`). It will **not** update major versions (e.g., `8.57.0` to `9.14.0`), as major updates can introduce breaking changes.
