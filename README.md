@@ -42,12 +42,6 @@ If `depcheck` is not installed, install it globally by running:
 npm install -g depcheck
 ```
 
-To review dependencies that have newer versions, run:
-
-```bash
-npm outdated
-```
-
 To safely update dependencies, run:
 
 ```bash
