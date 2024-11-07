@@ -102,7 +102,7 @@ export default function DetailsModeGrades({ id }: { id: number }) {
 				>
 					Przejdź <FaAngleRight />
 				</button>
-				<AddGradeMaterialModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+				<AddGradeMaterialModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} materialId={material.id} />
 			</div>
 		</div>
 	);
