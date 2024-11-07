@@ -27,12 +27,12 @@ export default function SectionByIdPageContent({ title, id: sectionId, searchPar
 		return (sections && sections.find((section) => section.id === sectionId)?.name) || title;
 	}, [sectionId, sections, title]);
 
-	if (status === Status.ERROR) return <Error container />;
+	if (status === Status.PENDING) return <Loading full />;
 
 	return (
 		<PageContent headerValue={findSectionName()}>
-			{status === Status.PENDING || !sections ? (
-				<Loading full />
+			{status === Status.ERROR || !sections ? (
+				<Error container />
 			) : (
 				<>
 					<CategoryBubbleBtns
