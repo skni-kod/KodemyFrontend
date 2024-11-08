@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from 'react';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 
@@ -34,11 +35,11 @@ const Toast: React.FC<ToastProps> = ({ message, type, index, onClose }) => {
 
 	return (
 		<div
-			className={`flex flex-row items-center justify-between h-fit p-3 2xs:p-4 w-full rounded ${bgColor} ${shadowColor} text-white`}
+			className={`flex h-fit w-full flex-row items-center justify-between rounded p-3 2xs:p-4 ${bgColor} ${shadowColor} text-white`}
 		>
 			<p key={index}>{message}</p>
 			<div className="flex items-center justify-center">
-				<IoIosCloseCircleOutline onClick={onClose} className="w-6 sm:w-5 h-6 sm:h-5 ml-3 cursor-pointer" />
+				<IoIosCloseCircleOutline onClick={onClose} className="ml-3 h-6 w-6 cursor-pointer sm:h-5 sm:w-5" />
 			</div>
 		</div>
 	);
