@@ -3,7 +3,6 @@ import React from 'react';
 import ShowBlockImage from '@/components/home/ShowBlockImage';
 import HomeMoreButton from '@/components/home/HomeMoreButton';
 import { TEXT } from '@/utils/constant';
-import Toast from '../utils/Toast';
 
 export default function HomeShowSection() {
 	return (

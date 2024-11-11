@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from 'react';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 

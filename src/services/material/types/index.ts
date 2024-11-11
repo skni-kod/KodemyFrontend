@@ -1,6 +1,7 @@
 export { type default as MaterialSearch } from './materialSearch';
 export { type default as Material } from './material';
 export { type default as MaterialAdd } from './materialAdd';
+export { type default as MaterialAddGrade } from './materialAddGrade';
 export { type default as MaterialFiltersParam } from './materialFiltersParam';
 export { default as MaterialStatus } from './materialStatus';
 export { type default as MaterialTag } from './materialTag';

@@ -31,22 +31,22 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: ComponentParentProps) {
 	return (
 		<html lang="pl">
-			<body>
-				<SessionProvider signUri="/auth">
-					<SidebarProvider>
-						<ToastProvider>
+			<ToastProvider>
+				<body>
+					<SessionProvider signUri="/auth">
+						<SidebarProvider>
 							<div id="container" className="h-auto min-h-fullContent w-full overflow-x-hidden">
 								<Header />
 								<Sidebar />
 								<Main>{children}</Main>
 								<Footer />
-								<ToastContainer />
 								<div id="m-root"></div>
 							</div>
-						</ToastProvider>
-					</SidebarProvider>
-				</SessionProvider>
-			</body>
+							<ToastContainer />
+						</SidebarProvider>
+					</SessionProvider>
+				</body>
+			</ToastProvider>
 		</html>
 	);
 }
