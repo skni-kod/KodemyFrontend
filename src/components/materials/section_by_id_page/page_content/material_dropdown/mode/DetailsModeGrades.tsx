@@ -1,14 +1,15 @@
 import { Rating } from 'react-simple-star-rating';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import MaterialService from '@/services/material/materialService';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 import { Material } from '@/services/material/types';
-import Link from 'next/link';
 import { FaAngleRight } from 'react-icons/fa6';
+import AddGradeMaterialModal from '@/components/materials/add_grade_modal/AddGradeMaterialModal';
 
 export default function DetailsModeGrades({ id }: { id: number }) {
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const { data: material, status, fetch } = useFetchState<Material>();
 
 	useEffect(() => fetch(() => MaterialService.getMaterialById(id)), [fetch, id]);
@@ -37,6 +38,11 @@ export default function DetailsModeGrades({ id }: { id: number }) {
 			default:
 				return 'Nieznana ocena';
 		}
+	};
+
+
+	const handleMenuAddMaterialClick = () => {
+		setIsModalOpen(true);
 	};
 
 	return (
@@ -91,12 +97,13 @@ export default function DetailsModeGrades({ id }: { id: number }) {
 				</table>
 			</div>
 			<div className="flex w-full justify-end pt-4">
-				<Link
-					href={material.link}
+				<button
+					onClick={handleMenuAddMaterialClick}
 					className="flex h-9 items-center gap-1 rounded-xl bg-grade px-4 text-lg font-semibold text-gradeText"
 				>
 					Przejdź <FaAngleRight />
-				</Link>
+				</button>
+				<AddGradeMaterialModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} materialId={material.id} />
 			</div>
 		</div>
 	);

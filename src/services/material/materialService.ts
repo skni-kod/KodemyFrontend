@@ -3,6 +3,7 @@ import { Material, MaterialFiltersParam, MaterialSearch, MaterialSortField } fro
 import kodemyApi from '@/utils/api';
 import { InternalServerErrorApiError } from '@/utils/api/types/apiError';
 import MaterialAdd from './types/materialAdd';
+import MaterialAddGrade from '@/services/material/types/materialAddGrade';
 
 export default class MaterialService extends ApiService {
 	public static async getMaterials(
@@ -37,6 +38,23 @@ export default class MaterialService extends ApiService {
 	public static async publishMaterial(material: MaterialAdd, token: string): Promise<MaterialAdd> {
 		try {
 			const response = await kodemyApi.post<MaterialAdd>('/api/materials', material, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			return response.data;
+		} catch (err) {
+			return Promise.reject(new InternalServerErrorApiError());
+		}
+	}
+
+	public static async addGradeToMaterial(
+		materialId: number,
+		grade: MaterialAddGrade,
+		token: string,
+	): Promise<MaterialAddGrade> {
+		try {
+			const response = await kodemyApi.post<MaterialAddGrade>(`/api/materials/${materialId}/grades`, grade, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
