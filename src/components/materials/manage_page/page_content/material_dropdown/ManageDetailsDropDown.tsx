@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import DetailsModePreview from '@/components/materials/section_by_id_page/page_content/material_dropdown/mode/DetailsModePreview';
 import DetailsModeGrades from '@/components/materials/section_by_id_page/page_content/material_dropdown/mode/DetailsModeGrades';
+import DetailsModeManage from '@/components/materials/manage_page/page_content/material_dropdown/mode/DetailsModeManage';
+import DetailsModeHistory from '@/components/materials/manage_page/page_content/material_dropdown/mode/DetailsModeHistory';
 
 enum DetailsMode {
 	OVERVIEW,
@@ -14,8 +16,8 @@ enum DetailsMode {
 const menu: { name: string; mode: DetailsMode; clickable: boolean }[] = [
 	{ name: 'Przegląd', mode: DetailsMode.OVERVIEW, clickable: true },
 	{ name: 'Oceny', mode: DetailsMode.GRADES, clickable: true },
-	{ name: 'Zarządzaj', mode: DetailsMode.MANAGE, clickable: false },
-	{ name: 'Historia', mode: DetailsMode.HISTORY, clickable: false },
+	{ name: 'Zarządzaj', mode: DetailsMode.MANAGE, clickable: true },
+	{ name: 'Historia', mode: DetailsMode.HISTORY, clickable: true },
 ];
 
 export default function ManageDetailsDropDown({ id }: { id: number }) {
@@ -44,6 +46,8 @@ export default function ManageDetailsDropDown({ id }: { id: number }) {
 			</div>
 			{openMode === DetailsMode.OVERVIEW && <DetailsModePreview id={id} />}
 			{openMode === DetailsMode.GRADES && <DetailsModeGrades id={id} />}
+			{openMode === DetailsMode.MANAGE && <DetailsModeManage id={id} />}
+			{openMode === DetailsMode.HISTORY && <DetailsModeHistory id={id} />}
 		</div>
 	);
 }

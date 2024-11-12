@@ -3,7 +3,8 @@ import Image from 'next/image';
 import DocumentsImage from '@/assets/material/documents.png';
 import React, { useState } from 'react';
 import { LuDot } from 'react-icons/lu';
-import { Material, MaterialSearch } from '@/services/material/types';
+import { MaterialSearch } from '@/services/material/types';
+import calculateTimeDifference from '../../../../utils/methods/calculateTimeDifference';
 
 type MaterialUserBlockProps = {
 	data: MaterialSearch;
@@ -33,7 +34,7 @@ export default function MaterialListItem({ data: material, children }: MaterialU
 							readonly
 						/>
 					</div>
-					<div className="">{material.createdDate.toString()}</div>
+					<div className="">{calculateTimeDifference(material.createdDate.toString())}</div>
 				</div>
 				<div className="flex w-full justify-between gap-6 py-3">
 					<div>

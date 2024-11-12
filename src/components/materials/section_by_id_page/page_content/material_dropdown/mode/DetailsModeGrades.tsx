@@ -8,6 +8,29 @@ import { Material } from '@/services/material/types';
 import { FaAngleRight } from 'react-icons/fa6';
 import AddGradeMaterialModal from '@/components/materials/add_grade_modal/AddGradeMaterialModal';
 
+function between(value: number, min: number, max: number): boolean {
+	return value > min && value <= max;
+}
+
+const getRatingDescription = (grade: number) => {
+	switch (true) {
+		case grade === 0:
+			return 'Brak ocen';
+		case between(grade, 0, 1.5):
+			return 'Bardzo słaby';
+		case between(grade, 1.5, 2.5):
+			return 'Słaby';
+		case between(grade, 2.5, 3.5):
+			return 'Średni';
+		case between(grade, 3.5, 4.5):
+			return 'Dobry';
+		case between(grade, 4.5, 5.0):
+			return 'Rewelacyjny';
+		default:
+			return 'Nieznana ocena';
+	}
+};
+
 export default function DetailsModeGrades({ id }: { id: number }) {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const { data: material, status, fetch } = useFetchState<Material>();
@@ -17,36 +40,13 @@ export default function DetailsModeGrades({ id }: { id: number }) {
 	if (status === Status.PENDING) return <Loading scale="small" />;
 	if (status === Status.ERROR || !material) return <Error />;
 
-	function between(value: number, min: number, max: number) {
-		return value > min && value <= max;
-	}
-
-	const getRatingDescription = (grade: number) => {
-		switch (true) {
-			case grade === 0:
-				return 'Brak ocen';
-			case between(grade, 0, 1.5):
-				return 'Bardzo słaby';
-			case between(grade, 1.5, 2.5):
-				return 'Słaby';
-			case between(grade, 2.5, 3.5):
-				return 'Średni';
-			case between(grade, 3.5, 4.5):
-				return 'Dobry';
-			case between(grade, 4.5, 5.0):
-				return 'Rewelacyjny';
-			default:
-				return 'Nieznana ocena';
-		}
-	};
-
 	const handleMenuAddMaterialClick = () => {
 		setIsModalOpen(true);
 	};
 
 	return (
 		<div className="w-full p-7">
-			<h2 className="text-lg font-semibold">Opinie o produkcie</h2>
+			<h2 className="text-lg font-semibold">Opinie</h2>
 			<div className="grid grid-cols-1 items-center md:grid-cols-[1fr_2fr]">
 				<div className="flex w-full flex-col items-center">
 					<h3 className="flex items-center text-lg font-bold">{getRatingDescription(material.averageGrade)}</h3>
@@ -60,9 +60,9 @@ export default function DetailsModeGrades({ id }: { id: number }) {
 						{material.gradeStats
 							.slice()
 							.reverse()
-							.map((stat, index) => {
-								const totalRatings = material.gradeStats.reduce((acc, curr) => acc + curr, 0);
-								const percentage = (stat / totalRatings) * 100;
+							.map((stat: number, index: number) => {
+								const totalRatings: number = material.gradeStats.reduce((acc: number, curr: number) => acc + curr, 0);
+								const percentage: number = (stat / totalRatings) * 100;
 
 								return (
 									<tr key={index}>
