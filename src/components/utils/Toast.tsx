@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 interface ToastProps {
@@ -8,6 +8,19 @@ interface ToastProps {
 	index?: number;
 	onClose: () => void;
 }
+
+//
+//how to use:
+//
+// directly in component when we want to use it:
+//
+// const { addToast } = useToast();
+// const handleShowToast = () => {
+// 	addToast('Testowe powiadomienie', 'info', 5000);
+// };
+//<button className="h-navMenu w-[100px]" onClick={handleShowToast}>
+//	TestToast1
+//</button>
 
 const Toast: React.FC<ToastProps> = ({ message, type, index, onClose }) => {
 	let bgColor = '';
