@@ -2,8 +2,6 @@ import React from 'react';
 import HamburgerMenuIcoBtn from '@/components/layout/navbar/left/HamburgerMenuIcoBtn';
 import Link from 'next/link';
 import KodemyLogo from '@/components/layout/navbar/left/KodemyLogo';
-import { useSidebar } from '@/contexts/SidebarContext';
-import UserActionBtns from '@/components/layout/navbar/right/UserActionBtns';
 import SearchBlock from '@/components/layout/navbar/middle/SearchBlock';
 import UserActionBlock from '@/components/layout/navbar/right/UserActionBlock';
 

@@ -40,7 +40,6 @@ export default function DetailsModeGrades({ id }: { id: number }) {
 		}
 	};
 
-
 	const handleMenuAddMaterialClick = () => {
 		setIsModalOpen(true);
 	};

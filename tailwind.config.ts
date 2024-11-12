@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -19,6 +20,10 @@ const config: Config = {
 		extend: {
 			boxShadow: {
 				bottomShadow: '0px 6px 20px 2px rgba(107, 114, 128, 1)',
+				greenShadow: '0px 0px 22px 1px rgba(72, 187, 120, 1)',
+				redShadow: '0px 0px 22px 1px rgba(245, 101, 101, 1)',
+				blueShadow: '0px 0px 22px 1px rgba(59, 130, 246, 1)',
+				yellowShadow: '0px 0px 22px 1px rgba(236, 201, 75, 1)',
 			},
 			colors: {
 				primary: 'rgb(var(--primary-color) / <alpha-value>)',
