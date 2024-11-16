@@ -7,6 +7,7 @@ import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 import { Material } from '@/services/material/types';
 import { FaAngleRight } from 'react-icons/fa6';
 import AddGradeMaterialModal from '@/components/materials/add_grade_modal/AddGradeMaterialModal';
+import { MaterialButton } from '@/components/utils/Button';
 
 function between(value: number, min: number, max: number): boolean {
 	return value > min && value <= max;
@@ -96,12 +97,9 @@ export default function DetailsModeGrades({ id }: { id: number }) {
 				</table>
 			</div>
 			<div className="flex w-full justify-end pt-4">
-				<button
-					onClick={handleMenuAddMaterialClick}
-					className="flex h-9 items-center gap-1 rounded-xl bg-grade px-4 text-lg font-semibold text-gradeText"
-				>
+				<MaterialButton onClick={handleMenuAddMaterialClick} type="yellow">
 					Przejdź <FaAngleRight />
-				</button>
+				</MaterialButton>
 				<AddGradeMaterialModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} materialId={material.id} />
 			</div>
 		</div>

@@ -4,6 +4,7 @@ import AddGrade from '@/components/materials/add_grade_modal/stages/AddGrade';
 import { useSessionContext } from '@/contexts/SessionContext';
 import { FaAngleRight } from 'react-icons/fa6';
 import MaterialService from '@/services/material/materialService';
+import { MaterialButton } from '@/components/utils/Button';
 
 enum Stage {
 	GRADE,
@@ -72,12 +73,9 @@ export default function AddGradeMaterialModal({
 					</div>
 					<div className="w-full pt-8">{getStageComponent()}</div>
 					<div className="flex items-center justify-end">
-						<button
-							className="flex h-9 items-center gap-1 rounded-xl bg-grade px-4 text-lg font-semibold text-gradeText"
-							onClick={handlePublish}
-						>
+						<MaterialButton onClick={handlePublish} type="yellow">
 							Oceń <FaAngleRight />
-						</button>
+						</MaterialButton>
 					</div>
 				</Modal>
 			)}

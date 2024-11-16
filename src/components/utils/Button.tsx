@@ -26,3 +26,46 @@ export default function Button({
 		</button>
 	);
 }
+
+type MaterialColorTypeButton = 'blue' | 'yellow' | 'green' | 'gray';
+
+export function MaterialButton({
+	children,
+	onClick,
+	type,
+}: {
+	children: React.ReactNode;
+	onClick?: () => void;
+	type: MaterialColorTypeButton;
+}) {
+	let bgColor = '';
+	let textColor = '';
+
+	switch (type) {
+		case 'blue':
+			bgColor = 'bg-primary';
+			textColor = 'text-textOnPrimary';
+			break;
+		case 'yellow':
+			bgColor = 'bg-grade';
+			textColor = 'text-gradeText';
+			break;
+		case 'green':
+			bgColor = 'bg-green-600';
+			textColor = 'text-green-100';
+			break;
+		case 'gray':
+			bgColor = 'bg-gray-700';
+			textColor = 'text-gray-200';
+			break;
+	}
+
+	return (
+		<button
+			className={`flex h-9 items-center gap-1 rounded-xl ${bgColor} px-4 text-lg font-semibold ${textColor} `}
+			onClick={onClick}
+		>
+			{children}
+		</button>
+	);
+}
