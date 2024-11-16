@@ -5,6 +5,20 @@ import { InternalServerErrorApiError } from '@/utils/api/types/apiError';
 import MaterialAdd from './types/materialAdd';
 import MaterialAddGrade from '@/services/material/types/materialAddGrade';
 
+export const MaterialSwaggerStatuses = {
+	APPROVED: 'APPROVED',
+	PENDING: 'PENDING',
+	DRAFT: 'DRAFT',
+	REJECTED: 'REJECTED',
+	BAN_REQUESTED: 'BAN_REQUESTED',
+	BANNED: 'BANNED',
+	DEPRECATION_REQUEST: 'DEPRECATION_REQUEST',
+	DEPRECATED: 'DEPRECATED',
+	DELETED: 'DELETED',
+} as const;
+
+export type MaterialSwaggerStatus = keyof typeof MaterialSwaggerStatuses;
+
 export default class MaterialService extends ApiService {
 	public static async getMaterials(
 		params: SearchRequestParams<MaterialSortField, MaterialFiltersParam>,
@@ -22,7 +36,6 @@ export default class MaterialService extends ApiService {
 		try {
 			return await kodemyApi.get<Pageable<MaterialSearch>>(`/api/materials?${requestParams}`).then((res) => res.data);
 		} catch (err) {
-			console.log(err);
 			return Promise.reject(new InternalServerErrorApiError());
 		}
 	}
@@ -59,6 +72,27 @@ export default class MaterialService extends ApiService {
 					Authorization: `Bearer ${token}`,
 				},
 			});
+			return response.data;
+		} catch (err) {
+			return Promise.reject(new InternalServerErrorApiError());
+		}
+	}
+
+	public static async changeMaterialStatus(
+		materialId: number,
+		newStatus: MaterialSwaggerStatus,
+		token: string,
+	): Promise<Material> {
+		try {
+			const response = await kodemyApi.post<Material>(
+				`/api/materials/${materialId}/status`,
+				{ status: newStatus },
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				},
+			);
 			return response.data;
 		} catch (err) {
 			return Promise.reject(new InternalServerErrorApiError());
