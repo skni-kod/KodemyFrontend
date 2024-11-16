@@ -8,8 +8,10 @@ import { FaAngleDown, FaAngleRight } from 'react-icons/fa6';
 import { MaterialButton } from '@/components/utils/Button';
 import { useSessionContext } from '@/contexts/SessionContext';
 import Link from 'next/link';
+import { useToast } from '@/contexts/ToastContext';
 
 export default function DetailsModeManage({ id }: { id: number }) {
+	const { addToast } = useToast();
 	const { session } = useSessionContext();
 	const { data: material, status, fetch } = useFetchState<Material>();
 
@@ -27,8 +29,10 @@ export default function DetailsModeManage({ id }: { id: number }) {
 
 			const response = await MaterialService.changeMaterialStatus(material.id, newStatus, session.token.bearer);
 
+			addToast(`Zmieniono status materiału na: ${newStatus}`, 'success', 5000);
 			console.log('Change status successfully:', response);
 		} catch (error) {
+			addToast(`Error changing status`, 'danger', 5000);
 			console.error('Error changing status:', error);
 		}
 	};
@@ -51,7 +55,7 @@ export default function DetailsModeManage({ id }: { id: number }) {
 				<MaterialButton onClick={() => handleChangeStatus(MaterialSwaggerStatuses.REJECTED)} type="gray">
 					Odrzuć <FaAngleDown />
 				</MaterialButton>
-				<MaterialButton onClick={() => handleChangeStatus(MaterialSwaggerStatuses.APPROVED)} type="green">
+				<MaterialButton onClick={() => handleChangeStatus(MaterialSwaggerStatuses.DRAFT)} type="green">
 					Zaakceptuj <FaAngleRight />
 				</MaterialButton>
 			</div>

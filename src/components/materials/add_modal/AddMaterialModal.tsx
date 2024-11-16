@@ -13,6 +13,7 @@ import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
 import MaterialService from '@/services/material/materialService';
 import { useSessionContext } from '@/contexts/SessionContext';
+import { useToast } from '@/contexts/ToastContext';
 
 enum Stage {
 	SECTION,
@@ -39,6 +40,7 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 	const { session } = useSessionContext();
 	const [stage, setStage] = useState<Stage>(Stage.SECTION);
 	const { data: sections, status, fetch: fetchSections } = useFetchState<Section[]>();
+	const { addToast } = useToast();
 
 	useEffect(() => {
 		isOpen && fetchSections(SectionService.getSections);
@@ -173,9 +175,11 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 				session.token.bearer,
 			);
 
+			addToast(`Dodano materiał`, 'success', 5000);
 			console.log('Material published successfully:', response);
 			handleClose();
 		} catch (error) {
+			addToast(`Error publishing material`, 'danger', 5000);
 			console.error('Error publishing material:', error);
 		}
 	};
