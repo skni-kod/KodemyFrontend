@@ -4,6 +4,8 @@ import AddGrade from '@/components/materials/add_grade_modal/stages/AddGrade';
 import { useSessionContext } from '@/contexts/SessionContext';
 import { FaAngleRight } from 'react-icons/fa6';
 import MaterialService from '@/services/material/materialService';
+import { MaterialButton } from '@/components/utils/Button';
+import { useToast } from '@/contexts/ToastContext';
 
 enum Stage {
 	GRADE,
@@ -21,6 +23,7 @@ export default function AddGradeMaterialModal({
 	const { session } = useSessionContext();
 	const [stage, setStage] = useState<Stage>(Stage.GRADE);
 	const [rating, setRating] = useState<number>(1);
+	const { addToast } = useToast();
 
 	const handleAddMaterialChange = (newRating: number) => {
 		setRating(newRating);
@@ -56,9 +59,11 @@ export default function AddGradeMaterialModal({
 
 			const response = await MaterialService.addGradeToMaterial(materialId, { grade }, session.token.bearer);
 
+			addToast(`Dodano ocenę`, 'success', 5000);
 			console.log('Grade added successfully:', response);
 			handleClose();
 		} catch (error) {
+			addToast(`Error adding grade:`, 'danger', 5000);
 			console.error('Error adding grade:', error);
 		}
 	};
@@ -72,12 +77,9 @@ export default function AddGradeMaterialModal({
 					</div>
 					<div className="w-full pt-8">{getStageComponent()}</div>
 					<div className="flex items-center justify-end">
-						<button
-							className="flex h-9 items-center gap-1 rounded-xl bg-grade px-4 text-lg font-semibold text-gradeText"
-							onClick={handlePublish}
-						>
+						<MaterialButton onClick={handlePublish} type="yellow">
 							Oceń <FaAngleRight />
-						</button>
+						</MaterialButton>
 					</div>
 				</Modal>
 			)}

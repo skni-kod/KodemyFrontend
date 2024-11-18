@@ -1,7 +1,6 @@
 'use client';
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-
-type ToastType = 'success' | 'danger' | 'info' | 'warning';
+import { ToastType } from '@/components/utils/Toast';
 
 interface Toast {
 	id: number;

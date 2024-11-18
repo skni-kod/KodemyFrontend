@@ -1,9 +1,11 @@
 import React from 'react';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 
+export type ToastType = 'success' | 'danger' | 'info' | 'warning';
+
 interface ToastProps {
 	message: string;
-	type: 'success' | 'danger' | 'info' | 'warning';
+	type: ToastType;
 	durationMs: number;
 	index?: number;
 	onClose: () => void;

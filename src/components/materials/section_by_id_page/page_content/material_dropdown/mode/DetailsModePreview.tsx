@@ -6,6 +6,7 @@ import MaterialService from '@/services/material/materialService';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
+import { MaterialButton } from '@/components/utils/Button';
 
 export default function DetailsModePreview({ id }: { id: number }) {
 	const { data: material, status, fetch: fetchMaterial } = useFetchState<Material>();
@@ -22,11 +23,10 @@ export default function DetailsModePreview({ id }: { id: number }) {
 				<p className="pt-2">{material.description}</p>
 			</div>
 			<div className="flex w-full justify-end pt-4">
-				<Link
-					href={material.link}
-					className="flex h-9 items-center gap-1 rounded-xl bg-primary px-4 text-lg font-semibold text-textOnPrimary"
-				>
-					Przejdź <FaAngleRight />
+				<Link href={material.link}>
+					<MaterialButton type="blue">
+						Przejdź <FaAngleRight />
+					</MaterialButton>
 				</Link>
 			</div>
 		</div>
