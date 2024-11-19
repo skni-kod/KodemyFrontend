@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { ThemeOption, themes } from '@/utils/lightMode/themes';
 
-export type SystemColorMode = 'system' | 'single';
+type SystemColorMode = 'system' | 'single';
 
 export default function AppearanceSettingsSubPage() {
 	const [colorMode, setColorMode] = useState<SystemColorMode>('single');
@@ -13,11 +13,13 @@ export default function AppearanceSettingsSubPage() {
 		themes.find((theme: ThemeOption) => theme.id === 'dark-default')!,
 	);
 
-	const [selectedTheme, setSelectedTheme] = useState<string>('light-default');
+	const [selectedTheme, setSelectedTheme] = useState<ThemeOption>(
+		themes.find((theme: ThemeOption) => theme.id === 'dark-default')!,
+	);
 
-	console.log('selectedDayTheme', selectedDayTheme);
-	console.log('selectedNightTheme', selectedNightTheme);
-
+	console.log('selectedDayTheme', selectedDayTheme.id);
+	console.log('selectedNightTheme', selectedNightTheme.id);
+	console.log('selectedTheme', selectedTheme.id);
 	return (
 		<div>
 			<h1 className="mb-4 text-2xl font-bold">Wygląd</h1>
@@ -33,9 +35,9 @@ export default function AppearanceSettingsSubPage() {
 					{themes.map((theme) => (
 						<button
 							key={theme.id}
-							onClick={() => setSelectedTheme(theme.id)}
+							onClick={() => setSelectedTheme(theme)}
 							className={`rounded-lg border-2 text-left ${
-								selectedTheme === theme.id ? 'border-blue-500' : 'border-gray-300'
+								selectedTheme.id === theme.id ? 'border-blue-500' : 'border-gray-300'
 							}`}
 						>
 							<Image
@@ -113,11 +115,11 @@ function SystemMode({ isDay, isModeActive, selectedTheme, onClick, allThemes }: 
 				&quot;.
 			</p>
 
-			<div className="mb-4 rounded-lg border p-2">
+			<div className="mb-4 rounded-2xl border p-2">
 				<Image
 					src={hoveredTheme ? hoveredTheme.imageSrc : selectedTheme.imageSrc}
 					alt="Theme Preview"
-					className="rounded object-cover"
+					className="rounded-xl object-cover"
 					layout="responsive"
 				/>
 				<div className="mt-2 text-center text-sm font-medium">
