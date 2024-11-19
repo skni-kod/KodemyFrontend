@@ -2,13 +2,11 @@
 import React, { useState, Suspense } from 'react';
 import PageContent from '@/components/layout/PageContent';
 import SectionBubbleBtn from '@/components/materials/manage_page/page_head/SectionBubbleBtn';
-import AppearanceSettingsSubPage from '@/components/settings/page_content/AppearanceSettingsSubPage';
+import AppearanceSettingsSubPage from '@/components/settings/appearance/AppearanceSettingsSubPage';
 
-const LazyProfileSettingsSubPage = React.lazy(
-	() => import('@/components/settings/page_content/ProfileSettingsSubPage'),
-);
+const LazyProfileSettingsSubPage = React.lazy(() => import('@/components/settings/profile/ProfileSettingsSubPage'));
 const LazyNotificationSettingsSubPage = React.lazy(
-	() => import('@/components/settings/page_content/NotificationSettingsSubPage'),
+	() => import('@/components/settings/notification/NotificationSettingsSubPage'),
 );
 
 type BubbleContent = {
