@@ -9,7 +9,7 @@ import {
 import Link from 'next/link';
 import { IconType } from 'react-icons';
 import { useSessionContext } from '@/contexts/SessionContext';
-import { TEXT, USER_NAV_MENU } from '@/utils/constant';
+import { USER_NAV_MENU } from '@/utils/constant';
 
 enum Menu {
 	HEADER,
@@ -69,12 +69,12 @@ export default function UserDropDownMenu({ menuClassName }: UserDropDownMenuProp
 			type: Menu.HEADER,
 			label: 'KONTO',
 		},
-		/*{
+		{
 			type: Menu.LINK,
 			label: USER_NAV_MENU.LINK.SETTINGS,
 			icon: IoSettingsOutline,
 			href: '/settings',
-		},*/
+		},
 		{
 			type: Menu.LINK,
 			label: USER_NAV_MENU.LINK.LOGOUT,
