@@ -1,10 +1,15 @@
 'use client';
+import React, { useState, Suspense } from 'react';
 import PageContent from '@/components/layout/PageContent';
-import React, { useState } from 'react';
 import SectionBubbleBtn from '@/components/materials/manage_page/page_head/SectionBubbleBtn';
 import AppearanceSettingsSubPage from '@/components/settings/page_content/AppearanceSettingsSubPage';
-import NotificationSettingsSubPage from '@/components/settings/page_content/NotificationSettingsSubPage';
-import ProfileSettingsSubPage from '@/components/settings/page_content/ProfileSettingsSubPage';
+
+const LazyProfileSettingsSubPage = React.lazy(
+	() => import('@/components/settings/page_content/ProfileSettingsSubPage'),
+);
+const LazyNotificationSettingsSubPage = React.lazy(
+	() => import('@/components/settings/page_content/NotificationSettingsSubPage'),
+);
 
 type BubbleContent = {
 	id: number;
@@ -34,9 +39,17 @@ export default function SettingsPageContent() {
 			case 1:
 				return <AppearanceSettingsSubPage />;
 			case 2:
-				return <ProfileSettingsSubPage />;
+				return (
+					<Suspense fallback={<p>Ładowanie Profilu...</p>}>
+						<LazyProfileSettingsSubPage />
+					</Suspense>
+				);
 			case 3:
-				return <NotificationSettingsSubPage />;
+				return (
+					<Suspense fallback={<p>Ładowanie Powiadomień...</p>}>
+						<LazyNotificationSettingsSubPage />
+					</Suspense>
+				);
 			default:
 				return <p>Wybierz sekcję, aby zobaczyć szczegóły.</p>;
 		}
