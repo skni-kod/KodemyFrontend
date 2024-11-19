@@ -14,32 +14,30 @@ body,
   line-height: 1.25rem;
 }
 
-@layer base {
-  :root {
-    --primary-color: 2 132 199; // sky
-    --primary-hover-color: 2 112 169; // sky darker
-    --text-on-primary-color: 186 230 253; // sky lighter
-    --secondary-color: 48 49 52; // nearly black
-    --text-on-secondary-color: 240 240 240; // nearly white
-    --background-color: 255 255 255; // white
-    --background-hover-color: 240 240 240; // light grey
-    --error-color: 176 0 32;
-    --webkit-scrollbar-color: 200 200 200;
-    --grade: 255 188 11; //yellow
-  }
+.light {
+  --primary-color: 2 132 199; // sky
+  --primary-hover-color: 2 112 169; // sky darker
+  --text-on-primary-color: 186 230 253; // sky lighter
+  --secondary-color: 48 49 52; // nearly black
+  --text-on-secondary-color: 240 240 240; // nearly white
+  --background-color: 255 255 255; // white
+  --background-hover-color: 240 240 240; // light grey
+  --error-color: 176 0 32;
+  --webkit-scrollbar-color: 200 200 200;
+  --grade: 255 188 11; //yellow
+}
 
-  @mixin root-dark {
-    :root {
-      --secondary-color: 255 255 255; // white
-      --background-color: 48 49 52; // nearly black
-      --background-hover-color: 38 39 40; // nearly black darker
-      --webkit-scrollbar-color: 68 69 70; // nearly gray
-    }
-  }
-
-  /*@media (prefers-color-scheme: dark) {
-    @include root-dark;
-  }*/
+.dark {
+  --primary-color: 56 189 248; /* jasnoniebieski (sky adjusted for dark mode) */
+  --primary-hover-color: 37 140 185; /* ciemniejszy jasnoniebieski */
+  --text-on-primary-color: 15 23 42; /* bardzo ciemny niebieski (dobry kontrast dla jasnego niebieskiego) */
+  --secondary-color: 240 246 252; /* jasnoszary zamiast prawie czarnego */
+  --text-on-secondary-color: 28 28 28; /* ciemny szary (dobry kontrast na jasnym szarym) */
+  --background-color: 28 28 28; /* ciemnoszary jako główne tło */
+  --background-hover-color: 48 49 52; /* ciemniejszy odcień szarości dla hover */
+  --error-color: 255 69 58; /* jasna czerwień (lepiej widoczna na ciemnym tle) */
+  --webkit-scrollbar-color: 88 88 88; /* szary odcień dla ciemnych motywów */
+  --grade: 255 203 96; /* jasny żółty, bardziej kontrastowy na ciemnym tle */
 }
 
 ::-webkit-scrollbar {

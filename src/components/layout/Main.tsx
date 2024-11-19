@@ -8,5 +8,7 @@ export default function Main({ children }: ComponentParentProps) {
 
 	const isCollapsed = !sidebar.isOpen;
 
-	return <main className={`mt-nav ${isCollapsed ? 'ml-side' : 'ml-expandSide'}`}>{children}</main>;
+	return (
+		<main className={`mt-nav min-h-fullContent bg-bg ${isCollapsed ? 'ml-side' : 'ml-expandSide'}`}>{children}</main>
+	);
 }
