@@ -43,8 +43,7 @@ export default function AppearanceSettingsSubPage() {
 							<Image
 								src={theme.imageSrc}
 								alt={theme.label}
-								className="mb-2 h-20 w-full rounded object-cover"
-								layout="responsive"
+								className="mb-2 aspect-video h-auto w-full rounded object-cover"
 							/>
 							<div className="pb-2 pl-2 text-sm font-medium">{theme.label}</div>
 						</button>

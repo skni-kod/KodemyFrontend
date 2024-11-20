@@ -37,20 +37,20 @@ body,
   --background-hover-color: 61 68 72; // szary
   --error-color: 255 69 58;
   --webkit-scrollbar-color: 88 88 88;
-  --grade: 255 203 96;
+  --grade: 214 154 0;
 }
 
 .dark-dimmed {
-  --primary-color: 120 120 120; /* Neutral szary */
-  --primary-hover-color: 100 100 100; /* Ciemniejszy szary */
-  --text-on-primary-color: 255 255 255; /* Biały tekst na ciemnym tle */
-  --secondary-color: 60 60 60; /* Bardzo ciemny szary */
+  --primary-color: 68 145 169; /* muted sky */
+  --primary-hover-color: 50 100 122; /* muted darker sky */
+  --text-on-primary-color: 160 180 196; /* muted lighter sky */
+  --secondary-color: 171 171 171; /* Bardzo ciemny szary */
   --text-on-secondary-color: 230 230 230; /* Jasny szary */
   --background-color: 48 48 48; /* Ciemny szary */
   --background-hover-color: 64 64 64; /* Jaśniejszy szary przy hover */
   --error-color: 176 0 32; /* Kolor błędu pozostaje bez zmian */
   --webkit-scrollbar-color: 80 80 80; /* Szary scrollbar */
-  --grade: 200 200 200; /* Jasny szary akcent */
+  --grade: 214 154 0;; /* Jasny szary akcent */
 }
 
 ::-webkit-scrollbar {
