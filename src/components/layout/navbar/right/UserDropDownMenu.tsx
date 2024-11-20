@@ -90,12 +90,12 @@ export default function UserDropDownMenu({ menuClassName }: UserDropDownMenuProp
 					<li key={idx} className="w-full">
 						{type == Menu.HEADER ? (
 							<div className="w-full pt-1 uppercase">
-								<span className="block w-full px-0.5 text-center text-xs text-gray-500">{label}</span>
-								<div className="border-grey2white w-full border-t pb-1" />
+								<span className="block w-full px-0.5 text-center text-xs text-secondary">{label}</span>
+								<div className="w-full border-t border-secondary pb-1" />
 							</div>
 						) : (
 							<Link
-								className="flex cursor-pointer items-center gap-1 bg-bg px-1 py-2 tracking-wide hover:bg-bgHover"
+								className="flex cursor-pointer items-center gap-1 rounded-md bg-bg px-1 py-2 tracking-wide text-secondary hover:bg-bgHover"
 								href={href!}
 							>
 								{React.createElement(icon!)}

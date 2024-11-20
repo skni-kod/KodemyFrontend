@@ -32,7 +32,7 @@ export default function RootLayout({ children }: ComponentParentProps) {
 	return (
 		<html lang="pl">
 			<ToastProvider>
-				<body className="light">
+				<body className="light-default">
 					<SessionProvider signUri="/auth">
 						<SidebarProvider>
 							<div id="container" className="h-auto min-h-fullContent w-full overflow-x-hidden">

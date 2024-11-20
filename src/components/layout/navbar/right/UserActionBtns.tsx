@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { SlBell, SlPlus, SlUser } from 'react-icons/sl';
 import NotificationDropDownMenu from '@/components/layout/navbar/right/NotificationDropDownMenu';
 import UserDropDownMenu from '@/components/layout/navbar/right/UserDropDownMenu';
-import { useRouter } from 'next/navigation';
 import ComponentParentProps from '@/utils/types/node/componentParentProps';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa6';
 import AddMaterialModal from '@/components/materials/add_modal/AddMaterialModal';
@@ -37,8 +36,6 @@ export default function UserActionBtns() {
 	const [menuOpen, setMenuOpen] = useState<Menu>(Menu.OFF);
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-	const router = useRouter();
-
 	const handleMenuClick = (menu: Menu) => {
 		setMenuOpen(menuOpen == menu ? Menu.OFF : menu);
 	};
@@ -48,7 +45,7 @@ export default function UserActionBtns() {
 		setIsModalOpen(true);
 	};
 
-	const dropdownMenuClassName = 'top-navMenu absolute -right-[0.66rem] z-50 mt-0.5';
+	const dropdownMenuClassName = 'top-navMenu absolute -right-[0.66rem] z-50 mt-0.5 border border-secondary rounded-lg';
 
 	return (
 		<>

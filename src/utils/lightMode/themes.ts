@@ -14,4 +14,5 @@ export type ThemeOption = {
 export const themes: ThemeOption[] = [
 	{ id: 'light-default', label: 'Light Default', imageSrc: LightDefault, buttonImageSrc: LightDefaultButton },
 	{ id: 'dark-default', label: 'Dark Default', imageSrc: DarkDefault, buttonImageSrc: DarkDefaultButton },
+	{ id: 'dark-dimmed', label: 'Dark Default', imageSrc: DarkDefault, buttonImageSrc: DarkDefaultButton },
 ];

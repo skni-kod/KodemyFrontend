@@ -67,7 +67,7 @@ export default function Sidebar() {
 	const sidebar = useSidebar();
 
 	return (
-		<div className={`fixed min-h-full ${!sidebar.isOpen ? 'w-side' : 'w-expandSide'} bg-bg shadow-md`}>
+		<div className={`fixed min-h-full ${!sidebar.isOpen ? 'w-side' : 'w-expandSide'} bg-bg shadow-md shadow-secondary`}>
 			<ul className="flex h-full w-full list-none flex-col pt-2">
 				{sidebarSections.map(({ id, name, icon }) => (
 					<Link
@@ -88,7 +88,9 @@ export default function Sidebar() {
 							/>
 						</div>
 						{
-							<span className={`transition-width duration-300 ease-in-out ${!sidebar.isOpen ? 'hidden w-0' : ''}`}>
+							<span
+								className={`transition-width text-secondary duration-300 ease-in-out ${!sidebar.isOpen ? 'hidden w-0' : ''}`}
+							>
 								{name}
 							</span>
 						}
