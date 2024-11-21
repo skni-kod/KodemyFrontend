@@ -126,14 +126,14 @@ export default function AppearanceSettingsSubPage() {
 function ThemeModeSelector({ colorMode, onChange }: { colorMode: SystemColorMode; onChange: (e: any) => void }) {
 	return (
 		<div className="mb-4">
-			<label htmlFor="theme-mode" className="mb-1 block text-sm font-medium">
+			<label htmlFor="theme-mode" className="mb-1 block text-sm font-medium text-secondary">
 				Wygląd
 			</label>
 			<select
 				id="theme-mode"
 				value={colorMode}
 				onChange={onChange}
-				className="block w-full rounded-md border p-2 focus:ring focus:ring-blue-500"
+				className="w-full rounded-md border bg-bg p-2 text-secondary"
 			>
 				<option value="single">Pojedyńczy tryb</option>
 				<option value="system">Synchronizuj z systemem</option>
@@ -154,10 +154,10 @@ function SystemMode({ isDay, isModeActive, selectedTheme, onClick, allThemes }: 
 	const [hoveredTheme, setHoveredTheme] = useState<ThemeOption | null>(null);
 
 	return (
-		<div className="bg-gray rounded-lg border p-4">
+		<div className="rounded-lg border bg-bg p-4">
 			<div className="mb-4 flex items-center justify-between">
 				<h2 className="text-lg font-semibold">{isDay ? '☀️ Day theme' : '🌙 Night theme'}</h2>
-				{isModeActive && <span className="rounded bg-primary px-2 py-1 text-xs text-white">Active</span>}
+				{isModeActive && <span className="rounded border border-primary px-2 py-1 text-xs text-primary">Active</span>}
 			</div>
 			<p className="mb-4 text-sm">
 				This theme will be active when your system is set to &quot;
