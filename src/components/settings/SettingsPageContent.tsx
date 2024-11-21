@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, Suspense } from 'react';
 import PageContent from '@/components/layout/PageContent';
-import SectionBubbleBtn from '@/components/materials/manage_page/page_head/SectionBubbleBtn';
+import CategoryBubbleBtn from '@/components/materials/section_by_id_page/page_head/CategoryBubbleBtn';
 import AppearanceSettingsSubPage from '@/components/settings/appearance/AppearanceSettingsSubPage';
 
 const LazyProfileSettingsSubPage = React.lazy(() => import('@/components/settings/profile/ProfileSettingsSubPage'));
@@ -57,7 +57,12 @@ export default function SettingsPageContent() {
 		<PageContent headerValue={'Ustawienia'}>
 			<div className="flex w-full flex-wrap items-center gap-4 text-center text-xl">
 				{settingsPageContent.map(({ id, name }) => (
-					<SectionBubbleBtn key={id} name={name} onClick={() => setActivatedSectionId(id)} />
+					<CategoryBubbleBtn
+						key={id}
+						name={name}
+						selected={id === activatedSectionId}
+						onClick={() => setActivatedSectionId(id)}
+					/>
 				))}
 			</div>
 			<div className="mt-6">{renderContent()}</div>

@@ -86,7 +86,7 @@ export default function AppearanceSettingsSubPage() {
 					))}
 				</div>
 			) : (
-				<div className="grid gap-6 md:grid-cols-2">
+				<div className="grid gap-6 md:grid-cols-2 lg:w-2/3">
 					<SystemMode
 						isDay
 						isModeActive
