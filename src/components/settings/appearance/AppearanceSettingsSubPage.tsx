@@ -169,16 +169,12 @@ function SystemMode({ isDay, isModeActive, selectedTheme, onClick, allThemes }: 
 						onClick={() => onClick(theme.id)}
 						onMouseEnter={() => setHoveredTheme(theme)}
 						onMouseLeave={() => setHoveredTheme(null)}
-						className={`relative h-8 w-8 rounded-full border-2 ${
-							selectedTheme.id === theme.id ? 'border-primary' : 'border-secondary'
-						} transition-colors duration-300 ease-in-out`}
+						className={`relative h-8 w-8 rounded-full border-2 ${selectedTheme.id === theme.id ? 'border-primary' : 'border-secondary'} transition-colors duration-300 ease-in-out`}
 					>
 						<Image
 							src={theme.buttonImageSrc}
 							alt={theme.label}
-							className={`h-full w-full rounded-full object-cover object-center transition-transform duration-300 ease-in-out ${
-								selectedTheme.id === theme.id ? 'scale-75' : 'scale-100'
-							}`}
+							className={`h-full w-full rounded-full object-cover object-center transition-transform duration-300 ease-in-out ${selectedTheme.id === theme.id ? 'scale-75 border-2 border-gray' : 'scale-100'}`}
 						/>
 					</button>
 				))}
