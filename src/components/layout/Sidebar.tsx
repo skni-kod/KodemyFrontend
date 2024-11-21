@@ -89,7 +89,7 @@ export default function Sidebar() {
 						</div>
 						{
 							<span
-								className={`transition-width text-secondary duration-300 ease-in-out ${!sidebar.isOpen ? 'hidden w-0' : ''}`}
+								className={`text-secondary transition-all duration-300 ease-in-out ${!sidebar.isOpen ? 'hidden w-0' : ''}`}
 							>
 								{name}
 							</span>

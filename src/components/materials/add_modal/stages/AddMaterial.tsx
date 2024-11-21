@@ -11,7 +11,7 @@ import Tag from '@/services/tag/types/tag';
 
 const Label = ({ htmlFor, value, starred = false }: { htmlFor: string; value: string; starred?: boolean }) => {
 	return (
-		<label htmlFor={htmlFor} className="block pb-1.5 text-left text-gray-700">
+		<label htmlFor={htmlFor} className="block pb-1.5 text-left text-secondary">
 			{value}
 			{starred ? '*' : ''}:
 		</label>
@@ -101,7 +101,9 @@ export default function AddMaterial({
 					className="w-full rounded-lg border p-2"
 					placeholder="Podaj link do materiału"
 				/>
-				<small className="mt-1 block text-sm text-gray-500">*Link musi zawierać przedrostek https:// lub http://</small>
+				<small className="mt-1 block text-sm text-secondary">
+					*Link musi zawierać przedrostek https:// lub http://
+				</small>
 			</div>
 
 			<div className="form-group">
@@ -118,7 +120,7 @@ export default function AddMaterial({
 				{showTagList && filteredTags.length > 0 && (
 					<ul className="max-h-40 w-full overflow-y-auto rounded-lg border">
 						{filteredTags.map((tag) => (
-							<li key={tag.id} onClick={() => handleAddTag(tag.id)} className="cursor-pointer p-2 hover:bg-gray-100">
+							<li key={tag.id} onClick={() => handleAddTag(tag.id)} className="cursor-pointer p-2 hover:bg-secondary">
 								{tag.name}
 							</li>
 						))}
@@ -133,12 +135,12 @@ export default function AddMaterial({
 						const tag = tags.find((t) => t.id === tagId);
 						return tag ? (
 							<span
-								className="relative flex cursor-pointer items-center rounded bg-gray-200 p-2"
+								className="relative flex cursor-pointer items-center rounded bg-secondary p-2"
 								onClick={() => handleRemoveTag(tag.id)}
 							>
-								<span className="text-gray-800">{tag.name}</span>
+								<span className="text-secondary">{tag.name}</span>
 								<span className="flex items-center justify-center">
-									<IoCloseOutline className="h-6 w-6 font-semibold text-gray-600" />
+									<IoCloseOutline className="h-6 w-6 font-semibold text-secondary" />
 								</span>
 							</span>
 						) : null;

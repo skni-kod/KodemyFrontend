@@ -80,7 +80,7 @@ export default function DetailsModeGrades({ id }: { id: number }) {
 											/>
 										</td>
 										<td className="w-full px-4 py-2">
-											<div className="relative h-4 w-full rounded bg-gray-200">
+											<div className="relative h-4 w-full rounded bg-gray">
 												<div
 													className="absolute left-0 top-0 h-full rounded bg-grade"
 													style={{ width: `${percentage}%` }}

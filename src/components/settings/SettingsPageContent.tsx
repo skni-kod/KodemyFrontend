@@ -55,7 +55,7 @@ export default function SettingsPageContent() {
 
 	return (
 		<PageContent headerValue={'Ustawienia'}>
-			<div className="text-semibold flex w-full flex-wrap items-center gap-4 text-center text-xl">
+			<div className="flex w-full flex-wrap items-center gap-4 text-center text-xl">
 				{settingsPageContent.map(({ id, name }) => (
 					<SectionBubbleBtn key={id} name={name} onClick={() => setActivatedSectionId(id)} />
 				))}

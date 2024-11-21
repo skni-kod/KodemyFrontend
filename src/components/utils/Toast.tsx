@@ -30,19 +30,19 @@ const Toast: React.FC<ToastProps> = ({ message, type, index, onClose }) => {
 
 	switch (type) {
 		case 'success':
-			bgColor = 'bg-green-600';
+			bgColor = 'bg-green';
 			shadowColor = 'shadow-greenShadow';
 			break;
 		case 'danger':
-			bgColor = 'bg-red-600';
+			bgColor = 'bg-error';
 			shadowColor = 'shadow-redShadow';
 			break;
 		case 'info':
-			bgColor = 'bg-blue-600';
+			bgColor = 'bg-primary';
 			shadowColor = 'shadow-blueShadow';
 			break;
 		case 'warning':
-			bgColor = 'bg-yellow-600';
+			bgColor = 'bg-grade';
 			shadowColor = 'shadow-yellowShadow';
 			break;
 	}

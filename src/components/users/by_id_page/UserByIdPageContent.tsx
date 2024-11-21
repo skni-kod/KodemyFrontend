@@ -27,12 +27,10 @@ export default function UserByIdPageContent({ id: userId, title }: MetadataProps
 			{status === Status.ERROR || !user ? (
 				<Error container />
 			) : (
-				<div className="text-black2white">
-					<div className="space-y-12">
-						<UserDetailsSection user={user} />
-						<UserSessionSection user={user} />
-						<UserMaterialsSection user={user} />
-					</div>
+				<div className="space-y-12">
+					<UserDetailsSection user={user} />
+					<UserSessionSection user={user} />
+					<UserMaterialsSection user={user} />
 				</div>
 			)}
 		</PageContent>

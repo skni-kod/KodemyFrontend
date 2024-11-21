@@ -51,13 +51,11 @@ const UserDetailsSection: React.FC<UserDetailsSectionProps> = ({ user }) => {
 				</div>
 				<div className="flex grow items-center justify-between px-[3vw] md:px-5">
 					<div>
-						<div className="text-black2white text-bold text-ellipsis py-[1vw] text-[2.82vw] md:py-1 md:text-xl">
-							{user.username}
-						</div>
-						<div className="text-bold py-[0.9vw] text-[2vw] md:py-1 md:text-sm">
+						<div className="text-ellipsis py-[1vw] text-[2.82vw] md:py-1 md:text-xl">{user.username}</div>
+						<div className="py-[0.9vw] text-[2vw] md:py-1 md:text-sm">
 							{TEXT.USER.EMAIL}: <div className={tab}>{user.email || 'Brak adresu email'}</div>
 						</div>
-						<h1 className="text-bold relative py-[0.9vw] text-[2vw] md:py-1 md:text-sm">
+						<h1 className="relative py-[0.9vw] text-[2vw] md:py-1 md:text-sm">
 							{TEXT.USER.ROLE}:
 							<div className={tab}>
 								{isAdminOrSuperAdmin && isEditingProfile ? (
@@ -67,7 +65,7 @@ const UserDetailsSection: React.FC<UserDetailsSectionProps> = ({ user }) => {
 										</button>
 										<span className="inline-block">{isMenuOpen ? <RxTriangleUp /> : <RxTriangleDown />}</span>
 										{isMenuOpen && (
-											<div className="bg-white2verydarkgrey absolute right-7 top-10 z-10 mt-2 w-fit">
+											<div className="absolute right-7 top-10 z-10 mt-2 w-fit">
 												<ul className="m-0 max-h-none w-max cursor-pointer list-none overflow-auto rounded-lg border-2 p-0">
 													{userRolesData.map((role, index) => (
 														<li key={index}>
@@ -88,7 +86,7 @@ const UserDetailsSection: React.FC<UserDetailsSectionProps> = ({ user }) => {
 								)}
 							</div>
 						</h1>
-						<div className="text-bold py-[0.9vw] text-[2vw] md:py-1 md:text-sm">
+						<div className="py-[0.9vw] text-[2vw] md:py-1 md:text-sm">
 							{TEXT.USER.CREATED}:<div className={tab}>{calculateTimeDifference(user.createdDate)}</div>
 						</div>
 					</div>

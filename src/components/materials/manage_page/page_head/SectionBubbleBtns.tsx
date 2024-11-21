@@ -23,7 +23,7 @@ export default function SectionBubbleBtns() {
 	if (status === Status.ERROR || !sections) return <Error />;
 
 	return (
-		<div className="text-semibold flex w-full flex-wrap items-center gap-4 text-center text-xl">
+		<div className="flex w-full flex-wrap items-center gap-4 text-center text-xl">
 			{activatedSectionId === null ? (
 				<>
 					{sections.map(({ id, name, categories }) => (

@@ -32,7 +32,10 @@ const config: Config = {
 				bgHover: 'rgb(var(--background-hover-color) / <alpha-value>)',
 				error: 'rgb(var(--error-color) / <alpha-value>)',
 				grade: 'rgb(var(--grade) / <alpha-value>)',
-				gradeText: 'rgb(var(--secondary-color) / <alpha-value>)',
+				gray: 'rgb(var(--gray) / <alpha-value>)',
+				grayText: 'rgb(var(--grayText) / <alpha-value>)',
+				green: 'rgb(var(--green) / <alpha-value>)',
+				greenText: 'rgb(var(--greenText) / <alpha-value>)',
 			},
 			height: {
 				inherit: 'inherit',

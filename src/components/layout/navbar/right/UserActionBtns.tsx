@@ -56,7 +56,7 @@ export default function UserActionBtns() {
 			<MenuBtnWrapper onClick={() => handleMenuClick(Menu.NOTIFICATION)}>
 				<div className="relative">
 					<SlBell className="h-full text-2xl" />
-					<span className="absolute left-0.5 top-[0.0625rem] h-2.5 w-2.5 rounded-xl bg-red-700"></span>
+					<span className="absolute left-0.5 top-[0.0625rem] h-2.5 w-2.5 rounded-xl bg-error"></span>
 				</div>
 				{React.createElement(menuOpen === Menu.NOTIFICATION ? FaAngleUp : FaAngleDown, { className: 'h-full text-sm' })}
 				{menuOpen === Menu.NOTIFICATION && <NotificationDropDownMenu menuClassName={dropdownMenuClassName} />}
