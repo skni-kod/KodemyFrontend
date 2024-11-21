@@ -1,0 +1,14 @@
+name: Tests
+
+on:
+  push:
+    branches: [ "dev", "main", "test" ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: LintTest
+        with:
+          script:
+            npm run lint
