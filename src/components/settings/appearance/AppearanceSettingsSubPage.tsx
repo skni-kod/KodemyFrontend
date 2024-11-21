@@ -5,17 +5,34 @@ import { ThemeOption, themes } from '@/utils/lightMode/themes';
 type SystemColorMode = 'system' | 'single';
 
 export default function AppearanceSettingsSubPage() {
-	const [colorMode, setColorMode] = useState<SystemColorMode>('single');
-	const [selectedDayTheme, setDayTheme] = useState<ThemeOption>(
-		themes.find((theme: ThemeOption) => theme.id === 'light-default')!,
-	);
-	const [selectedNightTheme, setSelectedNightTheme] = useState<ThemeOption>(
-		themes.find((theme: ThemeOption) => theme.id === 'dark-default')!,
-	);
+	const [colorMode, setColorMode] = useState<SystemColorMode>(() => {
+		const savedColorMode = localStorage.getItem('colorMode');
+		return (savedColorMode as SystemColorMode) || 'single';
+	});
 
-	const [selectedTheme, setSelectedTheme] = useState<ThemeOption>(
-		themes.find((theme: ThemeOption) => theme.id === 'dark-default')!,
-	);
+	const [selectedDayTheme, setDayTheme] = useState<ThemeOption>(() => {
+		const savedDayTheme = localStorage.getItem('dayTheme');
+		return (
+			themes.find((theme: ThemeOption) => theme.id === savedDayTheme) ||
+			themes.find((theme: ThemeOption) => theme.id === 'light-default')!
+		);
+	});
+
+	const [selectedNightTheme, setSelectedNightTheme] = useState<ThemeOption>(() => {
+		const savedNightTheme = localStorage.getItem('nightTheme');
+		return (
+			themes.find((theme: ThemeOption) => theme.id === savedNightTheme) ||
+			themes.find((theme: ThemeOption) => theme.id === 'dark-default')!
+		);
+	});
+
+	const [selectedTheme, setSelectedTheme] = useState<ThemeOption>(() => {
+		const savedTheme = localStorage.getItem('selectedTheme');
+		return (
+			themes.find((theme: ThemeOption) => theme.id === savedTheme) ||
+			themes.find((theme: ThemeOption) => theme.id === 'dark-default')!
+		);
+	});
 
 	useEffect(() => {
 		const savedDayTheme = localStorage.getItem('dayTheme');
