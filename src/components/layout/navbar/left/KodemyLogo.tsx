@@ -1,7 +1,8 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
-import Kodemy from '@/assets/logo/dark/kodemyBig.png';
+import KodemyDark from '@/assets/logo/dark/kodemyBig.png';
+import KodemyWhite from '@/assets/logo/white/kodemyBig.png';
 
 type KodemyLogoProps = {
 	className?: string;
@@ -10,9 +11,9 @@ type KodemyLogoProps = {
 
 export default function KodemyLogo({ className = 'h-full w-full', ratio = 1 }: KodemyLogoProps) {
 	const [image, setImage] = useState<{ src: string; width: number; height: number }>({
-		src: Kodemy.src,
-		width: Kodemy.width,
-		height: Kodemy.height,
+		src: KodemyDark.src,
+		width: KodemyDark.width,
+		height: KodemyDark.height,
 	});
 
 	/*const importImg = useMemo(() => {
