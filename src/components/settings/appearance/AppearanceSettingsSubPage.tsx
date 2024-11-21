@@ -56,6 +56,8 @@ export default function AppearanceSettingsSubPage() {
 		return () => mediaQuery.removeEventListener('change', handleChange);
 	}, [colorMode, selectedDayTheme, selectedNightTheme, selectedTheme]);
 
+	const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
 	return (
 		<div>
 			<h1 className="mb-4 text-2xl font-bold">Wygląd</h1>
@@ -88,8 +90,8 @@ export default function AppearanceSettingsSubPage() {
 			) : (
 				<div className="grid gap-6 md:grid-cols-2 lg:w-2/3">
 					<SystemMode
-						isDay
-						isModeActive
+						isDay={true}
+						isModeActive={!isDarkMode}
 						selectedTheme={selectedDayTheme}
 						onClick={(themeId) => setDayTheme(themes.find((theme) => theme.id === themeId)!)}
 						allThemes={themes}
@@ -97,7 +99,7 @@ export default function AppearanceSettingsSubPage() {
 
 					<SystemMode
 						isDay={false}
-						isModeActive
+						isModeActive={isDarkMode}
 						selectedTheme={selectedNightTheme}
 						onClick={(themeId) => setNightTheme(themes.find((theme) => theme.id === themeId)!)}
 						allThemes={themes}
