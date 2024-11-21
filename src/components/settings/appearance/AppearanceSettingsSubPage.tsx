@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ThemeOption, themes } from '@/utils/lightMode/themes';
 
@@ -17,9 +17,43 @@ export default function AppearanceSettingsSubPage() {
 		themes.find((theme: ThemeOption) => theme.id === 'dark-default')!,
 	);
 
-	console.log('selectedDayTheme', selectedDayTheme.id);
-	console.log('selectedNightTheme', selectedNightTheme.id);
-	console.log('selectedTheme', selectedTheme.id);
+	useEffect(() => {
+		const savedDayTheme = localStorage.getItem('dayTheme');
+		const savedNightTheme = localStorage.getItem('nightTheme');
+		const savedTheme = localStorage.getItem('selectedTheme');
+		const savedColorMode = localStorage.getItem('colorMode');
+
+		if (savedDayTheme) {
+			const theme = themes.find((theme) => theme.id === savedDayTheme);
+			if (theme) setDayTheme(theme);
+		}
+
+		if (savedNightTheme) {
+			const theme = themes.find((theme) => theme.id === savedNightTheme);
+			if (theme) setSelectedNightTheme(theme);
+		}
+
+		if (savedTheme) {
+			const theme = themes.find((theme) => theme.id === savedTheme);
+			if (theme) setSelectedTheme(theme);
+		}
+
+		if (savedColorMode) {
+			setColorMode(savedColorMode as SystemColorMode);
+		}
+	}, []);
+
+	const saveToLocalStorage = () => {
+		localStorage.setItem('dayTheme', selectedDayTheme.id);
+		localStorage.setItem('nightTheme', selectedNightTheme.id);
+		localStorage.setItem('selectedTheme', selectedTheme.id);
+		localStorage.setItem('colorMode', colorMode);
+	};
+
+	useEffect(() => {
+		saveToLocalStorage();
+	}, [selectedDayTheme, selectedNightTheme, selectedTheme, colorMode]);
+
 	return (
 		<div>
 			<h1 className="mb-4 text-2xl font-bold">Wygląd</h1>
@@ -103,7 +137,7 @@ function SystemMode({ isDay, isModeActive, selectedTheme, onClick, allThemes }: 
 	const [hoveredTheme, setHoveredTheme] = useState<ThemeOption | null>(null);
 
 	return (
-		<div className="rounded-lg border bg-gray p-4">
+		<div className="bg-gray rounded-lg border p-4">
 			<div className="mb-4 flex items-center justify-between">
 				<h2 className="text-lg font-semibold">{isDay ? '☀️ Day theme' : '🌙 Night theme'}</h2>
 				{isModeActive && <span className="rounded bg-primary px-2 py-1 text-xs text-white">Active</span>}
@@ -139,7 +173,7 @@ function SystemMode({ isDay, isModeActive, selectedTheme, onClick, allThemes }: 
 						<Image
 							src={theme.buttonImageSrc}
 							alt={theme.label}
-							className={`h-full w-full rounded-full object-cover object-center transition-transform duration-300 ease-in-out ${selectedTheme.id === theme.id ? 'scale-75 border-2 border-gray' : 'scale-100'}`}
+							className={`h-full w-full rounded-full object-cover object-center transition-transform duration-300 ease-in-out ${selectedTheme.id === theme.id ? 'border-gray scale-75 border-2' : 'scale-100'}`}
 						/>
 					</button>
 				))}
