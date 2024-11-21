@@ -5,71 +5,56 @@ import { ThemeOption, themes } from '@/utils/lightMode/themes';
 type SystemColorMode = 'system' | 'single';
 
 export default function AppearanceSettingsSubPage() {
-	const [colorMode, setColorMode] = useState<SystemColorMode>(() => {
-		const savedColorMode = localStorage.getItem('colorMode');
-		return (savedColorMode as SystemColorMode) || 'single';
-	});
+	const [colorMode, setColorMode] = useState<SystemColorMode>(
+		() => (localStorage.getItem('colorMode') as SystemColorMode) || 'single',
+	);
 
-	const [selectedDayTheme, setDayTheme] = useState<ThemeOption>(() => {
-		const savedDayTheme = localStorage.getItem('dayTheme');
-		return (
-			themes.find((theme: ThemeOption) => theme.id === savedDayTheme) ||
-			themes.find((theme: ThemeOption) => theme.id === 'light-default')!
-		);
-	});
+	const [selectedDayTheme, setDayTheme] = useState<ThemeOption>(
+		() =>
+			themes.find((theme) => theme.id === localStorage.getItem('dayTheme')) ||
+			themes.find((theme) => theme.id === 'light-default')!,
+	);
 
-	const [selectedNightTheme, setSelectedNightTheme] = useState<ThemeOption>(() => {
-		const savedNightTheme = localStorage.getItem('nightTheme');
-		return (
-			themes.find((theme: ThemeOption) => theme.id === savedNightTheme) ||
-			themes.find((theme: ThemeOption) => theme.id === 'dark-default')!
-		);
-	});
+	const [selectedNightTheme, setNightTheme] = useState<ThemeOption>(
+		() =>
+			themes.find((theme) => theme.id === localStorage.getItem('nightTheme')) ||
+			themes.find((theme) => theme.id === 'dark-default')!,
+	);
 
-	const [selectedTheme, setSelectedTheme] = useState<ThemeOption>(() => {
-		const savedTheme = localStorage.getItem('selectedTheme');
-		return (
-			themes.find((theme: ThemeOption) => theme.id === savedTheme) ||
-			themes.find((theme: ThemeOption) => theme.id === 'dark-default')!
-		);
-	});
+	const [selectedTheme, setTheme] = useState<ThemeOption>(
+		() =>
+			themes.find((theme) => theme.id === localStorage.getItem('selectedTheme')) ||
+			themes.find((theme) => theme.id === 'dark-default')!,
+	);
 
 	useEffect(() => {
-		const savedDayTheme = localStorage.getItem('dayTheme');
-		const savedNightTheme = localStorage.getItem('nightTheme');
-		const savedTheme = localStorage.getItem('selectedTheme');
-		const savedColorMode = localStorage.getItem('colorMode');
-
-		if (savedDayTheme) {
-			const theme = themes.find((theme) => theme.id === savedDayTheme);
-			if (theme) setDayTheme(theme);
-		}
-
-		if (savedNightTheme) {
-			const theme = themes.find((theme) => theme.id === savedNightTheme);
-			if (theme) setSelectedNightTheme(theme);
-		}
-
-		if (savedTheme) {
-			const theme = themes.find((theme) => theme.id === savedTheme);
-			if (theme) setSelectedTheme(theme);
-		}
-
-		if (savedColorMode) {
-			setColorMode(savedColorMode as SystemColorMode);
-		}
-	}, []);
-
-	const saveToLocalStorage = () => {
+		// Save settings to localStorage whenever they change
+		localStorage.setItem('colorMode', colorMode);
 		localStorage.setItem('dayTheme', selectedDayTheme.id);
 		localStorage.setItem('nightTheme', selectedNightTheme.id);
 		localStorage.setItem('selectedTheme', selectedTheme.id);
-		localStorage.setItem('colorMode', colorMode);
-	};
+	}, [colorMode, selectedDayTheme, selectedNightTheme, selectedTheme]);
 
 	useEffect(() => {
-		saveToLocalStorage();
-	}, [selectedDayTheme, selectedNightTheme, selectedTheme, colorMode]);
+		// Apply the selected theme to the document
+		const applyTheme = () => {
+			let theme = selectedTheme;
+			if (colorMode === 'system') {
+				const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				theme = isDarkMode ? selectedNightTheme : selectedDayTheme;
+			}
+			document.documentElement.setAttribute('data-theme', theme.id);
+		};
+
+		applyTheme();
+
+		// Listen for system dark mode changes if in 'system' mode
+		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+		const handleChange = () => colorMode === 'system' && applyTheme();
+
+		mediaQuery.addEventListener('change', handleChange);
+		return () => mediaQuery.removeEventListener('change', handleChange);
+	}, [colorMode, selectedDayTheme, selectedNightTheme, selectedTheme]);
 
 	return (
 		<div>
@@ -86,7 +71,7 @@ export default function AppearanceSettingsSubPage() {
 					{themes.map((theme) => (
 						<button
 							key={theme.id}
-							onClick={() => setSelectedTheme(theme)}
+							onClick={() => setTheme(theme)}
 							className={`rounded-lg border-2 text-left ${
 								selectedTheme.id === theme.id ? 'border-primary' : 'border-gray'
 							}`}
@@ -103,8 +88,8 @@ export default function AppearanceSettingsSubPage() {
 			) : (
 				<div className="grid gap-6 md:grid-cols-2">
 					<SystemMode
-						isDay={true}
-						isModeActive={true}
+						isDay
+						isModeActive
 						selectedTheme={selectedDayTheme}
 						onClick={(themeId) => setDayTheme(themes.find((theme) => theme.id === themeId)!)}
 						allThemes={themes}
@@ -112,9 +97,9 @@ export default function AppearanceSettingsSubPage() {
 
 					<SystemMode
 						isDay={false}
-						isModeActive={false}
+						isModeActive
 						selectedTheme={selectedNightTheme}
-						onClick={(themeId) => setSelectedNightTheme(themes.find((theme) => theme.id === themeId)!)}
+						onClick={(themeId) => setNightTheme(themes.find((theme) => theme.id === themeId)!)}
 						allThemes={themes}
 					/>
 				</div>
@@ -173,8 +158,7 @@ function SystemMode({ isDay, isModeActive, selectedTheme, onClick, allThemes }: 
 					layout="responsive"
 				/>
 				<div className="mt-2 text-center text-sm font-medium">
-					{hoveredTheme ? hoveredTheme.label : selectedTheme.label}{' '}
-					{/* Show hovered theme label or selected theme label */}
+					{hoveredTheme ? hoveredTheme.label : selectedTheme.label}
 				</div>
 			</div>
 
@@ -185,12 +169,16 @@ function SystemMode({ isDay, isModeActive, selectedTheme, onClick, allThemes }: 
 						onClick={() => onClick(theme.id)}
 						onMouseEnter={() => setHoveredTheme(theme)}
 						onMouseLeave={() => setHoveredTheme(null)}
-						className={`relative h-8 w-8 rounded-full border-2 ${selectedTheme.id === theme.id ? 'border-primary' : 'border-secondary'} transition-colors duration-300 ease-in-out`}
+						className={`relative h-8 w-8 rounded-full border-2 ${
+							selectedTheme.id === theme.id ? 'border-primary' : 'border-secondary'
+						} transition-colors duration-300 ease-in-out`}
 					>
 						<Image
 							src={theme.buttonImageSrc}
 							alt={theme.label}
-							className={`h-full w-full rounded-full object-cover object-center transition-transform duration-300 ease-in-out ${selectedTheme.id === theme.id ? 'border-gray scale-75 border-2' : 'scale-100'}`}
+							className={`h-full w-full rounded-full object-cover object-center transition-transform duration-300 ease-in-out ${
+								selectedTheme.id === theme.id ? 'scale-75' : 'scale-100'
+							}`}
 						/>
 					</button>
 				))}
