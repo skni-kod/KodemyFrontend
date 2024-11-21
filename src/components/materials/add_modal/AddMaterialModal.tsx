@@ -114,7 +114,7 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 				return <AddMaterial initialData={data.details!} onChange={handleAddMaterialChange} />;
 			case Stage.SUMMARY:
 				return (
-					<div className="text-center">
+					<div className="text-center text-secondary">
 						<h4>Czy na pewno chcesz opublikować ten materiał?</h4>
 						<p className="pt-2">Po kliknięciu &ldquo;Opublikuj&rdquo;, materiał zostanie udostępniony.</p>
 					</div>
@@ -193,7 +193,7 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 					) : (
 						<>
 							<div className="w-full text-center">
-								<h3 className="text-3xl font-semibold">{getModalHeader()}</h3>
+								<h3 className="text-3xl font-semibold text-secondary">{getModalHeader()}</h3>
 							</div>
 							<div className="w-full pt-8">{getStageComponent(sections)}</div>
 							<div className="flex w-full flex-col items-center gap-2 pt-8">

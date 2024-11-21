@@ -18,7 +18,7 @@ export default function SectionSelect({ sections, selected, onClick }: SectionSe
 					key={id}
 					className={clsx(
 						'flex w-full items-center gap-2 rounded-xl border-2 bg-bg px-3 py-2',
-						selected !== id ? 'cursor-pointer hover:bg-bgHover' : 'border-primary text-primary',
+						selected !== id ? 'cursor-pointer border border-secondary hover:bg-bgHover' : 'border-primary text-primary',
 					)}
 					onClick={() => onClick(id)}
 				>
@@ -34,7 +34,7 @@ export default function SectionSelect({ sections, selected, onClick }: SectionSe
 							}}
 						/>
 					</div>
-					<span className="text-xl font-normal">{name}</span>
+					<span className="text-xl font-normal text-secondary">{name}</span>
 				</li>
 			))}
 		</ul>

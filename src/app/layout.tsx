@@ -42,6 +42,7 @@ export default function RootLayout({ children }: ComponentParentProps) {
 									<Sidebar />
 									<Main>{children}</Main>
 									<Footer />
+									<div id="modal"></div>
 								</div>
 								<ToastContainer />
 							</SidebarProvider>

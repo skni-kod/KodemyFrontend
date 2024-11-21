@@ -15,7 +15,7 @@ export default function Button({
 		<button
 			className={`flex h-[2.5rem] items-center rounded-md px-4 py-2 text-sm font-semibold ${
 				disabled
-					? 'cursor-not-allowed bg-gray text-textOnPrimary'
+					? 'cursor-not-allowed bg-secondary text-textOnPrimary'
 					: 'cursor-pointer bg-primary text-textOnPrimary hover:bg-primaryHover'
 			}`}
 			style={style}

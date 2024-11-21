@@ -5,7 +5,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 type ModalProps = { className?: string; children: React.ReactNode; onClose: () => void };
 
 const Modal = ({ className, children, onClose }: ModalProps) => {
-	const mRoot = document.getElementById('m-root');
+	const mRoot = document.getElementById('modal');
 	const mNode = document.createElement('div');
 
 	useEffect(() => {

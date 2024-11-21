@@ -15,11 +15,11 @@ export default function CategorySelect({ categories, selected, onClick }: Catego
 					key={id}
 					className={clsx(
 						'flex w-full items-center gap-4 rounded-xl border-2 bg-bg px-6 py-4',
-						selected !== id ? 'cursor-pointer hover:bg-bgHover' : 'border-primary text-primary',
+						selected !== id ? 'cursor-pointer border border-secondary hover:bg-bgHover' : 'border-primary text-primary',
 					)}
 					onClick={() => onClick(id)}
 				>
-					<span className="w-full text-center text-xl font-normal">{name}</span>
+					<span className="w-full text-center text-xl font-normal text-secondary">{name}</span>
 				</li>
 			))}
 		</ul>
