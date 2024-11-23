@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ThemeOption, themes } from '@/utils/lightMode/themes';
@@ -28,7 +29,6 @@ export default function AppearanceSettingsSubPage() {
 	);
 
 	useEffect(() => {
-		// Save settings to localStorage whenever they change
 		localStorage.setItem('colorMode', colorMode);
 		localStorage.setItem('dayTheme', selectedDayTheme.id);
 		localStorage.setItem('nightTheme', selectedNightTheme.id);
@@ -36,7 +36,6 @@ export default function AppearanceSettingsSubPage() {
 	}, [colorMode, selectedDayTheme, selectedNightTheme, selectedTheme]);
 
 	useEffect(() => {
-		// Apply the selected theme to the document
 		const applyTheme = () => {
 			let theme = selectedTheme;
 			if (colorMode === 'system') {
@@ -48,7 +47,6 @@ export default function AppearanceSettingsSubPage() {
 
 		applyTheme();
 
-		// Listen for system dark mode changes if in 'system' mode
 		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 		const handleChange = () => colorMode === 'system' && applyTheme();
 
