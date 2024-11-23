@@ -30,8 +30,6 @@ const UserDetailsSection: React.FC<UserDetailsSectionProps> = ({ user }) => {
 
 	const userRolesData: string[] = [];
 
-	const avatarSize = 'h-[120px] w-[120px] 3sm:h-32 3sm:w-32';
-
 	const tab = 'ml-4';
 	return (
 		<UserCard>
@@ -42,11 +40,16 @@ const UserDetailsSection: React.FC<UserDetailsSectionProps> = ({ user }) => {
 				setIsEditing={setIsEditingProfile}
 			/>
 			<UserCardBody>
-				<div className={`flex-none ${avatarSize} flex aspect-square items-center justify-center p-[1vw] md:p-1`}>
+				<div
+					className={`flex aspect-square max-h-[120px] max-w-[120px] flex-none items-center justify-center p-[1vw] md:p-1`}
+				>
 					<Image
 						src={user && user.photo ? user.photo : AvatarImage.src}
 						alt={TEXT.USER.AVATAR}
-						className={`flex items-center justify-center rounded-full ${avatarSize}`}
+						className="rounded-full object-cover"
+						layout="responsive"
+						width={1}
+						height={1}
 					/>
 				</div>
 				<div className="flex grow items-center justify-between px-[3vw] md:px-5">
