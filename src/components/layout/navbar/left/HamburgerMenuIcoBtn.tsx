@@ -9,7 +9,7 @@ export default function HamburgerMenuIcoBtn() {
 	return (
 		<div className="cursor-pointer" onClick={sidebar.handleToggle}>
 			<button className="flex aspect-square h-nav w-side items-center justify-center">
-				<GiHamburgerMenu className="block h-full w-full p-1/4" />
+				<GiHamburgerMenu className="block h-full w-full p-1/4 text-secondary" />
 			</button>
 		</div>
 	);

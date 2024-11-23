@@ -1,7 +1,9 @@
 'use client';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Kodemy from '@/assets/logo/dark/kodemyBig.png';
+import KodemyDark from '@/assets/logo/dark/kodemyBig.png';
+import KodemyWhite from '@/assets/logo/white/kodemyBig.png';
+import { themes } from '@/utils/lightMode/themes';
 
 type KodemyLogoProps = {
 	className?: string;
@@ -9,28 +11,33 @@ type KodemyLogoProps = {
 };
 
 export default function KodemyLogo({ className = 'h-full w-full', ratio = 1 }: KodemyLogoProps) {
-	const [image, setImage] = useState<{ src: string; width: number; height: number }>({
-		src: Kodemy.src,
-		width: Kodemy.width,
-		height: Kodemy.height,
-	});
-
-	/*const importImg = useMemo(() => {
-		return import('@/assets/logo/dark/kodemyBig.png');
-	}, []);
+	const [themeType, setThemeType] = useState<'light' | 'dark'>('light');
 
 	useEffect(() => {
-		importImg.then(({ default: { src, width, height } }) => {
-			setImage({ src, width: clientHeight * (width / height) * ratio, height: clientHeight * ratio });
-		});
-	}, [importImg, ratio]);*/
+		const html = document.documentElement;
+
+		const updateThemeType = () => {
+			const currentThemeId = html.getAttribute('data-theme') || 'light-default';
+			const currentTheme = themes.find((theme) => theme.id === currentThemeId);
+			setThemeType(currentTheme?.iconType || 'light');
+		};
+
+		const observer = new MutationObserver(updateThemeType);
+		observer.observe(html, { attributes: true, attributeFilter: ['data-theme'] });
+
+		updateThemeType();
+
+		return () => observer.disconnect();
+	}, []);
+
+	const logo = themeType === 'dark' ? KodemyWhite : KodemyDark;
 
 	return (
 		<div className={className}>
 			<Image
-				src={image.src}
-				width={image.width}
-				height={image.height}
+				src={logo.src}
+				width={logo.width * ratio}
+				height={logo.height * ratio}
 				alt="Logo strony"
 				style={{
 					height: '100%',

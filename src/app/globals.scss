@@ -3,61 +3,105 @@
 @tailwind utilities;
 
 * {
-  font-family: var(--font-poppins), 'Comic Sans MS', 'Times New Roman', sans-serif;
+	font-family: var(--font-poppins), 'Comic Sans MS', 'Times New Roman', sans-serif;
 }
 
 html,
 body,
 :root {
-  min-height: 100%;
-  font-size: 16px;
-  line-height: 1.25rem;
+	min-height: 100%;
+	font-size: 16px;
+	line-height: 1.25rem;
 }
 
 @layer base {
-  :root {
-    --primary-color: 2 132 199; // sky
-    --primary-hover-color: 2 112 169; // sky darker
-    --text-on-primary-color: 186 230 253; // sky lighter
-    --secondary-color: 48 49 52; // nearly black
-    --text-on-secondary-color: 240 240 240; // nearly white
-    --background-color: 255 255 255; // white
-    --background-hover-color: 240 240 240; // light grey
-    --error-color: 176 0 32;
-    --webkit-scrollbar-color: 200 200 200;
-    --grade: 255 188 11; //yellow
-  }
+	:root {
+		--primary-color: 2 132 199; // sky
+		--primary-hover-color: 2 112 169; // sky darker
+		--text-on-primary-color: 186 230 253; // sky lighter
+		--secondary-color: 48 49 52; // nearly black
+		--text-on-secondary-color: 240 240 240; // nearly white
+		--background-color: 255 255 255; // white
+		--background-hover-color: 240 240 240; // light grey
+		--error-color: 176 0 32;
+		--webkit-scrollbar-color: 200 200 200;
+		--grade: 255 188 11; //yellow
+		--gray: 229 231 235;
+		--grayText: 55 65 81;
+		--green: 22 163 74;
+		--greenText: 220 252 231;
+	}
 
-  @mixin root-dark {
-    :root {
-      --secondary-color: 255 255 255; // white
-      --background-color: 48 49 52; // nearly black
-      --background-hover-color: 38 39 40; // nearly black darker
-      --webkit-scrollbar-color: 68 69 70; // nearly gray
-    }
-  }
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--primary-color: 56 189 248;
+			--primary-hover-color: 37 140 185;
+			--text-on-primary-color: 15 23 42;
+			--secondary-color: 240 246 252;
+			--text-on-secondary-color: 28 28 28;
+			--background-color: 21 27 35; // prawie czarny
+			--background-hover-color: 61 68 72; // szary
+			--error-color: 255 69 58;
+			--webkit-scrollbar-color: 88 88 88;
+			--grade: 214 154 0;
+			--gray: 229 231 235;
+			--grayText: 55 65 81;
+			--green: 22 163 74;
+			--greenText: 220 252 231;
+		}
+	}
 
-  /*@media (prefers-color-scheme: dark) {
-    @include root-dark;
-  }*/
+	:root[data-theme='dark-default'] {
+		--primary-color: 56 189 248;
+		--primary-hover-color: 37 140 185;
+		--text-on-primary-color: 15 23 42;
+		--secondary-color: 240 246 252;
+		--text-on-secondary-color: 28 28 28;
+		--background-color: 21 27 35; // prawie czarny
+		--background-hover-color: 61 68 72; // szary
+		--error-color: 255 69 58;
+		--webkit-scrollbar-color: 88 88 88;
+		--grade: 214 154 0;
+		--gray: 229 231 235;
+		--grayText: 55 65 81;
+		--green: 22 163 74;
+		--greenText: 220 252 231;
+	}
+
+	:root[data-theme='dark-dimmed'] {
+		--primary-color: 68 145 169; /* muted sky */
+		--primary-hover-color: 50 100 122; /* muted darker sky */
+		--text-on-primary-color: 160 180 196; /* muted lighter sky */
+		--secondary-color: 171 171 171; /* Bardzo ciemny szary */
+		--text-on-secondary-color: 230 230 230; /* Jasny szary */
+		--background-color: 48 48 48; /* Ciemny szary */
+		--background-hover-color: 64 64 64; /* Jaśniejszy szary przy hover */
+		--error-color: 176 0 32; /* Kolor błędu pozostaje bez zmian */
+		--webkit-scrollbar-color: 80 80 80; /* Szary scrollbar */
+		--grade: 214 154 0; /* Jasny szary akcent */
+		--gray: 229 231 235;
+		--grayText: 55 65 81;
+		--green: 22 163 74;
+		--greenText: 220 252 231;
+	}
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+	width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(var(--webkit-scrollbar-color));
-  border-radius: 6px;
+	background-color: rgb(var(--webkit-scrollbar-color));
+	border-radius: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
-  border-radius: 6px;
+	background-color: transparent;
+	border-radius: 6px;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+	.text-balance {
+		text-wrap: balance;
+	}
 }

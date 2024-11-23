@@ -18,6 +18,7 @@ export const PAGE_TITLE = {
 	MATERIALS_MANAGE: 'Zarządzanie materiałami',
 	NOT_FOUND: 'Nie znaleziono strony',
 	SECTION_BY_ID: 'Materiały sekcji',
+	SETTINGS: `Ustawienia`,
 	SIGN_IN: 'Logowanie',
 	USERS_MANAGE: 'Zarządzanie użytkownikami',
 	AUTH_CALLBACK: 'Autoryzowanie',

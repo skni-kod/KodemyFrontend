@@ -15,7 +15,7 @@ export default function FiltersBlock({ fields }: FiltersBlockProps) {
 	return (
 		<div className="w-full px-4 pt-6">
 			<h3 className="w-full pb-5 text-2xl">{TEXT.WHAT_LOOKING_FOR}</h3>
-			<div className="border-black2white text-md flex w-full flex-wrap gap-2 leading-none">
+			<div className="flex w-full flex-wrap gap-2 leading-none">
 				<PhraseField className={FILTER_FIELD_CLASSNAMES} activePhrase={fields.phrase} />
 				<GradeField className={FILTER_FIELD_CLASSNAMES} activeGrade={fields.grade} />
 			</div>

@@ -2,11 +2,8 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-	content: [
-		'./src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-		'./src/components/**/*.{js,ts,jsx,tsx,mdx}',
-		'./src/methods/**/*.{js,ts,jsx,tsx,mdx}',
-	],
+	content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+	colors: {},
 	theme: {
 		screens: {
 			'2xs': '375px',
@@ -35,7 +32,10 @@ const config: Config = {
 				bgHover: 'rgb(var(--background-hover-color) / <alpha-value>)',
 				error: 'rgb(var(--error-color) / <alpha-value>)',
 				grade: 'rgb(var(--grade) / <alpha-value>)',
-				gradeText: 'rgb(var(--secondary-color) / <alpha-value>)',
+				gray: 'rgb(var(--gray) / <alpha-value>)',
+				grayText: 'rgb(var(--grayText) / <alpha-value>)',
+				green: 'rgb(var(--green) / <alpha-value>)',
+				greenText: 'rgb(var(--greenText) / <alpha-value>)',
 			},
 			height: {
 				inherit: 'inherit',

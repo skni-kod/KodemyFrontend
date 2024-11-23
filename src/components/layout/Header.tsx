@@ -8,7 +8,7 @@ import UserActionBlock from '@/components/layout/navbar/right/UserActionBlock';
 export default function Header() {
 	return (
 		<div className="fixed top-0 z-40 w-full">
-			<nav className="flex w-full flex-row justify-between bg-bg shadow-md">
+			<nav className="flex w-full flex-row justify-between bg-bg shadow-sm shadow-secondary">
 				<div className="flex h-nav flex-row">
 					<HamburgerMenuIcoBtn />
 					<Link href="/" className="h-nav py-1">

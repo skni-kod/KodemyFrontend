@@ -73,7 +73,7 @@ export default function AddGradeMaterialModal({
 			{isOpen && (
 				<Modal onClose={handleClose} className="max-w-xs xs:w-full">
 					<div className="w-full text-center">
-						<h3 className="text-3xl font-semibold">{getModalHeader()}</h3>
+						<h3 className="text-3xl font-semibold text-secondary">{getModalHeader()}</h3>
 					</div>
 					<div className="w-full pt-8">{getStageComponent()}</div>
 					<div className="flex items-center justify-end">

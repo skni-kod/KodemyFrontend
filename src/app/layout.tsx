@@ -13,6 +13,7 @@ import ComponentParentProps from '@/utils/types/node/componentParentProps';
 import SessionProvider from '@/contexts/SessionContext';
 import { ToastProvider } from '@/contexts/ToastContext';
 import ToastContainer from '@/components/utils/ToastContainer';
+import ThemeInitializer from '@/utils/lightMode/ThemeInitializer';
 
 const poppins = Poppins({
 	subsets: ['latin'],
@@ -30,21 +31,23 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: ComponentParentProps) {
 	return (
-		<html lang="pl">
+		<html lang="pl" data-theme="light-default">
 			<ToastProvider>
 				<body>
-					<SessionProvider signUri="/auth">
-						<SidebarProvider>
-							<div id="container" className="h-auto min-h-fullContent w-full overflow-x-hidden">
-								<Header />
-								<Sidebar />
-								<Main>{children}</Main>
-								<Footer />
-								<div id="m-root"></div>
-							</div>
-							<ToastContainer />
-						</SidebarProvider>
-					</SessionProvider>
+					<ThemeInitializer>
+						<SessionProvider signUri="/auth">
+							<SidebarProvider>
+								<div id="container" className="h-auto min-h-fullContent w-full overflow-x-hidden">
+									<Header />
+									<Sidebar />
+									<Main>{children}</Main>
+									<Footer />
+									<div id="modal"></div>
+								</div>
+								<ToastContainer />
+							</SidebarProvider>
+						</SessionProvider>
+					</ThemeInitializer>
 				</body>
 			</ToastProvider>
 		</html>

@@ -19,7 +19,7 @@ export default function UserMaterialsSection({ user }: UserMaterialsSectionProps
 				setIsEditing={() => {}}
 			/>
 			<UserCardBody>
-				<span className="italic text-gray-600">{TEXT.IMPLEMENTATION_PROCESS}</span>
+				<span className="italic text-gray">{TEXT.IMPLEMENTATION_PROCESS}</span>
 			</UserCardBody>
 		</UserCard>
 	);

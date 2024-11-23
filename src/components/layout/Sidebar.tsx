@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import codingLanguage from '@/assets/section/dark/coding-language.png';
@@ -65,9 +65,26 @@ export const sidebarSections: SidebarSection[] = [
 
 export default function Sidebar() {
 	const sidebar = useSidebar();
+	const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+	useEffect(() => {
+		const html = document.documentElement;
+
+		const updateTheme = () => {
+			const currentTheme = html.getAttribute('data-theme')?.includes('dark') ? 'dark' : 'light';
+			setTheme(currentTheme);
+		};
+
+		const observer = new MutationObserver(updateTheme);
+		observer.observe(html, { attributes: true, attributeFilter: ['data-theme'] });
+
+		updateTheme();
+
+		return () => observer.disconnect();
+	}, []);
 
 	return (
-		<div className={`fixed min-h-full ${!sidebar.isOpen ? 'w-side' : 'w-expandSide'} bg-bg shadow-md`}>
+		<div className={`fixed min-h-full ${!sidebar.isOpen ? 'w-side' : 'w-expandSide'} bg-bg shadow-md shadow-secondary`}>
 			<ul className="flex h-full w-full list-none flex-col pt-2">
 				{sidebarSections.map(({ id, name, icon }) => (
 					<Link
@@ -76,22 +93,15 @@ export default function Sidebar() {
 						className="flex w-full cursor-pointer flex-row items-center bg-bg hover:bg-bgHover"
 					>
 						<div className="p-5">
-							<Image
-								src={icon.light}
-								width={24}
-								height={24}
-								alt={name}
-								style={{
-									width: 'auto',
-									height: 'auto',
-								}}
-							/>
+							<Image src={theme === 'light' ? icon.light : icon.dark} width={24} height={24} alt={name} />
 						</div>
-						{
-							<span className={`transition-width duration-300 ease-in-out ${!sidebar.isOpen ? 'hidden w-0' : ''}`}>
-								{name}
-							</span>
-						}
+						<span
+							className={`text-secondary transition-all duration-300 ease-in-out ${
+								!sidebar.isOpen ? 'hidden w-0' : ''
+							}`}
+						>
+							{name}
+						</span>
 					</Link>
 				))}
 			</ul>

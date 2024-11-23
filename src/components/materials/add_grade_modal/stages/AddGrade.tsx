@@ -12,7 +12,7 @@ export default function AddGrade({ rating, onChange }: { rating: number; onChang
 				<Rating initialValue={rating} SVGstyle={{ display: 'inline' }} size={72} onClick={handleRatingClick} />
 			</div>
 
-			<div className="text-center text-gray-500">{rating > 0 && `Wybrana ocena: ${rating}`}</div>
+			<div className="text-center text-secondary">{rating > 0 && `Wybrana ocena: ${rating}`}</div>
 		</div>
 	);
 }

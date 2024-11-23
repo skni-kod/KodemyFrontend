@@ -15,7 +15,7 @@ export default function Button({
 		<button
 			className={`flex h-[2.5rem] items-center rounded-md px-4 py-2 text-sm font-semibold ${
 				disabled
-					? 'cursor-not-allowed bg-gray-300 text-textOnPrimary'
+					? 'cursor-not-allowed bg-secondary text-textOnPrimary'
 					: 'cursor-pointer bg-primary text-textOnPrimary hover:bg-primaryHover'
 			}`}
 			style={style}
@@ -51,12 +51,12 @@ export function MaterialButton({
 			textColor = 'text-gradeText';
 			break;
 		case 'green':
-			bgColor = 'bg-green-600';
-			textColor = 'text-green-100';
+			bgColor = 'bg-green';
+			textColor = 'text-greenText';
 			break;
 		case 'gray':
-			bgColor = 'bg-gray-700';
-			textColor = 'text-gray-200';
+			bgColor = 'bg-grayText';
+			textColor = 'text-gray';
 			break;
 	}
 

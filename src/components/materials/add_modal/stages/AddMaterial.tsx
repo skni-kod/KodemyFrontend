@@ -11,7 +11,7 @@ import Tag from '@/services/tag/types/tag';
 
 const Label = ({ htmlFor, value, starred = false }: { htmlFor: string; value: string; starred?: boolean }) => {
 	return (
-		<label htmlFor={htmlFor} className="block pb-1.5 text-left text-gray-700">
+		<label htmlFor={htmlFor} className="block pb-1.5 text-left text-secondary">
 			{value}
 			{starred ? '*' : ''}:
 		</label>
@@ -68,57 +68,59 @@ export default function AddMaterial({
 
 	return (
 		<div className="flex w-full flex-col gap-4">
-			<div className="form-group">
+			<div>
 				<Label htmlFor={title} value={TEXT.ADD_MATERIAL_MODAL.TITLE} />
 				<input
 					id="title"
 					type="text"
 					value={title}
 					onChange={(e) => setTitle(e.target.value)}
-					className="w-full rounded-lg border p-2"
+					className="w-full rounded-lg border bg-bg p-2 text-secondary"
 					placeholder="Podaj tytuł materiału"
 				/>
 			</div>
 
-			<div className="form-group">
+			<div>
 				<Label htmlFor="description" value={TEXT.ADD_MATERIAL_MODAL.DESC} />
 				<textarea
 					id="description"
 					value={description}
 					onChange={(e) => setDescription(e.target.value)}
-					className="w-full resize-none rounded-lg border p-2"
+					className="w-full resize-none rounded-lg border bg-bg p-2 text-secondary"
 					placeholder="Podaj opis materiału"
 				></textarea>
 			</div>
 
-			<div className="form-group">
+			<div>
 				<Label htmlFor="link" value={TEXT.ADD_MATERIAL_MODAL.LINK} starred />
 				<input
 					id="link"
 					type="text"
 					value={link}
 					onChange={(e) => setLink(e.target.value)}
-					className="w-full rounded-lg border p-2"
+					className="w-full rounded-lg border bg-bg p-2 text-secondary"
 					placeholder="Podaj link do materiału"
 				/>
-				<small className="mt-1 block text-sm text-gray-500">*Link musi zawierać przedrostek https:// lub http://</small>
+				<small className="mt-1 block text-sm text-secondary">
+					*Link musi zawierać przedrostek https:// lub http://
+				</small>
 			</div>
 
-			<div className="form-group">
+			<div>
 				<Label htmlFor="tags" value={TEXT.ADD_MATERIAL_MODAL.FIND_TAGS} />
 				<input
 					id="tagSearch"
 					type="text"
 					value={tagSearch}
 					onChange={(e) => setTagSearch(e.target.value)}
-					className="w-full rounded-lg border p-2"
+					className="w-full rounded-lg border bg-bg p-2 text-secondary"
 					placeholder="Wpisz nazwę tagu"
 					onClick={handleTagInputClick}
 				/>
 				{showTagList && filteredTags.length > 0 && (
-					<ul className="max-h-40 w-full overflow-y-auto rounded-lg border">
+					<ul className="max-h-40 w-full overflow-y-auto rounded-lg border bg-bg text-secondary">
 						{filteredTags.map((tag) => (
-							<li key={tag.id} onClick={() => handleAddTag(tag.id)} className="cursor-pointer p-2 hover:bg-gray-100">
+							<li key={tag.id} onClick={() => handleAddTag(tag.id)} className="cursor-pointer p-2 hover:bg-bgHover">
 								{tag.name}
 							</li>
 						))}
@@ -126,19 +128,19 @@ export default function AddMaterial({
 				)}
 			</div>
 
-			<div className="form-group">
+			<div>
 				<Label htmlFor="tagsSelected" value={TEXT.ADD_MATERIAL_MODAL.SELECTED_TAGS} />
 				<div className="flex flex-wrap gap-2">
 					{tagsIds.map((tagId) => {
 						const tag = tags.find((t) => t.id === tagId);
 						return tag ? (
 							<span
-								className="relative flex cursor-pointer items-center rounded bg-gray-200 p-2"
+								className="relative flex cursor-pointer items-center rounded p-2"
 								onClick={() => handleRemoveTag(tag.id)}
 							>
-								<span className="text-gray-800">{tag.name}</span>
+								<span className="text-secondary">{tag.name}</span>
 								<span className="flex items-center justify-center">
-									<IoCloseOutline className="h-6 w-6 font-semibold text-gray-600" />
+									<IoCloseOutline className="h-6 w-6 font-semibold text-secondary" />
 								</span>
 							</span>
 						) : null;
