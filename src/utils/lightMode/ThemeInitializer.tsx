@@ -1,30 +1,55 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { defaultTheme, themes } from '@/utils/lightMode/themes';
 
 export default function ThemeInitializer({ children }: { children: React.ReactNode }) {
 	useEffect(() => {
-		const savedTheme = localStorage.getItem('selectedTheme') || 'dark-default';
-		const colorMode = localStorage.getItem('colorMode') || 'single';
-		const dayTheme = localStorage.getItem('dayTheme') || 'light-default';
-		const nightTheme = localStorage.getItem('nightTheme') || 'dark-default';
+		const theme = JSON.parse(localStorage.getItem('theme') || JSON.stringify(defaultTheme));
 
-		const applyTheme = () => {
-			let themeId = savedTheme;
-			if (colorMode === 'system') {
-				const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-				themeId = isDarkMode ? nightTheme : dayTheme;
+		const applyInitialTheme = () => {
+			const html = document.documentElement;
+
+			html.setAttribute('data-day-theme', theme.dayTheme);
+			html.setAttribute('data-night-theme', theme.nightTheme);
+			html.setAttribute('data-single-theme', theme.selectedTheme);
+
+			const dayThemeImage = themes.find((t) => t.id === theme.dayTheme)?.imageSrc;
+			const nightThemeImage = themes.find((t) => t.id === theme.nightTheme)?.imageSrc;
+
+			if (dayThemeImage) {
+				html.style.setProperty('--day-theme-image', `url(${dayThemeImage.src})`);
 			}
-			document.documentElement.setAttribute('data-theme', themeId);
+			if (nightThemeImage) {
+				html.style.setProperty('--night-theme-image', `url(${nightThemeImage.src})`);
+			}
+
+			if (theme.colorMode === 'system') {
+				html.setAttribute('data-color-mode', 'system');
+				const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				html.setAttribute('data-theme', isDarkMode ? theme.nightTheme : theme.dayTheme);
+			} else {
+				html.setAttribute('data-color-mode', 'single');
+				html.setAttribute('data-theme', theme.selectedTheme);
+			}
 		};
 
-		applyTheme();
+		applyInitialTheme();
 
 		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-		mediaQuery.addEventListener('change', applyTheme);
+		const handleSystemModeChange = () => {
+			const html = document.documentElement;
+
+			if (theme.colorMode === 'system') {
+				const isDarkMode = mediaQuery.matches;
+				html.setAttribute('data-theme', isDarkMode ? theme.nightTheme : theme.dayTheme);
+			}
+		};
+
+		mediaQuery.addEventListener('change', handleSystemModeChange);
 
 		return () => {
-			mediaQuery.removeEventListener('change', applyTheme);
+			mediaQuery.removeEventListener('change', handleSystemModeChange);
 		};
 	}, []);
 

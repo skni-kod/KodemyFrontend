@@ -20,6 +20,7 @@ export const PAGE_TITLE = {
 	SECTION_BY_ID: 'Materiały sekcji',
 	SETTINGS: `Ustawienia`,
 	SIGN_IN: 'Logowanie',
+	SIGN_OUT: 'Wylogowanie',
 	USERS_MANAGE: 'Zarządzanie użytkownikami',
 	AUTH_CALLBACK: 'Autoryzowanie',
 };

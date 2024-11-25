@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import KodemyDark from '@/assets/logo/dark/kodemyBig.png';
 import KodemyWhite from '@/assets/logo/white/kodemyBig.png';
-import { themes } from '@/utils/lightMode/themes';
+import { IconType, themes } from '@/utils/lightMode/themes';
 
 type KodemyLogoProps = {
 	className?: string;
@@ -11,15 +11,15 @@ type KodemyLogoProps = {
 };
 
 export default function KodemyLogo({ className = 'h-full w-full', ratio = 1 }: KodemyLogoProps) {
-	const [themeType, setThemeType] = useState<'light' | 'dark'>('light');
+	const [themeType, setThemeType] = useState<IconType>('dark');
 
 	useEffect(() => {
 		const html = document.documentElement;
 
 		const updateThemeType = () => {
-			const currentThemeId = html.getAttribute('data-theme') || 'light-default';
+			const currentThemeId = html.getAttribute('data-theme') || 'dark-default';
 			const currentTheme = themes.find((theme) => theme.id === currentThemeId);
-			setThemeType(currentTheme?.iconType || 'light');
+			setThemeType(currentTheme?.iconType || 'dark');
 		};
 
 		const observer = new MutationObserver(updateThemeType);
@@ -30,7 +30,7 @@ export default function KodemyLogo({ className = 'h-full w-full', ratio = 1 }: K
 		return () => observer.disconnect();
 	}, []);
 
-	const logo = themeType === 'dark' ? KodemyWhite : KodemyDark;
+	const logo = themeType === 'dark' ? KodemyDark : KodemyWhite;
 
 	return (
 		<div className={className}>

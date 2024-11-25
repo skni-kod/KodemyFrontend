@@ -1,6 +1,7 @@
 import kodemyApi from '@/utils/api';
 import { ApiService } from '@/utils/api/types';
 import { JwtInfoResponse, ProviderLiResponse } from '@/services/auth/types';
+import { InternalServerErrorApiError } from '@/utils/api/types/apiError';
 
 export default class AuthService extends ApiService {
 	public static async refreshJwt(refresh: string, bearerJti: string): Promise<JwtInfoResponse> {
@@ -18,5 +19,19 @@ export default class AuthService extends ApiService {
 
 	public static async getProviders() {
 		return await kodemyApi.get<ProviderLiResponse>('/api/oauth2/providers').then((res) => res.data);
+	}
+
+	public static async logout(token: string): Promise<void> {
+		try {
+			const response = await kodemyApi.post(`/api/logout `, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			return response.data;
+		} catch (err) {
+			console.error('error', err);
+			return Promise.reject(new InternalServerErrorApiError());
+		}
 	}
 }
