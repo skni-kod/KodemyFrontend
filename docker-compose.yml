@@ -1,10 +1,15 @@
 services:
   frontend:
-    image: kodemy-frontend:latest
+    image: kodemy-frontend
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     ports:
       - ${EXPOSE_PORT}:3000
     environment:
       - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://kni.prz.edu.pl:47458
+      - NEXT_PUBLIC_ERROR_HOLD_TIME_IN_MS=5000
     volumes:
       - frontend_vol:/app
     networks:
