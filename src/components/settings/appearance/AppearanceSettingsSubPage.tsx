@@ -1,57 +1,60 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { ThemeOption, themes } from '@/utils/lightMode/themes';
-
-type SystemColorMode = 'system' | 'single';
+import { defaultTheme, SystemColorMode, ThemeOption, themes } from '@/utils/lightMode/themes';
+import Loading from '@/components/common/Loading';
 
 export default function AppearanceSettingsSubPage() {
-	const [colorMode, setColorMode] = useState<'system' | 'single'>(
-		() => (localStorage.getItem('colorMode') as 'system' | 'single') || 'single',
-	);
-	const [selectedDayTheme, setDayTheme] = useState<ThemeOption>(
-		() =>
-			themes.find((theme) => theme.id === localStorage.getItem('dayTheme')) ||
-			themes.find((theme) => theme.id === 'light-default')!,
-	);
-	const [selectedNightTheme, setNightTheme] = useState<ThemeOption>(
-		() =>
-			themes.find((theme) => theme.id === localStorage.getItem('nightTheme')) ||
-			themes.find((theme) => theme.id === 'dark-default')!,
-	);
-	const [selectedSingleTheme, setSingleTheme] = useState<ThemeOption>(
-		() =>
-			themes.find((theme) => theme.id === localStorage.getItem('selectedTheme')) ||
-			themes.find((theme) => theme.id === 'dark-default')!,
-	);
+	const [theme, setTheme] = useState(defaultTheme);
+	const [isClient, setIsClient] = useState(false);
+
+	useEffect(() => {
+		setIsClient(true);
+		const savedTheme = localStorage.getItem('theme');
+		if (savedTheme) {
+			setTheme(JSON.parse(savedTheme));
+		}
+	}, []);
 
 	const updateThemes = () => {
 		const html = document.documentElement;
 
-		// Zachowujemy wszystkie motywy w atrybutach HTML
-		html.setAttribute('data-day-theme', selectedDayTheme.id);
-		html.setAttribute('data-night-theme', selectedNightTheme.id);
-		html.setAttribute('data-single-theme', selectedSingleTheme.id);
+		html.setAttribute('data-day-theme', theme.dayTheme);
+		html.setAttribute('data-night-theme', theme.nightTheme);
+		html.setAttribute('data-single-theme', theme.selectedTheme);
 
-		if (colorMode === 'system') {
+		if (theme.colorMode === 'system') {
 			html.setAttribute('data-color-mode', 'system');
 			const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-			html.setAttribute('data-theme', isDarkMode ? selectedNightTheme.id : selectedDayTheme.id);
+			html.setAttribute('data-theme', isDarkMode ? theme.nightTheme : theme.dayTheme);
 		} else {
 			html.setAttribute('data-color-mode', 'single');
-			html.setAttribute('data-theme', selectedSingleTheme.id);
+			html.setAttribute('data-theme', theme.selectedTheme);
 		}
 
-		// Synchronizacja z localStorage
-		localStorage.setItem('colorMode', colorMode);
-		localStorage.setItem('dayTheme', selectedDayTheme.id);
-		localStorage.setItem('nightTheme', selectedNightTheme.id);
-		localStorage.setItem('selectedTheme', selectedSingleTheme.id);
+		localStorage.setItem('theme', JSON.stringify(theme));
 	};
 
 	useEffect(() => {
-		updateThemes();
-	}, [colorMode, selectedDayTheme, selectedNightTheme, selectedSingleTheme]);
+		if (isClient) {
+			updateThemes();
+		}
+	}, [theme, isClient]);
+
+	const handleChange = (key: keyof typeof theme, value: string) => {
+		setTheme((prev: any) => ({ ...prev, [key]: value }));
+	};
+
+	if (!isClient)
+		return (
+			<div className="pt-8">
+				<Loading scale="small" />
+			</div>
+		);
+
+	const findThemeById = (id: string): ThemeOption | undefined => {
+		return themes.find((theme) => theme.id === id);
+	};
 
 	return (
 		<div>
@@ -61,24 +64,27 @@ export default function AppearanceSettingsSubPage() {
 				Selekcje są stosowane natychmiast.
 			</p>
 
-			<ThemeModeSelector colorMode={colorMode} onChange={(e) => setColorMode(e.target.value)} />
+			<ThemeModeSelector
+				colorMode={theme.colorMode as SystemColorMode}
+				onChange={(e) => handleChange('colorMode', e.target.value)}
+			/>
 
-			{colorMode === 'single' ? (
+			{theme.colorMode === 'single' ? (
 				<div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-					{themes.map((theme) => (
+					{themes.map((themeOption) => (
 						<button
-							key={theme.id}
-							onClick={() => setSingleTheme(theme)}
+							key={themeOption.id}
+							onClick={() => handleChange('selectedTheme', themeOption.id)}
 							className={`rounded-lg border-2 text-left ${
-								selectedSingleTheme.id === theme.id ? 'border-primary' : 'border-gray'
+								theme.selectedTheme === themeOption.id ? 'border-primary' : 'border-gray'
 							}`}
 						>
 							<Image
-								src={theme.imageSrc}
-								alt={theme.label}
+								src={themeOption.imageSrc}
+								alt={themeOption.label}
 								className="mb-2 aspect-video h-auto w-full rounded object-cover"
 							/>
-							<div className="pb-2 pl-2 text-sm font-medium">{theme.label}</div>
+							<div className="pb-2 pl-2 text-sm font-medium">{themeOption.label}</div>
 						</button>
 					))}
 				</div>
@@ -87,15 +93,15 @@ export default function AppearanceSettingsSubPage() {
 					<SystemMode
 						isDay={true}
 						isModeActive={!window.matchMedia('(prefers-color-scheme: dark)').matches}
-						selectedTheme={selectedDayTheme}
-						onClick={(themeId) => setDayTheme(themes.find((theme) => theme.id === themeId)!)}
+						selectedTheme={findThemeById(theme.dayTheme) || themes[0]} // Używamy obiektu ThemeOption
+						onClick={(themeId) => handleChange('dayTheme', themeId)}
 						allThemes={themes}
 					/>
 					<SystemMode
 						isDay={false}
 						isModeActive={window.matchMedia('(prefers-color-scheme: dark)').matches}
-						selectedTheme={selectedNightTheme}
-						onClick={(themeId) => setNightTheme(themes.find((theme) => theme.id === themeId)!)}
+						selectedTheme={findThemeById(theme.nightTheme) || themes[0]} // Używamy obiektu ThemeOption
+						onClick={(themeId) => handleChange('nightTheme', themeId)}
 						allThemes={themes}
 					/>
 				</div>
@@ -151,7 +157,6 @@ function SystemMode({ isDay, isModeActive, selectedTheme, onClick, allThemes }: 
 					src={hoveredTheme ? hoveredTheme.imageSrc : selectedTheme.imageSrc}
 					alt="Theme Preview"
 					className="rounded-xl object-cover"
-					layout="responsive"
 				/>
 				<div className="mt-2 text-center text-sm font-medium">
 					{hoveredTheme ? hoveredTheme.label : selectedTheme.label}

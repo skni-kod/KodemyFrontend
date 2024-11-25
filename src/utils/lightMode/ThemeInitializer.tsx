@@ -1,45 +1,48 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { defaultTheme, themes } from '@/utils/lightMode/themes';
 
 export default function ThemeInitializer({ children }: { children: React.ReactNode }) {
 	useEffect(() => {
-		const colorMode = localStorage.getItem('colorMode') || 'single';
-		const dayTheme = localStorage.getItem('dayTheme') || 'light-default';
-		const nightTheme = localStorage.getItem('nightTheme') || 'dark-default';
-		const singleTheme = localStorage.getItem('selectedTheme') || 'dark-default';
+		const theme = JSON.parse(localStorage.getItem('theme') || JSON.stringify(defaultTheme));
 
 		const applyInitialTheme = () => {
 			const html = document.documentElement;
 
-			// Zachowaj dane o motywach w HTML
-			html.setAttribute('data-day-theme', dayTheme);
-			html.setAttribute('data-night-theme', nightTheme);
-			html.setAttribute('data-single-theme', singleTheme);
+			html.setAttribute('data-day-theme', theme.dayTheme);
+			html.setAttribute('data-night-theme', theme.nightTheme);
+			html.setAttribute('data-single-theme', theme.selectedTheme);
 
-			if (colorMode === 'system') {
+			const dayThemeImage = themes.find((t) => t.id === theme.dayTheme)?.imageSrc;
+			const nightThemeImage = themes.find((t) => t.id === theme.nightTheme)?.imageSrc;
+
+			if (dayThemeImage) {
+				html.style.setProperty('--day-theme-image', `url(${dayThemeImage.src})`);
+			}
+			if (nightThemeImage) {
+				html.style.setProperty('--night-theme-image', `url(${nightThemeImage.src})`);
+			}
+
+			if (theme.colorMode === 'system') {
 				html.setAttribute('data-color-mode', 'system');
 				const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-				html.setAttribute('data-theme', isDarkMode ? nightTheme : dayTheme);
+				html.setAttribute('data-theme', isDarkMode ? theme.nightTheme : theme.dayTheme);
 			} else {
 				html.setAttribute('data-color-mode', 'single');
-				html.setAttribute('data-theme', singleTheme);
+				html.setAttribute('data-theme', theme.selectedTheme);
 			}
 		};
 
 		applyInitialTheme();
 
-		// Dodanie listenera dla trybu systemowego
 		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 		const handleSystemModeChange = () => {
 			const html = document.documentElement;
 
-			// Tylko jeśli tryb to "system", aktualizujemy `data-theme`
-			if (html.getAttribute('data-color-mode') === 'system') {
+			if (theme.colorMode === 'system') {
 				const isDarkMode = mediaQuery.matches;
-				const dayTheme = html.getAttribute('data-day-theme')!;
-				const nightTheme = html.getAttribute('data-night-theme')!;
-				html.setAttribute('data-theme', isDarkMode ? nightTheme : dayTheme);
+				html.setAttribute('data-theme', isDarkMode ? theme.nightTheme : theme.dayTheme);
 			}
 		};
 

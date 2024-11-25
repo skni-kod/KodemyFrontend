@@ -9,30 +9,41 @@ import DarkDimmedButton from '@/assets/settings/appearance/darkDimmed/darkDimmed
 export type ThemeOption = {
 	id: string;
 	label: string;
-	iconType: 'light' | 'dark';
+	iconType: IconType;
 	imageSrc: StaticImageData;
 	buttonImageSrc: StaticImageData;
+};
+
+export type IconType = 'light' | 'dark';
+
+export type SystemColorMode = 'system' | 'single';
+
+export const defaultTheme = {
+	colorMode: 'single' as SystemColorMode,
+	dayTheme: 'light-default' as ThemeOption['id'],
+	nightTheme: 'dark-default' as ThemeOption['id'],
+	selectedTheme: 'dark-default' as ThemeOption['id'],
 };
 
 export const themes: ThemeOption[] = [
 	{
 		id: 'light-default',
 		label: 'Light Default',
-		iconType: 'light',
+		iconType: 'dark',
 		imageSrc: LightDefault,
 		buttonImageSrc: LightDefaultButton,
 	},
 	{
 		id: 'dark-default',
 		label: 'Dark Default',
-		iconType: 'dark',
+		iconType: 'light',
 		imageSrc: DarkDefault,
 		buttonImageSrc: DarkDefaultButton,
 	},
 	{
 		id: 'dark-dimmed',
 		label: 'Dark Default',
-		iconType: 'dark',
+		iconType: 'light',
 		imageSrc: DarkDimmed,
 		buttonImageSrc: DarkDimmedButton,
 	},

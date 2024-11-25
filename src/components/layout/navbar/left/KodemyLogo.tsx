@@ -30,7 +30,7 @@ export default function KodemyLogo({ className = 'h-full w-full', ratio = 1 }: K
 		return () => observer.disconnect();
 	}, []);
 
-	const logo = themeType === 'dark' ? KodemyWhite : KodemyDark;
+	const logo = themeType === 'dark' ? KodemyDark : KodemyWhite;
 
 	return (
 		<div className={className}>

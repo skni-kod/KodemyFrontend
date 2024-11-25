@@ -13,6 +13,7 @@ import moreInfoWhite from '@/assets/section/white/more-information.png';
 import retroGame from '@/assets/section/dark/retro-game.png';
 import retroGameWhite from '@/assets/section/white/retro-game.png';
 import { useSidebar } from '@/contexts/SidebarContext';
+import { IconType } from '@/utils/lightMode/themes';
 
 type SidebarSection = {
 	id: number;
@@ -65,7 +66,7 @@ export const sidebarSections: SidebarSection[] = [
 
 export default function Sidebar() {
 	const sidebar = useSidebar();
-	const [theme, setTheme] = useState<'light' | 'dark'>('light');
+	const [theme, setTheme] = useState<IconType>('light');
 
 	useEffect(() => {
 		const html = document.documentElement;
