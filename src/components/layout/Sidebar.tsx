@@ -85,12 +85,14 @@ export default function Sidebar() {
 	}, []);
 
 	return (
-		<div className={`fixed min-h-full ${!sidebar.isOpen ? 'w-side' : 'w-expandSide'} bg-bg shadow-md shadow-secondary`}>
+		<div
+			className={`fixed min-h-full ${!sidebar.isOpen ? 'w-side' : 'w-expandSide'} mt-nav bg-bg shadow-md shadow-secondary`}
+		>
 			<ul className="flex h-full w-full list-none flex-col pt-2">
 				{sidebarSections.map(({ id, name, icon }) => (
 					<Link
 						key={id}
-						href={`/sections/${id}`}
+						href={`/sections/${id}?sectionId=${id}`}
 						className="flex w-full cursor-pointer flex-row items-center bg-bg hover:bg-bgHover"
 					>
 						<div className="p-5">
