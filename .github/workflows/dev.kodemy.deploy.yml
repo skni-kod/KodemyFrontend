@@ -1,0 +1,116 @@
+name: DEV - KodemyFrontend deploy
+
+on:
+  push:
+    branches: [ "dev" ]
+    paths-ignore:
+      - '.gitignore'
+      - 'README.md'
+
+env:
+  WORKING_DIRECTORY: ${{ vars.WORKING_DIRECTORY }}
+  NETWORK_NAME: ${{ vars.NETWORK_NAME }}
+  EXPOSE_PORT: ${{ vars.EXPOSE_PORT }}
+  NODE_ENV: ${{ vars.NODE_ENV }}
+  API_URL: ${{ vars.PUBLIC_API_URL }}
+  ERROR_HOLD_TIME_IN_MS: ${{ vars.ERROR_HOLD_TIME_IN_MS }}
+
+jobs:
+  prepare:
+    name: Prepare
+    runs-on: self-hosted
+    environment: dev
+    steps:
+      - name: Check environments
+        run: |
+          REQUIRED_VARS=\
+          (
+            "WORKING_DIRECTORY"
+            "NETWORK_NAME"
+            "EXPOSE_PORT"
+            "NODE_ENV"
+            "API_URL"
+            "ERROR_HOLD_TIME_IN_MS"
+          )
+          EXIT=0
+          for VAR in "${REQUIRED_VARS[@]}"; do
+            [ -z "${!VAR}" ] && echo "Environment variable $VAR is missing." && EXIT=1
+          done
+          exit $EXIT
+  update-branch:
+    name: Update branch
+    needs: [ prepare ]
+    runs-on: self-hosted
+    environment: dev
+    steps:
+      - name: Update ${{ github.ref_name }}
+        uses: appleboy/ssh-action@master
+        env:
+          BRANCH: ${{ github.ref_name }}
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          port: ${{ secrets.REMOTE_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: WORKING_DIRECTORY,BRANCH
+          script: |
+            cd $WORKING_DIRECTORY
+            git checkout $BRANCH || exit 1
+            git pull origin $BRANCH || exit 1
+  validate:
+    name: Validate components
+    runs-on: self-hosted
+    needs: [ update-branch ]
+    environment: dev
+    steps:
+      - name: Validate components
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          port: ${{ secrets.REMOTE_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "Validate npm"
+            command -v npm &> /dev/null || exit 1
+  build-and-deploy:
+    name: Build, Test, Deploy
+    runs-on: self-hosted
+    needs: [ validate ]
+    environment: dev
+    steps:
+      - name: Build, Test, Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          port: ${{ secrets.REMOTE_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: |
+            WORKING_DIRECTORY,
+            NETWORK_NAME, EXPOSE_PORT,
+            NODE_ENV,
+            API_URL, ERROR_HOLD_TIME_IN_MS
+          script: |
+            cd $WORKING_DIRECTORY
+            npm ci
+            
+            echo "Run Prettier Format"
+            npm run format
+            
+            echo "Run Linter"
+            npm run lint
+            
+            echo "Build"
+            npm run build
+            
+            docker compose up --build -d
+      - name: Cleanup
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          port: ${{ secrets.REMOTE_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker system prune -f
