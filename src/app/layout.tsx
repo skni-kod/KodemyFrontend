@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: ComponentParentProps) {
 	return (
-		<html lang="pl" data-theme="light-default">
+		<html lang="pl" data-color-mode="single" data-theme="light-default">
 			<ToastProvider>
 				<body>
 					<ThemeInitializer>

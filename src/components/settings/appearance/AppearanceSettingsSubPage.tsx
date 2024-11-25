@@ -6,62 +6,59 @@ import { ThemeOption, themes } from '@/utils/lightMode/themes';
 type SystemColorMode = 'system' | 'single';
 
 export default function AppearanceSettingsSubPage() {
-	const [colorMode, setColorMode] = useState<SystemColorMode>(
-		() => (localStorage.getItem('colorMode') as SystemColorMode) || 'single',
+	const [colorMode, setColorMode] = useState<'system' | 'single'>(
+		() => (localStorage.getItem('colorMode') as 'system' | 'single') || 'single',
 	);
-
 	const [selectedDayTheme, setDayTheme] = useState<ThemeOption>(
 		() =>
 			themes.find((theme) => theme.id === localStorage.getItem('dayTheme')) ||
 			themes.find((theme) => theme.id === 'light-default')!,
 	);
-
 	const [selectedNightTheme, setNightTheme] = useState<ThemeOption>(
 		() =>
 			themes.find((theme) => theme.id === localStorage.getItem('nightTheme')) ||
 			themes.find((theme) => theme.id === 'dark-default')!,
 	);
-
-	const [selectedTheme, setTheme] = useState<ThemeOption>(
+	const [selectedSingleTheme, setSingleTheme] = useState<ThemeOption>(
 		() =>
 			themes.find((theme) => theme.id === localStorage.getItem('selectedTheme')) ||
 			themes.find((theme) => theme.id === 'dark-default')!,
 	);
 
-	useEffect(() => {
+	const updateThemes = () => {
+		const html = document.documentElement;
+
+		// Zachowujemy wszystkie motywy w atrybutach HTML
+		html.setAttribute('data-day-theme', selectedDayTheme.id);
+		html.setAttribute('data-night-theme', selectedNightTheme.id);
+		html.setAttribute('data-single-theme', selectedSingleTheme.id);
+
+		if (colorMode === 'system') {
+			html.setAttribute('data-color-mode', 'system');
+			const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			html.setAttribute('data-theme', isDarkMode ? selectedNightTheme.id : selectedDayTheme.id);
+		} else {
+			html.setAttribute('data-color-mode', 'single');
+			html.setAttribute('data-theme', selectedSingleTheme.id);
+		}
+
+		// Synchronizacja z localStorage
 		localStorage.setItem('colorMode', colorMode);
 		localStorage.setItem('dayTheme', selectedDayTheme.id);
 		localStorage.setItem('nightTheme', selectedNightTheme.id);
-		localStorage.setItem('selectedTheme', selectedTheme.id);
-	}, [colorMode, selectedDayTheme, selectedNightTheme, selectedTheme]);
+		localStorage.setItem('selectedTheme', selectedSingleTheme.id);
+	};
 
 	useEffect(() => {
-		const applyTheme = () => {
-			let theme = selectedTheme;
-			if (colorMode === 'system') {
-				const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-				theme = isDarkMode ? selectedNightTheme : selectedDayTheme;
-			}
-			document.documentElement.setAttribute('data-theme', theme.id);
-		};
-
-		applyTheme();
-
-		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-		const handleChange = () => colorMode === 'system' && applyTheme();
-
-		mediaQuery.addEventListener('change', handleChange);
-		return () => mediaQuery.removeEventListener('change', handleChange);
-	}, [colorMode, selectedDayTheme, selectedNightTheme, selectedTheme]);
-
-	const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+		updateThemes();
+	}, [colorMode, selectedDayTheme, selectedNightTheme, selectedSingleTheme]);
 
 	return (
 		<div>
 			<h1 className="mb-4 text-2xl font-bold">Wygląd</h1>
 			<p className="mb-6">
 				Wybierz, jak aplikacja ma wyglądać dla Ciebie. Wybierz pojedynczy motyw lub zsynchronizuj go z systemowym.
-				Selekcje są stosowane natychmiast i automatycznie zapisywane.
+				Selekcje są stosowane natychmiast.
 			</p>
 
 			<ThemeModeSelector colorMode={colorMode} onChange={(e) => setColorMode(e.target.value)} />
@@ -71,9 +68,9 @@ export default function AppearanceSettingsSubPage() {
 					{themes.map((theme) => (
 						<button
 							key={theme.id}
-							onClick={() => setTheme(theme)}
+							onClick={() => setSingleTheme(theme)}
 							className={`rounded-lg border-2 text-left ${
-								selectedTheme.id === theme.id ? 'border-primary' : 'border-gray'
+								selectedSingleTheme.id === theme.id ? 'border-primary' : 'border-gray'
 							}`}
 						>
 							<Image
@@ -89,15 +86,14 @@ export default function AppearanceSettingsSubPage() {
 				<div className="grid gap-6 md:grid-cols-2 lg:w-2/3">
 					<SystemMode
 						isDay={true}
-						isModeActive={!isDarkMode}
+						isModeActive={!window.matchMedia('(prefers-color-scheme: dark)').matches}
 						selectedTheme={selectedDayTheme}
 						onClick={(themeId) => setDayTheme(themes.find((theme) => theme.id === themeId)!)}
 						allThemes={themes}
 					/>
-
 					<SystemMode
 						isDay={false}
-						isModeActive={isDarkMode}
+						isModeActive={window.matchMedia('(prefers-color-scheme: dark)').matches}
 						selectedTheme={selectedNightTheme}
 						onClick={(themeId) => setNightTheme(themes.find((theme) => theme.id === themeId)!)}
 						allThemes={themes}
