@@ -12,7 +12,7 @@ env:
   NETWORK_NAME: ${{ vars.NETWORK_NAME }}
   EXPOSE_PORT: ${{ vars.EXPOSE_PORT }}
   NODE_ENV: ${{ vars.NODE_ENV }}
-  API_URL: ${{ vars.PUBLIC_API_URL }}
+  NEXT_PUBLIC_API_URL: ${{ vars.PUBLIC_API_URL }}
   ERROR_HOLD_TIME_IN_MS: ${{ vars.ERROR_HOLD_TIME_IN_MS }}
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
             "NETWORK_NAME"
             "EXPOSE_PORT"
             "NODE_ENV"
-            "API_URL"
+            "NEXT_PUBLIC_API_URL"
             "ERROR_HOLD_TIME_IN_MS"
           )
           EXIT=0
@@ -93,7 +93,7 @@ jobs:
             WORKING_DIRECTORY,
             NETWORK_NAME, EXPOSE_PORT,
             NODE_ENV,
-            API_URL, ERROR_HOLD_TIME_IN_MS
+            NEXT_PUBLIC_API_URL, ERROR_HOLD_TIME_IN_MS
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
