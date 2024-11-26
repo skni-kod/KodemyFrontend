@@ -2,7 +2,7 @@ name: DEV - KodemyFrontend deploy
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: ['dev']
     paths-ignore:
       - '.gitignore'
       - 'README.md'
@@ -40,7 +40,7 @@ jobs:
           exit $EXIT
   update-branch:
     name: Update branch
-    needs: [ prepare ]
+    needs: [prepare]
     runs-on: self-hosted
     environment: dev
     steps:
@@ -63,7 +63,7 @@ jobs:
   validate:
     name: Validate components
     runs-on: self-hosted
-    needs: [ update-branch ]
+    needs: [update-branch]
     environment: dev
     steps:
       - name: Validate components
@@ -81,7 +81,7 @@ jobs:
   build-and-deploy:
     name: Build, Test, Deploy
     runs-on: self-hosted
-    needs: [ validate ]
+    needs: [validate]
     environment: dev
     steps:
       - name: Build, Test, Deploy
@@ -98,28 +98,19 @@ jobs:
             NEXT_PUBLIC_API_URL, ERROR_HOLD_TIME_IN_MS
           script: |
             source $NVM_DIR/nvm.sh
-            
+
             cd $WORKING_DIRECTORY
             npm clean-install
-            
+
             echo "Run Prettier Format"
             npm run format
-            
+
             echo "Run Linter"
             npm run lint
-            
+
             echo "Build"
             npm run build
 
-            PORT=$EXPOSE_PORT
-            PID=$(lsof -ti:$PORT)
-            if [ -n "$PID" ]; then
-              echo "Killing process $PID on port $PORT..."
-              kill -9 $PID
-            fi
-
-            # echo "Starting application in detached mode..."
-            # nohup sh -c "npm start -- --port $EXPOSE_PORT" > app.log 2>&1 &
             docker compose up --build -d
       - name: Cleanup
         uses: appleboy/ssh-action@master
