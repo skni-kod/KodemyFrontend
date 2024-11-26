@@ -14,7 +14,7 @@ env:
   NODE_ENV: ${{ vars.NODE_ENV }}
   NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
   ERROR_HOLD_TIME_IN_MS: ${{ vars.ERROR_HOLD_TIME_IN_MS }}
-  NVM_DIR: ~/.nvm
+  NVM_DIR: '~/.nvm'
 
 jobs:
   prepare:
