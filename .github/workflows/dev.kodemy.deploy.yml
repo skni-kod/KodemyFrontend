@@ -14,6 +14,7 @@ env:
   NODE_ENV: ${{ vars.NODE_ENV }}
   NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
   ERROR_HOLD_TIME_IN_MS: ${{ vars.ERROR_HOLD_TIME_IN_MS }}
+  NVM_DIR: ~/.nvm
 
 jobs:
   prepare:
@@ -70,12 +71,11 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           port: ${{ secrets.REMOTE_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: NVM_DIR
           script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
+            source $NVM_DIR/nvm.sh
             echo "Validate npm"
             which npm || { echo "npm not found in PATH"; exit 1; }
-
   build-and-deploy:
     name: Build, Test, Deploy
     runs-on: self-hosted
@@ -93,10 +93,10 @@ jobs:
             WORKING_DIRECTORY,
             NETWORK_NAME, EXPOSE_PORT,
             NODE_ENV,
-            NEXT_PUBLIC_API_URL, ERROR_HOLD_TIME_IN_MS
+            NEXT_PUBLIC_API_URL, ERROR_HOLD_TIME_IN_MS,
+            NVM_DIR
           script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
+            source $NVM_DIR/nvm.sh
           
             cd $WORKING_DIRECTORY
             npm clean-install
@@ -110,18 +110,18 @@ jobs:
             echo "Build"
             npm run build
 
-            PORT=$EXPOSE_PORT
-            PID=$(lsof -ti:$PORT)
-            if [ -n "$PID" ]; then
-              echo "Killing process $PID on port $PORT..."
-              kill -9 $PID
-            else
-              echo "No processes found on port $PORT."
-            fi
-          
-            echo "Starting application in detached mode..."
-            nohup sh -c "npm start -- --port $EXPOSE_PORT" > app.log 2>&1 &
-            # docker compose up --build -d
+#            PORT=$EXPOSE_PORT
+#            PID=$(lsof -ti:$PORT)
+#            if [ -n "$PID" ]; then
+#              echo "Killing process $PID on port $PORT..."
+#              kill -9 $PID
+#            else
+#              echo "No processes found on port $PORT."
+#            fi
+#
+#            echo "Starting application in detached mode..."
+#            nohup sh -c "npm start -- --port $EXPOSE_PORT" > app.log 2>&1 &
+             docker compose up --build -d
       - name: Cleanup
         uses: appleboy/ssh-action@master
         with:
