@@ -109,8 +109,8 @@ jobs:
             
             echo "Build"
             npm run build
-            
-            docker compose up --build -d
+            npm start
+            # docker compose up --build -d
       - name: Cleanup
         uses: appleboy/ssh-action@master
         with:
