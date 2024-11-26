@@ -93,7 +93,7 @@ jobs:
             API_URL, ERROR_HOLD_TIME_IN_MS
           script: |
             cd $WORKING_DIRECTORY
-            npm ci
+            npm clean-install
             
             echo "Run Prettier Format"
             npm run format
