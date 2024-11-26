@@ -109,7 +109,6 @@ jobs:
             
             echo "Build"
             npm run build
-            npm start
 
             PORT=$EXPOSE_PORT
             PID=$(lsof -ti:$PORT)
