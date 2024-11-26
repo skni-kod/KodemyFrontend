@@ -71,19 +71,8 @@ jobs:
           port: ${{ secrets.REMOTE_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            echo "Starting validation process"
-  
-            # Check if npm is installed
-            echo "Checking if npm is available..."
-            if ! command -v npm &> /dev/null; then
-              echo "Error: npm is not installed or not in PATH." >&2
-              exit 1
-            else
-              echo "npm is available."
-            fi
-  
-            # Additional validation checks can go here
-            echo "Validation completed successfully."
+            echo "Validate npm"
+            which npm &> /dev/null || exit 1
   build-and-deploy:
     name: Build, Test, Deploy
     runs-on: self-hosted
