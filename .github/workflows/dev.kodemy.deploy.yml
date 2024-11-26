@@ -121,7 +121,7 @@ jobs:
             fi
           
             echo "Starting application in detached mode..."
-            nohup npm start -- --port $EXPOSE_PORT > app.log 2>&1 &
+            nohup sh -c "npm start -- --port $EXPOSE_PORT" > app.log 2>&1 &
             # docker compose up --build -d
       - name: Cleanup
         uses: appleboy/ssh-action@master
