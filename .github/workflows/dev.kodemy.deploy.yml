@@ -71,6 +71,8 @@ jobs:
           port: ${{ secrets.REMOTE_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             echo "Validate npm"
             echo "Current PATH: $PATH"
             which npm || { echo "npm not found in PATH"; exit 1; }
