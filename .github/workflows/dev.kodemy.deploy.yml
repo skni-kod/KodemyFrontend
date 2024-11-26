@@ -72,7 +72,9 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             echo "Validate npm"
-            which npm &> /dev/null || exit 1
+            echo "Current PATH: $PATH"
+            which npm || { echo "npm not found in PATH"; exit 1; }
+
   build-and-deploy:
     name: Build, Test, Deploy
     runs-on: self-hosted
