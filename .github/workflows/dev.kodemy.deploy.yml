@@ -12,7 +12,7 @@ env:
   NETWORK_NAME: ${{ vars.NETWORK_NAME }}
   EXPOSE_PORT: ${{ vars.EXPOSE_PORT }}
   NODE_ENV: ${{ vars.NODE_ENV }}
-  NEXT_PUBLIC_API_URL: ${{ vars.PUBLIC_API_URL }}
+  NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
   ERROR_HOLD_TIME_IN_MS: ${{ vars.ERROR_HOLD_TIME_IN_MS }}
 
 jobs:
@@ -110,6 +110,18 @@ jobs:
             echo "Build"
             npm run build
             npm start
+
+            PORT=$EXPOSE_PORT
+            PID=$(lsof -ti:$PORT)
+            if [ -n "$PID" ]; then
+              echo "Killing process $PID on port $PORT..."
+              kill -9 $PID
+            else
+              echo "No processes found on port $PORT."
+            fi
+          
+            echo "Starting application in detached mode..."
+            nohup npm start -- --port $EXPOSE_PORT > app.log 2>&1 &
             # docker compose up --build -d
       - name: Cleanup
         uses: appleboy/ssh-action@master
