@@ -56,7 +56,9 @@ jobs:
           envs: WORKING_DIRECTORY,BRANCH
           script: |
             cd $WORKING_DIRECTORY
+            git fetch origin || exit 1
             git checkout $BRANCH || exit 1
+            git reset --hard origin/$BRANCH || exit 1 
             git pull origin $BRANCH || exit 1
   validate:
     name: Validate components
@@ -90,14 +92,13 @@ jobs:
           port: ${{ secrets.REMOTE_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           envs: |
-            WORKING_DIRECTORY,
+            WORKING_DIRECTORY, NVM_DIR,
             NETWORK_NAME, EXPOSE_PORT,
             NODE_ENV,
-            NEXT_PUBLIC_API_URL, ERROR_HOLD_TIME_IN_MS,
-            NVM_DIR
+            NEXT_PUBLIC_API_URL, ERROR_HOLD_TIME_IN_MS
           script: |
             source $NVM_DIR/nvm.sh
-          
+            
             cd $WORKING_DIRECTORY
             npm clean-install
             
@@ -110,18 +111,16 @@ jobs:
             echo "Build"
             npm run build
 
-#            PORT=$EXPOSE_PORT
-#            PID=$(lsof -ti:$PORT)
-#            if [ -n "$PID" ]; then
-#              echo "Killing process $PID on port $PORT..."
-#              kill -9 $PID
-#            else
-#              echo "No processes found on port $PORT."
-#            fi
-#
-#            echo "Starting application in detached mode..."
-#            nohup sh -c "npm start -- --port $EXPOSE_PORT" > app.log 2>&1 &
-             docker compose up --build -d
+            PORT=$EXPOSE_PORT
+            PID=$(lsof -ti:$PORT)
+            if [ -n "$PID" ]; then
+              echo "Killing process $PID on port $PORT..."
+              kill -9 $PID
+            fi
+
+            # echo "Starting application in detached mode..."
+            # nohup sh -c "npm start -- --port $EXPOSE_PORT" > app.log 2>&1 &
+            docker compose up --build -d
       - name: Cleanup
         uses: appleboy/ssh-action@master
         with:
