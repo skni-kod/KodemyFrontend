@@ -112,12 +112,12 @@ jobs:
             npm run build
 
             docker compose up --build -d
-      # - name: Cleanup
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.REMOTE_HOST }}
-      #     username: ${{ secrets.REMOTE_USER }}
-      #     port: ${{ secrets.REMOTE_PORT }}
+      - name: Cleanup
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          port: ${{ secrets.REMOTE_PORT }}
       #     key: ${{ secrets.SSH_PRIVATE_KEY }}
       #     script: |
       #       docker system prune -f
