@@ -2,7 +2,7 @@ name: DEV - KodemyFrontend deploy
 
 on:
   push:
-    branches: ['dev']
+    branches: [ 'dev-deploy' ]
     paths-ignore:
       - '.gitignore'
       - 'README.md'
@@ -40,7 +40,7 @@ jobs:
           exit $EXIT
   update-branch:
     name: Update branch
-    needs: [prepare]
+    needs: [ prepare ]
     runs-on: self-hosted
     environment: dev
     steps:
@@ -63,7 +63,7 @@ jobs:
   validate:
     name: Validate components
     runs-on: self-hosted
-    needs: [update-branch]
+    needs: [ update-branch ]
     environment: dev
     steps:
       - name: Validate components
@@ -81,7 +81,7 @@ jobs:
   build-and-deploy:
     name: Build, Test, Deploy
     runs-on: self-hosted
-    needs: [validate]
+    needs: [ validate ]
     environment: dev
     steps:
       - name: Build, Test, Deploy
