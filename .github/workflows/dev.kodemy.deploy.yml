@@ -118,6 +118,6 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           port: ${{ secrets.REMOTE_PORT }}
-      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     script: |
-      #       docker system prune -f
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker system prune -f
