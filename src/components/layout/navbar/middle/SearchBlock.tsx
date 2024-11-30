@@ -1,9 +1,15 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SlMagnifier } from 'react-icons/sl';
 import Modal from '@/components/utils/Modal';
 import SearchBar from '@/components/utils/SearchBar';
-import { TEXT } from '@/utils/constant';
+import { DEFAULT_PAGE_SIZE, TEXT } from '@/utils/constant';
+import MaterialService from '@/services/material/materialService';
+import { MaterialSearch, MaterialSortField } from '@/services/material/types';
+import { Pageable, SortDirection } from '@/utils/api/types';
+import useFetchState, { Status } from '@/utils/hooks/useFetchState';
+import Loading from '@/components/common/Loading';
+import Error from '@/components/common/Error';
 
 export default function SearchBlock() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -11,20 +17,28 @@ export default function SearchBlock() {
 	const openModal = () => setIsOpen(true);
 	const closeModal = () => setIsOpen(false);
 
-	const data = [
-		{ name: 'aa', test: 'bb' },
-		{ name: 'aa', test: 'bb' },
-		{ name: 'aa', test: 'bb' },
-		{ name: 'y123', test: 'ale nie?' },
-		{ name: 'y123', test: 'ale j co nie?' },
-		{ name: 'y123', test: 'aljca co nie?' },
-		{ name: 'y123', test: 'dfgfdgaca co nie?' },
-		{ name: 'y123', test: 'aljdfg dfg o nie?' },
-		{ name: 'y123', test: 'ale jajca co nie?' },
-		{ name: 'aa', test: 'bb' },
-		{ name: 'y123', test: 'ale jajca co nie?' },
-	];
-	const searchFields = ['name', 'test'];
+	const searchParams = {
+		page: 1,
+		size: DEFAULT_PAGE_SIZE,
+		sort: MaterialSortField.ID,
+		sort_direction: SortDirection.ASC,
+	};
+
+	const { data: materials, status, fetch: fetchMaterials } = useFetchState<Pageable<MaterialSearch>>();
+
+	useEffect(() => {
+		fetchMaterials(() => {
+			return MaterialService.getMaterials(searchParams);
+		});
+	}, []);
+
+	if (status === Status.PENDING)
+		return (
+			<div className="pt-8">
+				<Loading scale="small" />
+			</div>
+		);
+	if (status === Status.ERROR || !materials) return <Error />;
 
 	return (
 		<>
@@ -45,7 +59,7 @@ export default function SearchBlock() {
 				>
 					<div className="flex flex-col gap-4">
 						<h2 className="text-lg font-semibold">{TEXT.WHAT_LOOKING_FOR}</h2>
-						<SearchBar data={data} searchFields={searchFields} />
+						<SearchBar data={materials!.content} searchFields={['title', 'description']} />
 					</div>
 				</Modal>
 			)}
