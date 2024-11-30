@@ -1,6 +1,7 @@
 'use client';
 import { TEXT } from '@/utils/constant';
 import React, { useState } from 'react';
+import { SlArrowRightCircle } from 'react-icons/sl';
 
 export default function SearchBar({ data, searchFields }: { data: any[]; searchFields: string[] }) {
 	const [query, setQuery] = useState('');
@@ -30,15 +31,17 @@ export default function SearchBar({ data, searchFields }: { data: any[]; searchF
 			<div className="flex flex-col">
 				{results.length > 0 ? (
 					results.map((result, index) => (
-						<div
-							key={index}
-							className="flex cursor-pointer flex-row gap-x-2 border-b p-2 last:border-none hover:bg-gray"
-						>
-							{searchFields.map((field) => (
-								<span key={field} className="block">
-									{result[field]}
-								</span>
-							))}
+						<div key={index} className="flex flex-row justify-between border-b p-2 last:border-none hover:bg-gray">
+							<div className="flex flex-col gap-2">
+								{searchFields.map((field, index) => (
+									<span key={field} className={`w-fit text-left ${index === 0 ? 'font-bold' : 'font-normal'}`}>
+										{result[field]}
+									</span>
+								))}
+							</div>
+							<span className="flex items-center justify-center">
+								<SlArrowRightCircle className="size-5"></SlArrowRightCircle>
+							</span>
 						</div>
 					))
 				) : (
