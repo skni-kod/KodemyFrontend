@@ -1,11 +1,11 @@
 'use client';
+import { TEXT } from '@/utils/constant';
 import React, { useState } from 'react';
 
 export default function SearchBar({ data, searchFields }: { data: any[]; searchFields: string[] }) {
 	const [query, setQuery] = useState('');
 	const [results, setResults] = useState<any[]>([]);
 
-	// Obsługa wyszukiwania
 	const handleSearch = (input: string) => {
 		setQuery(input);
 		if (input.trim()) {
@@ -19,28 +19,30 @@ export default function SearchBar({ data, searchFields }: { data: any[]; searchF
 	};
 
 	return (
-		<div className="w-full">
+		<div className="flex flex-col gap-4">
 			<input
 				type="text"
-				className="w-full rounded-md border px-4 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-				placeholder="Search..."
+				className="w-full rounded-md border px-4 py-2 transition-all duration-300 ease-in-out focus:outline-none focus:ring-1 focus:ring-textOnSecondary"
+				placeholder={TEXT.LOOKING_FOR + '...'}
 				value={query}
 				onChange={(e) => handleSearch(e.target.value)}
 			/>
-
-			<div className="mt-4 max-h-64 overflow-y-auto">
+			<div className="flex flex-col">
 				{results.length > 0 ? (
 					results.map((result, index) => (
-						<div key={index} className="hover:bg-gray-100 cursor-pointer border-b p-2 last:border-none">
+						<div
+							key={index}
+							className="flex cursor-pointer flex-row gap-x-2 border-b p-2 last:border-none hover:bg-gray"
+						>
 							{searchFields.map((field) => (
-								<span key={field} className="flex flex-row">
+								<span key={field} className="block">
 									{result[field]}
 								</span>
 							))}
 						</div>
 					))
 				) : (
-					<div className="text-gray-500">No results found</div>
+					<div className="text-textOnSecondary">{TEXT.NOT_FOUND_ELEMENTS}</div>
 				)}
 			</div>
 		</div>
