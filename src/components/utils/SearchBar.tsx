@@ -1,9 +1,18 @@
 'use client';
 import { TEXT } from '@/utils/constant';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { SlArrowRightCircle } from 'react-icons/sl';
 
-export default function SearchBar({ data, searchFields }: { data: any[]; searchFields: string[] }) {
+export default function SearchBar({
+	data,
+	searchFields,
+	onClose,
+}: {
+	data: any[];
+	searchFields: string[];
+	onClose: () => void;
+}) {
 	const [query, setQuery] = useState('');
 	const [results, setResults] = useState<any[]>([]);
 
@@ -14,6 +23,7 @@ export default function SearchBar({ data, searchFields }: { data: any[]; searchF
 				searchFields.some((field) => item[field].toString().toLowerCase().includes(input.toLowerCase())),
 			);
 			setResults(filteredResults);
+			console.log(filteredResults);
 		} else {
 			setResults([]);
 		}
@@ -39,9 +49,13 @@ export default function SearchBar({ data, searchFields }: { data: any[]; searchF
 									</span>
 								))}
 							</div>
-							<span className="flex items-center justify-center">
+							<Link
+								href={`/sections/${result['sectionId']}?fields=(id%3A"${result['id']}")`}
+								onClick={onClose}
+								className="flex w-fit items-center justify-center"
+							>
 								<SlArrowRightCircle className="size-5"></SlArrowRightCircle>
-							</span>
+							</Link>
 						</div>
 					))
 				) : (
