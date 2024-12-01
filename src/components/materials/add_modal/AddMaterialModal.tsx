@@ -158,12 +158,12 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 
 	const handlePublish = async () => {
 		try {
-			if (!session || !session.token?.bearer) {
+			if (!session) {
 				console.error('No session or Bearer token found');
 				return;
 			}
 
-			const response = await MaterialService.publishMaterial(
+			await MaterialService.publishMaterial(
 				{
 					title: data.details!.title,
 					description: data.details!.description,
@@ -171,12 +171,10 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 					typeId: data.sectionId!,
 					categoryId: data.categoryId!,
 					tagsIds: data.details!.tagsIds,
-				},
-				session.token.bearer,
+				}
 			);
 
 			addToast(`Dodano materiał`, 'success', 5000);
-			console.log('Material published successfully:', response);
 			handleClose();
 		} catch (error) {
 			addToast(`Error publishing material`, 'danger', 5000);

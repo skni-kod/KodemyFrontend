@@ -49,7 +49,7 @@ export default function AuthProvidersBtns() {
 			{providers.map(({ provider, authorize }, index) => (
 				<button
 					key={index}
-					onClick={() => router.push(`${process.env.NEXT_PUBLIC_API_URL}${authorize}`)}
+					onClick={() => router.push(authorize)}
 					className="flex items-center gap-2 rounded-lg border border-secondary bg-bg px-4 py-2 hover:bg-bgHover hover:text-primaryHover"
 				>
 					{React.createElement(PROVIDERS_MAP[provider].icoType, {

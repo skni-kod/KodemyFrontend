@@ -20,7 +20,8 @@ export default class UserService extends ApiService {
 		});
 
 		try {
-			return await kodemyApi.get<Pageable<UserSearch>>(`/api/users?${requestParams}`).then((res) => res.data);
+			return await kodemyApi.get<Pageable<UserSearch>>(`/api/users?${requestParams}`)
+				.then((res) => res.data);
 		} catch (err) {
 			console.debug(err);
 			return Promise.reject(new InternalServerErrorApiError());
@@ -30,7 +31,7 @@ export default class UserService extends ApiService {
 	public static async getUserById(session: Session | undefined, id: number): Promise<User> {
 		try {
 			return await kodemyApi
-				.get<User>(`/api/users/${id}`, session ? this.withCredentials(session.token.bearer) : {})
+				.get<User>(`/api/users/${id}`)
 				.then((res) => res.data);
 		} catch (err) {
 			return Promise.reject(new InternalServerErrorApiError());
