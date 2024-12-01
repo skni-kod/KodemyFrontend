@@ -4,7 +4,6 @@ import PageContent from '@/components/layout/PageContent';
 import KodemyLogo from '@/components/layout/navbar/left/KodemyLogo';
 import SkniKodLogo from '@/components/auth/SkniKodLogo';
 import { useRouter } from 'next/navigation';
-import AuthService from '@/services/auth/authService';
 import { useSessionContext } from '@/contexts/SessionContext';
 import { useToast } from '@/contexts/ToastContext';
 
@@ -15,12 +14,12 @@ export default function LogoutPageContent() {
 
 	useEffect(() => {
 		try {
-			if (!session || !session.token?.bearer) {
+			if (!session) {
 				console.error('No session or Bearer token found');
 				return;
 			}
 
-			AuthService.logout(session.token.bearer);
+			//AuthService.logout();
 
 			addToast(`Wylogowano poprawnie`, 'success', 5000);
 			//router.replace('/');

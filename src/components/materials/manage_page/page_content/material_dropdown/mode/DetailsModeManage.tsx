@@ -22,15 +22,14 @@ export default function DetailsModeManage({ id }: { id: number }) {
 
 	const handleChangeStatus = async (newStatus: MaterialSwaggerStatus) => {
 		try {
-			if (!session || !session.token?.bearer) {
-				console.error('No session or Bearer token found');
+			if (!session) {
+				console.error('No session');
 				return;
 			}
 
-			const response = await MaterialService.changeMaterialStatus(material.id, newStatus, session.token.bearer);
+			await MaterialService.changeMaterialStatus(material.id, newStatus);
 
 			addToast(`Zmieniono status materiału na: ${newStatus}`, 'success', 5000);
-			console.log('Change status successfully:', response);
 		} catch (error) {
 			addToast(`Error changing status`, 'danger', 5000);
 			console.error('Error changing status:', error);
