@@ -1,4 +1,3 @@
-import { RawAxiosRequestHeaders } from 'axios';
 import { ApiError } from '@/utils/api/types/index';
 
 enum FetchStatus {
@@ -8,10 +7,6 @@ enum FetchStatus {
 }
 
 export default abstract class ApiService {
-	protected static withCredentials(accessToken: string): { headers: RawAxiosRequestHeaders } {
-		return { headers: { Authorization: `Bearer ${accessToken}` } };
-	}
-
 	private static wrapPromise<T>(promise: Promise<T>) {
 		let status: FetchStatus = FetchStatus.PENDING;
 		let data: T | ApiError;

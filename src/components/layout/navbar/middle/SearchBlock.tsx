@@ -21,13 +21,15 @@ export default function SearchBlock() {
 		page: 1,
 		size: DEFAULT_PAGE_SIZE,
 		sort: MaterialSortField.ID,
-		sort_direction: SortDirection.ASC,
+		sort_direction: SortDirection.ASC
 	};
 
 	const { data: materials, status, fetch: fetchMaterials } = useFetchState<Pageable<MaterialSearch>>();
 
+	if (!isOpen) return <></>;
+
 	useEffect(() => {
-		fetchMaterials(() => {
+		isOpen && fetchMaterials(() => {
 			return MaterialService.getMaterials(searchParams);
 		});
 	}, []);

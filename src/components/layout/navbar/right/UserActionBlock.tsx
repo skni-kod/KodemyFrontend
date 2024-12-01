@@ -1,23 +1,24 @@
 'use client';
-import { SessionStatus, useSessionContext } from '@/contexts/SessionContext';
+import { useSessionContext } from '@/contexts/SessionContext';
 import React, { useEffect, useState } from 'react';
-import Button from '@/components/common/Button';
 import { TEXT } from '@/utils/constant';
 import { useRouter } from 'next/navigation';
 import UserActionBtns from '@/components/layout/navbar/right/UserActionBtns';
 
 export default function UserActionBlock() {
-	const { session, status } = useSessionContext();
-	const [stateStatus, setStateStatus] = useState(status);
+	const { session, isSessionLoading } = useSessionContext();
+	const [state, setState] = useState<number>(() => {
+		return isSessionLoading ? 0 : (session != undefined ? 1 : -1);
+	});
 	const router = useRouter();
 
 	useEffect(() => {
-		setStateStatus(status);
-	}, [status]);
+		setState(isSessionLoading ? 0 : (session != undefined ? 1 : -1));
+	}, [session, isSessionLoading]);
 
 	return (
 		<>
-			{SessionStatus.UNAUTHENTICATED === stateStatus && (
+			{state == -1 && (
 				<div className="pr-2">
 					<button
 						className="flex h-[2.5rem] cursor-pointer items-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-textOnPrimary hover:bg-primaryHover"
@@ -28,7 +29,7 @@ export default function UserActionBlock() {
 				</div>
 			)}
 
-			{SessionStatus.AUTHENTICATED === stateStatus && <UserActionBtns />}
+			{state == 1 && <UserActionBtns />}
 		</>
 	);
 }

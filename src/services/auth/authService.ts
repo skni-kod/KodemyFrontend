@@ -21,13 +21,9 @@ export default class AuthService extends ApiService {
 		return await kodemyApi.get<ProviderLiResponse>('/api/oauth2/providers').then((res) => res.data);
 	}
 
-	public static async logout(token: string): Promise<void> {
+	public static async logout(): Promise<void> {
 		try {
-			const response = await kodemyApi.post(`/api/logout `, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
+			const response = await kodemyApi.post(`/api/auth/logout`);
 			return response.data;
 		} catch (err) {
 			console.error('error', err);
