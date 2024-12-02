@@ -6,19 +6,17 @@ import { useRouter } from 'next/navigation';
 import UserActionBtns from '@/components/layout/navbar/right/UserActionBtns';
 
 export default function UserActionBlock() {
-	const { session, isSessionLoading } = useSessionContext();
-	const [state, setState] = useState<number>(() => {
-		return isSessionLoading ? 0 : (session != undefined ? 1 : -1);
-	});
+	const { session, sessionStatus } = useSessionContext();
+	const [stateStatus, setStateStatus] = useState(sessionStatus);
 	const router = useRouter();
 
 	useEffect(() => {
-		setState(isSessionLoading ? 0 : (session != undefined ? 1 : -1));
-	}, [session, isSessionLoading]);
+		setStateStatus(sessionStatus);
+	}, [sessionStatus]);
 
 	return (
 		<>
-			{state == -1 && (
+			{stateStatus === 'UNAUTHENTICATED' && (
 				<div className="pr-2">
 					<button
 						className="flex h-[2.5rem] cursor-pointer items-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-textOnPrimary hover:bg-primaryHover"
@@ -29,7 +27,7 @@ export default function UserActionBlock() {
 				</div>
 			)}
 
-			{state == 1 && <UserActionBtns />}
+			{stateStatus === 'AUTHENTICATED' && <UserActionBtns />}
 		</>
 	);
 }

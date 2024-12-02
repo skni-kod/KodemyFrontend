@@ -1,7 +1,11 @@
 'use client';
 import React from 'react';
-import UserAuthorized from '@/services/user/types/userAuthorized';
+import { jwtDecode } from 'jwt-decode';
+import AuthService from '@/services/auth/authService';
+import { deleteCookie, getCookie } from 'cookies-next';
+import { AUTH_PRE_SESSION } from '@/utils/constant';
 import UserService from '@/services/user/userService';
+import UserAuthorized from '@/services/user/types/userAuthorized';
 
 const __SESSION_CACHE: {
 	signUri: string;
@@ -15,8 +19,12 @@ export interface Session {
 	user: {
 		id: number;
 		username: string;
-		state: number
-		role: string;
+		state: number;
+		roles: string[];
+	};
+	token: {
+		bearer: string;
+		refresh: string;
 	};
 }
 
@@ -34,24 +42,23 @@ export interface Jwt {
 export type SessionContextType =
 	| {
 	session: Session;
-	isSessionLoading: false
-	refresh: () => void;
+	sessionStatus: 'AUTHENTICATED';
+	update: (session: Session | undefined) => void;
+} | {
+	session: undefined;
+	sessionStatus: 'UNAUTHENTICATED';
+	update: (session: Session | undefined) => void;
 }
 	| {
 	session: Session | undefined;
-	isSessionLoading: true;
-	refresh: () => void;
+	sessionStatus: 'LOADING';
+	update: (session: Session | undefined) => void;
 }
-	| {
-	session: undefined;
-	isSessionLoading: false;
-	refresh: () => void;
-};
 
 export const SessionContext = React.createContext<SessionContextType>({
 	session: undefined,
-	isSessionLoading: false,
-	refresh: () => {
+	sessionStatus: 'LOADING',
+	update: () => {
 	}
 });
 
@@ -64,44 +71,42 @@ interface SessionContextProviderProps {
 const SessionProvider = ({ session: sessionProp = undefined, signUri, children }: SessionContextProviderProps) => {
 	__SESSION_CACHE.signUri = signUri;
 
-	const updateSession = React.useCallback(async (user: UserAuthorized) => {
-		setSession({
-			user: { id: user.id, username: user.username, role: user.role.name, state: 0 }
-		});
-	}, []);
-
 	const [session, setSession] = React.useState<Session | undefined>(sessionProp);
 	const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
-	const update = React.useCallback(() => {
-		const updateFromApi = async () => {
-			return await UserService.getMe().then((user) => updateSession(user));
+	const update = React.useCallback((user: UserAuthorized | undefined) => {
+		if (!user) {
+			setSession(undefined);
+			return undefined;
+		}
+		const session: Session = {
+			user: { id: user.id, username: user.username, roles: [user.role.name], state: 0 },
+			token: { bearer: '', refresh: '' }
 		};
-
-		updateFromApi().finally(() => {
-			setIsLoading(false);
-		});
-	}, [session]);
-
-	React.useEffect(() => {
-		const updateFromApi = async () => {
-			return await UserService.getMe().then((user) => updateSession(user));
-		};
-
-		updateFromApi().finally(() => {
-			setIsLoading(false);
-		});
+		setSession(session);
+		return session;
 	}, []);
 
-	const isLoading1 = React.useCallback(() => isLoading, [isLoading]);
+	React.useEffect(() => {
+		UserService.getMe()
+			.then((user) => update(user))
+			.catch(() => update(undefined))
+			.finally(() => {
+				setIsLoading(false);
+			});
+	}, [update]);
+
+	const status = React.useCallback(() => {
+		return isLoading ? 'LOADING' : (session ? 'AUTHENTICATED' : 'UNAUTHENTICATED');
+	}, [isLoading, session]);
 
 	const value: any = React.useMemo(
 		() => ({
 			session,
-			isSessionLoading: isLoading1(),
-			refresh: update
+			status: status(),
+			update
 		}),
-		[session, update]
+		[session, status, update]
 	);
 
 	return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
@@ -115,15 +120,18 @@ export const useSessionContext = (isSecure = false): SessionContextType => {
 		throw new Error('useSessionContext must be used within a SessionProvider');
 	}
 
-	React.useEffect(() => context.refresh(), []);
+	const isUnauthenticated = context.sessionStatus == 'UNAUTHENTICATED';
 
 	React.useEffect(() => {
-		if (isSecure && (context.session == undefined && context.isSessionLoading)) {
+		if (isSecure && isUnauthenticated) {
 			window.location.href = `${__SESSION_CACHE.signUri}?${new URLSearchParams({
 				callbackUri: window.location.href
 			})}`;
 		}
-	}, [isSecure, context.session, context.isSessionLoading]);
+	}, [isSecure, isUnauthenticated, context.sessionStatus]);
 
+	/*return isSecure && isUnauthenticated
+		? { session: context.session, sessionStatus: 'LOADING', update: context.update }
+		: context;*/
 	return context;
 };
