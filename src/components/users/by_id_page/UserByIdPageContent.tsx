@@ -14,11 +14,11 @@ import UserMaterialsSection from '@/components/users/by_id_page/page_content/Use
 
 export default function UserByIdPageContent({ id: userId, title }: MetadataProps & { id: number }) {
 	const { data: user, status, fetch: fetchUser } = useFetchState<User>();
-	const { session, isSessionLoading } = useSessionContext();
+	const { session, sessionStatus } = useSessionContext();
 
 	useEffect(() => {
-		!isSessionLoading && fetchUser(() => UserService.getUserById(session, userId));
-	}, [fetchUser, session, isSessionLoading, userId]);
+		sessionStatus != 'LOADING' && fetchUser(() => UserService.getUserById(session, userId));
+	}, [fetchUser, session, sessionStatus, userId]);
 
 	if (status === Status.PENDING) return <Loading full />;
 
