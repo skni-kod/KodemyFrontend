@@ -79,7 +79,7 @@ export default function UserDropDownMenu({ menuClassName }: UserDropDownMenuProp
 			type: Menu.LINK,
 			label: USER_NAV_MENU.LINK.LOGOUT,
 			icon: IoLogOutOutline,
-			href: '/auth/logout',
+			href: '/api/logout',
 		},
 	];
 
