@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { SlMagnifier } from 'react-icons/sl';
 import Modal from '@/components/utils/Modal';
 import SearchBar from '@/components/utils/SearchBar';
@@ -17,31 +17,31 @@ export default function SearchBlock() {
 	const openModal = () => setIsOpen(true);
 	const closeModal = () => setIsOpen(false);
 
-	const searchParams = {
-		page: 1,
-		size: DEFAULT_PAGE_SIZE,
-		sort: MaterialSortField.ID,
-		sort_direction: SortDirection.ASC,
-	};
+	const SEARCH_PARAMS = useMemo(
+		() => ({
+			page: 1,
+			size: DEFAULT_PAGE_SIZE,
+			sort: MaterialSortField.ID,
+			sort_direction: SortDirection.ASC,
+		}),
+		[],
+	);
 
 	const { data: materials, status, fetch: fetchMaterials } = useFetchState<Pageable<MaterialSearch>>();
 
-	if (!isOpen) return <></>;
-
 	useEffect(() => {
-		isOpen &&
-			fetchMaterials(() => {
-				return MaterialService.getMaterials(searchParams);
-			});
-	}, []);
+		if (isOpen) {
+			fetchMaterials(() => MaterialService.getMaterials(SEARCH_PARAMS));
+		}
+	}, [isOpen, fetchMaterials, SEARCH_PARAMS]);
 
-	if (status === Status.PENDING)
+	if (isOpen && status === Status.PENDING)
 		return (
 			<div className="pt-8">
 				<Loading scale="small" />
 			</div>
 		);
-	if (status === Status.ERROR || !materials) return <Error />;
+	if (isOpen && (status === Status.ERROR || !materials)) return <Error />;
 
 	return (
 		<>
@@ -62,7 +62,7 @@ export default function SearchBlock() {
 				>
 					<div className="flex flex-col gap-4">
 						<h2 className="text-lg font-semibold">{TEXT.WHAT_LOOKING_FOR}</h2>
-						<SearchBar onClose={closeModal} data={materials.content} searchFields={['title', 'description']} />
+						<SearchBar onClose={closeModal} data={materials!.content} searchFields={['title', 'description']} />
 					</div>
 				</Modal>
 			)}
