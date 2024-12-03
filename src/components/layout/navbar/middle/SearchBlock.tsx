@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { SlMagnifier } from 'react-icons/sl';
 import Modal from '@/components/utils/Modal';
 import SearchBar from '@/components/utils/SearchBar';
@@ -17,31 +17,28 @@ export default function SearchBlock() {
 	const openModal = () => setIsOpen(true);
 	const closeModal = () => setIsOpen(false);
 
-	const searchParams = {
+	const SEARCH_PARAMS = useMemo(() => ({
 		page: 1,
 		size: DEFAULT_PAGE_SIZE,
 		sort: MaterialSortField.ID,
 		sort_direction: SortDirection.ASC,
-	};
+	}), []);
 
 	const { data: materials, status, fetch: fetchMaterials } = useFetchState<Pageable<MaterialSearch>>();
 
-	if (!isOpen) return <></>;
-
 	useEffect(() => {
-		isOpen &&
-			fetchMaterials(() => {
-				return MaterialService.getMaterials(searchParams);
-			});
-	}, []);
+		if (isOpen) {
+			fetchMaterials(() => MaterialService.getMaterials(SEARCH_PARAMS));
+		}
+	}, [isOpen, fetchMaterials, SEARCH_PARAMS]);
 
-	if (status === Status.PENDING)
+	if (isOpen && status === Status.PENDING)
 		return (
 			<div className="pt-8">
 				<Loading scale="small" />
 			</div>
 		);
-	if (status === Status.ERROR || !materials) return <Error />;
+	if (isOpen && (status === Status.ERROR || !materials)) return <Error />;
 
 	return (
 		<>
