@@ -82,21 +82,19 @@ const SessionProvider = ({ session: sessionProp = undefined, signUri, children }
 			)
 			.catch(() => setSession(undefined))
 			.finally(() => setIsLoading(false));
-	}, []);
+	}, [isLoading]);
 
 	const checkStatus = React.useCallback(() => {
 		return isLoading ? 'LOADING' : session ? 'AUTHENTICATED' : 'UNAUTHENTICATED';
-	}, [isLoading]);
-
-	const update = () => {};
+	}, [isLoading, session]);
 
 	const value: any = React.useMemo(
 		() => ({
 			session: session,
 			sessionStatus: checkStatus(),
-			update: update,
+			update: () => {},
 		}),
-		[session, checkStatus, update],
+		[session, checkStatus],
 	);
 
 	return <SessionContext.Provider value={value}> {children}</SessionContext.Provider>;
