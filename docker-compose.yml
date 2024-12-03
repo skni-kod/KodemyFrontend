@@ -22,5 +22,3 @@ networks:
 volumes:
   frontend_vol:
     driver: local
-
-

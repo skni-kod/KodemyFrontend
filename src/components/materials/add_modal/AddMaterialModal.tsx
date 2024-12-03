@@ -163,16 +163,14 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 				return;
 			}
 
-			await MaterialService.publishMaterial(
-				{
-					title: data.details!.title,
-					description: data.details!.description,
-					link: data.details!.link,
-					typeId: data.sectionId!,
-					categoryId: data.categoryId!,
-					tagsIds: data.details!.tagsIds,
-				}
-			);
+			await MaterialService.publishMaterial({
+				title: data.details!.title,
+				description: data.details!.description,
+				link: data.details!.link,
+				typeId: data.sectionId!,
+				categoryId: data.categoryId!,
+				tagsIds: data.details!.tagsIds,
+			});
 
 			addToast(`Dodano materiał`, 'success', 5000);
 			handleClose();

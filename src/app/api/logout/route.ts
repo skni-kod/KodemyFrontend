@@ -10,10 +10,7 @@ export async function GET(req: NextRequest) {
 	const baseUrl = req.nextUrl.origin;
 
 	const headers: HeadersInit = {
-		'Set-Cookie': [
-			`${ACCESS_TOKEN_COOKIE}=; Path=/; Max-Age=0;`,
-			`${REFRESH_TOKEN_COOKIE}=; Path=/; Max-Age=0;`
-		].join(', ')
+		'Set-Cookie': `${ACCESS_TOKEN_COOKIE}=; Path=/; Max-Age=0;, ${REFRESH_TOKEN_COOKIE}=; Path=/; Max-Age=0;`,
 	};
 
 	await AuthService.logout();
