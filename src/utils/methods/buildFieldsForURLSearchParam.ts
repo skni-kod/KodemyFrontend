@@ -1,5 +1,4 @@
 const buildFieldsForURLSearchParam = (fields: Record<string, any>): string => {
-	console.log('fields', fields);
 	const fieldEntries = Object.entries(fields)
 		.filter(([_, value]) => value !== null && value !== undefined)
 		.map(([key, value], index) => {

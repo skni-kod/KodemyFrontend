@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { defaultTheme, SystemColorMode, ThemeOption, themes } from '@/utils/lightMode/themes';
 import Loading from '@/components/common/Loading';
@@ -16,7 +16,7 @@ export default function AppearanceSettingsSubPage() {
 		}
 	}, []);
 
-	const updateThemes = () => {
+	const updateThemes = useCallback(() => {
 		const html = document.documentElement;
 
 		html.setAttribute('data-day-theme', theme.dayTheme);
@@ -33,13 +33,13 @@ export default function AppearanceSettingsSubPage() {
 		}
 
 		localStorage.setItem('theme', JSON.stringify(theme));
-	};
+	}, [theme]);
 
 	useEffect(() => {
 		if (isClient) {
 			updateThemes();
 		}
-	}, [theme, isClient]);
+	}, [theme, isClient, updateThemes]);
 
 	const handleChange = (key: keyof typeof theme, value: string) => {
 		setTheme((prev: any) => ({ ...prev, [key]: value }));

@@ -23,7 +23,6 @@ export default function SearchBar({
 				searchFields.some((field) => item[field].toString().toLowerCase().includes(input.toLowerCase())),
 			);
 			setResults(filteredResults);
-			console.log(filteredResults);
 		} else {
 			setResults([]);
 		}

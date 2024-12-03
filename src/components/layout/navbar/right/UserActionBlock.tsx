@@ -1,23 +1,17 @@
 'use client';
-import { SessionStatus, useSessionContext } from '@/contexts/SessionContext';
-import React, { useEffect, useState } from 'react';
-import Button from '@/components/common/Button';
+import { useSessionContext } from '@/contexts/SessionContext';
+import React from 'react';
 import { TEXT } from '@/utils/constant';
 import { useRouter } from 'next/navigation';
 import UserActionBtns from '@/components/layout/navbar/right/UserActionBtns';
 
 export default function UserActionBlock() {
-	const { session, status } = useSessionContext();
-	const [stateStatus, setStateStatus] = useState(status);
+	const sessionContext = useSessionContext();
 	const router = useRouter();
-
-	useEffect(() => {
-		setStateStatus(status);
-	}, [status]);
 
 	return (
 		<>
-			{SessionStatus.UNAUTHENTICATED === stateStatus && (
+			{sessionContext.sessionStatus === 'UNAUTHENTICATED' && (
 				<div className="pr-2">
 					<button
 						className="flex h-[2.5rem] cursor-pointer items-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-textOnPrimary hover:bg-primaryHover"
@@ -28,7 +22,7 @@ export default function UserActionBlock() {
 				</div>
 			)}
 
-			{SessionStatus.AUTHENTICATED === stateStatus && <UserActionBtns />}
+			{sessionContext.sessionStatus === 'AUTHENTICATED' && <UserActionBtns />}
 		</>
 	);
 }

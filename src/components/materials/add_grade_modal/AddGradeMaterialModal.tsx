@@ -50,17 +50,16 @@ export default function AddGradeMaterialModal({
 
 	const handlePublish = async () => {
 		try {
-			if (!session || !session.token?.bearer) {
+			if (!session) {
 				console.error('No session or Bearer token found');
 				return;
 			}
 
 			const grade = rating.toFixed(1);
 
-			const response = await MaterialService.addGradeToMaterial(materialId, { grade }, session.token.bearer);
+			await MaterialService.addGradeToMaterial(materialId, { grade });
 
 			addToast(`Dodano ocenę`, 'success', 5000);
-			console.log('Grade added successfully:', response);
 			handleClose();
 		} catch (error) {
 			addToast(`Error adding grade:`, 'danger', 5000);

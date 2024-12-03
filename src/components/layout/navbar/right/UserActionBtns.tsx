@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import { SlBell, SlPlus, SlUser } from 'react-icons/sl';
-import NotificationDropDownMenu from '@/components/layout/navbar/right/NotificationDropDownMenu';
 import UserDropDownMenu from '@/components/layout/navbar/right/UserDropDownMenu';
 import ComponentParentProps from '@/utils/types/node/componentParentProps';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa6';
@@ -61,7 +60,8 @@ export default function UserActionBtns() {
 				{React.createElement(menuOpen === Menu.NOTIFICATION ? FaAngleUp : FaAngleDown, {
 					className: 'h-full text-sm text-secondary',
 				})}
-				{menuOpen === Menu.NOTIFICATION && <NotificationDropDownMenu menuClassName={dropdownMenuClassName} />}
+				{/*TODO NOTIFICATION*/}
+				{/*{menuOpen === Menu.NOTIFICATION && <NotificationDropDownMenu menuClassName={dropdownMenuClassName} />}*/}
 			</MenuBtnWrapper>
 			<MenuBtnWrapper onClick={() => handleMenuClick(Menu.USER)}>
 				<SlUser className="h-full text-2xl text-secondary" />

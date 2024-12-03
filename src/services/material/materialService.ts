@@ -48,51 +48,27 @@ export default class MaterialService extends ApiService {
 		}
 	}
 
-	public static async publishMaterial(material: MaterialAdd, token: string): Promise<MaterialAdd> {
+	public static async publishMaterial(material: MaterialAdd): Promise<MaterialAdd> {
 		try {
-			const response = await kodemyApi.post<MaterialAdd>('/api/materials', material, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
+			const response = await kodemyApi.post<MaterialAdd>('/api/materials', material);
 			return response.data;
 		} catch (err) {
 			return Promise.reject(new InternalServerErrorApiError());
 		}
 	}
 
-	public static async addGradeToMaterial(
-		materialId: number,
-		grade: MaterialAddGrade,
-		token: string,
-	): Promise<MaterialAddGrade> {
+	public static async addGradeToMaterial(materialId: number, grade: MaterialAddGrade): Promise<MaterialAddGrade> {
 		try {
-			const response = await kodemyApi.post<MaterialAddGrade>(`/api/materials/${materialId}/grades`, grade, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
+			const response = await kodemyApi.post<MaterialAddGrade>(`/api/materials/${materialId}/grades`, grade);
 			return response.data;
 		} catch (err) {
 			return Promise.reject(new InternalServerErrorApiError());
 		}
 	}
 
-	public static async changeMaterialStatus(
-		materialId: number,
-		newStatus: MaterialSwaggerStatus,
-		token: string,
-	): Promise<Material> {
+	public static async changeMaterialStatus(materialId: number, newStatus: MaterialSwaggerStatus): Promise<Material> {
 		try {
-			const response = await kodemyApi.post<Material>(
-				`/api/materials/${materialId}/status`,
-				{ status: newStatus },
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				},
-			);
+			const response = await kodemyApi.post<Material>(`/api/materials/${materialId}/status`, { status: newStatus });
 			return response.data;
 		} catch (err) {
 			return Promise.reject(new InternalServerErrorApiError());

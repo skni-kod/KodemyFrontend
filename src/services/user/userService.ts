@@ -3,6 +3,7 @@ import kodemyApi from '@/utils/api';
 import { InternalServerErrorApiError } from '@/utils/api/types/apiError';
 import { User, UserFiltersParam, UserSearch, UserSortField } from '@/services/user/types';
 import { Session } from '@/contexts/SessionContext';
+import UserAuthorized from '@/services/user/types/userAuthorized';
 
 export default class UserService extends ApiService {
 	public static async getUsers(
@@ -28,9 +29,15 @@ export default class UserService extends ApiService {
 
 	public static async getUserById(session: Session | undefined, id: number): Promise<User> {
 		try {
-			return await kodemyApi
-				.get<User>(`/api/users/${id}`, session ? this.withCredentials(session.token.bearer) : {})
-				.then((res) => res.data);
+			return await kodemyApi.get<User>(`/api/users/${id}`).then((res) => res.data);
+		} catch (err) {
+			return Promise.reject(new InternalServerErrorApiError());
+		}
+	}
+
+	public static async getMe(): Promise<UserAuthorized> {
+		try {
+			return await kodemyApi.get<UserAuthorized>(`/api/users/me`).then((res) => res.data);
 		} catch (err) {
 			return Promise.reject(new InternalServerErrorApiError());
 		}

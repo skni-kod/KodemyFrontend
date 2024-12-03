@@ -9,15 +9,15 @@ import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
 import UserService from '@/services/user/userService';
 import { User } from '@/services/user/types';
-import { SessionStatus, useSessionContext } from '@/contexts/SessionContext';
+import { useSessionContext } from '@/contexts/SessionContext';
 import UserMaterialsSection from '@/components/users/by_id_page/page_content/UserMaterialsSection';
 
 export default function UserByIdPageContent({ id: userId, title }: MetadataProps & { id: number }) {
 	const { data: user, status, fetch: fetchUser } = useFetchState<User>();
-	const { session, status: sessionStatus } = useSessionContext();
+	const { session, sessionStatus } = useSessionContext();
 
 	useEffect(() => {
-		sessionStatus !== SessionStatus.LOADING && fetchUser(() => UserService.getUserById(session, userId));
+		sessionStatus != 'LOADING' && fetchUser(() => UserService.getUserById(session, userId));
 	}, [fetchUser, session, sessionStatus, userId]);
 
 	if (status === Status.PENDING) return <Loading full />;
