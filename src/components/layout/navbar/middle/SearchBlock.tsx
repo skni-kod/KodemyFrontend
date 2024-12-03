@@ -17,12 +17,15 @@ export default function SearchBlock() {
 	const openModal = () => setIsOpen(true);
 	const closeModal = () => setIsOpen(false);
 
-	const SEARCH_PARAMS = useMemo(() => ({
-		page: 1,
-		size: DEFAULT_PAGE_SIZE,
-		sort: MaterialSortField.ID,
-		sort_direction: SortDirection.ASC,
-	}), []);
+	const SEARCH_PARAMS = useMemo(
+		() => ({
+			page: 1,
+			size: DEFAULT_PAGE_SIZE,
+			sort: MaterialSortField.ID,
+			sort_direction: SortDirection.ASC,
+		}),
+		[],
+	);
 
 	const { data: materials, status, fetch: fetchMaterials } = useFetchState<Pageable<MaterialSearch>>();
 
