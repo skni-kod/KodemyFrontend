@@ -59,7 +59,7 @@ export default function SearchBlock() {
 				>
 					<div className="flex flex-col gap-4">
 						<h2 className="text-lg font-semibold">{TEXT.WHAT_LOOKING_FOR}</h2>
-						<SearchBar onClose={closeModal} data={materials.content} searchFields={['title', 'description']} />
+						<SearchBar onClose={closeModal} data={materials!.content} searchFields={['title', 'description']} />
 					</div>
 				</Modal>
 			)}
