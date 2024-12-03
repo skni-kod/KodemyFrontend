@@ -103,9 +103,6 @@ jobs:
             cd $WORKING_DIRECTORY
             npm install
 
-            echo "Run Prettier Format"
-            npm run format
-
             echo "Run Linter"
             npm run lint
 
