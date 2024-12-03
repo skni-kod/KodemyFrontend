@@ -14,14 +14,14 @@ export const MaterialSwaggerStatuses = {
 	BANNED: 'BANNED',
 	DEPRECATION_REQUEST: 'DEPRECATION_REQUEST',
 	DEPRECATED: 'DEPRECATED',
-	DELETED: 'DELETED'
+	DELETED: 'DELETED',
 } as const;
 
 export type MaterialSwaggerStatus = keyof typeof MaterialSwaggerStatuses;
 
 export default class MaterialService extends ApiService {
 	public static async getMaterials(
-		params: SearchRequestParams<MaterialSortField, MaterialFiltersParam>
+		params: SearchRequestParams<MaterialSortField, MaterialFiltersParam>,
 	): Promise<Pageable<MaterialSearch>> {
 		const { size, page, sort, sort_direction, filters } = params;
 
@@ -30,7 +30,7 @@ export default class MaterialService extends ApiService {
 			page: page > 0 ? (page - 1).toString() : '0',
 			sort: MaterialSortField[sort],
 			sort_direction: SortDirection[sort_direction],
-			filters: filters ? JSON.stringify(filters) : '{}'
+			filters: filters ? JSON.stringify(filters) : '{}',
 		});
 
 		try {
@@ -57,10 +57,7 @@ export default class MaterialService extends ApiService {
 		}
 	}
 
-	public static async addGradeToMaterial(
-		materialId: number,
-		grade: MaterialAddGrade
-	): Promise<MaterialAddGrade> {
+	public static async addGradeToMaterial(materialId: number, grade: MaterialAddGrade): Promise<MaterialAddGrade> {
 		try {
 			const response = await kodemyApi.post<MaterialAddGrade>(`/api/materials/${materialId}/grades`, grade);
 			return response.data;
@@ -69,14 +66,9 @@ export default class MaterialService extends ApiService {
 		}
 	}
 
-	public static async changeMaterialStatus(
-		materialId: number,
-		newStatus: MaterialSwaggerStatus
-	): Promise<Material> {
+	public static async changeMaterialStatus(materialId: number, newStatus: MaterialSwaggerStatus): Promise<Material> {
 		try {
-			const response = await kodemyApi.post<Material>(
-				`/api/materials/${materialId}/status`, { status: newStatus }
-			);
+			const response = await kodemyApi.post<Material>(`/api/materials/${materialId}/status`, { status: newStatus });
 			return response.data;
 		} catch (err) {
 			return Promise.reject(new InternalServerErrorApiError());

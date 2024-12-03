@@ -21,7 +21,7 @@ export default function SearchBlock() {
 		page: 1,
 		size: DEFAULT_PAGE_SIZE,
 		sort: MaterialSortField.ID,
-		sort_direction: SortDirection.ASC
+		sort_direction: SortDirection.ASC,
 	};
 
 	const { data: materials, status, fetch: fetchMaterials } = useFetchState<Pageable<MaterialSearch>>();
@@ -29,9 +29,10 @@ export default function SearchBlock() {
 	if (!isOpen) return <></>;
 
 	useEffect(() => {
-		isOpen && fetchMaterials(() => {
-			return MaterialService.getMaterials(searchParams);
-		});
+		isOpen &&
+			fetchMaterials(() => {
+				return MaterialService.getMaterials(searchParams);
+			});
 	}, []);
 
 	if (status === Status.PENDING)
