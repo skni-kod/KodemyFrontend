@@ -1,19 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { HttpStatusCode } from 'axios';
-import { NextApiResponse } from 'next';
 import AuthService from '@/services/auth/authService';
 
 const ACCESS_TOKEN_COOKIE = 'AUTH_CONTEXT';
 const REFRESH_TOKEN_COOKIE = 'AUTH_PERSIST';
 
-export async function GET(req: NextRequest) {
-	const baseUrl = req.nextUrl.origin;
+const accessCookie = `${ACCESS_TOKEN_COOKIE}=; Path=/; Max-Age=0; SameSite=Lax;`;
+const refreshCookie = `${ACCESS_TOKEN_COOKIE}=; Path=/; Max-Age=0; SameSite=Lax;`;
 
+export function GET(req: NextRequest) {
 	const headers: HeadersInit = {
-		'Set-Cookie': `${ACCESS_TOKEN_COOKIE}=; Path=/; Max-Age=0;, ${REFRESH_TOKEN_COOKIE}=; Path=/; Max-Age=0;`,
+		'Set-Cookie': `${accessCookie}, ${refreshCookie}`,
 	};
 
-	await AuthService.logout();
+	AuthService.logout();
 
-	return NextResponse.redirect(baseUrl, { status: HttpStatusCode.PermanentRedirect, headers });
+	return NextResponse.rewrite(req.nextUrl.origin, { status: HttpStatusCode.PermanentRedirect, headers });
 }
