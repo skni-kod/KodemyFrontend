@@ -7,7 +7,7 @@ import UserAuthorized from '@/services/user/types/userAuthorized';
 
 export default class UserService extends ApiService {
 	public static async getUsers(
-		params: SearchRequestParams<UserSortField, UserFiltersParam>
+		params: SearchRequestParams<UserSortField, UserFiltersParam>,
 	): Promise<Pageable<UserSearch>> {
 		const { size, page, sort, sort_direction, filters } = params;
 
@@ -16,12 +16,11 @@ export default class UserService extends ApiService {
 			page: page > 0 ? (page - 1).toString() : '0',
 			sort: UserSortField[sort],
 			sort_direction: SortDirection[sort_direction],
-			filters: filters ? JSON.stringify(filters) : '{}'
+			filters: filters ? JSON.stringify(filters) : '{}',
 		});
 
 		try {
-			return await kodemyApi.get<Pageable<UserSearch>>(`/api/users?${requestParams}`)
-				.then((res) => res.data);
+			return await kodemyApi.get<Pageable<UserSearch>>(`/api/users?${requestParams}`).then((res) => res.data);
 		} catch (err) {
 			console.debug(err);
 			return Promise.reject(new InternalServerErrorApiError());
@@ -30,9 +29,7 @@ export default class UserService extends ApiService {
 
 	public static async getUserById(session: Session | undefined, id: number): Promise<User> {
 		try {
-			return await kodemyApi
-				.get<User>(`/api/users/${id}`)
-				.then((res) => res.data);
+			return await kodemyApi.get<User>(`/api/users/${id}`).then((res) => res.data);
 		} catch (err) {
 			return Promise.reject(new InternalServerErrorApiError());
 		}
@@ -40,9 +37,7 @@ export default class UserService extends ApiService {
 
 	public static async getMe(): Promise<UserAuthorized> {
 		try {
-			return await kodemyApi
-				.get<UserAuthorized>(`/api/users/me`)
-				.then((res) => res.data);
+			return await kodemyApi.get<UserAuthorized>(`/api/users/me`).then((res) => res.data);
 		} catch (err) {
 			return Promise.reject(new InternalServerErrorApiError());
 		}
