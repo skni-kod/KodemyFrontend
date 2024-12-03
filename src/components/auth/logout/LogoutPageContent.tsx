@@ -27,7 +27,7 @@ export default function LogoutPageContent() {
 			addToast(`Błąd podczas wylogowania:`, 'danger', 5000);
 			console.error('Błąd podczas wylogowania:', error);
 		}
-	}, []);
+	}, [addToast, session]);
 
 	return (
 		<PageContent noHeader>
