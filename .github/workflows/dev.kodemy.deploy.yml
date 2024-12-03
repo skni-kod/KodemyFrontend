@@ -97,6 +97,7 @@ jobs:
             NODE_ENV,
             NEXT_PUBLIC_API_URL, ERROR_HOLD_TIME_IN_MS
           script: |
+            set -e
             source $NVM_DIR/nvm.sh
 
             cd $WORKING_DIRECTORY
