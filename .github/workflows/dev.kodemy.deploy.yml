@@ -101,7 +101,7 @@ jobs:
             source $NVM_DIR/nvm.sh
 
             cd $WORKING_DIRECTORY
-            npm clean-install
+            npm install
 
             echo "Run Prettier Format"
             npm run format
