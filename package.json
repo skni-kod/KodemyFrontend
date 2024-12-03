@@ -6,7 +6,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint --format stylish",
-		"format": "prettier --write ."
+		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'"
 	},
 	"lint-staged": {
 		"src/**/*.{js,ts,tsx}": [
