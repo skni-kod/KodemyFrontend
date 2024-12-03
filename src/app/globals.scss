@@ -15,21 +15,23 @@ body,
 }
 
 @layer base {
-	:root {
-		--primary-color: 2 132 199; // sky
-		--primary-hover-color: 2 112 169; // sky darker
-		--text-on-primary-color: 186 230 253; // sky lighter
-		--secondary-color: 48 49 52; // nearly black
-		--text-on-secondary-color: 240 240 240; // nearly white
-		--background-color: 255 255 255; // white
-		--background-hover-color: 240 240 240; // light grey
-		--error-color: 176 0 32;
-		--webkit-scrollbar-color: 200 200 200;
-		--grade: 255 188 11; //yellow
-		--gray: 229 231 235;
-		--grayText: 55 65 81;
-		--green: 22 163 74;
-		--greenText: 220 252 231;
+	@media (prefers-color-scheme: light) {
+		:root {
+			--primary-color: 2 132 199; // sky
+			--primary-hover-color: 2 112 169; // sky darker
+			--text-on-primary-color: 186 230 253; // sky lighter
+			--secondary-color: 48 49 52; // nearly black
+			--text-on-secondary-color: 240 240 240; // nearly white
+			--background-color: 255 255 255; // white
+			--background-hover-color: 240 240 240; // light grey
+			--error-color: 176 0 32;
+			--webkit-scrollbar-color: 200 200 200;
+			--grade: 255 188 11; //yellow
+			--gray: 229 231 235;
+			--grayText: 55 65 81;
+			--green: 22 163 74;
+			--greenText: 220 252 231;
+		}
 	}
 
 	@media (prefers-color-scheme: dark) {
