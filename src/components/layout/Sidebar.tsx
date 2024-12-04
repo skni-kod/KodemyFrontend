@@ -92,7 +92,7 @@ export default function Sidebar() {
 				{sidebarSections.map(({ id, name, icon }) => (
 					<Link
 						key={id}
-						href={`/sections/${id}?sectionId=${id}`}
+						href={`/sections/${id}`}
 						className="flex w-full cursor-pointer flex-row items-center bg-bg hover:bg-bgHover"
 					>
 						<div className="p-5">

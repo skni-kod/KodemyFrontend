@@ -17,7 +17,7 @@ export default function FiltersBlock({ fields }: FiltersBlockProps) {
 			<h3 className="w-full pb-5 text-2xl">{TEXT.WHAT_LOOKING_FOR}</h3>
 			<div className="flex w-full flex-wrap gap-2 leading-none">
 				<PhraseField className={FILTER_FIELD_CLASSNAMES} activePhrase={fields.phrase} />
-				<GradeField className={FILTER_FIELD_CLASSNAMES} activeGrade={fields.grade} />
+				<GradeField className={FILTER_FIELD_CLASSNAMES} activeGrade={fields.minAvgGrade} />
 			</div>
 		</div>
 	);
