@@ -110,6 +110,38 @@ jobs:
             npm run build
 
             docker compose up --build -d
+            export FRONTEND_CONTAINERS=$(docker-compose ps -q)
+
+      - name: Validate running
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          port: ${{ secrets.REMOTE_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: |
+            WORKING_DIRECTORY, NVM_DIR,
+            NETWORK_NAME, EXPOSE_PORT,
+            NODE_ENV,
+            NEXT_PUBLIC_API_URL, ERROR_HOLD_TIME_IN_MS
+          script: |
+            cd $WORKING_DIRECTORY
+
+            echo "Waiting 1 minute..."
+            sleep 1m
+
+            for container in $FRONTEND_CONTAINERS; do
+                status=$(docker inspect --format='{{.State.Status}}' $container)
+                if [ "$status" != "running" ]; then
+                    echo "$container not running"
+                    docker compose -f docker-compose.yml -f docker-compose.backup.yml up -d
+                    exit 1
+                fi
+            done
+
+            echo "All containers validated successfully."   
+            docker commit kodemyfrontend-frontend-1 kodemy-frontend:backup
+
       - name: Cleanup
         uses: appleboy/ssh-action@master
         with:
