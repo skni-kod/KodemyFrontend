@@ -10,11 +10,13 @@ import { Pageable, SortDirection } from '@/utils/api/types';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
-export default function SearchBlock() {
+type SearchBlockProps = {
+	rwdSM: boolean;
+};
+
+export default function SearchBlock({ rwdSM }: SearchBlockProps) {
 	const [isOpen, setIsOpen] = useState(false);
-	const rwdSM = useMediaQuery('(min-width:640px)');
 
 	const openModal = () => setIsOpen(true);
 	const closeModal = () => setIsOpen(false);

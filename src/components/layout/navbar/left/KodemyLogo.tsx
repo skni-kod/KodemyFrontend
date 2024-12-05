@@ -10,7 +10,7 @@ import { IconType, themes } from '@/utils/lightMode/themes';
 type KodemyLogoProps = {
 	className?: string;
 	ratio?: number;
-	size?: 'big' | 'small';
+	size: 'big' | 'small';
 };
 
 export default function KodemyLogo({ className = 'h-full w-full', ratio = 1, size }: KodemyLogoProps) {
@@ -34,7 +34,7 @@ export default function KodemyLogo({ className = 'h-full w-full', ratio = 1, siz
 	}, []);
 
 	const logo =
-		size !== 'big'
+		size === 'big'
 			? themeType === 'dark'
 				? KodemyDarkBig
 				: KodemyWhiteBig
