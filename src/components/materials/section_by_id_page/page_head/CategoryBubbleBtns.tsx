@@ -24,10 +24,8 @@ export default function CategoryBubbleBtns({ sections, activeSectionId, activesC
 
 		setSelectedCategories((prevState) => {
 			if (prevState.includes(id)) {
-				// Usuń kategorię, jeśli już jest zaznaczona
 				updatedCategories = prevState.filter((categoryId) => categoryId !== id);
 			} else {
-				// Dodaj kategorię
 				updatedCategories = [...prevState, id];
 			}
 			return updatedCategories;
