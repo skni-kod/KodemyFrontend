@@ -86,7 +86,7 @@ export default function Sidebar() {
 
 	return (
 		<div
-			className={`fixed min-h-full ${!sidebar.isOpen ? 'w-side' : 'w-expandSide'} mt-nav bg-bg shadow-md shadow-secondary`}
+			className={`fixed min-h-full bg-bg ${!sidebar.isOpen ? 'w-side' : 'w-expandSide'} mt-nav bg-bg shadow-md shadow-secondary transition-all duration-300 ease-in-out`}
 		>
 			<ul className="flex h-full w-full list-none flex-col pt-2">
 				{sidebarSections.map(({ id, name, icon }) => (
@@ -99,9 +99,7 @@ export default function Sidebar() {
 							<Image src={theme === 'light' ? icon.light : icon.dark} width={24} height={24} alt={name} />
 						</div>
 						<span
-							className={`text-secondary transition-all duration-300 ease-in-out ${
-								!sidebar.isOpen ? 'hidden w-0' : ''
-							}`}
+							className={`relative text-secondary transition-all duration-300 ease-in-out ${!sidebar.isOpen ? '-left-96 w-0' : 'left-0 w-40'}`}
 						>
 							{name}
 						</span>

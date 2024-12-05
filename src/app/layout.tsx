@@ -33,7 +33,7 @@ export default function RootLayout({ children }: ComponentParentProps) {
 	return (
 		<html lang="pl" data-color-mode="single" data-theme="light-default">
 			<ToastProvider>
-				<body>
+				<body className="bg-bg">
 					<ThemeInitializer>
 						<SessionProvider signUri="/auth">
 							<SidebarProvider>
