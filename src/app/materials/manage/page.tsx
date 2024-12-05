@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import MaterialManagePageContent from '@/components/materials/manage_page/MaterialManagePageContent';
 import { MaterialSearchParams, SearchParams } from '@/utils/types';
 import PageQueryProps from '@/utils/types/page/pageQueryProps';
-import { DEFAULT_PAGE_SIZE, PAGE_TITLE } from '@/utils/constant';
+import { DEFAULT_MATERIAL_PAGE_SORT, DEFAULT_PAGE_SIZE, PAGE_TITLE } from '@/utils/constant';
 import { parseFieldsFromURLSearchParam } from '@/utils/methods';
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export default function MaterialsManagePage({ searchParams }: PageQueryProps<Sea
 	const materialSearchParams: MaterialSearchParams = {
 		page: searchParams?.page ?? 1,
 		size: searchParams?.size ?? DEFAULT_PAGE_SIZE,
-		sort: searchParams?.sort ?? 0,
+		sort: searchParams?.sort ?? DEFAULT_MATERIAL_PAGE_SORT,
 		fields: parseFieldsFromURLSearchParam(searchParams?.fields),
 	};
 

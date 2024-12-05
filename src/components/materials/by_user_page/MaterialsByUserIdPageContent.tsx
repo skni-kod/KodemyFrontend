@@ -25,7 +25,7 @@ export default function MaterialsByUserIdPageContent({
 	return (
 		<PageContent headerValue={session ? 'Materiały: ' + session.user.username : PAGE_TITLE.MATERIAL_BY_USER}>
 			<SectionBubbleBtns />
-			<FiltersBlock fields={searchParams.fields} />
+			<FiltersBlock searchParams={searchParams} />
 			<MaterialResultsDisplay searchParams={searchParams} DetailsDropDownComponent={DetailsDropDown} />
 		</PageContent>
 	);

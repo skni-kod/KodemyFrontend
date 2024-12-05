@@ -40,7 +40,7 @@ export default function SectionByIdPageContent({ title, id: sectionId, searchPar
 						activeSectionId={sectionId}
 						activesCategoryIds={searchParams.fields?.categoryIds}
 					/>
-					<FiltersBlock fields={searchParams.fields ?? {}} />
+					<FiltersBlock searchParams={searchParams ?? {}} />
 					<MaterialResultsDisplay searchParams={searchParams} DetailsDropDownComponent={DetailsDropDown} />
 				</>
 			)}

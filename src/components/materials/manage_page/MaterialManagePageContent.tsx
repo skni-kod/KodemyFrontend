@@ -15,7 +15,7 @@ export default function MaterialManagePageContent({ title, searchParams }: Mater
 	return (
 		<PageContent headerValue={title}>
 			<SectionBubbleBtns />
-			<FiltersBlock fields={searchParams.fields ?? {}} />
+			<FiltersBlock searchParams={searchParams ?? {}} />
 			<MaterialResultsDisplay searchParams={searchParams} DetailsDropDownComponent={ManageDetailsDropDown} />
 		</PageContent>
 	);
