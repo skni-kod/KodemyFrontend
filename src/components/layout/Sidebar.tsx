@@ -86,7 +86,7 @@ export default function Sidebar() {
 
 	return (
 		<div
-			className={`fixed min-h-full bg-bg ${!sidebar.isOpen ? 'w-side' : 'w-expandSide'} mt-nav bg-bg shadow-md shadow-secondary transition-all duration-300 ease-in-out`}
+			className={`fixed left-0 top-0 z-30 min-h-full bg-bg ${!sidebar.isOpen ? 'w-side' : 'w-expandSide'} mt-nav bg-bg shadow-md shadow-secondary transition-all duration-300 ease-in-out`}
 		>
 			<ul className="flex h-full w-full list-none flex-col pt-2">
 				{sidebarSections.map(({ id, name, icon }) => (
