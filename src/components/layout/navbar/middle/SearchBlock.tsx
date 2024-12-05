@@ -58,7 +58,7 @@ export default function SearchBlock() {
 			{isOpen && (
 				<Modal
 					onClose={closeModal}
-					className="size-[90%] overflow-y-auto border-2 border-primary bg-secondary text-textOnSecondary sm:size-2/3"
+					className="size-[90%] overflow-y-auto border-2 border-secondary bg-bg text-secondary sm:size-2/3"
 				>
 					<div className="flex flex-col gap-4">
 						<h2 className="text-lg font-semibold">{TEXT.WHAT_LOOKING_FOR}</h2>
