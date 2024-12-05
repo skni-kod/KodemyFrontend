@@ -23,6 +23,7 @@ export default function MaterialResultsDisplay({
 	searchParams,
 	DetailsDropDownComponent,
 }: MaterialResultsDisplayProps) {
+	console.log('searchParams1111111', searchParams);
 	const { data: materials, status, fetch: fetchMaterials } = useFetchState<Pageable<MaterialSearch>>();
 
 	useEffect(() => {

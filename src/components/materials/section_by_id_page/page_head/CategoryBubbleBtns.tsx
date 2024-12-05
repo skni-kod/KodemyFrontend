@@ -1,9 +1,9 @@
-import CategoryBubbleBtn from '@/components/materials/section_by_id_page/page_head/CategoryBubbleBtn';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Section } from '@/services/section/types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { MaterialFields } from '@/utils/types/materialSearchParams';
 import { buildFieldsForURLSearchParam, parseFieldsFromURLSearchParam } from '@/utils/methods';
+import CategoryBubbleBtn from '@/components/materials/section_by_id_page/page_head/CategoryBubbleBtn';
 
 type CategoryBubbleBtnsProps = {
 	sections: Section[];
@@ -21,17 +21,26 @@ export default function CategoryBubbleBtns({ sections, activeSectionId, activesC
 	};
 
 	const handleSelect = (id: number) => {
-		let categoryIds: number[] = [];
+		let updatedCategories: number[] = [];
 
 		setSelectedCategories((prevState) => {
-			categoryIds = prevState.includes(id) ? [...prevState] : [...prevState, id];
-			return categoryIds;
+			if (prevState.includes(id)) {
+				// Usuń kategorię, jeśli już jest zaznaczona
+				updatedCategories = prevState.filter((categoryId) => categoryId !== id);
+			} else {
+				// Dodaj kategorię
+				updatedCategories = [...prevState, id];
+			}
+			return updatedCategories;
 		});
 
 		const params = new URLSearchParams(searchParams);
 		params.set(
 			'fields',
-			buildFieldsForURLSearchParam({ ...parseFieldsFromURLSearchParam(params.get('fields')), categoryIds }),
+			buildFieldsForURLSearchParam({
+				...parseFieldsFromURLSearchParam(params.get('fields')),
+				categoryIds: updatedCategories,
+			}),
 		);
 		router.push(`?${params}`);
 	};
@@ -43,7 +52,7 @@ export default function CategoryBubbleBtns({ sections, activeSectionId, activesC
 					key={id}
 					name={name}
 					selected={!!selectedCategories && selectedCategories.includes(id)}
-					onClick={() => handleSelect(id)}
+					onClick={() => handleSelect(id)} // Obsługa usuwania/dodawania
 				/>
 			))}
 		</div>
