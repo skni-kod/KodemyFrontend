@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Section } from '@/services/section/types';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { MaterialFields } from '@/utils/types/materialSearchParams';
 import { buildFieldsForURLSearchParam, parseFieldsFromURLSearchParam } from '@/utils/methods';
 import CategoryBubbleBtn from '@/components/materials/section_by_id_page/page_head/CategoryBubbleBtn';
 
@@ -52,7 +51,7 @@ export default function CategoryBubbleBtns({ sections, activeSectionId, activesC
 					key={id}
 					name={name}
 					selected={!!selectedCategories && selectedCategories.includes(id)}
-					onClick={() => handleSelect(id)} // Obsługa usuwania/dodawania
+					onClick={() => handleSelect(id)}
 				/>
 			))}
 		</div>
