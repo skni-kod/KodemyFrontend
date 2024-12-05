@@ -14,7 +14,7 @@ export default function UserActionBlock() {
 			{sessionContext.sessionStatus === 'UNAUTHENTICATED' && (
 				<div className="pr-2">
 					<button
-						className="flex h-[2.5rem] cursor-pointer items-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-textOnPrimary hover:bg-primaryHover"
+						className="flex h-[2.5rem] cursor-pointer items-center text-nowrap rounded-md bg-primary px-4 py-2 text-sm font-semibold text-textOnPrimary hover:bg-primaryHover"
 						onClick={() => router.push('/auth')}
 					>
 						{TEXT.SIGN_IN}

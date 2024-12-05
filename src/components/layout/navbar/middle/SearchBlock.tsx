@@ -10,9 +10,11 @@ import { Pageable, SortDirection } from '@/utils/api/types';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function SearchBlock() {
 	const [isOpen, setIsOpen] = useState(false);
+	const rwdSM = useMediaQuery('(min-width:640px)');
 
 	const openModal = () => setIsOpen(true);
 	const closeModal = () => setIsOpen(false);
@@ -49,10 +51,10 @@ export default function SearchBlock() {
 				className="flex h-full w-full cursor-pointer flex-row items-center rounded-md border px-4 py-2 text-lg font-semibold text-secondary"
 				onClick={openModal}
 			>
-				<div className="aspect-square h-full">
+				<div className="flex aspect-square h-full flex-row items-center justify-center">
 					<SlMagnifier className="h-full" />
 				</div>
-				<span className="ml-2">{TEXT.LOOKING_FOR + '...'}</span>
+				{rwdSM && <span className="ml-2">{TEXT.LOOKING_FOR + '...'}</span>}
 			</div>
 
 			{isOpen && (
