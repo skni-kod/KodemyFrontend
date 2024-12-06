@@ -14,6 +14,7 @@ import retroGame from '@/assets/section/dark/retro-game.png';
 import retroGameWhite from '@/assets/section/white/retro-game.png';
 import { useSidebar } from '@/contexts/SidebarContext';
 import { IconType } from '@/utils/lightMode/themes';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 type SidebarSection = {
 	id: number;
@@ -67,6 +68,7 @@ export const sidebarSections: SidebarSection[] = [
 export default function Sidebar() {
 	const sidebar = useSidebar();
 	const [theme, setTheme] = useState<IconType>('light');
+	const rwdXS = useMediaQuery('(min-width:530px)');
 
 	useEffect(() => {
 		const html = document.documentElement;
@@ -86,7 +88,7 @@ export default function Sidebar() {
 
 	return (
 		<div
-			className={`fixed min-h-full ${!sidebar.isOpen ? 'w-side' : 'w-expandSide'} mt-nav bg-bg shadow-md shadow-secondary`}
+			className={`fixed left-0 top-0 z-30 min-h-full bg-bg ${!sidebar.isOpen ? (rwdXS ? 'w-side' : 'w-0') : rwdXS ? 'w-expandSide' : 'w-full'} mt-nav bg-bg shadow-md shadow-secondary transition-all duration-300 ease-in-out`}
 		>
 			<ul className="flex h-full w-full list-none flex-col pt-2">
 				{sidebarSections.map(({ id, name, icon }) => (
@@ -99,9 +101,7 @@ export default function Sidebar() {
 							<Image src={theme === 'light' ? icon.light : icon.dark} width={24} height={24} alt={name} />
 						</div>
 						<span
-							className={`text-secondary transition-all duration-300 ease-in-out ${
-								!sidebar.isOpen ? 'hidden w-0' : ''
-							}`}
+							className={`relative text-secondary transition-all duration-300 ease-in-out ${!sidebar.isOpen ? '-left-96 w-0' : 'left-0 w-40'}`}
 						>
 							{name}
 						</span>

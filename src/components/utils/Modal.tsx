@@ -23,7 +23,7 @@ const Modal = ({ className, children, onClose }: ModalProps) => {
 						<AiOutlineClose height={120} width={120} className="h-6 w-6" />
 					</button>
 				</div>
-				<div className="w-full px-6 pb-6 pt-0.5">{children}</div>
+				<div className="w-full px-2 pb-6 pt-0.5 xs:px-6">{children}</div>
 			</div>
 		</div>,
 		mNode,

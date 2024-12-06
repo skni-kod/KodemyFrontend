@@ -11,7 +11,11 @@ import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 import Loading from '@/components/common/Loading';
 import Error from '@/components/common/Error';
 
-export default function SearchBlock() {
+type SearchBlockProps = {
+	rwdSM: boolean;
+};
+
+export default function SearchBlock({ rwdSM }: SearchBlockProps) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const openModal = () => setIsOpen(true);
@@ -49,16 +53,16 @@ export default function SearchBlock() {
 				className="flex h-full w-full cursor-pointer flex-row items-center rounded-md border px-4 py-2 text-lg font-semibold text-secondary"
 				onClick={openModal}
 			>
-				<div className="aspect-square h-full">
+				<div className="flex aspect-square h-full flex-row items-center justify-center">
 					<SlMagnifier className="h-full" />
 				</div>
-				<span className="ml-2">{TEXT.LOOKING_FOR + '...'}</span>
+				{rwdSM && <span className="ml-2">{TEXT.LOOKING_FOR + '...'}</span>}
 			</div>
 
 			{isOpen && (
 				<Modal
 					onClose={closeModal}
-					className="size-[90%] overflow-y-auto border-2 border-primary bg-secondary text-textOnSecondary sm:size-2/3"
+					className="size-[90%] overflow-y-auto border-2 border-secondary bg-bg text-secondary sm:size-2/3"
 				>
 					<div className="flex flex-col gap-4">
 						<h2 className="text-lg font-semibold">{TEXT.WHAT_LOOKING_FOR}</h2>
