@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 
-import './globals.scss';
+import './globals.css';
 
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';

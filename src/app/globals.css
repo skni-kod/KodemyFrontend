@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--font-poppins: 'Poppins', sans-serif; /* Define the Poppins font here */
+}
+
 * {
 	font-family: var(--font-poppins), 'Comic Sans MS', 'Times New Roman', sans-serif;
 }
+
 
 html,
 body,
@@ -17,16 +22,16 @@ body,
 @layer base {
 	@media (prefers-color-scheme: light) {
 		:root {
-			--primary-color: 2 132 199; // sky
-			--primary-hover-color: 2 112 169; // sky darker
-			--text-on-primary-color: 186 230 253; // sky lighter
-			--secondary-color: 48 49 52; // nearly black
-			--text-on-secondary-color: 240 240 240; // nearly white
-			--background-color: 255 255 255; // white
-			--background-hover-color: 240 240 240; // light grey
+			--primary-color: 2 132 199; /*// sky*/
+			--primary-hover-color: 2 112 169; /*// sky darker*/
+			--text-on-primary-color: 186 230 253; /*// sky lighter*/
+			--secondary-color: 48 49 52; /*// nearly black*/
+			--text-on-secondary-color: 240 240 240; /*// nearly white*/
+			--background-color: 255 255 255; /*// white*/
+			--background-hover-color: 240 240 240;
 			--error-color: 176 0 32;
 			--webkit-scrollbar-color: 200 200 200;
-			--grade: 255 188 11; //yellow
+			--grade: 255 188 11; /*//yellow*/
 			--gray: 229 231 235;
 			--grayText: 55 65 81;
 			--green: 22 163 74;
@@ -41,8 +46,8 @@ body,
 			--text-on-primary-color: 15 23 42;
 			--secondary-color: 240 246 252;
 			--text-on-secondary-color: 28 28 28;
-			--background-color: 21 27 35; // prawie czarny
-			--background-hover-color: 61 68 72; // szary
+			--background-color: 21 27 35; /*// prawie czarny*/
+			--background-hover-color: 61 68 72; /*// szary*/
 			--error-color: 255 69 58;
 			--webkit-scrollbar-color: 88 88 88;
 			--grade: 214 154 0;
@@ -59,8 +64,8 @@ body,
 		--text-on-primary-color: 15 23 42;
 		--secondary-color: 240 246 252;
 		--text-on-secondary-color: 28 28 28;
-		--background-color: 21 27 35; // prawie czarny
-		--background-hover-color: 61 68 72; // szary
+		--background-color: 21 27 35; /*// prawie czarny*/
+		--background-hover-color: 61 68 72; /*// szary*/
 		--error-color: 255 69 58;
 		--webkit-scrollbar-color: 88 88 88;
 		--grade: 214 154 0;
