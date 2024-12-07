@@ -2,7 +2,7 @@ name: DEV - KodemyFrontend deploy
 
 on:
   push:
-    branches: [ "dev-deploy" ]
+    branches: [ 'dev-deploy' ]
     paths-ignore:
       - '.gitignore'
       - 'README.md'
@@ -12,8 +12,9 @@ env:
   NETWORK_NAME: ${{ vars.NETWORK_NAME }}
   EXPOSE_PORT: ${{ vars.EXPOSE_PORT }}
   NODE_ENV: ${{ vars.NODE_ENV }}
-  API_URL: ${{ vars.PUBLIC_API_URL }}
+  NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
   ERROR_HOLD_TIME_IN_MS: ${{ vars.ERROR_HOLD_TIME_IN_MS }}
+  NVM_DIR: '/root/.nvm'
 
 jobs:
   prepare:
@@ -29,7 +30,7 @@ jobs:
             "NETWORK_NAME"
             "EXPOSE_PORT"
             "NODE_ENV"
-            "API_URL"
+            "NEXT_PUBLIC_API_URL"
             "ERROR_HOLD_TIME_IN_MS"
           )
           EXIT=0
@@ -55,7 +56,9 @@ jobs:
           envs: WORKING_DIRECTORY,BRANCH
           script: |
             cd $WORKING_DIRECTORY
+            git fetch origin || exit 1
             git checkout $BRANCH || exit 1
+            git reset --hard origin/$BRANCH || exit 1 
             git pull origin $BRANCH || exit 1
   validate:
     name: Validate components
@@ -70,9 +73,11 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           port: ${{ secrets.REMOTE_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: NVM_DIR
           script: |
+            source $NVM_DIR/nvm.sh
             echo "Validate npm"
-            which npm &> /dev/null || exit 1
+            which npm || { echo "npm not found in PATH"; exit 1; }
   build-and-deploy:
     name: Build, Test, Deploy
     runs-on: self-hosted
@@ -87,24 +92,56 @@ jobs:
           port: ${{ secrets.REMOTE_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           envs: |
-            WORKING_DIRECTORY,
+            WORKING_DIRECTORY, NVM_DIR,
             NETWORK_NAME, EXPOSE_PORT,
             NODE_ENV,
-            API_URL, ERROR_HOLD_TIME_IN_MS
+            NEXT_PUBLIC_API_URL, ERROR_HOLD_TIME_IN_MS
           script: |
+            set -e
+            source $NVM_DIR/nvm.sh
+
             cd $WORKING_DIRECTORY
-            npm clean-install
-            
-            echo "Run Prettier Format"
-            npm run format
-            
+            npm install
+
             echo "Run Linter"
             npm run lint
-            
+
             echo "Build"
             npm run build
-            
+
             docker compose up --build -d
+            export FRONTEND_CONTAINERS=$(docker-compose ps -q)
+
+      - name: Validate running
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          port: ${{ secrets.REMOTE_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: |
+            WORKING_DIRECTORY, NVM_DIR,
+            NETWORK_NAME, EXPOSE_PORT,
+            NODE_ENV,
+            NEXT_PUBLIC_API_URL, ERROR_HOLD_TIME_IN_MS
+          script: |
+            cd $WORKING_DIRECTORY
+
+            echo "Waiting 1 minute..."
+            sleep 1m
+
+            for container in $FRONTEND_CONTAINERS; do
+                status=$(docker inspect --format='{{.State.Status}}' $container)
+                if [ "$status" != "running" ]; then
+                    echo "$container not running"
+                    docker compose -f docker-compose.yml -f docker-compose.backup.yml up -d
+                    exit 1
+                fi
+            done
+
+            echo "All containers validated successfully."   
+            docker commit kodemyfrontend-frontend-1 kodemy-frontend:backup
+
       - name: Cleanup
         uses: appleboy/ssh-action@master
         with:
@@ -114,3 +151,49 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             docker system prune -f
+
+  create-tag:
+    name: Create tag
+    runs-on: self-hosted
+    environment: dev
+    needs: [ build-and-deploy ]
+    steps:  
+      - name: Create tag
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          port: ${{ secrets.REMOTE_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: |
+            WORKING_DIRECTORY
+          script: |
+            cd $WORKING_DIRECTORY
+            git tag -l | xargs git tag -d
+            git fetch --tags
+            tags=$(git tag -l)
+            
+            latest_tag=$(echo "$tags" | grep -E '^v?0\.[0-9]+\.[0-9]+(-.*)?$' | sort -V | tail -n 1)
+            
+            if [ -n "$latest_tag" ]; then
+              if [[ "$latest_tag" == v* ]]; then
+                latest_tag="${latest_tag#v}"
+              fi
+              
+              base_version=$(echo "$latest_tag" | sed 's/-.*//')
+              
+              major=$(echo "$base_version" | cut -d'.' -f1)
+              minor=$(echo "$base_version" | cut -d'.' -f2)
+              patch=$(echo "$base_version" | cut -d'.' -f3)
+              
+              new_patch=$((patch + 1))
+              
+              new_tag="v${major}.${minor}.${new_patch}-dev"
+            else
+              new_tag="0.0.1"
+            fi
+        
+            echo "New tag: $new_tag"
+            
+            git tag $new_tag
+            git push origin --tags
