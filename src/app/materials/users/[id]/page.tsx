@@ -15,9 +15,11 @@ export const metadata: Metadata = {
 };
 
 export default async function MaterialsByUserIdPage({
-	params: { id },
+	params,
 	searchParams,
 }: PageQueryProps<SearchParams<string>> & { params: { id: string } }) {
+	const { id } = await params;
+
 	const resolvedSearchParams = await searchParams;
 
 	doIf(!isNumber(id), () => notFound());
