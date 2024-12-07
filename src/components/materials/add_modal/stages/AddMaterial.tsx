@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import TypesService from '@/services/tag/typesService';
-import useFetchState, { Status } from '@/utils/hooks/useFetchState';
-import Loading from '@/components/common/Loading';
-import Error from '@/components/common/Error';
-import Tags from '@/services/tag/types/tags';
-import { Details } from '@/components/materials/add_modal/AddMaterialModal';
+import React, { useEffect, useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
-import { TEXT } from '@/utils/constant';
+
+import Error from '@/components/common/Error';
+import Loading from '@/components/common/Loading';
+import { Details } from '@/components/materials/add_modal/AddMaterialModal';
 import Tag from '@/services/tag/types/tag';
+import Tags from '@/services/tag/types/tags';
+import TypesService from '@/services/tag/typesService';
+import { TEXT } from '@/utils/constant';
+import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 
 const Label = ({ htmlFor, value, starred = false }: { htmlFor: string; value: string; starred?: boolean }) => {
 	return (

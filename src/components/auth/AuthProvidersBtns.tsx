@@ -1,14 +1,15 @@
 'use client';
 import React, { useEffect } from 'react';
-import { AiFillGithub } from 'react-icons/ai';
 import { IconType } from 'react-icons';
+import { AiFillGithub } from 'react-icons/ai';
 import { useRouter } from 'next/navigation';
+
+import Error from '@/components/common/Error';
+import Loading from '@/components/common/Loading';
+import AuthService from '@/services/auth/authService';
+import { ProviderLiResponse } from '@/services/auth/types';
 import { TEXT } from '@/utils/constant';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
-import { ProviderLiResponse } from '@/services/auth/types';
-import AuthService from '@/services/auth/authService';
-import Loading from '@/components/common/Loading';
-import Error from '@/components/common/Error';
 
 const PROVIDERS: { name: string; icoType: IconType; icoColor: string }[] = [
 	{

@@ -1,8 +1,9 @@
 import React from 'react';
-import { TEXT } from '@/utils/constant';
+
 import PhraseField from '@/components/materials/section_by_id_page/page_head/filter_field/PhraseField';
-import ComponentParentProps from '@/utils/types/node/componentParentProps';
+import { TEXT } from '@/utils/constant';
 import { MaterialFields } from '@/utils/types/materialSearchParams';
+import ComponentParentProps from '@/utils/types/node/componentParentProps';
 
 type FiltersBlockProps = ComponentParentProps & {
 	fields: MaterialFields;

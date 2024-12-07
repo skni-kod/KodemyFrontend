@@ -1,15 +1,16 @@
-import Image from 'next/image';
 import React, { useState } from 'react';
-import { UserSearch } from '@/services/user/types';
-import IsActiveStatus from '@/components/users/manage_page/page_content/IsActiveStatus';
+import Image from 'next/image';
+
+import transformRoleName from '../../../../utils/methods/transformRoleName';
+
 import AvatarImage from '@/assets/avatar.png';
+import IsActiveStatus from '@/components/users/manage_page/page_content/IsActiveStatus';
+import { UserSearch } from '@/services/user/types';
 
 type UserBlockProps = {
 	data: UserSearch;
 	children: React.ReactNode;
 };
-
-const mapUserRole = (role: string) => role.substring(role.indexOf('_') + 1);
 
 export default function UserListItem({ data: user, children }: UserBlockProps) {
 	const [isOpenDetails, setIsOpenDetails] = useState<boolean>(false);
@@ -42,8 +43,8 @@ export default function UserListItem({ data: user, children }: UserBlockProps) {
 						<h3 className="text-lg font-semibold text-primary">
 							{user.id}: {user.username}
 						</h3>
-						<div className="pt-1">{mapUserRole(user.role.name)}</div>
-						<div className="flex items-center pt-1">{user.email}</div>
+						<div className="pt-1">{transformRoleName(user.role.name)}</div>
+						<div className="flex items-center pt-1"></div>
 					</div>
 				</div>
 			</div>

@@ -1,8 +1,9 @@
-import Image from 'next/image';
-import clsx from 'clsx';
-import { Section } from '@/services/section/types';
-import { sidebarSections } from '@/components/layout/Sidebar';
 import React from 'react';
+import clsx from 'clsx';
+import Image from 'next/image';
+
+import { sidebarSections } from '@/components/layout/Sidebar';
+import { Section } from '@/services/section/types';
 
 type SectionSelectProps = {
 	sections: Section[];

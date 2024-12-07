@@ -1,10 +1,12 @@
-import { Rating } from 'react-simple-star-rating';
-import Image from 'next/image';
-import DocumentsImage from '@/assets/material/documents.png';
 import React, { useState } from 'react';
 import { LuDot } from 'react-icons/lu';
-import { MaterialSearch } from '@/services/material/types';
+import { Rating } from 'react-simple-star-rating';
+import Image from 'next/image';
+
 import calculateTimeDifference from '../../../../utils/methods/calculateTimeDifference';
+
+import DocumentsImage from '@/assets/material/documents.png';
+import { MaterialSearch } from '@/services/material/types';
 
 type MaterialUserBlockProps = {
 	data: MaterialSearch;

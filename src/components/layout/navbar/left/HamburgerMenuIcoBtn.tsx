@@ -1,7 +1,8 @@
 'use client';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import { useSidebar } from '@/contexts/SidebarContext';
 import React from 'react';
+import { GiHamburgerMenu } from 'react-icons/gi';
+
+import { useSidebar } from '@/contexts/SidebarContext';
 
 export default function HamburgerMenuIcoBtn() {
 	const sidebar = useSidebar();

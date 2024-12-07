@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+
 import { Category } from '@/services/section/types';
 
 type CategorySelectProps = {

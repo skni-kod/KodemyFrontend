@@ -1,34 +1,48 @@
 import React from 'react';
-import { doIf, isNumber, parseFieldsFromURLSearchParam } from '@/utils/methods';
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+
 import SectionByIdPageContent from '@/components/materials/section_by_id_page/SectionByIdPageContent';
-import { MaterialSearchParams, SearchParams } from '@/utils/types';
-import PageQueryProps from '@/utils/types/page/pageQueryProps';
+import { MaterialSortField } from '@/services/material/types';
+import { SortDirection } from '@/utils/api/types';
 import { DEFAULT_PAGE_SIZE, PAGE_TITLE } from '@/utils/constant';
+import { isNumber, parseFieldsFromURLSearchParam } from '@/utils/methods';
+import { MaterialSearchParams, SearchParams } from '@/utils/types';
 
 export const metadata: Metadata = {
 	title: PAGE_TITLE.SECTION_BY_ID,
 };
 
-export default function SectionByIdPage({
-	params,
-	searchParams,
-}: PageQueryProps<SearchParams<string>> & {
-	params: { id: string };
-}) {
-	doIf(!isNumber(params.id), () => notFound());
+interface SectionByIdPageProps {
+	params: Promise<{ id: string }>;
+	searchParams: Promise<SearchParams<string>>;
+}
+
+export default async function SectionByIdPage({ params, searchParams }: SectionByIdPageProps) {
+	const resolvedParams = await params;
+	const resolvedSearchParams = searchParams ? await searchParams : {};
+
+	const sectionId = Number(resolvedParams.id);
+
+	if (!isNumber(sectionId)) {
+		notFound();
+	}
+
 	const materialSearchParams: MaterialSearchParams = {
-		page: searchParams?.page ?? 1,
-		size: searchParams?.size ?? DEFAULT_PAGE_SIZE,
-		sort: searchParams?.sort ?? 0,
-		fields: parseFieldsFromURLSearchParam(searchParams?.fields),
+		page: resolvedSearchParams?.page ?? 1,
+		size: resolvedSearchParams?.size ?? DEFAULT_PAGE_SIZE,
+		sort: resolvedSearchParams?.sort ?? MaterialSortField.ID,
+		sort_direction: SortDirection.ASC,
+		fields: {
+			...parseFieldsFromURLSearchParam(resolvedSearchParams?.fields),
+			sectionId,
+		},
 	};
 
 	return (
 		<SectionByIdPageContent
 			title={metadata.title?.toString() ?? ''}
-			id={Number(params.id)}
+			id={sectionId}
 			searchParams={materialSearchParams}
 		/>
 	);

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Metadata } from 'next';
-import PageQueryProps from '@/utils/types/page/pageQueryProps';
-import { doIf, isNumber } from '@/utils/methods';
 import { notFound } from 'next/navigation';
+
 import UserByIdPageContent from '@/components/users/by_id_page/UserByIdPageContent';
+import { doIf, isNumber } from '@/utils/methods';
+import PageQueryProps from '@/utils/types/page/pageQueryProps';
 
 export const metadata: Metadata = {
 	title: 'Konto użytkownika',

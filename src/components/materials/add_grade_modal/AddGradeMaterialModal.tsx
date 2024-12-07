@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import Modal from '@/components/utils/Modal';
-import AddGrade from '@/components/materials/add_grade_modal/stages/AddGrade';
-import { useSessionContext } from '@/contexts/SessionContext';
 import { FaAngleRight } from 'react-icons/fa6';
-import MaterialService from '@/services/material/materialService';
+
+import AddGrade from '@/components/materials/add_grade_modal/stages/AddGrade';
 import { MaterialButton } from '@/components/utils/Button';
+import Modal from '@/components/utils/Modal';
+import { useSessionContext } from '@/contexts/SessionContext';
 import { useToast } from '@/contexts/ToastContext';
+import MaterialService from '@/services/material/materialService';
 
 enum Stage {
 	GRADE,

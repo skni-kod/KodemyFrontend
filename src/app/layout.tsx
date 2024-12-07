@@ -1,19 +1,20 @@
-import type { Metadata } from 'next';
-import './globals.scss';
 import React from 'react';
-import Header from '@/components/layout/Header';
-import Sidebar from '@/components/layout/Sidebar';
-import Main from '@/components/layout/Main';
-import Footer from '@/components/layout/Footer';
-
+import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
-import { SidebarProvider } from '@/contexts/SidebarContext';
-import { METADATA } from '@/utils/constant';
-import ComponentParentProps from '@/utils/types/node/componentParentProps';
-import SessionProvider from '@/contexts/SessionContext';
-import { ToastProvider } from '@/contexts/ToastContext';
+
+import './globals.css';
+
+import Footer from '@/components/layout/Footer';
+import Header from '@/components/layout/Header';
+import Main from '@/components/layout/Main';
+import Sidebar from '@/components/layout/Sidebar';
 import ToastContainer from '@/components/utils/ToastContainer';
+import SessionProvider from '@/contexts/SessionContext';
+import { SidebarProvider } from '@/contexts/SidebarContext';
+import { ToastProvider } from '@/contexts/ToastContext';
+import { METADATA } from '@/utils/constant';
 import ThemeInitializer from '@/utils/lightMode/ThemeInitializer';
+import ComponentParentProps from '@/utils/types/node/componentParentProps';
 
 const poppins = Poppins({
 	subsets: ['latin'],
@@ -33,7 +34,7 @@ export default function RootLayout({ children }: ComponentParentProps) {
 	return (
 		<html lang="pl" data-color-mode="single" data-theme="light-default">
 			<ToastProvider>
-				<body>
+				<body className="relative bg-bg">
 					<ThemeInitializer>
 						<SessionProvider signUri="/auth">
 							<SidebarProvider>

@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
 import { HttpStatusCode } from 'axios';
+import { NextRequest, NextResponse } from 'next/server';
+
 import AuthService from '@/services/auth/authService';
 
 const ACCESS_TOKEN_COOKIE = 'AUTH_CONTEXT';

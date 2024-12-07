@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+
 import AvatarImage from '@/assets/avatar.png';
-import { useEffect, useRef, useState } from 'react';
 
 export default function UserAvatarBtn({ onClick = () => {} }: { onClick?: () => void }) {
 	const [containerHeight, setContainerHeight] = useState<number | null>(null);

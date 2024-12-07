@@ -1,17 +1,22 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react';
 import { SlMagnifier } from 'react-icons/sl';
+
+import Error from '@/components/common/Error';
+import Loading from '@/components/common/Loading';
 import Modal from '@/components/utils/Modal';
 import SearchBar from '@/components/utils/SearchBar';
-import { DEFAULT_PAGE_SIZE, TEXT } from '@/utils/constant';
 import MaterialService from '@/services/material/materialService';
 import { MaterialSearch, MaterialSortField } from '@/services/material/types';
 import { Pageable, SortDirection } from '@/utils/api/types';
+import { DEFAULT_PAGE_SIZE, TEXT } from '@/utils/constant';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
-import Loading from '@/components/common/Loading';
-import Error from '@/components/common/Error';
 
-export default function SearchBlock() {
+type SearchBlockProps = {
+	rwdSM: boolean;
+};
+
+export default function SearchBlock({ rwdSM }: SearchBlockProps) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const openModal = () => setIsOpen(true);
@@ -49,16 +54,16 @@ export default function SearchBlock() {
 				className="flex h-full w-full cursor-pointer flex-row items-center rounded-md border px-4 py-2 text-lg font-semibold text-secondary"
 				onClick={openModal}
 			>
-				<div className="aspect-square h-full">
+				<div className="flex aspect-square h-full flex-row items-center justify-center">
 					<SlMagnifier className="h-full" />
 				</div>
-				<span className="ml-2">{TEXT.LOOKING_FOR + '...'}</span>
+				{rwdSM && <span className="ml-2">{TEXT.LOOKING_FOR + '...'}</span>}
 			</div>
 
 			{isOpen && (
 				<Modal
 					onClose={closeModal}
-					className="size-[90%] overflow-y-auto border-2 border-primary bg-secondary text-textOnSecondary sm:size-2/3"
+					className="size-[90%] overflow-y-auto border-2 border-secondary bg-bg text-secondary sm:size-2/3"
 				>
 					<div className="flex flex-col gap-4">
 						<h2 className="text-lg font-semibold">{TEXT.WHAT_LOOKING_FOR}</h2>
