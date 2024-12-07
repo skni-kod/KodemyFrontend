@@ -1,6 +1,6 @@
+import { JwtInfoResponse, ProviderLiResponse } from '@/services/auth/types';
 import kodemyApi from '@/utils/api';
 import { ApiService } from '@/utils/api/types';
-import { JwtInfoResponse, ProviderLiResponse } from '@/services/auth/types';
 import { InternalServerErrorApiError } from '@/utils/api/types/apiError';
 
 export default class AuthService extends ApiService {

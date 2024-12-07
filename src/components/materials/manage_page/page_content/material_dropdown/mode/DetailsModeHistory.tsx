@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import MaterialService from '@/services/material/materialService';
-import Loading from '@/components/common/Loading';
+
 import Error from '@/components/common/Error';
-import useFetchState, { Status } from '@/utils/hooks/useFetchState';
+import Loading from '@/components/common/Loading';
+import MaterialService from '@/services/material/materialService';
 import { Material } from '@/services/material/types';
+import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 
 export default function DetailsModeHistory({ id }: { id: number }) {
 	const { data: material, status, fetch } = useFetchState<Material>();

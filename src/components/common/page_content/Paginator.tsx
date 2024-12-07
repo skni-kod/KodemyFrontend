@@ -1,7 +1,8 @@
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
-import { PaginatorBtn } from '@/components/common/page_content/PaginatorBtn';
 import { useRouter, useSearchParams } from 'next/navigation';
+
+import { PaginatorBtn } from '@/components/common/page_content/PaginatorBtn';
 
 type PaginatorProps = {
 	page: number;

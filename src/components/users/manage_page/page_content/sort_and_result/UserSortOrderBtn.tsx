@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa6';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { SortDirection } from '@/utils/api/types';
-import { UserSortField } from '@/services/user/types';
 import clsx from 'clsx';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+import { UserSortField } from '@/services/user/types';
+import { SortDirection } from '@/utils/api/types';
 
 type SortOrderBtnProps = {
 	className?: string;

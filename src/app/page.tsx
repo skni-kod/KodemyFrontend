@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+
 import HomePageContent from '@/components/home/HomePageContent';
 import { PAGE_TITLE } from '@/utils/constant';
 

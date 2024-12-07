@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import Modal from '@/components/utils/Modal';
-import SectionSelect from '@/components/materials/add_modal/stages/SectionSelect';
-import Button from '@/components/utils/Button';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+
+import Error from '@/components/common/Error';
+import Loading from '@/components/common/Loading';
+import StageDots from '@/components/materials/add_modal/StageDots';
 import AddMaterial from '@/components/materials/add_modal/stages/AddMaterial';
 import CategorySelect from '@/components/materials/add_modal/stages/CategorySelect';
-import StageDots from '@/components/materials/add_modal/StageDots';
-import useFetchState, { Status } from '@/utils/hooks/useFetchState';
-import { Section } from '@/services/section/types';
-import SectionService from '@/services/section/sectionService';
-import Loading from '@/components/common/Loading';
-import Error from '@/components/common/Error';
-import MaterialService from '@/services/material/materialService';
+import SectionSelect from '@/components/materials/add_modal/stages/SectionSelect';
+import Button from '@/components/utils/Button';
+import Modal from '@/components/utils/Modal';
 import { useSessionContext } from '@/contexts/SessionContext';
 import { useToast } from '@/contexts/ToastContext';
+import MaterialService from '@/services/material/materialService';
+import SectionService from '@/services/section/sectionService';
+import { Section } from '@/services/section/types';
+import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 
 enum Stage {
 	SECTION,

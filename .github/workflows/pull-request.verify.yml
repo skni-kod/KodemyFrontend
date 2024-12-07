@@ -1,0 +1,29 @@
+name: Pull Request - verify
+
+on:
+  pull_request:
+    branches: ['main', 'dev']
+
+jobs:
+  verify:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: |
+          npm clean-install
+
+      - name: Run Prettier Format
+        run: |
+          npm run format || exit 1
+
+      - name: Run Linter
+        run: |
+          npm run lint

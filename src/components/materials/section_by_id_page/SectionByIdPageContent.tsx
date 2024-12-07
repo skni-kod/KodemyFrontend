@@ -1,17 +1,18 @@
 'use client';
 import React, { useCallback, useEffect } from 'react';
-import { MaterialSearchParams } from '@/utils/types';
-import PageContent from '@/components/layout/PageContent';
-import SectionService from '@/services/section/sectionService';
-import Loading from '@/components/common/Loading';
+
 import Error from '@/components/common/Error';
+import Loading from '@/components/common/Loading';
+import PageContent from '@/components/layout/PageContent';
+import MaterialResultsDisplay from '@/components/materials/common/page_content/MaterialResultsDisplay';
+import FiltersBlock from '@/components/materials/common/page_head/FiltersBlock';
+import DetailsDropDown from '@/components/materials/section_by_id_page/page_content/material_dropdown/DetailsDropDown';
+import CategoryBubbleBtns from '@/components/materials/section_by_id_page/page_head/CategoryBubbleBtns';
+import SectionService from '@/services/section/sectionService';
 import { Section } from '@/services/section/types';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
-import MaterialResultsDisplay from '@/components/materials/common/page_content/MaterialResultsDisplay';
-import DetailsDropDown from '@/components/materials/section_by_id_page/page_content/material_dropdown/DetailsDropDown';
+import { MaterialSearchParams } from '@/utils/types';
 import MetadataProps from '@/utils/types/page/metadataProps';
-import FiltersBlock from '@/components/materials/common/page_head/FiltersBlock';
-import CategoryBubbleBtns from '@/components/materials/section_by_id_page/page_head/CategoryBubbleBtns';
 
 type SectionByIdPageContentProps = MetadataProps & {
 	id: number;
@@ -40,7 +41,7 @@ export default function SectionByIdPageContent({ title, id: sectionId, searchPar
 						activeSectionId={sectionId}
 						activesCategoryIds={searchParams.fields?.categoryIds}
 					/>
-					<FiltersBlock fields={searchParams.fields ?? {}} />
+					<FiltersBlock searchParams={searchParams} />
 					<MaterialResultsDisplay searchParams={searchParams} DetailsDropDownComponent={DetailsDropDown} />
 				</>
 			)}

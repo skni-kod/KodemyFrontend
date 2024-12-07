@@ -1,6 +1,6 @@
 type PageQueryProps<T> = {
-	params: {};
-	searchParams?: T;
+	params: Promise<{ [key: string]: any }>;
+	searchParams?: Promise<T>;
 };
 
 export default PageQueryProps;

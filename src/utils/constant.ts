@@ -1,6 +1,6 @@
 import { MaterialSortField } from '@/services/material/types';
-import { SortDirection } from '@/utils/api/types';
 import { UserSortField } from '@/services/user/types';
+import { SortDirection } from '@/utils/api/types';
 
 export const METADATA = {
 	ASSETS: [],

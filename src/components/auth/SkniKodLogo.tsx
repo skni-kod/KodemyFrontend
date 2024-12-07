@@ -1,6 +1,7 @@
 'use client';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
+
 import SkniKod from '@/assets/logo/skni-kod/full_logo.png';
 
 interface SkniKodLogoProps {

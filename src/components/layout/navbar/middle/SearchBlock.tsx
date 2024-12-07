@@ -1,15 +1,16 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react';
 import { SlMagnifier } from 'react-icons/sl';
+
+import Error from '@/components/common/Error';
+import Loading from '@/components/common/Loading';
 import Modal from '@/components/utils/Modal';
 import SearchBar from '@/components/utils/SearchBar';
-import { DEFAULT_PAGE_SIZE, TEXT } from '@/utils/constant';
 import MaterialService from '@/services/material/materialService';
 import { MaterialSearch, MaterialSortField } from '@/services/material/types';
 import { Pageable, SortDirection } from '@/utils/api/types';
+import { DEFAULT_PAGE_SIZE, TEXT } from '@/utils/constant';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
-import Loading from '@/components/common/Loading';
-import Error from '@/components/common/Error';
 
 type SearchBlockProps = {
 	rwdSM: boolean;

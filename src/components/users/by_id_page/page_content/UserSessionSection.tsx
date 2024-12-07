@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+
+import UserCard from '@/components/users/by_id_page/page_content/UserCard';
+import UserCardBody from '@/components/users/by_id_page/page_content/UserCardBody';
 import UserCardTitle from '@/components/users/by_id_page/page_content/UserCardTitle';
 import { User } from '@/services/user/types';
-import UserCardBody from '@/components/users/by_id_page/page_content/UserCardBody';
-import UserCard from '@/components/users/by_id_page/page_content/UserCard';
 import { TEXT } from '@/utils/constant';
 
 interface UserData {

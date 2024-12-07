@@ -1,5 +1,6 @@
 'use client';
-import React, { useState, Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
+
 import PageContent from '@/components/layout/PageContent';
 import CategoryBubbleBtn from '@/components/materials/section_by_id_page/page_head/CategoryBubbleBtn';
 import AppearanceSettingsSubPage from '@/components/settings/appearance/AppearanceSettingsSubPage';

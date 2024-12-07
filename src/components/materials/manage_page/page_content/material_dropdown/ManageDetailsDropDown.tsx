@@ -1,10 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import DetailsModePreview from '@/components/materials/section_by_id_page/page_content/material_dropdown/mode/DetailsModePreview';
-import DetailsModeGrades from '@/components/materials/section_by_id_page/page_content/material_dropdown/mode/DetailsModeGrades';
-import DetailsModeManage from '@/components/materials/manage_page/page_content/material_dropdown/mode/DetailsModeManage';
+
 import DetailsModeHistory from '@/components/materials/manage_page/page_content/material_dropdown/mode/DetailsModeHistory';
+import DetailsModeManage from '@/components/materials/manage_page/page_content/material_dropdown/mode/DetailsModeManage';
+import DetailsModeGrades from '@/components/materials/section_by_id_page/page_content/material_dropdown/mode/DetailsModeGrades';
+import DetailsModePreview from '@/components/materials/section_by_id_page/page_content/material_dropdown/mode/DetailsModePreview';
 
 enum DetailsMode {
 	OVERVIEW,

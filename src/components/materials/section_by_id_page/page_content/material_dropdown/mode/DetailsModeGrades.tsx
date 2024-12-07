@@ -1,13 +1,14 @@
-import { Rating } from 'react-simple-star-rating';
 import React, { useEffect, useState } from 'react';
-import MaterialService from '@/services/material/materialService';
-import Loading from '@/components/common/Loading';
-import Error from '@/components/common/Error';
-import useFetchState, { Status } from '@/utils/hooks/useFetchState';
-import { Material } from '@/services/material/types';
 import { FaAngleRight } from 'react-icons/fa6';
+import { Rating } from 'react-simple-star-rating';
+
+import Error from '@/components/common/Error';
+import Loading from '@/components/common/Loading';
 import AddGradeMaterialModal from '@/components/materials/add_grade_modal/AddGradeMaterialModal';
 import { MaterialButton } from '@/components/utils/Button';
+import MaterialService from '@/services/material/materialService';
+import { Material } from '@/services/material/types';
+import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 
 function between(value: number, min: number, max: number): boolean {
 	return value > min && value <= max;

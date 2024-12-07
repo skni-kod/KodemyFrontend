@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Container from '@/components/layout/Container';
 
 export default function Error({ info, container = false }: { info?: string; container?: boolean }) {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { IconType } from 'react-icons';
 import {
 	IoDocumentOutline,
 	IoFileTrayOutline,
@@ -7,7 +8,7 @@ import {
 	IoSettingsOutline,
 } from 'react-icons/io5';
 import Link from 'next/link';
-import { IconType } from 'react-icons';
+
 import { useSessionContext } from '@/contexts/SessionContext';
 import { USER_NAV_MENU } from '@/utils/constant';
 

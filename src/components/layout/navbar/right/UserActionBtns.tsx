@@ -1,10 +1,11 @@
 'use client';
 import React, { useState } from 'react';
-import { SlBell, SlPlus, SlUser } from 'react-icons/sl';
-import UserDropDownMenu from '@/components/layout/navbar/right/UserDropDownMenu';
-import ComponentParentProps from '@/utils/types/node/componentParentProps';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa6';
+import { SlBell, SlPlus, SlUser } from 'react-icons/sl';
+
+import UserDropDownMenu from '@/components/layout/navbar/right/UserDropDownMenu';
 import AddMaterialModal from '@/components/materials/add_modal/AddMaterialModal';
+import ComponentParentProps from '@/utils/types/node/componentParentProps';
 
 enum Menu {
 	OFF,

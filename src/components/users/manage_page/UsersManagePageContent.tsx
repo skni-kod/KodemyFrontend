@@ -1,10 +1,11 @@
 import React from 'react';
-import MetadataProps from '@/utils/types/page/metadataProps';
+
 import PageContent from '@/components/layout/PageContent';
+import DetailsDropDown from '@/components/users/manage_page/page_content/user_dropdown/DetailsDropDown';
 import UserFiltersBlock from '@/components/users/manage_page/page_head/UserFiltersBlock';
 import UserResultsDisplay from '@/components/users/manage_page/UserResultsDisplay';
 import { UserSearchParams } from '@/utils/types';
-import DetailsDropDown from '@/components/users/manage_page/page_content/user_dropdown/DetailsDropDown';
+import MetadataProps from '@/utils/types/page/metadataProps';
 
 type UsersManagePageContentProps = MetadataProps & {
 	searchParams: UserSearchParams;

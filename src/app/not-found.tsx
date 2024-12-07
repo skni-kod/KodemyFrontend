@@ -1,5 +1,6 @@
-import NotFoundPageContent from '@/components/not-found/NoFoundContent';
 import { Metadata } from 'next';
+
+import NotFoundPageContent from '@/components/not-found/NoFoundContent';
 import { PAGE_TITLE } from '@/utils/constant';
 
 export const metadata: Metadata = {

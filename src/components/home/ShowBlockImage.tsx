@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+
 import Background from '@/assets/home/background.png';
 
 export default function ShowBlockImage() {

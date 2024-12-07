@@ -1,6 +1,7 @@
 import React from 'react';
-import { UserSearch } from '@/services/user/types';
+
 import UserListItem from '@/components/users/manage_page/page_content/UserListItem';
+import { UserSearch } from '@/services/user/types';
 import { TEXT } from '@/utils/constant';
 
 export default function UserListBlock({
