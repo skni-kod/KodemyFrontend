@@ -1,10 +1,9 @@
-/** @type {import('next').NextConfig} */
+import type { NextConfig } from 'next';
 
-const nextConfig = {
+const nextConfig: NextConfig = {
 	eslint: {
 		dirs: ['src'],
 	},
-	distDir: 'build',
 	rewrites: async () => [
 		{
 			source: '/api/:path*',
