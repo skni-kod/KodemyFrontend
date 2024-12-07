@@ -5,17 +5,21 @@ import { MaterialSearchParams, SearchParams } from '@/utils/types';
 import PageQueryProps from '@/utils/types/page/pageQueryProps';
 import { DEFAULT_MATERIAL_PAGE_SORT, DEFAULT_PAGE_SIZE, PAGE_TITLE } from '@/utils/constant';
 import { parseFieldsFromURLSearchParam } from '@/utils/methods';
+import { SortDirection } from '@/utils/api/types';
 
 export const metadata: Metadata = {
 	title: PAGE_TITLE.MATERIALS_MANAGE,
 };
 
-export default function MaterialsManagePage({ searchParams }: PageQueryProps<SearchParams<string>>) {
+export default async function MaterialsManagePage({ searchParams }: PageQueryProps<SearchParams<string>>) {
+	const resolvedSearchParams = await searchParams;
+
 	const materialSearchParams: MaterialSearchParams = {
-		page: searchParams?.page ?? 1,
-		size: searchParams?.size ?? DEFAULT_PAGE_SIZE,
-		sort: searchParams?.sort ?? DEFAULT_MATERIAL_PAGE_SORT,
-		fields: parseFieldsFromURLSearchParam(searchParams?.fields),
+		page: resolvedSearchParams?.page ?? 1,
+		size: resolvedSearchParams?.size ?? DEFAULT_PAGE_SIZE,
+		sort: resolvedSearchParams?.sort ?? DEFAULT_MATERIAL_PAGE_SORT,
+		sort_direction: SortDirection.ASC,
+		fields: parseFieldsFromURLSearchParam(resolvedSearchParams?.fields),
 	};
 
 	return <MaterialManagePageContent title={metadata.title?.toString() ?? ''} searchParams={materialSearchParams} />;
