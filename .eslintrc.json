@@ -1,6 +1,16 @@
 {
-	"extends": ["next/core-web-vitals", "plugin:prettier/recommended", "next", "prettier"],
-	"plugins": ["prettier", "tailwindcss"],
+	"extends": [
+		"next/core-web-vitals",
+		"plugin:prettier/recommended",
+		"next",
+		"prettier"
+	],
+	"plugins": [
+		"prettier",
+		"tailwindcss",
+		"simple-import-sort",
+		"unused-imports"
+	],
 	"rules": {
 		"prettier/prettier": [
 			"error",
@@ -37,6 +47,27 @@
 			{
 				"selector": "Literal[value=/\\b(bg|text|border|from|to)-(red|blue|green|yellow|gray|purple|pink|indigo|cyan|teal|emerald|amber|lime)-\\d{3,}/]",
 				"message": "Nie używaj wbudowanych kolorów Tailwind. Użyj zdefiniowanych w tailwind.config.js."
+			}
+		],
+		"simple-import-sort/imports": [
+			"error",
+			{
+				"groups": [
+					["^react", "^@?\\w"],
+					["^\\u0000"],
+					["^@?\\w"],
+					["^\\."]
+				]
+			}
+		],
+		"unused-imports/no-unused-imports": "error",
+		"unused-imports/no-unused-vars": [
+			"warn",
+			{
+				"vars": "all",
+				"varsIgnorePattern": "^_",
+				"args": "after-used",
+				"ignoreRestSiblings": true
 			}
 		]
 	}

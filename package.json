@@ -20,6 +20,8 @@
     "axios": "^1.7.4",
     "clsx": "^2.1.1",
     "cookies-next": "^5.0.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-unused-imports": "^4.1.4",
     "jwt-decode": "^4.0.0",
     "next": "15.0.4",
     "react": "19.0.0",
