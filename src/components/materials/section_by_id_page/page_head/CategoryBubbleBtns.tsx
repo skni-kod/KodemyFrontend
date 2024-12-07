@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Section } from '@/services/section/types';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { buildFieldsForURLSearchParam, parseFieldsFromURLSearchParam } from '@/utils/methods';
+
 import CategoryBubbleBtn from '@/components/materials/section_by_id_page/page_head/CategoryBubbleBtn';
+import { Section } from '@/services/section/types';
+import { buildFieldsForURLSearchParam, parseFieldsFromURLSearchParam } from '@/utils/methods';
 
 type CategoryBubbleBtnsProps = {
 	sections: Section[];

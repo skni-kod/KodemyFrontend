@@ -1,13 +1,14 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
-import useFetchState, { Status } from '@/utils/hooks/useFetchState';
-import { Section } from '@/services/section/types';
-import SectionService from '@/services/section/sectionService';
-import SectionBubbleBtn from '@/components/materials/manage_page/page_head/SectionBubbleBtn';
-import Loading from '@/components/common/Loading';
-import Error from '@/components/common/Error';
-import CategoryBubbleBtns from '@/components/materials/section_by_id_page/page_head/CategoryBubbleBtns';
 import { MdArrowBackIos } from 'react-icons/md';
+
+import Error from '@/components/common/Error';
+import Loading from '@/components/common/Loading';
+import SectionBubbleBtn from '@/components/materials/manage_page/page_head/SectionBubbleBtn';
+import CategoryBubbleBtns from '@/components/materials/section_by_id_page/page_head/CategoryBubbleBtns';
+import SectionService from '@/services/section/sectionService';
+import { Section } from '@/services/section/types';
+import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 
 export default function SectionBubbleBtns() {
 	const { data: sections, status, fetch: fetchSections } = useFetchState<Section[]>();

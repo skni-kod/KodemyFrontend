@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+
 import { defaultTheme, themes } from '@/utils/lightMode/themes';
 
 export default function ThemeInitializer({ children }: { children: React.ReactNode }) {

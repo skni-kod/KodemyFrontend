@@ -1,9 +1,9 @@
-import { ApiService, Pageable, SearchRequestParams, SortDirection } from '@/utils/api/types';
-import kodemyApi from '@/utils/api';
-import { InternalServerErrorApiError } from '@/utils/api/types/apiError';
-import { User, UserFiltersParam, UserSearch, UserSortField } from '@/services/user/types';
 import { Session } from '@/contexts/SessionContext';
+import { User, UserFiltersParam, UserSearch, UserSortField } from '@/services/user/types';
 import UserAuthorized from '@/services/user/types/userAuthorized';
+import kodemyApi from '@/utils/api';
+import { ApiService, Pageable, SearchRequestParams, SortDirection } from '@/utils/api/types';
+import { InternalServerErrorApiError } from '@/utils/api/types/apiError';
 
 export default class UserService extends ApiService {
 	public static async getUsers(

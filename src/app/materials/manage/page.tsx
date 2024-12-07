@@ -1,11 +1,12 @@
 import React from 'react';
 import { Metadata } from 'next';
+
 import MaterialManagePageContent from '@/components/materials/manage_page/MaterialManagePageContent';
-import { MaterialSearchParams, SearchParams } from '@/utils/types';
-import PageQueryProps from '@/utils/types/page/pageQueryProps';
+import { SortDirection } from '@/utils/api/types';
 import { DEFAULT_MATERIAL_PAGE_SORT, DEFAULT_PAGE_SIZE, PAGE_TITLE } from '@/utils/constant';
 import { parseFieldsFromURLSearchParam } from '@/utils/methods';
-import { SortDirection } from '@/utils/api/types';
+import { MaterialSearchParams, SearchParams } from '@/utils/types';
+import PageQueryProps from '@/utils/types/page/pageQueryProps';
 
 export const metadata: Metadata = {
 	title: PAGE_TITLE.MATERIALS_MANAGE,

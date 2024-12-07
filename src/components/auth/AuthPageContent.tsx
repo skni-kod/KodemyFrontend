@@ -1,8 +1,9 @@
 import React from 'react';
-import PageContent from '@/components/layout/PageContent';
-import KodemyLogo from '@/components/layout/navbar/left/KodemyLogo';
-import SkniKodLogo from '@/components/auth/SkniKodLogo';
+
 import AuthProvidersBtns from '@/components/auth/AuthProvidersBtns';
+import SkniKodLogo from '@/components/auth/SkniKodLogo';
+import KodemyLogo from '@/components/layout/navbar/left/KodemyLogo';
+import PageContent from '@/components/layout/PageContent';
 import { TEXT } from '@/utils/constant';
 
 export default function AuthPageContent() {

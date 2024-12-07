@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { ApiError, ApiErrorData } from '@/utils/api/types';
 
 const headers = {

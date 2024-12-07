@@ -1,20 +1,21 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Image from 'next/image';
+import Link from 'next/link';
+
 import codingLanguage from '@/assets/section/dark/coding-language.png';
-import codingLanguageWhite from '@/assets/section/white/coding-language.png';
 import consoleI from '@/assets/section/dark/console.png';
-import consoleIWhite from '@/assets/section/white/console.png';
 import internet from '@/assets/section/dark/internet.png';
-import internetWhite from '@/assets/section/white/internet.png';
 import moreInfo from '@/assets/section/dark/more-information.png';
-import moreInfoWhite from '@/assets/section/white/more-information.png';
 import retroGame from '@/assets/section/dark/retro-game.png';
+import codingLanguageWhite from '@/assets/section/white/coding-language.png';
+import consoleIWhite from '@/assets/section/white/console.png';
+import internetWhite from '@/assets/section/white/internet.png';
+import moreInfoWhite from '@/assets/section/white/more-information.png';
 import retroGameWhite from '@/assets/section/white/retro-game.png';
 import { useSidebar } from '@/contexts/SidebarContext';
 import { IconType } from '@/utils/lightMode/themes';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 type SidebarSection = {
 	id: number;

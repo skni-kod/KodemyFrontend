@@ -1,7 +1,8 @@
 import React from 'react';
+
 import UserCard from '@/components/users/by_id_page/page_content/UserCard';
-import UserCardTitle from '@/components/users/by_id_page/page_content/UserCardTitle';
 import UserCardBody from '@/components/users/by_id_page/page_content/UserCardBody';
+import UserCardTitle from '@/components/users/by_id_page/page_content/UserCardTitle';
 import { User } from '@/services/user/types';
 import { TEXT } from '@/utils/constant';
 

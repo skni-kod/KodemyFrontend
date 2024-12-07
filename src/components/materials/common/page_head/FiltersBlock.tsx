@@ -1,10 +1,11 @@
 import React from 'react';
-import { TEXT } from '@/utils/constant';
-import PhraseField from '@/components/materials/section_by_id_page/page_head/filter_field/PhraseField';
+
 import GradeField from '@/components/materials/section_by_id_page/page_head/filter_field/GradeField';
-import ComponentParentProps from '@/utils/types/node/componentParentProps';
 import MaterialSort from '@/components/materials/section_by_id_page/page_head/filter_field/MaterialSort';
+import PhraseField from '@/components/materials/section_by_id_page/page_head/filter_field/PhraseField';
+import { TEXT } from '@/utils/constant';
 import { MaterialSearchParams } from '@/utils/types';
+import ComponentParentProps from '@/utils/types/node/componentParentProps';
 
 type FiltersBlockProps = ComponentParentProps & {
 	searchParams: MaterialSearchParams;

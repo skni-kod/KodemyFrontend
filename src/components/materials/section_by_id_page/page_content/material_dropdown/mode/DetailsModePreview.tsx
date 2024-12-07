@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import Link from 'next/link';
 import { FaAngleRight } from 'react-icons/fa6';
-import { Material } from '@/services/material/types';
-import MaterialService from '@/services/material/materialService';
-import Loading from '@/components/common/Loading';
+import Link from 'next/link';
+
 import Error from '@/components/common/Error';
-import useFetchState, { Status } from '@/utils/hooks/useFetchState';
+import Loading from '@/components/common/Loading';
 import { MaterialButton } from '@/components/utils/Button';
+import MaterialService from '@/services/material/materialService';
+import { Material } from '@/services/material/types';
+import useFetchState, { Status } from '@/utils/hooks/useFetchState';
 
 export default function DetailsModePreview({ id }: { id: number }) {
 	const { data: material, status, fetch: fetchMaterial } = useFetchState<Material>();

@@ -1,8 +1,9 @@
 'use client';
-import { TEXT } from '@/utils/constant';
-import Link from 'next/link';
 import React, { useState } from 'react';
 import { SlArrowRightCircle } from 'react-icons/sl';
+import Link from 'next/link';
+
+import { TEXT } from '@/utils/constant';
 
 export default function SearchBar({
 	data,

@@ -1,6 +1,6 @@
 'use client';
+import React, { useEffect, useState } from 'react';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa6';
-import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 type GradeFieldProps = {

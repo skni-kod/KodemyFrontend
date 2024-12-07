@@ -1,8 +1,9 @@
 'use client';
 import React, { useEffect } from 'react';
-import PageContent from '@/components/layout/PageContent';
-import KodemyLogo from '@/components/layout/navbar/left/KodemyLogo';
+
 import SkniKodLogo from '@/components/auth/SkniKodLogo';
+import KodemyLogo from '@/components/layout/navbar/left/KodemyLogo';
+import PageContent from '@/components/layout/PageContent';
 import { useSessionContext } from '@/contexts/SessionContext';
 import { useToast } from '@/contexts/ToastContext';
 

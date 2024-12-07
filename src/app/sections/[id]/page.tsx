@@ -1,12 +1,13 @@
 import React from 'react';
-import { isNumber, parseFieldsFromURLSearchParam } from '@/utils/methods';
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+
 import SectionByIdPageContent from '@/components/materials/section_by_id_page/SectionByIdPageContent';
-import { MaterialSearchParams, SearchParams } from '@/utils/types';
-import { DEFAULT_PAGE_SIZE, PAGE_TITLE } from '@/utils/constant';
 import { MaterialSortField } from '@/services/material/types';
 import { SortDirection } from '@/utils/api/types';
+import { DEFAULT_PAGE_SIZE, PAGE_TITLE } from '@/utils/constant';
+import { isNumber, parseFieldsFromURLSearchParam } from '@/utils/methods';
+import { MaterialSearchParams, SearchParams } from '@/utils/types';
 
 export const metadata: Metadata = {
 	title: PAGE_TITLE.SECTION_BY_ID,

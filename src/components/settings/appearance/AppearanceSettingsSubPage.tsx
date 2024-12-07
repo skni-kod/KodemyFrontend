@@ -1,8 +1,9 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { defaultTheme, SystemColorMode, ThemeOption, themes } from '@/utils/lightMode/themes';
+
 import Loading from '@/components/common/Loading';
+import { defaultTheme, SystemColorMode, ThemeOption, themes } from '@/utils/lightMode/themes';
 
 export default function AppearanceSettingsSubPage() {
 	const [theme, setTheme] = useState(defaultTheme);

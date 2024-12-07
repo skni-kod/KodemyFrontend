@@ -1,25 +1,19 @@
 'use client';
 import React, { useEffect } from 'react';
-import SortOrderBtn, {
-	MAT_ORDER_OPTIONS,
-} from '@/components/materials/common/page_content/sort_and_result/SortOrderBtn';
-import ResultCount from '@/components/common/page_content/sort_and_result/ResultCount';
-import MaterialListBlock from '@/components/materials/section_by_id_page/page_content/MaterialListBlock';
-import Paginator from '@/components/common/page_content/Paginator';
-import { MaterialSearchParams, UserSearchParams } from '@/utils/types';
-import MaterialService from '@/services/material/materialService';
-import { Pageable } from '@/utils/api/types';
-import { MaterialSearch } from '@/services/material/types';
-import Loading from '@/components/common/Loading';
+
 import Error from '@/components/common/Error';
-import useFetchState, { Status } from '@/utils/hooks/useFetchState';
-import { DEFAULT_PAGE_SIZE, DEFAULT_MATERIAL_PAGE_SORT, DEFAULT_PAGE_SORT_DIRECTION } from '@/utils/constant';
-import UserService from '@/services/user/userService';
+import Loading from '@/components/common/Loading';
+import Paginator from '@/components/common/page_content/Paginator';
+import ResultCount from '@/components/common/page_content/sort_and_result/ResultCount';
 import UserSortOrderBtn, {
 	USER_ORDER_OPTIONS,
 } from '@/components/users/manage_page/page_content/sort_and_result/UserSortOrderBtn';
 import UserListBlock from '@/components/users/manage_page/page_content/UserListBlock';
 import UserSearch from '@/services/user/types/userSearch';
+import UserService from '@/services/user/userService';
+import { Pageable } from '@/utils/api/types';
+import useFetchState, { Status } from '@/utils/hooks/useFetchState';
+import { UserSearchParams } from '@/utils/types';
 
 interface UserResultsDisplayProps {
 	searchParams: UserSearchParams;

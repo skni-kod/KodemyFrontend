@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { RxTriangleDown, RxTriangleUp } from 'react-icons/rx';
+import Image from 'next/image';
+
 import AvatarImage from '@/assets/avatar.png';
+import UserCard from '@/components/users/by_id_page/page_content/UserCard';
+import UserCardBody from '@/components/users/by_id_page/page_content/UserCardBody';
 import UserCardTitle from '@/components/users/by_id_page/page_content/UserCardTitle';
 import { User } from '@/services/user/types';
-import { calculateTimeDifference, transformRoleName } from '@/utils/methods';
-import UserCardBody from '@/components/users/by_id_page/page_content/UserCardBody';
-import UserCard from '@/components/users/by_id_page/page_content/UserCard';
 import { TEXT } from '@/utils/constant';
-import Image from 'next/image';
+import { calculateTimeDifference, transformRoleName } from '@/utils/methods';
 
 interface UserDetailsSectionProps {
 	user: User;

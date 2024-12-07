@@ -1,9 +1,11 @@
-import Image from 'next/image';
 import React, { useState } from 'react';
-import { UserSearch } from '@/services/user/types';
-import IsActiveStatus from '@/components/users/manage_page/page_content/IsActiveStatus';
-import AvatarImage from '@/assets/avatar.png';
+import Image from 'next/image';
+
 import transformRoleName from '../../../../utils/methods/transformRoleName';
+
+import AvatarImage from '@/assets/avatar.png';
+import IsActiveStatus from '@/components/users/manage_page/page_content/IsActiveStatus';
+import { UserSearch } from '@/services/user/types';
 
 type UserBlockProps = {
 	data: UserSearch;

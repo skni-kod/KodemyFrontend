@@ -1,7 +1,8 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import MinGradeRangeField from './MinGradeRangeField';
+import React, { useEffect, useState } from 'react';
+
 import MaxGradeRangeField from './MaxGradeRangeField';
+import MinGradeRangeField from './MinGradeRangeField';
 
 type GradeRangeFieldProps = {
 	className: string;

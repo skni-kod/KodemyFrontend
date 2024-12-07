@@ -1,10 +1,10 @@
 'use client';
-import { FaArrowRight } from 'react-icons/fa6';
 import { useRef, useState } from 'react';
+import { FaArrowRight } from 'react-icons/fa6';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { buildFieldsForURLSearchParam, isHasText, parseFieldsFromURLSearchParam } from '@/utils/methods';
-import { MaterialFields } from '@/utils/types/materialSearchParams';
+
 import { TEXT } from '@/utils/constant';
+import { buildFieldsForURLSearchParam, isHasText, parseFieldsFromURLSearchParam } from '@/utils/methods';
 
 type PhraseFieldProps = {
 	className: string;

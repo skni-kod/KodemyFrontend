@@ -1,6 +1,7 @@
 import React from 'react';
-import ComponentParentProps from '@/utils/types/node/componentParentProps';
+
 import Container from '@/components/layout/Container';
+import ComponentParentProps from '@/utils/types/node/componentParentProps';
 
 interface PageProps extends ComponentParentProps {
 	headerValue?: string;

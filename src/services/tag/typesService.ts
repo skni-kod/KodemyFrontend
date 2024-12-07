@@ -1,7 +1,7 @@
-import { ApiService } from '@/utils/api/types';
-import kodemyApi from '@/utils/api';
-import { InternalServerErrorApiError } from '@/utils/api/types/apiError';
 import Tags from '@/services/tag/types/tags';
+import kodemyApi from '@/utils/api';
+import { ApiService } from '@/utils/api/types';
+import { InternalServerErrorApiError } from '@/utils/api/types/apiError';
 
 export default class TypesService extends ApiService {
 	public static async getTags(): Promise<Tags> {

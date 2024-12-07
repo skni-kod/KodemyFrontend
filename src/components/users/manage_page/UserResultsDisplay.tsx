@@ -1,19 +1,20 @@
 'use client';
 import React, { useEffect } from 'react';
-import ResultCount from '@/components/common/page_content/sort_and_result/ResultCount';
-import Paginator from '@/components/common/page_content/Paginator';
-import { UserSearchParams } from '@/utils/types';
-import { Pageable } from '@/utils/api/types';
-import Loading from '@/components/common/Loading';
+
 import Error from '@/components/common/Error';
-import useFetchState, { Status } from '@/utils/hooks/useFetchState';
-import { DEFAULT_PAGE_SIZE, DEFAULT_PAGE_SORT_DIRECTION, DEFAULT_USER_PAGE_SORT } from '@/utils/constant';
-import { UserSearch } from '@/services/user/types';
-import UserService from '@/services/user/userService';
-import UserListBlock from '@/components/users/manage_page/page_content/UserListBlock';
+import Loading from '@/components/common/Loading';
+import Paginator from '@/components/common/page_content/Paginator';
+import ResultCount from '@/components/common/page_content/sort_and_result/ResultCount';
 import UserSortOrderBtn, {
 	USER_ORDER_OPTIONS,
 } from '@/components/users/manage_page/page_content/sort_and_result/UserSortOrderBtn';
+import UserListBlock from '@/components/users/manage_page/page_content/UserListBlock';
+import { UserSearch } from '@/services/user/types';
+import UserService from '@/services/user/userService';
+import { Pageable } from '@/utils/api/types';
+import { DEFAULT_PAGE_SIZE, DEFAULT_PAGE_SORT_DIRECTION } from '@/utils/constant';
+import useFetchState, { Status } from '@/utils/hooks/useFetchState';
+import { UserSearchParams } from '@/utils/types';
 
 interface UserResultsDisplayProps {
 	searchParams: UserSearchParams;

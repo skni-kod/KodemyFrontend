@@ -1,9 +1,10 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+
 import KodemyDarkBig from '@/assets/logo/dark/kodemyBig.png';
-import KodemyWhiteBig from '@/assets/logo/white/kodemyBig.png';
 import KodemyDarkSmall from '@/assets/logo/dark/kodemySmall.png';
+import KodemyWhiteBig from '@/assets/logo/white/kodemyBig.png';
 import KodemyWhiteSmall from '@/assets/logo/white/kodemySmall.png';
 import { IconType, themes } from '@/utils/lightMode/themes';
 

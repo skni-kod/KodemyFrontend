@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import { FaCircle } from 'react-icons/fa6';
 import React from 'react';
+import { FaCircle } from 'react-icons/fa6';
+import clsx from 'clsx';
 
 export default function IsActiveStatus({ isActive }: { isActive: boolean }) {
 	return (

@@ -1,5 +1,5 @@
-import { SearchParams } from '@/utils/types/index';
 import { SortDirection } from '@/utils/api/types';
+import { SearchParams } from '@/utils/types/index';
 
 type SearchParamsEnhanced<T> = SearchParams<T> & {
 	page: number;
