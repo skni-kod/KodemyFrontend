@@ -96,6 +96,7 @@ export default function Sidebar() {
 					<Link
 						key={id}
 						href={`/sections/${id}`}
+						onClick={sidebar.handleClose}
 						className="flex w-full cursor-pointer flex-row items-center bg-bg hover:bg-bgHover"
 					>
 						<div className="p-5">
