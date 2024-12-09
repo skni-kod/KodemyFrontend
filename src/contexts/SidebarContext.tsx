@@ -23,7 +23,7 @@ export const SidebarProvider = ({ children }: { children: React.ReactNode }) => 
 			value={{
 				isOpen,
 				handleToggle,
-				handleClose
+				handleClose,
 			}}
 		>
 			{children}
