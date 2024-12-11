@@ -12,12 +12,12 @@ type FiltersBlockProps = ComponentParentProps & {
 };
 
 export default function FiltersBlock({ searchParams }: FiltersBlockProps) {
-	const FILTER_FIELD_CLASSNAMES = 'flex items-center gap-2.5 p-2.5 border-2 rounded-2xl overflow-hidden';
+	const FILTER_FIELD_CLASSNAMES = 'flex items-center gap-2.5 p-2.5 border-2 rounded-2xl overflow-hidden w-fit';
 
 	return (
 		<div className="w-full px-0 pt-6 sm:px-4">
 			<h3 className="w-full pb-5 text-xl sm:text-2xl">{TEXT.WHAT_LOOKING_FOR}</h3>
-			<div className="flex w-full flex-wrap gap-2 leading-none">
+			<div className="flex w-full flex-wrap gap-2 text-sm leading-none xs:text-base">
 				<PhraseField className={FILTER_FIELD_CLASSNAMES} activePhrase={searchParams.fields.phrase} />
 				<MaterialSort className={FILTER_FIELD_CLASSNAMES} activeSort={searchParams.sort} />
 				<GradeField
