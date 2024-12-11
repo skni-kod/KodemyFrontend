@@ -33,7 +33,7 @@ export default function PhraseField({ className, activePhrase }: PhraseFieldProp
 		<div className={className}>
 			<input
 				placeholder={TEXT.INPUT_PHRASE}
-				className="border-0 bg-transparent focus:outline-none"
+				className="w-32 border-0 bg-transparent focus:outline-none xs:w-40"
 				value={phrase}
 				name="phrase"
 				onChange={(e) => setPhrase(e.target.value)}

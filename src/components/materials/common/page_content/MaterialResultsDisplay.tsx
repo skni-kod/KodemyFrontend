@@ -24,7 +24,6 @@ export default function MaterialResultsDisplay({
 	searchParams,
 	DetailsDropDownComponent,
 }: MaterialResultsDisplayProps) {
-	console.log('searchParams1111111', searchParams);
 	const { data: materials, status, fetch: fetchMaterials } = useFetchState<Pageable<MaterialSearch>>();
 
 	useEffect(() => {
@@ -49,9 +48,9 @@ export default function MaterialResultsDisplay({
 
 	return (
 		<div className="py-2">
-			<div className="flex w-full items-center justify-between px-4 pt-5">
+			<div className="flex w-full flex-col items-center justify-between gap-y-4 px-0 pt-5 md:flex-row md:gap-y-0 md:px-4">
 				<SortOrderBtn activeSort={searchParams.sort} />
-				<ResultCount value={materials.content.length} />
+				{materials.content.length > 0 && <ResultCount value={materials.content.length} />}
 			</div>
 			<MaterialListBlock materials={materials.content} DetailsDropDownComponentProp={DetailsDropDownComponent} />
 			<div className="flex w-full justify-center pt-6">

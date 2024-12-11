@@ -44,7 +44,7 @@ export default function CategoryBubbleBtns({ sections, activeSectionId, activesC
 	};
 
 	return (
-		<div className="flex w-full flex-wrap items-center gap-4 text-center text-xl text-secondary">
+		<div className="flex w-full flex-wrap items-center gap-2 text-center text-sm text-secondary xs:gap-4 xs:text-xl">
 			{sectionCategories().map(({ id, name }) => (
 				<CategoryBubbleBtn
 					key={id}
