@@ -1,7 +1,11 @@
-import MaterialAdd from './types/materialAdd';
-
-import { Material, MaterialFiltersParam, MaterialSearch, MaterialSortField } from '@/services/material/types';
-import MaterialAddGrade from '@/services/material/types/materialAddGrade';
+import {
+	Material,
+	MaterialAdd,
+	MaterialAddGrade,
+	MaterialFiltersParam,
+	MaterialSearch,
+	MaterialSortField,
+} from '@/services/material/types';
 import kodemyApi from '@/utils/api';
 import { ApiService, Pageable, SearchRequestParams, SortDirection } from '@/utils/api/types';
 import { InternalServerErrorApiError } from '@/utils/api/types/apiError';
