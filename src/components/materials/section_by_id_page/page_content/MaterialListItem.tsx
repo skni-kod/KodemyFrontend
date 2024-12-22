@@ -5,10 +5,9 @@ import { Rating } from 'react-simple-star-rating';
 import { useMediaQuery } from '@mui/material';
 import Image from 'next/image';
 
-import calculateTimeDifference from '../../../../utils/methods/calculateTimeDifference';
-
 import DocumentsImage from '@/assets/material/documents.png';
 import { MaterialSearch } from '@/services/material/types';
+import { calculateTimeDifference } from '@/utils/methods';
 
 type MaterialUserBlockProps = {
 	data: MaterialSearch;

@@ -1,6 +1,5 @@
 import { Session } from '@/contexts/SessionContext';
-import { User, UserFiltersParam, UserSearch, UserSortField } from '@/services/user/types';
-import UserAuthorized from '@/services/user/types/userAuthorized';
+import { User, UserAuthorized, UserFiltersParam, UserSearch, UserSortField } from '@/services/user/types';
 import kodemyApi from '@/utils/api';
 import { ApiService, Pageable, SearchRequestParams, SortDirection } from '@/utils/api/types';
 import { InternalServerErrorApiError } from '@/utils/api/types/apiError';
