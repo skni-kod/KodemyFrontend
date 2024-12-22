@@ -117,3 +117,8 @@ export function calculateTimeDifference(createdDate: string) {
 		return 'Mniej niż 1 minutę temu';
 	}
 }
+
+export const capitalize = (text: string) => {
+	if (!text) return '';
+	return text.charAt(0).toUpperCase() + text.slice(1);
+};
