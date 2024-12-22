@@ -1,4 +1,4 @@
-import { JwtInfoResponse, ProviderLiResponse } from '@/services/auth/types';
+import { Auth, JwtInfoResponse, ProviderLiResponse } from '@/services/auth/types';
 import kodemyApi from '@/utils/api';
 import { ApiService } from '@/utils/api/types';
 import { InternalServerErrorApiError } from '@/utils/api/types/apiError';
@@ -7,10 +7,6 @@ export default class AuthService extends ApiService {
 	public static async refreshJwt(refresh: string, bearerJti: string): Promise<JwtInfoResponse> {
 		const params = new URLSearchParams({ refresh, bearerJti });
 		return await kodemyApi.get<JwtInfoResponse>(`/api/auth/refresh`, { params }).then((res) => res.data);
-	}
-
-	public static async getMe() {
-		return await kodemyApi.get('/api/users/me').then((res) => res.data);
 	}
 
 	public static async checkAuth() {
@@ -29,5 +25,9 @@ export default class AuthService extends ApiService {
 			console.error('error', err);
 			return Promise.reject(new InternalServerErrorApiError());
 		}
+	}
+
+	public static async getAuth(): Promise<Auth> {
+		return await kodemyApi.get('/api/auth').then((res) => res.data);
 	}
 }

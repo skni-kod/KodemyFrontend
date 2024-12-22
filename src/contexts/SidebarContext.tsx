@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react';
 type SidebarContextType = {
 	isOpen: boolean;
 	handleToggle: () => void;
+	handleClose: () => void;
 };
 
 const SidebarContext = React.createContext<SidebarContextType | undefined>(undefined);
@@ -15,11 +16,14 @@ export const SidebarProvider = ({ children }: { children: React.ReactNode }) => 
 
 	const handleToggle = () => setIsOpen((state) => !state);
 
+	const handleClose = () => setIsOpen(false);
+
 	return (
 		<SidebarContext.Provider
 			value={{
 				isOpen,
 				handleToggle,
+				handleClose,
 			}}
 		>
 			{children}

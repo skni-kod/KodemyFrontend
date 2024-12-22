@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import UserService from '@/services/user/userService';
+import AuthService from '@/services/auth/authService';
 
 const __SESSION_CACHE: {
 	signUri: string;
@@ -37,20 +37,20 @@ export interface Jwt {
 
 export type SessionContextType =
 	| {
-			session: Session;
-			sessionStatus: 'AUTHENTICATED';
-			update: (session: Session | undefined) => void;
-	  }
+	session: Session;
+	sessionStatus: 'AUTHENTICATED';
+	update: (session: Session | undefined) => void;
+}
 	| {
-			session: Session | undefined;
-			sessionStatus: 'LOADING';
-			update: (session: Session | undefined) => void;
-	  }
+	session: Session | undefined;
+	sessionStatus: 'LOADING';
+	update: (session: Session | undefined) => void;
+}
 	| {
-			session: undefined;
-			sessionStatus: 'UNAUTHENTICATED';
-			update: (session: Session | undefined) => void;
-	  };
+	session: undefined;
+	sessionStatus: 'UNAUTHENTICATED';
+	update: (session: Session | undefined) => void;
+};
 
 export const SessionContext = React.createContext<SessionContextType>({
 	session: undefined,
@@ -74,7 +74,7 @@ const SessionProvider = ({ session: sessionProp = undefined, signUri, children }
 		if (!isLoading) {
 			return;
 		}
-		UserService.getMe()
+		AuthService.getAuth()
 			.then((user) =>
 				setSession({
 					user: { id: user.id, username: user.username, roles: [user.role.name], state: 0 },

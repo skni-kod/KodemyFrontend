@@ -1,12 +1,13 @@
+'use client';
 import React, { useState } from 'react';
 import { LuDot } from 'react-icons/lu';
 import { Rating } from 'react-simple-star-rating';
+import { useMediaQuery } from '@mui/material';
 import Image from 'next/image';
-
-import calculateTimeDifference from '../../../../utils/methods/calculateTimeDifference';
 
 import DocumentsImage from '@/assets/material/documents.png';
 import { MaterialSearch } from '@/services/material/types';
+import { calculateTimeDifference } from '@/utils/methods';
 
 type MaterialUserBlockProps = {
 	data: MaterialSearch;
@@ -15,6 +16,7 @@ type MaterialUserBlockProps = {
 
 export default function MaterialListItem({ data: material, children }: MaterialUserBlockProps) {
 	const [isOpenDetails, setIsOpenDetails] = useState<boolean>(false);
+	const rwdXS = useMediaQuery('(min-width:530px)');
 
 	const handleOpenDetails = () => {
 		setIsOpenDetails((prevState) => !prevState);
@@ -36,16 +38,24 @@ export default function MaterialListItem({ data: material, children }: MaterialU
 							readonly
 						/>
 					</div>
-					<div className="">{calculateTimeDifference(material.createdDate.toString())}</div>
+					<div className="text-xs 2xs:text-sm xs:text-base">
+						{calculateTimeDifference(material.createdDate.toString())}
+					</div>
 				</div>
 				<div className="flex w-full justify-between gap-6 py-3">
 					<div>
-						<Image src={DocumentsImage.src} alt="Materiał Kodemy" className="aspect-square" width="65" height="65" />
+						<Image
+							src={DocumentsImage.src}
+							alt="Materiał Kodemy"
+							className="aspect-square"
+							width={rwdXS ? '65' : '50'}
+							height={rwdXS ? '65' : '50'}
+						/>
 					</div>
 					<div className="flex-1">
-						<h3 className="text-lg font-semibold text-primary">{material.title}</h3>
-						<div className="pt-1">{material.author?.username}</div>
-						<div className="flex items-center pt-1.5">
+						<h3 className="text-sm font-semibold text-primary 2xs:text-base xs:text-lg">{material.title}</h3>
+						<div className="pt-1 text-xs 2xs:text-sm xs:text-base">{material.author?.username}</div>
+						<div className="flex items-center pt-1.5 text-xs 2xs:text-sm xs:text-base">
 							{material.tags.map(({ name }, index) => (
 								<React.Fragment key={index}>
 									<span>{name}</span>

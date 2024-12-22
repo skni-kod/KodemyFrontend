@@ -10,6 +10,7 @@ import AuthService from '@/services/auth/authService';
 import { ProviderLiResponse } from '@/services/auth/types';
 import { TEXT } from '@/utils/constant';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';
+import { capitalize } from '@/utils/methods';
 
 const PROVIDERS: { name: string; icoType: IconType; icoColor: string }[] = [
 	{
@@ -51,13 +52,15 @@ export default function AuthProvidersBtns() {
 				<button
 					key={index}
 					onClick={() => router.push(authorize)}
-					className="flex items-center gap-2 rounded-lg border border-secondary bg-bg px-4 py-2 hover:bg-bgHover hover:text-primaryHover"
+					className="p-0.25 flex w-72 items-center rounded-lg border border-secondary bg-bg px-2 hover:bg-bgHover"
 				>
-					{React.createElement(PROVIDERS_MAP[provider].icoType, {
-						className: PROVIDERS_MAP[provider].icoColor,
-						style: iconStyles,
-					})}
-					<h3 className="text-center text-sm md:text-base">{`${TEXT.AUTH.CONTINUE_WITH} ${provider.toUpperCase()}`}</h3>
+					<span className="flex aspect-square h-12 items-center justify-center">
+						{React.createElement(PROVIDERS_MAP[provider].icoType, {
+							className: PROVIDERS_MAP[provider].icoColor,
+							style: iconStyles,
+						})}
+					</span>
+					<h3 className="text-sm md:text-base">{`${TEXT.AUTH.CONTINUE_WITH} ${capitalize(provider)}`}</h3>
 				</button>
 			))}
 		</>

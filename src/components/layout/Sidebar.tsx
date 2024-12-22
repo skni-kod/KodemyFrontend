@@ -96,13 +96,14 @@ export default function Sidebar() {
 					<Link
 						key={id}
 						href={`/sections/${id}`}
+						onClick={sidebar.handleClose}
 						className="flex w-full cursor-pointer flex-row items-center bg-bg hover:bg-bgHover"
 					>
 						<div className="p-5">
 							<Image src={theme === 'light' ? icon.light : icon.dark} width={24} height={24} alt={name} />
 						</div>
 						<span
-							className={`relative text-secondary transition-all duration-300 ease-in-out ${!sidebar.isOpen ? '-left-96 w-0' : 'left-0 w-40'}`}
+							className={`relative text-secondary transition-all duration-300 ease-in-out ${!sidebar.isOpen ? '-left-96 z-0 w-0 opacity-0' : 'left-0 z-50 w-40 opacity-100'}`}
 						>
 							{name}
 						</span>

@@ -71,7 +71,7 @@ export default function AddGradeMaterialModal({
 	return (
 		<>
 			{isOpen && (
-				<Modal onClose={handleClose} className="max-w-xs xs:w-full">
+				<Modal onClose={handleClose} className="h-fit w-[90%] sm:w-2/3">
 					<div className="w-full text-center">
 						<h3 className="text-3xl font-semibold text-secondary">{getModalHeader()}</h3>
 					</div>

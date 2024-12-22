@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { IconType } from 'react-icons';
 import {
 	IoDocumentOutline,
@@ -32,57 +32,59 @@ interface UserDropDownMenuProps {
 export default function UserDropDownMenu({ menuClassName }: UserDropDownMenuProps) {
 	const { session } = useSessionContext();
 
-	const menus: MenuLink[] = [
-		{
-			type: Menu.LINK,
-			label: USER_NAV_MENU.LINK.USER_ACCOUNT,
-			icon: IoPersonOutline,
-			href: `/users/${session?.user.id}`,
-		},
-		{
-			type: Menu.HEADER,
-			label: 'ZAWARTOŚĆ',
-		},
-		{
-			type: Menu.LINK,
-			label: USER_NAV_MENU.LINK.YOUR_MATERIALS,
-			icon: IoDocumentOutline,
-			href: `/materials/users/${session?.user.id}`,
-			isParsed: true,
-		},
-		{
-			type: Menu.HEADER,
-			label: 'ADMINISTRACJA',
-		},
-		{
-			type: Menu.LINK,
-			label: USER_NAV_MENU.LINK.USERS_MATERIALS,
-			icon: IoFileTrayOutline,
-			href: '/materials/manage',
-		},
-		{
-			type: Menu.LINK,
-			label: USER_NAV_MENU.LINK.USERS,
-			icon: IoPersonOutline,
-			href: '/users/manage',
-		},
-		{
-			type: Menu.HEADER,
-			label: 'KONTO',
-		},
-		{
-			type: Menu.LINK,
-			label: USER_NAV_MENU.LINK.SETTINGS,
-			icon: IoSettingsOutline,
-			href: '/settings',
-		},
-		{
-			type: Menu.LINK,
-			label: USER_NAV_MENU.LINK.LOGOUT,
-			icon: IoLogOutOutline,
-			href: '/api/logout',
-		},
-	];
+	const menus: MenuLink[] = useMemo(() => {
+		return [
+			{
+				type: Menu.LINK,
+				label: USER_NAV_MENU.LINK.USER_ACCOUNT,
+				icon: IoPersonOutline,
+				href: `/users/${session?.user.id}`,
+			},
+			{
+				type: Menu.HEADER,
+				label: 'ZAWARTOŚĆ',
+			},
+			{
+				type: Menu.LINK,
+				label: USER_NAV_MENU.LINK.YOUR_MATERIALS,
+				icon: IoDocumentOutline,
+				href: `/materials/users/${session?.user.id}`,
+				isParsed: true,
+			},
+			{
+				type: Menu.HEADER,
+				label: 'ADMINISTRACJA',
+			},
+			{
+				type: Menu.LINK,
+				label: USER_NAV_MENU.LINK.USERS_MATERIALS,
+				icon: IoFileTrayOutline,
+				href: '/materials/manage',
+			},
+			{
+				type: Menu.LINK,
+				label: USER_NAV_MENU.LINK.USERS,
+				icon: IoPersonOutline,
+				href: '/users/manage',
+			},
+			{
+				type: Menu.HEADER,
+				label: 'KONTO',
+			},
+			{
+				type: Menu.LINK,
+				label: USER_NAV_MENU.LINK.SETTINGS,
+				icon: IoSettingsOutline,
+				href: '/settings',
+			},
+			{
+				type: Menu.LINK,
+				label: USER_NAV_MENU.LINK.LOGOUT,
+				icon: IoLogOutOutline,
+				href: '/auth/logout',
+			},
+		];
+	}, [session?.user.id]);
 
 	return (
 		<div className={`${menuClassName} w-60 bg-bg px-2 pb-2 pt-1 text-base font-normal shadow-md`}>

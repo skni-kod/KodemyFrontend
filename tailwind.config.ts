@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -42,6 +41,7 @@ const config: Config = {
 				nav: '3.75rem',
 				fullContent: 'calc(100vh - 3.5rem - 0.5rem - 0.5rem)',
 				navMenu: '2.625rem',
+				'13': '3.25rem',
 			},
 			inset: {
 				nav: '3.75rem',
@@ -68,6 +68,7 @@ const config: Config = {
 				fullContent: 'calc(100vh - 3.5rem - 0.5rem - 0.5rem)',
 			},
 			padding: {
+				'0.25': '0.0625rem',
 				'1/2': '50%',
 				'1/4': '25%',
 				nav: '3.75rem',

@@ -68,17 +68,6 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 		}
 	};
 
-	const getModalSize = () => {
-		switch (stage) {
-			case Stage.SECTION:
-				return 'w-128';
-			case Stage.CATEGORY:
-			case Stage.DETAILS:
-			case Stage.SUMMARY:
-				return 'w-full';
-		}
-	};
-
 	const getModalHeader = () => {
 		switch (stage) {
 			case Stage.SECTION:
@@ -184,7 +173,7 @@ export default function AddMaterialModal({ isOpen, onClose }: { isOpen: boolean;
 	return (
 		<>
 			{isOpen && (
-				<Modal onClose={handleClose} className={`${getModalSize()} max-w-xs xs:w-full`}>
+				<Modal onClose={handleClose} className="h-fit w-[90%] sm:w-2/3">
 					{status === Status.ERROR || !sections ? (
 						<Error />
 					) : (
