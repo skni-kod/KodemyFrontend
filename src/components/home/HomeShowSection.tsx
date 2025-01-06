@@ -8,10 +8,10 @@ import { TEXT } from '@/utils/constant';
 export default function HomeShowSection() {
 	return (
 		<section className="relative flex min-h-fullContent w-full items-center">
-			<div className="absolute bottom-0 left-0 flex h-full w-full items-end justify-center overflow-hidden">
+			<div className="absolute bottom-0 left-0 z-20 flex h-full w-full items-end justify-center overflow-hidden">
 				<ShowBlockImage />
 			</div>
-			<div className="mx-auto w-4/5">
+			<div className="relative z-50 mx-auto w-4/5">
 				<div className="w-fit px-20 py-8">
 					<div>
 						<h3 className="text-5xl font-bold">{TEXT.HOME.SHOW_MAIN}</h3>
