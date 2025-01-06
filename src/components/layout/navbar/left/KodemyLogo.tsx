@@ -50,10 +50,7 @@ export default function KodemyLogo({ className = 'h-full w-full', ratio = 1, siz
 				width={logo.width * ratio}
 				height={logo.height * ratio}
 				alt="Logo strony"
-				style={{
-					height: '100%',
-					width: 'auto',
-				}}
+				className="h-full w-auto"
 				priority
 			/>
 		</div>

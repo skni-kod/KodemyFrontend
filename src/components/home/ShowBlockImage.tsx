@@ -5,15 +5,6 @@ import Background from '@/assets/home/background.png';
 
 export default function ShowBlockImage() {
 	return (
-		<Image
-			src={Background.src}
-			alt=""
-			width={Background.width}
-			height={Background.height}
-			style={{
-				width: '100%',
-				height: 'auto',
-			}}
-		/>
+		<Image src={Background.src} alt="" width={Background.width} height={Background.height} className="h-full w-auto" />
 	);
 }

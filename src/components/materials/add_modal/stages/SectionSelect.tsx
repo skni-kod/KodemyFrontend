@@ -29,10 +29,7 @@ export default function SectionSelect({ sections, selected, onClick }: SectionSe
 							width={24}
 							height={24}
 							alt={name}
-							style={{
-								width: 'auto',
-								height: 'auto',
-							}}
+							className="h-full w-auto"
 						/>
 					</div>
 					<span className="text-xl font-normal text-secondary">{name}</span>
