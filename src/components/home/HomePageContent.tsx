@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import HomeShowSection from '@/components/home/HomeShowSection';
-import Container from '@/components/layout/Container';
 import PageContent from '@/components/layout/PageContent';
 
 interface HomePageContentProps {
@@ -24,7 +23,7 @@ export default function HomePageContent({ searchParams }: HomePageContentProps) 
 	return (
 		<PageContent noHeader noContainer>
 			<HomeShowSection />
-			<Container>{/*<HomeSuggestedSection />*/}</Container>
+			{/* <Container><HomeSuggestedSection /></Container> */}
 		</PageContent>
 	);
 }

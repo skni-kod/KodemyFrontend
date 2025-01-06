@@ -7,13 +7,10 @@ export default function ShowBlockImage() {
 	return (
 		<Image
 			src={Background.src}
-			alt=""
+			alt="Background Home Image"
 			width={Background.width}
 			height={Background.height}
-			style={{
-				width: '100%',
-				height: 'auto',
-			}}
+			className="h-full w-auto"
 		/>
 	);
 }
