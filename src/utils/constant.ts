@@ -82,6 +82,11 @@ export const TEXT = {
 		FIND_TAGS: 'Szukaj tagów',
 		SELECTED_TAGS: 'Zaznaczone tagi',
 	},
+	DEV_TOOLS: {
+		ADD_TAGS: 'Dodaj tagi',
+		DOWNLOAD_BEARER: 'Pobierz token Bearer',
+		REINDEX_MATERIALS: 'Reindeksuj materiały',
+	},
 };
 
 export const AUTH_PRE_SESSION = 'pre_session';
