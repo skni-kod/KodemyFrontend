@@ -23,6 +23,7 @@ export const PAGE_TITLE = {
 	SIGN_OUT: 'Wylogowanie',
 	USERS_MANAGE: 'Zarządzanie użytkownikami',
 	AUTH_CALLBACK: 'Autoryzowanie',
+	DEV_TOOLS: 'Narzędzia deweloperskie',
 };
 
 export const USER_NAV_MENU = {
