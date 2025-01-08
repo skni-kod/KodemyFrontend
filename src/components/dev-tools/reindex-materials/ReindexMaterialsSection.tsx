@@ -1,7 +1,9 @@
 import React from 'react';
 
+import SectionBox from '../SectionBox';
+
 import { TEXT } from '@/utils/constant';
 
 export default function ReindexMaterialsSection() {
-	return <h3 className="w-full pb-5 text-2xl">{TEXT.DEV_TOOLS.REINDEX_MATERIALS}</h3>;
+	return <SectionBox title={TEXT.DEV_TOOLS.REINDEX_MATERIALS}>reindeksuj materialy</SectionBox>;
 }
