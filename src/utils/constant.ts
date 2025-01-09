@@ -34,6 +34,7 @@ export const USER_NAV_MENU = {
 		USERS_MATERIALS: 'Materiały użytkowników',
 		USERS: 'Użytkownicy',
 		YOUR_MATERIALS: 'Twoje materiały',
+		DEV_TOOLS: 'Narzędzia deweloperskie',
 	},
 	GROUP: {
 		ACCOUNT_HEADER: 'KONTO',

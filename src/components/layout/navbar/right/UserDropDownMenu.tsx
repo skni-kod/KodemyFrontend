@@ -68,6 +68,12 @@ export default function UserDropDownMenu({ menuClassName }: UserDropDownMenuProp
 				href: '/users/manage',
 			},
 			{
+				type: Menu.LINK,
+				label: USER_NAV_MENU.LINK.DEV_TOOLS,
+				icon: IoSettingsOutline,
+				href: '/dev-tools',
+			},
+			{
 				type: Menu.HEADER,
 				label: 'KONTO',
 			},
