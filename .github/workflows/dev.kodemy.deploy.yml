@@ -116,6 +116,13 @@ jobs:
             cd $WORKING_DIRECTORY
             npm ci
 
+            echo "Check if prettier-plugin-tailwindcss is installed"
+            if ! npm list prettier-plugin-tailwindcss; then
+              echo "prettier-plugin-tailwindcss is missing!"
+              echo "Installing prettier-plugin-tailwindcss..."
+              npm install prettier-plugin-tailwindcss --save-dev
+            fi
+  
             echo "Run Prettier Format"
             npm run format
             
