@@ -1,4 +1,4 @@
-import CategoryDetailsResponse from '@/services/category/types/categoryDetailsResponse';
+import { CategoryDetailsResponse } from '@/services/category/types';
 import kodemyApi from '@/utils/api';
 import { ApiService } from '@/utils/api/types';
 

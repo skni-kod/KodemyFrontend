@@ -9,7 +9,7 @@ import UserSortOrderBtn, {
 	USER_ORDER_OPTIONS,
 } from '@/components/users/manage_page/page_content/sort_and_result/UserSortOrderBtn';
 import UserListBlock from '@/components/users/manage_page/page_content/UserListBlock';
-import UserSearch from '@/services/user/types/userSearch';
+import { UserSearch } from '@/services/user/types';
 import UserService from '@/services/user/userService';
 import { Pageable } from '@/utils/api/types';
 import useFetchState, { Status } from '@/utils/hooks/useFetchState';

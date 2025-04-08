@@ -1,4 +1,4 @@
-import Tags from '@/services/tag/types/tags';
+import { Tags } from '@/services/tag/types';
 import kodemyApi from '@/utils/api';
 import { ApiService } from '@/utils/api/types';
 import { InternalServerErrorApiError } from '@/utils/api/types/apiError';
