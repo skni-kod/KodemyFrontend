@@ -52,7 +52,7 @@ export default function AuthProvidersBtns() {
 				<button
 					key={index}
 					onClick={() => router.push(authorize)}
-					className="p-0.25 flex w-72 items-center rounded-lg border border-secondary bg-bg px-2 hover:bg-bgHover"
+					className="flex w-72 items-center rounded-lg border border-secondary bg-bg p-0.25 px-2 hover:bg-bgHover"
 				>
 					<span className="flex aspect-square h-12 items-center justify-center">
 						{React.createElement(PROVIDERS_MAP[provider].icoType, {

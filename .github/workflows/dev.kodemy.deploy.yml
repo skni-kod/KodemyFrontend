@@ -2,7 +2,7 @@ name: DEV - KodemyFrontend deploy
 
 on:
   push:
-    branches: [ 'dev-deploy' ]
+    branches: [ 'main' ]
     paths-ignore:
       - '.gitignore'
       - 'README.md'

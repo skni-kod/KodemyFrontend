@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import AuthService from '@/services/auth/authService';
+// import AuthService from '@/services/auth/authService';
 
 const ACCESS_TOKEN_COOKIE = 'AUTH_CONTEXT';
 const REFRESH_TOKEN_COOKIE = 'AUTH_PERSIST';

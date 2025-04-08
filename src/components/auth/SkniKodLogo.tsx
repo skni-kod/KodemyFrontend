@@ -34,10 +34,7 @@ export default function SkniKodLogo({ className = 'h-full w-full', ratio = 1 }: 
 				width={image.width}
 				height={image.height}
 				alt="Skni kod logo"
-				style={{
-					height: '100%',
-					width: 'auto',
-				}}
+				className="h-full w-auto"
 				priority
 			/>
 		</div>
