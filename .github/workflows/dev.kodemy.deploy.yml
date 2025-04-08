@@ -121,8 +121,14 @@ jobs:
               echo "prettier-plugin-tailwindcss is missing!"
               echo "Installing prettier-plugin-tailwindcss..."
               npm install prettier-plugin-tailwindcss --save-dev
+            else
+            echo "prettier-plugin-tailwindcss is already installed."
             fi
-  
+            
+            # Check that prettier can access the plugin
+            echo "Check if Prettier can access prettier-plugin-tailwindcss"
+            node -e "require('prettier-plugin-tailwindcss'); console.log('Prettier plugin is installed and accessible!');"
+            
             echo "Run Prettier Format"
             npm run format
             
