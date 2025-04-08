@@ -56,10 +56,23 @@ jobs:
           envs: WORKING_DIRECTORY,BRANCH
           script: |
             cd $WORKING_DIRECTORY
+
+            echo "🧹 Czyszczenie lokalnych zmian i nieśledzonych plików..."
+            git reset --hard HEAD || exit 1
+            git clean -fd || exit 1
+
+            echo "📡 Pobieranie zmian z origin..."
             git fetch origin || exit 1
+
+            echo "📂 Przełączanie na gałąź $BRANCH..."
             git checkout $BRANCH || exit 1
+
+            echo "🔁 Reset do origin/$BRANCH..."
             git reset --hard origin/$BRANCH || exit 1 
+
+            echo "⬇️ Pullowanie najnowszych zmian..."
             git pull origin $BRANCH || exit 1
+
   validate:
     name: Validate components
     runs-on: self-hosted
