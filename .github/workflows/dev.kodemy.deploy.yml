@@ -114,7 +114,7 @@ jobs:
             source $NVM_DIR/nvm.sh
 
             cd $WORKING_DIRECTORY
-            npm ci
+            npm ci --verbose
 
             echo "Check if prettier-plugin-tailwindcss is installed"
             if ! npm list prettier-plugin-tailwindcss; then
