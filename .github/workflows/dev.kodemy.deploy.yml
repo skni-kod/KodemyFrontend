@@ -114,10 +114,10 @@ jobs:
             source $NVM_DIR/nvm.sh
 
             cd $WORKING_DIRECTORY
-            npm ci
+            NODE_ENV=development npm ci
 
             echo "Build"
-            npm run build
+            NODE_ENV=production npm run build
 
             docker compose up --build -d
             export FRONTEND_CONTAINERS=$(docker-compose ps -q)
