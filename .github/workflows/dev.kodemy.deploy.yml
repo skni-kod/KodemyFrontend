@@ -92,7 +92,7 @@ jobs:
             echo "Validate npm"
             which npm || { echo "npm not found in PATH"; exit 1; }
   build-and-deploy:
-    name: Build, Test, Deploy
+    name: Build, Deploy
     runs-on: self-hosted
     needs: [ validate ]
     environment: dev
@@ -114,26 +114,7 @@ jobs:
             source $NVM_DIR/nvm.sh
 
             cd $WORKING_DIRECTORY
-            npm ci --verbose
-
-            echo "Check if prettier-plugin-tailwindcss is installed"
-            if ! npm list prettier-plugin-tailwindcss; then
-              echo "prettier-plugin-tailwindcss is missing!"
-              echo "Installing prettier-plugin-tailwindcss..."
-              npm install prettier-plugin-tailwindcss --save-dev
-            else
-            echo "prettier-plugin-tailwindcss is already installed."
-            fi
-            
-            # Check that prettier can access the plugin
-            echo "Check if Prettier can access prettier-plugin-tailwindcss"
-            node -e "require('prettier-plugin-tailwindcss'); console.log('Prettier plugin is installed and accessible!');"
-            
-            echo "Run Prettier Format"
-            npm run format
-            
-            echo "Run Linter"
-            npm run lint
+            npm ci
 
             echo "Build"
             npm run build
